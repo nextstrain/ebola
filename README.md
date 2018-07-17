@@ -1,6 +1,6 @@
 # nextstrain.org/ebola
 
-This is the [Nextstrain][https://nextstrain.org/] build for Ebola, visible at
+This is the [Nextstrain](https://nextstrain.org/) build for Ebola, visible at
 [nextstrain.org/ebola](https://nextstrain.org/ebola).
 
 The build encompasses fetching data, preparing it for analysis, doing quality
