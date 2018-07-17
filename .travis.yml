@@ -1,0 +1,14 @@
+services:
+  - docker
+language: python
+python:
+  - "3.6"
+install:
+  - pip3 install git+https://github.com/nextstrain/cli
+  - nextstrain version
+  - nextstrain check-setup
+  - nextstrain update
+script:
+  - mkdir -p data/
+  - cp -v example_data/ebola.fasta data/
+  - nextstrain build .
