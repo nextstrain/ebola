@@ -14,6 +14,9 @@ housed in this repository.
 
 ## Usage
 
+If you're unfamiliar with Nextstrain builds, you may want to follow our
+[quickstart guide][] first and then come back here.
+
 The easiest way to run this pathogen build is using the [Nextstrain
 command-line tool][nextstrain-cli]:
 
@@ -56,3 +59,4 @@ like so:
 [snakemake cli]: https://snakemake.readthedocs.io/en/stable/executable.html#all-options
 [nextstrain-cli]: https://github.com/nextstrain/cli
 [nextstrain-cli README]: https://github.com/nextstrain/cli/blob/master/README.md
+[quickstart guide]: https://nextstrain.org/docs/getting-started/quickstart
