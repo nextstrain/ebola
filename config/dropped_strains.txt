@@ -1,2 +1,6 @@
 EM_074335 # lack country metadata
 EM_074462 # lack country metadata
+G5364.1 # overly divergent
+G4837.1 # overly divergent
+LIBR10201 # overly divergent
+MK0868 # overly divergent

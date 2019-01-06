@@ -23,14 +23,13 @@ rule download:
         fasta_fields = "strain virus accession collection_date region country division location source locus authors url title journal puburl"
     shell:
         """
-        env PYTHONPATH=../fauna \
-            python2 ../fauna/vdb/download.py \
-                --database vdb \
-                --virus ebola \
-                --fasta_fields {params.fasta_fields} \
-                --resolve_method choose_genbank \
-                --path $(dirname {output.sequences}) \
-                --fstem $(basename {output.sequences} .fasta)
+        python3 ../fauna/vdb/download.py \
+            --database vdb \
+            --virus ebola \
+            --fasta_fields {params.fasta_fields} \
+            --resolve_method choose_genbank \
+            --path $(dirname {output.sequences}) \
+            --fstem $(basename {output.sequences} .fasta)
         """
 
 rule parse:
@@ -68,7 +67,7 @@ rule filter:
         sequences = "results/filtered.fasta"
     params:
         group_by = "division year month",
-        sequences_per_group = 15,
+        sequences_per_group = 30,
         min_date = 2012
     shell:
         """
@@ -102,7 +101,8 @@ rule align:
             --reference-sequence {input.reference} \
             --output {output.alignment} \
             --fill-gaps \
-            --remove-reference
+            --remove-reference \
+            --nthreads auto
         """
 
 rule tree:
@@ -115,7 +115,8 @@ rule tree:
         """
         augur tree \
             --alignment {input.alignment} \
-            --output {output.tree}
+            --output {output.tree} \
+            --nthreads auto
         """
 
 rule refine:
@@ -235,7 +236,6 @@ rule export:
 rule clean:
     message: "Removing directories: {params}"
     params:
-        "data "
         "results ",
         "auspice"
     shell:
