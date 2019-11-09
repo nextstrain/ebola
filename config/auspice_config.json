@@ -1,44 +1,41 @@
 {
   "title": "Genomic epidemiology of the 2013-2016 West African Ebola epidemic",
-  "color_options": {
+  "colorings": {
     "gt": {
-      "menuItem": "genotype",
-      "legendTitle": "Genotype",
-      "type": "discrete",
-      "key": "genotype"
+      "title": "Genotype",
+      "type": "categorical"
     },
     "num_date": {
-      "menuItem": "date",
-      "legendTitle": "Sampling date",
-      "type": "continuous",
-      "key": "num_date"
+      "title": "Date",
+      "type": "continuous"
     },
-    "authors": {
-      "key":"authors",
-      "legendTitle":"Authors",
-      "menuItem":"authors",
-      "type":"discrete"
+    "author": {
+      "title": "Author",
+      "type":"categorical"
     },
     "country": {
+      "title": "Country",
+      "type": "categorical"
     },
     "division": {
+      "title": "Division",
+      "type": "categorical"
     }
   },
-  "geo": [
+  "geo_resolutions": [
     "country",
     "division"
   ],
-  "defaults": {
-    "colorBy": "division",
-    "geoResolution": "division"
-  },  
-  "maintainer": [
-    "Trevor Bedford",
-    "http://bedford.io/team/trevor-bedford/"
+  "display_defaults": {
+    "color_by": "division",
+    "geo_resolution": "division"
+  },
+  "maintainers": [
+    ["Trevor Bedford", "http://bedford.io/team/trevor-bedford/"]
   ],
   "filters": [
     "country",
     "division",
-    "authors"
+    "author"
   ]
 }

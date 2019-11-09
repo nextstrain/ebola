@@ -1,13 +1,14 @@
-## Countries
+## countries
+
 country	guinea	#86BB6D
-country	sierra_leone	#4041C7
+country	sierra leone	#4041C7
 country	liberia	#E4682F
 
 ## divisions
 
 ## replicate the countries here
 division	guinea	#86BB6D
-division	sierra_leone	#4041C7
+division	sierra leone	#4041C7
 division	liberia	#E4682F
 
 # Guinean prefectures
@@ -53,28 +54,28 @@ division	kono	#4272CE
 division	bombali	#691D93
 division	kambia	#781C86
 division	koinadugu	#4041C7
-division	port_loko	#691D93
+division	port loko	#691D93
 division	tonkolili	#482BB6
 division	bo	#4066CF
 division	bonthe	#4041C7
 division	moyamba	#4041C7
 division	pujehun	#4887C6
-division	western_rural	#482BB6
-division	western_urban	#691D93
-division	western_area	#5824A4
+division	western rural	#482BB6
+division	western urban	#691D93
+division	western area	#5824A4
 
 # Liberian counties
 division	nimba	#E67D33
 division	rivercess	#E68735
-division	river_gee	#E29E39
+division	river gee	#E29E39
 division	sinoe	#E49838
 division	bomi	#DF4528
 division	bong	#E4682F
 division	gbarpolu	#DC2D24
-division	grand_cape_mount	#DB2122
-division	grand_bassa	#E67431
-division	grand_gedeh	#E69036
-division	grand_kru	#DFA53B
+division	grand cape mount	#DB2122
+division	grand bassa	#E67431
+division	grand gedeh	#E69036
+division	grand kru	#DFA53B
 division	lofa	#DE3926
 division	margibi	#E35C2C
 division	maryland	#DCAB3C
