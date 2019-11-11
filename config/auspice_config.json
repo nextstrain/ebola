@@ -1,27 +1,32 @@
 {
   "title": "Genomic epidemiology of the 2013-2016 West African Ebola epidemic",
-  "colorings": {
-    "gt": {
+  "colorings": [
+    {
+      "key": "gt",
       "title": "Genotype",
       "type": "categorical"
     },
-    "num_date": {
+    {
+      "key": "num_date",
       "title": "Date",
       "type": "continuous"
     },
-    "author": {
+    {
+      "key": "author",
       "title": "Author",
       "type":"categorical"
     },
-    "country": {
+    {
+      "key": "country",
       "title": "Country",
       "type": "categorical"
     },
-    "division": {
+    {
+      "key": "division",
       "title": "Division",
       "type": "categorical"
     }
-  },
+  ],
   "geo_resolutions": [
     "country",
     "division"
