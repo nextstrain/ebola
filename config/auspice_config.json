@@ -1,44 +1,47 @@
 {
   "title": "Genomic epidemiology of the 2013-2016 West African Ebola epidemic",
-  "color_options": {
-    "gt": {
-      "menuItem": "genotype",
-      "legendTitle": "Genotype",
-      "type": "discrete",
-      "key": "genotype"
+  "maintainers": [
+    {"name": "Trevor Bedford", "url": "http://bedford.io/team/trevor-bedford/"}
+  ],
+  "build_url": "https://github.com/nextstrain/ebola",
+  "colorings": [
+    {
+      "key": "gt",
+      "title": "Genotype",
+      "type": "categorical"
     },
-    "num_date": {
-      "menuItem": "date",
-      "legendTitle": "Sampling date",
-      "type": "continuous",
-      "key": "num_date"
+    {
+      "key": "num_date",
+      "title": "Date",
+      "type": "continuous"
     },
-    "authors": {
-      "key":"authors",
-      "legendTitle":"Authors",
-      "menuItem":"authors",
-      "type":"discrete"
+    {
+      "key": "author",
+      "title": "Author",
+      "type":"categorical"
     },
-    "country": {
+    {
+      "key": "country",
+      "title": "Country",
+      "type": "categorical"
     },
-    "division": {
+    {
+      "key": "division",
+      "title": "Division",
+      "type": "categorical"
     }
-  },
-  "geo": [
+  ],
+  "geo_resolutions": [
     "country",
     "division"
   ],
-  "defaults": {
-    "colorBy": "division",
-    "geoResolution": "division"
-  },  
-  "maintainer": [
-    "Trevor Bedford",
-    "http://bedford.io/team/trevor-bedford/"
-  ],
+  "display_defaults": {
+    "color_by": "division",
+    "geo_resolution": "division"
+  },
   "filters": [
     "country",
     "division",
-    "authors"
+    "author"
   ]
 }
