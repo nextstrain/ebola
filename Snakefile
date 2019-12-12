@@ -10,7 +10,8 @@ rule files:
         reference = "config/ebola_outgroup.gb",
         colors = "config/colors.tsv",
         lat_longs = "config/lat_longs.tsv",
-        auspice_config = "config/auspice_config.json"
+        auspice_config = "config/auspice_config.json",
+        footer_description = "config/description.md"
 
 files = rules.files.params
 
@@ -217,7 +218,8 @@ rule export:
         aa_muts = rules.translate.output.node_data,
         colors = files.colors,
         lat_longs = files.lat_longs,
-        auspice_config = files.auspice_config
+        auspice_config = files.auspice_config,
+        footer_description = files.footer_description
     output:
         auspice_json = rules.all.input.auspice_json
     shell:
@@ -229,6 +231,7 @@ rule export:
             --colors {input.colors} \
             --lat-longs {input.lat_longs} \
             --auspice-config {input.auspice_config} \
+            --description {input.footer_description} \
             --output {output.auspice_json}
         """
 
