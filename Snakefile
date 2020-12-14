@@ -69,7 +69,7 @@ rule filter:
         sequences = "results/filtered.fasta"
     params:
         group_by = "division year month",
-        sequences_per_group = 30,
+        sequences_per_group = 25,
         min_date = 2012
     shell:
         """
@@ -167,7 +167,7 @@ rule ancestral:
         augur ancestral \
             --tree {input.tree} \
             --alignment {input.alignment} \
-            --output {output.node_data} \
+            --output-node-data {output.node_data} \
             --inference {params.inference}
         """
 
@@ -232,6 +232,7 @@ rule export:
             --lat-longs {input.lat_longs} \
             --auspice-config {input.auspice_config} \
             --description {input.description} \
+            --include-root-sequence \
             --output {output.auspice_json}
         """
 
