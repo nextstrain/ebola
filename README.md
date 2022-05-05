@@ -1,5 +1,7 @@
 # nextstrain.org/ebola
 
+[![Build Status](https://github.com/nextstrain/ebola/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/nextstrain/ebola/actions/workflows/ci.yaml)
+
 This is the [Nextstrain](https://nextstrain.org/) build for Ebola, visible at
 [nextstrain.org/ebola](https://nextstrain.org/ebola).
 
