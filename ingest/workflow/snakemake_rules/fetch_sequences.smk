@@ -15,7 +15,7 @@ Produces final output as
 
 def download_serotype(w):
     serotype = {
-        'all': '64320',
+        'all': '186536', # Returns 3530 records, check if we need a more specific Taxon ID
     }
     return serotype[w.serotype]
 

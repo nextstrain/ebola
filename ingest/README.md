@@ -1,11 +1,11 @@
-# nextstrain.org/zika/ingest
+# nextstrain.org/ebola/ingest
 
-This is the ingest pipeline for Zika virus sequences.
+This is the ingest pipeline for Ebola virus sequences.
 
 ## Usage
 
 > NOTE: All command examples assume you are within the `ingest` directory.
-> If running commands from the outer `zika` directory, please replace the `.` with `ingest`
+> If running commands from the outer `ebola` directory, please replace the `.` with `ingest`
 
 Fetch sequences with
 
