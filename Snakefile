@@ -1,3 +1,6 @@
+if not config:
+    configfile: "config/config_ebola.yaml"
+
 rule all:
     input:
         auspice_json = "auspice/ebola.json"
@@ -16,40 +19,40 @@ rule files:
 files = rules.files.params
 
 rule download:
-    """Downloading sequences from fauna"""
+    """Downloading sequences and metadata from data.nextstrain.org"""
     output:
-        sequences = "data/ebola.fasta"
+        sequences = "data/sequences.fasta",
+        metadata = "data/metadata.tsv",
     params:
-        fasta_fields = "strain virus accession collection_date region country division location source locus authors url title journal puburl"
+        sequences_url = "https://data.nextstrain.org/files/workflows/ebola/test/sequences_all.fasta.zst",
+        metadata_url = "https://data.nextstrain.org/files/workflows/ebola/test/metadata_all.tsv.zst",
     shell:
         """
-        python3 ../fauna/vdb/download.py \
-            --database vdb \
-            --virus ebola \
-            --fasta_fields {params.fasta_fields} \
-            --resolve_method choose_genbank \
-            --path $(dirname {output.sequences}) \
-            --fstem $(basename {output.sequences} .fasta)
+        curl -fsSL {params.sequences_url:q} --output {output.sequences}
+        curl -fsSL {params.metadata_url:q} --output {output.metadata}
         """
 
-rule parse:
-    """Parsing fasta into sequences and metadata"""
+rule wrangle_metadata:
     input:
-        sequences = files.input_fasta
+        metadata=rules.download.output.metadata,
     output:
-        sequences = "results/sequences.fasta",
-        metadata = "results/metadata.tsv"
+        metadata="results/wrangled_metadata.tsv",
     params:
-        fasta_fields = "strain virus accession date region country division city db segment authors url title journal paper_url",
-        prettify_fields = "region country division city"
+        strain_id=lambda w: config.get("strain_id_field", "strain"),
+        wrangle_metadata_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/scripts/wrangle_metadata.py",
     shell:
         """
-        augur parse \
-            --sequences {input.sequences} \
-            --output-sequences {output.sequences} \
-            --output-metadata {output.metadata} \
-            --fields {params.fasta_fields} \
-            --prettify-fields {params.prettify_fields}
+        if [[ ! -d bin ]]; then
+          mkdir bin
+        fi
+        cd bin
+        [[ -f wrangle_metadata.py ]] || wget {params.wrangle_metadata_url}
+        chmod 755 *
+        cd ..
+        
+        python3 ./bin/wrangle_metadata.py --metadata {input.metadata} \
+            --strain-id {params.strain_id} \
+            --output {output.metadata}
         """
 
 rule filter:
@@ -218,7 +221,8 @@ rule export:
         auspice_config = files.auspice_config,
         description = files.description
     output:
-        auspice_json = rules.all.input.auspice_json
+        auspice_json = "results/raw_ebola.json",
+        root_sequence="results/raw_ebola_root-sequence.json",
     shell:
         """
         augur export v2 \
@@ -231,6 +235,36 @@ rule export:
             --description {input.description} \
             --include-root-sequence \
             --output {output.auspice_json}
+        """
+
+rule final_strain_name:
+    input:
+        auspice_json=rules.export.output.auspice_json,
+        metadata=rules.wrangle_metadata.output.metadata,
+        root_sequence=rules.export.output.root_sequence,
+    output:
+        auspice_json=rules.all.input.auspice_json,
+        root_sequence="auspice/ebola_root-sequence.json",
+    params:
+        display_strain_field=lambda w: config.get("display_strain_field", "strain"),
+        set_final_strain_name_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/scripts/set_final_strain_name.py",
+    shell:
+        """
+        if [[ ! -d bin ]]; then
+          mkdir bin
+        fi
+        cd bin
+        [[ -f set_final_strain_name.py ]] || wget {params.set_final_strain_name_url}
+        chmod 755 *
+        cd ..
+
+        python3 bin/set_final_strain_name.py \
+            --metadata {input.metadata} \
+            --input-auspice-json {input.auspice_json} \
+            --display-strain-name {params.display_strain_field} \
+            --output {output.auspice_json}
+
+        cp {input.root_sequence} {output.root_sequence}
         """
 
 rule clean:
