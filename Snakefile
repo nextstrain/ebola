@@ -39,7 +39,7 @@ rule decompress:
         metadata = "data/metadata.tsv.zst"
     output:
         sequences = "data/sequences.fasta",
-        metadata = "data/metadata.tsv"
+        metadata = "data/metadata.tsv",
     shell:
         """
         zstd -d -c {input.sequences} > {output.sequences}
@@ -48,7 +48,7 @@ rule decompress:
 
 rule wrangle_metadata:
     input:
-        metadata=rules.decompress.output.metadata,
+        metadata="data/metadata.tsv",
     output:
         metadata="results/wrangled_metadata.tsv",
     params:
@@ -77,8 +77,8 @@ rule filter:
       - excluding strains in {input.exclude}
     """
     input:
-        sequences = "results/sequences.fasta",
-        metadata = "results/metadata.tsv",
+        sequences = "data/sequences.fasta",
+        metadata = "results/wrangled_metadata.tsv",
         include = files.forced_strains,
         exclude = files.dropped_strains
     output:
@@ -146,7 +146,7 @@ rule refine:
     input:
         tree = "results/tree_raw.nwk",
         alignment = "results/aligned.fasta",
-        metadata = "results/metadata.tsv"
+        metadata = "results/wrangled_metadata.tsv"
     output:
         tree = "results/tree.nwk",
         node_data = "results/branch_lengths.json"
@@ -171,7 +171,7 @@ rule ancestral:
     """Reconstructing ancestral sequences and mutations"""
     input:
         tree = "results/tree.nwk",
-        alignment = "results/aligned.fasta"
+        alignment = "results/aligned.fasta",
     output:
         node_data = "results/nt_muts.json"
     params:
@@ -206,7 +206,7 @@ rule traits:
     """Inferring ancestral traits for {params.columns!s}"""
     input:
         tree = "results/tree.nwk",
-        metadata = "results/metadata.tsv"
+        metadata = "results/wrangled_metadata.tsv"
     output:
         node_data = "results/traits.json",
     params:
@@ -225,7 +225,7 @@ rule export:
     """Exporting data files for for auspice"""
     input:
         tree = "results/tree.nwk",
-        metadata = "results/metadata.tsv",
+        metadata = "results/wrangled_metadata.tsv",
         branch_lengths = "results/branch_lengths.json",
         traits = "results/traits.json",
         nt_muts = "results/nt_muts.json",
@@ -253,11 +253,11 @@ rule export:
 
 rule final_strain_name:
     input:
-        auspice_json=rules.export.output.auspice_json,
-        metadata=rules.wrangle_metadata.output.metadata,
-        root_sequence=rules.export.output.root_sequence,
+        auspice_json="results/raw_ebola.json",
+        metadata="results/wrangled_metadata.tsv",
+        root_sequence="results/raw_ebola_root-sequence.json",
     output:
-        auspice_json=rules.all.input.auspice_json,
+        auspice_json="auspice/ebola.json",
         root_sequence="auspice/ebola_root-sequence.json",
     params:
         display_strain_field=lambda w: config.get("display_strain_field", "strain"),
