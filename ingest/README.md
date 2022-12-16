@@ -10,7 +10,7 @@ This is the ingest pipeline for Ebola virus sequences.
 Fetch sequences with
 
 ```sh
-nextstrain build --cpus 1 . data/sequences_all.ndjson
+nextstrain build --cpus 1 . data/sequences.ndjson
 ```
 
 Run the complete ingest pipeline with
@@ -21,8 +21,8 @@ nextstrain build --cpus 1 .
 
 This will produce two files (within the `ingest` directory):
 
-- data/metadata_all.tsv
-- data/sequences_all.fasta
+- data/metadata.tsv
+- data/sequences.fasta
 
 Run the complete ingest pipeline and upload results to AWS S3 with
 

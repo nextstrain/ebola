@@ -7,13 +7,13 @@ upload:
     dst: 's3://nextstrain-data/files/workflows/ebola/test'
     # Files to upload to S3 that are in the `data` directory
     files_to_upload: [
-      'metadata_all.tsv.zst',
-      'sequences_all.fasta.zst',
+      'metadata.tsv.zst',
+      'sequences.fasta.zst',
     ]
     # Remote file names for the files to upload, must be in the same order as local files above
     remote_file_names: [
-      'metadata_all.tsv.zst',
-      'sequences_all.fasta.zst',
+      'metadata.tsv.zst',
+      'sequences.fasta.zst',
     ]
     cloudfront_domain: 'data.nextstrain.org'
 

@@ -38,14 +38,14 @@ rule concat_geolocation_rules:
 
 rule transform:
     input:
-        sequences_ndjson="data/sequences_{serotype}.ndjson",
+        sequences_ndjson="data/sequences.ndjson",
         all_geolocation_rules="data/all-geolocation-rules.tsv",
         annotations=config["transform"]["annotations"],
     output:
-        metadata=temp("data/raw_metadata_{serotype}.tsv"),
-        sequences="data/sequences_{serotype}.fasta",
+        metadata=temp("data/raw_metadata.tsv"),
+        sequences="data/sequences.fasta",
     log:
-        "logs/transform_{serotype}.txt",
+        "logs/transform.txt",
     params:
         field_map=config["transform"]["field_map"],
         strain_regex=config["transform"]["strain_regex"],
@@ -123,9 +123,9 @@ rule transform:
 
 rule post_process_metadata:
     input:
-        metadata="data/raw_metadata_{serotype}.tsv",
+        metadata="data/raw_metadata.tsv",
     output:
-        metadata="data/metadata_{serotype}.tsv",
+        metadata="data/metadata.tsv",
     params:
         post_process_metadata_url="https://raw.githubusercontent.com/nextstrain/zika/ingest/ingest/bin/post_process_metadata.py",
 
@@ -144,11 +144,11 @@ rule post_process_metadata:
 
 rule compress:
     input:
-        sequences="data/sequences_{serotype}.fasta",
-        metadata="data/metadata_{serotype}.tsv",
+        sequences="data/sequences.fasta",
+        metadata="data/metadata.tsv",
     output:
-        sequences="data/sequences_{serotype}.fasta.zst",
-        metadata="data/metadata_{serotype}.tsv.zst",
+        sequences="data/sequences.fasta.zst",
+        metadata="data/metadata.tsv.zst",
     shell:
         """
         zstd -T0 -o {output.sequences} {input.sequences}

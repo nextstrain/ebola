@@ -9,7 +9,7 @@ serotypes = ['all']
 
 def _get_all_targets(wildcards):
     # Default targets are the metadata TSV and sequences FASTA files
-    all_targets = expand(["data/sequences_{serotype}.fasta.zst", "data/metadata_{serotype}.tsv.zst"], serotype=serotypes)
+    all_targets = ["data/sequences.fasta.zst", "data/metadata.tsv.zst"]
 
     # Add additional targets based on upload config
     upload_config = config.get("upload", {})

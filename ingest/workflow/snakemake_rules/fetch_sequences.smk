@@ -13,17 +13,11 @@ Produces final output as
 
 """
 
-def download_serotype(w):
-    serotype = {
-        'all': '186536', # Returns 3530 records, check if we need a more specific Taxon ID
-    }
-    return serotype[w.serotype]
-
 rule fetch_from_genbank:
     output:
-        genbank_ndjson=temp("data/genbank_{serotype}.ndjson"),
+        genbank_ndjson=temp("data/genbank.ndjson"),
     params:
-        serotype_tax_id=download_serotype,
+        serotype_tax_id='186536', # Returns 3530 records, check if we need a more specific Taxon ID
         csv_to_ndjson_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/csv-to-ndjson",
         fetch_from_genbank_url="https://raw.githubusercontent.com/nextstrain/dengue/new_ingest/ingest/bin/fetch-from-genbank",
         genbank_url_url="https://raw.githubusercontent.com/nextstrain/dengue/new_ingest/ingest/bin/genbank-url", # Update if dengue merged
@@ -43,14 +37,14 @@ rule fetch_from_genbank:
 
 
 def _get_all_sources(wildcards):
-    return [f"data/{source}_{wildcards.serotype}.ndjson" for source in config["sources"]]
+    return [f"data/{source}.ndjson" for source in config["sources"]]
 
 
 rule fetch_all_sequences:
     input:
         all_sources=_get_all_sources,
     output:
-        sequences_ndjson=temp("data/sequences_{serotype}.ndjson"),
+        sequences_ndjson=temp("data/sequences.ndjson"),
     shell:
         """
         cat {input.all_sources} > {output.sequences_ndjson}
