@@ -21,20 +21,34 @@ files = rules.files.params
 rule download:
     """Downloading sequences and metadata from data.nextstrain.org"""
     output:
-        sequences = "data/sequences.fasta",
-        metadata = "data/metadata.tsv",
+        sequences = "data/sequences.fasta.zst",
+        metadata = "data/metadata.tsv.zst",
     params:
-        sequences_url = "https://data.nextstrain.org/files/workflows/ebola/test/sequences_all.fasta.zst",
-        metadata_url = "https://data.nextstrain.org/files/workflows/ebola/test/metadata_all.tsv.zst",
+        sequences_url = "https://data.nextstrain.org/files/workflows/ebola/test/sequences.fasta.zst",
+        metadata_url = "https://data.nextstrain.org/files/workflows/ebola/test/metadata.tsv.zst",
     shell:
         """
-        curl -fsSL {params.sequences_url:q} --output {output.sequences}
-        curl -fsSL {params.metadata_url:q} --output {output.metadata}
+        curl -fsSL --compressed {params.sequences_url:q} --output {output.sequences}
+        curl -fsSL --compressed {params.metadata_url:q} --output {output.metadata}
+        """
+
+rule decompress:
+    message: "Decompressing sequences and metadata"
+    input:
+        sequences = "data/sequences.fasta.zst",
+        metadata = "data/metadata.tsv.zst"
+    output:
+        sequences = "data/sequences.fasta",
+        metadata = "data/metadata.tsv"
+    shell:
+        """
+        zstd -d -c {input.sequences} > {output.sequences}
+        zstd -d -c {input.metadata} > {output.metadata}
         """
 
 rule wrangle_metadata:
     input:
-        metadata=rules.download.output.metadata,
+        metadata=rules.decompress.output.metadata,
     output:
         metadata="results/wrangled_metadata.tsv",
     params:
