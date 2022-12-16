@@ -14,7 +14,7 @@ rule trigger_build:
     output:
         touch("data/trigger/rebuild.done")
     params:
-        trigger_on_new_data_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/trigger-on-new-data"
+        trigger_on_new_data_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/trigger-on-new-data"
     shell:
         """
         if [[ ! -d bin ]]; then

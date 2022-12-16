@@ -53,7 +53,7 @@ rule wrangle_metadata:
         metadata="results/wrangled_metadata.tsv",
     params:
         strain_id=lambda w: config.get("strain_id_field", "strain"),
-        wrangle_metadata_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/scripts/wrangle_metadata.py",
+        wrangle_metadata_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/scripts/wrangle_metadata.py",
     shell:
         """
         if [[ ! -d bin ]]; then
@@ -261,7 +261,7 @@ rule final_strain_name:
         root_sequence="auspice/ebola_root-sequence.json",
     params:
         display_strain_field=lambda w: config.get("display_strain_field", "strain"),
-        set_final_strain_name_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/scripts/set_final_strain_name.py",
+        set_final_strain_name_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/scripts/set_final_strain_name.py",
     shell:
         """
         if [[ ! -d bin ]]; then

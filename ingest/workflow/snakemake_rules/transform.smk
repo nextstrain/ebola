@@ -62,15 +62,15 @@ rule transform:
         metadata_columns=config["transform"]["metadata_columns"],
         id_field=config["transform"]["id_field"],
         sequence_field=config["transform"]["sequence_field"],
-        transform_field_names_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/transform-field-names",
-        transform_string_fields_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/transform-string-fields",
-        transform_strain_names_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/transform-strain-names",
-        transform_date_fields_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/transform-date-fields",
-        transform_genbank_location_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/transform-genbank-location",
-        transform_authors_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/transform-authors",
-        apply_geolocation_rules_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/apply-geolocation-rules",
-        merge_user_metadata_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/merge-user-metadata",
-        ndjson_to_tsv_and_fasta_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/ndjson-to-tsv-and-fasta",
+        transform_field_names_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/transform-field-names",
+        transform_string_fields_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/transform-string-fields",
+        transform_strain_names_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/transform-strain-names",
+        transform_date_fields_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/transform-date-fields",
+        transform_genbank_location_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/transform-genbank-location",
+        transform_authors_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/transform-authors",
+        apply_geolocation_rules_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/apply-geolocation-rules",
+        merge_user_metadata_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/merge-user-metadata",
+        ndjson_to_tsv_and_fasta_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/ndjson-to-tsv-and-fasta",
     shell:
         """
         if [[ ! -d bin ]]; then
@@ -127,7 +127,7 @@ rule post_process_metadata:
     output:
         metadata="data/metadata.tsv",
     params:
-        post_process_metadata_url="https://raw.githubusercontent.com/nextstrain/zika/ingest/ingest/bin/post_process_metadata.py",
+        post_process_metadata_url="https://raw.githubusercontent.com/nextstrain/zika/2ae81db362fdeb5e832153dfaf2294fe971e638c/ingest/bin/post_process_metadata.py",
 
     shell:
         """

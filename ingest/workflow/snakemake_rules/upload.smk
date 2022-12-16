@@ -54,9 +54,9 @@ rule upload_to_s3:
         quiet="" if send_notifications else "--quiet",
         s3_dst=config["upload"].get("s3", {}).get("dst", ""),
         cloudfront_domain=config["upload"].get("s3", {}).get("cloudfront_domain", ""),
-        upload_to_s3_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/upload-to-s3",
-        sha256sum_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/sha256sum",
-        cloudfront_invalidate_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/cloudfront-invalidate"
+        upload_to_s3_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/upload-to-s3",
+        sha256sum_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/sha256sum",
+        cloudfront_invalidate_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/cloudfront-invalidate"
     shell:
         """
         if [[ ! -d bin ]]; then

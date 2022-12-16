@@ -28,7 +28,7 @@ rule notify_on_genbank_record_change:
         touch("data/notify/genbank-record-change.done"),
     params:
         s3_src=S3_SRC,
-        notify_on_record_change_url="https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/notify-on-record-change",
+        notify_on_record_change_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/notify-on-record-change",
     shell:
         """
         if [[ ! -d bin ]]; then
@@ -52,7 +52,7 @@ rule notify_on_metadata_diff:
         touch("data/notify/metadata-diff.done"),
     params:
         s3_src=S3_SRC,
-        notify_on_diff_url = "https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/notify-on-diff",
+        notify_on_diff_url = "https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/notify-on-diff",
     shell:
         """
         if [[ ! -d bin ]]; then
