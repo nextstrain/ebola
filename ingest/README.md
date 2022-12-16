@@ -39,9 +39,9 @@ Do the following to include sequences from static FASTA files.
 1. Convert the FASTA files to NDJSON files with:
 
     ```sh
-    wget https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/fasta-to-ndjson -O ingest/bin/fasta-to-ndjson
-    chmod 755 ingest/bin/fasta-to-ndjson
-    ./ingest/bin/fasta-to-ndjson \
+    wget https://raw.githubusercontent.com/nextstrain/monkeypox/master/ingest/bin/fasta-to-ndjson -O bin/fasta-to-ndjson
+    chmod 755 bin/fasta-to-ndjson
+    ./bin/fasta-to-ndjson \
         --fasta {path-to-fasta-file} \
         --fields {fasta-header-field-names} \
         --separator {field-separator-in-header} \
