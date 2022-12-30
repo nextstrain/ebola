@@ -56,14 +56,22 @@ rule wrangle_metadata:
         wrangle_metadata_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/scripts/wrangle_metadata.py",
     shell:
         """
-        if [[ ! -d bin ]]; then
-          mkdir bin
+        # (1) Pick curl or wget based on availability    
+        if which curl > /dev/null; then
+            download_cmd="curl -fsSL --output"
+        elif which wget > /dev/null; then
+            download_cmd="wget -O"
+        else
+            echo "ERROR: Neither curl nor wget found. Please install one of them."
+            exit 1
         fi
-        cd bin
-        [[ -f wrangle_metadata.py ]] || wget {params.wrangle_metadata_url}
-        chmod 755 *
-        cd ..
+
+        # (2) Download the required scripts if not already present
+        [[ -d bin ]] || mkdir bin
+        [[ -f bin/wrangle_metadata.py ]] || $download_cmd bin/wrangle_metadata.py {params.wrangle_metadata_url}
+        chmod +x bin/*
         
+        # (3) Run the script
         python3 ./bin/wrangle_metadata.py --metadata {input.metadata} \
             --strain-id {params.strain_id} \
             --output {output.metadata}
@@ -264,14 +272,22 @@ rule final_strain_name:
         set_final_strain_name_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/scripts/set_final_strain_name.py",
     shell:
         """
-        if [[ ! -d bin ]]; then
-          mkdir bin
+         # (1) Pick curl or wget based on availability
+        if which curl > /dev/null; then
+            download_cmd="curl -fsSL --output"
+        elif which wget > /dev/null; then
+            download_cmd="wget -O"
+        else
+            echo "ERROR: Neither curl nor wget found. Please install one of them."
+            exit 1
         fi
-        cd bin
-        [[ -f set_final_strain_name.py ]] || wget {params.set_final_strain_name_url}
-        chmod 755 *
-        cd ..
 
+        # (2) Download the required scripts if not already present
+        [[ -d bin ]] || mkdir bin
+        [[ -f bin/set_final_strain_name.py ]] || $download_cmd bin/set_final_strain_name.py {params.set_final_strain_name_url}
+        chmod +x bin/*
+        
+        # (3) Run the script
         python3 bin/set_final_strain_name.py \
             --metadata {input.metadata} \
             --input-auspice-json {input.auspice_json} \

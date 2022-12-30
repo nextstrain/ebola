@@ -31,16 +31,22 @@ rule notify_on_genbank_record_change:
         notify_on_record_change_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/notify-on-record-change",
     shell:
         """
-        if [[ ! -d bin ]]; then
-          mkdir bin
-        fi
-        if [[ ! -f bin/notify-on-record-change ]]; then
-          cd bin
-          wget {params.notify_on_record_change_url}
-          chmod 755
-          cd ..
+        # (1) Pick curl or wget based on availability    
+        if which curl > /dev/null; then
+            download_cmd="curl -fsSL --output"
+        elif which wget > /dev/null; then
+            download_cmd="wget -O"
+        else
+            echo "ERROR: Neither curl nor wget found. Please install one of them."
+            exit 1
         fi
 
+        # (2) Download the required scripts if not already present
+        [[ -d bin ]] || mkdir bin
+        [[ -f bin/notify-on-record-change ]] || $download_cmd bin/notify-on-record-change {params.notify_on_record_change_url}
+        chmod +x bin/*
+
+        # (3) Run the script
         ./bin/notify-on-record-change {input.genbank_ndjson} {params.s3_src:q}/genbank.ndjson.xz Genbank
         """
 
@@ -55,15 +61,22 @@ rule notify_on_metadata_diff:
         notify_on_diff_url = "https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/ingest/bin/notify-on-diff",
     shell:
         """
-        if [[ ! -d bin ]]; then
-          mkdir bin
+        # (1) Pick curl or wget based on availability    
+        if which curl > /dev/null; then
+            download_cmd="curl -fsSL --output"
+        elif which wget > /dev/null; then
+            download_cmd="wget -O"
+        else
+            echo "ERROR: Neither curl nor wget found. Please install one of them."
+            exit 1
         fi
-        if [[ ! -f bin/notify-on-diff ]]; then
-          cd bin
-          wget {params.notify_on_diff_url}
-          chmod 755
-          cd ..
-        fi
+
+        # (2) Download the required scripts if not already present
+        [[ -d bin ]] || mkdir bin
+        [[ -f bin/notify-on-diff ]] || $download_cmd bin/notify-on-diff {params.notify_on_diff_url}
+        chmod +x bin/*
+
+        # (3) Run the script
         ./bin/notify-on-diff {input.metadata} {params.s3_src:q}/metadata.tsv.gz
         """
 

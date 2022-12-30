@@ -23,15 +23,24 @@ rule fetch_from_genbank:
         genbank_url_url="https://raw.githubusercontent.com/nextstrain/dengue/ca659008bfbe4b3f799e11ecd106a0b95977fe93/ingest/bin/genbank-url", # Update if dengue merged
     shell:
         """
-        if [[ ! -d bin ]]; then
-          mkdir bin
+        # (1) Pick curl or wget based on availability    
+        if which curl > /dev/null; then
+            download_cmd="curl -fsSL --output"
+        elif which wget > /dev/null; then
+            download_cmd="wget -O"
+        else
+            echo "ERROR: Neither curl nor wget found. Please install one of them."
+            exit 1
         fi
-        cd bin
-        [[ -f csv-to-ndjson ]] || wget {params.csv_to_ndjson_url}
-        [[ -f genbank-url ]] || wget {params.genbank_url_url}
-        [[ -f fetch-from-genbank ]] || wget {params.fetch_from_genbank_url}
-        chmod 755 *
-        cd ..
+
+        # (2) Download the required scripts if not already present
+        [[ -d bin ]] || mkdir bin
+        [[ -f bin/csv-to-ndjson ]]      || $download_cmd bin/csv-to-ndjson {params.csv_to_ndjson_url}
+        [[ -f bin/genbank-url ]]        || $download_cmd bin/genbank-url {params.genbank_url_url}
+        [[ -f bin/fetch-from-genbank ]] || $download_cmd bin/fetch-from-genbank {params.fetch_from_genbank_url}
+        chmod +x bin/*
+
+        # (3) Fetch the sequences
         ./bin/fetch-from-genbank {params.serotype_tax_id} > {output.genbank_ndjson}
         """
 
