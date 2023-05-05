@@ -61,8 +61,8 @@ rule filter:
           - excluding strains in {input.exclude}
         """
     input:
-        sequences = rules.parse.output.sequences,
-        metadata = rules.parse.output.metadata,
+        sequences = "results/sequences.fasta",
+        metadata = "results/metadata.tsv",
         include = files.forced_strains,
         exclude = files.dropped_strains
     output:
@@ -92,7 +92,7 @@ rule align:
           - removing reference sequence
         """
     input:
-        sequences = rules.filter.output.sequences,
+        sequences = "results/filtered.fasta",
         reference = files.reference
     output:
         alignment = "results/aligned.fasta"
@@ -110,7 +110,7 @@ rule align:
 rule tree:
     message: "Building tree"
     input:
-        alignment = rules.align.output.alignment
+        alignment = "results/aligned.fasta"
     output:
         tree = "results/tree_raw.nwk"
     shell:
@@ -130,9 +130,9 @@ rule refine:
           - estimate {params.date_inference} node dates
         """
     input:
-        tree = rules.tree.output.tree,
-        alignment = rules.align.output,
-        metadata = rules.parse.output.metadata
+        tree = "results/tree_raw.nwk",
+        alignment = "results/aligned.fasta",
+        metadata = "results/metadata.tsv"
     output:
         tree = "results/tree.nwk",
         node_data = "results/branch_lengths.json"
@@ -156,8 +156,8 @@ rule refine:
 rule ancestral:
     message: "Reconstructing ancestral sequences and mutations"
     input:
-        tree = rules.refine.output.tree,
-        alignment = rules.align.output
+        tree = "results/tree.nwk",
+        alignment = "results/aligned.fasta"
     output:
         node_data = "results/nt_muts.json"
     params:
@@ -174,8 +174,8 @@ rule ancestral:
 rule translate:
     message: "Translating amino acid sequences"
     input:
-        tree = rules.refine.output.tree,
-        node_data = rules.ancestral.output.node_data,
+        tree = "results/tree.nwk",
+        node_data = "results/nt_muts.json",
         reference = files.reference
     output:
         node_data = "results/aa_muts.json"
@@ -191,8 +191,8 @@ rule translate:
 rule traits:
     message: "Inferring ancestral traits for {params.columns!s}"
     input:
-        tree = rules.refine.output.tree,
-        metadata = rules.parse.output.metadata
+        tree = "results/tree.nwk",
+        metadata = "results/metadata.tsv"
     output:
         node_data = "results/traits.json",
     params:
@@ -210,12 +210,12 @@ rule traits:
 rule export:
     message: "Exporting data files for for auspice"
     input:
-        tree = rules.refine.output.tree,
-        metadata = rules.parse.output.metadata,
-        branch_lengths = rules.refine.output.node_data,
-        traits = rules.traits.output.node_data,
-        nt_muts = rules.ancestral.output.node_data,
-        aa_muts = rules.translate.output.node_data,
+        tree = "results/tree.nwk",
+        metadata = "results/metadata.tsv",
+        branch_lengths = "results/branch_lengths.json",
+        traits = "results/traits.json",
+        nt_muts = "results/nt_muts.json",
+        aa_muts = "results/aa_muts.json",
         colors = files.colors,
         lat_longs = files.lat_longs,
         auspice_config = files.auspice_config,
