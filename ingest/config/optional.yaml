@@ -1,0 +1,24 @@
+# Optional configs used by Nextstrain team
+# Params for uploads
+upload:
+  # Upload params for AWS S3
+  s3:
+    # AWS S3 Bucket with prefix
+    dst: 's3://nextstrain-data/files/workflows/ebola/test'
+    # Files to upload to S3 that are in the `data` directory
+    files_to_upload: [
+      'metadata.tsv.zst',
+      'sequences.fasta.zst',
+    ]
+    # Remote file names for the files to upload, must be in the same order as local files above
+    remote_file_names: [
+      'metadata.tsv.zst',
+      'sequences.fasta.zst',
+    ]
+    cloudfront_domain: 'data.nextstrain.org'
+
+# Toggle for Slack notifications
+send_slack_notifications: False
+
+# Toggle for triggering builds
+trigger_rebuild: False
