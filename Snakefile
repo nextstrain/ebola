@@ -1,3 +1,6 @@
+if not config:
+    configfile: "config/config_ebola.yaml"
+
 rule all:
     input:
         auspice_json = "auspice/ebola.json"
@@ -16,40 +19,62 @@ rule files:
 files = rules.files.params
 
 rule download:
-    """Downloading sequences from fauna"""
+    """Downloading sequences and metadata from data.nextstrain.org"""
     output:
-        sequences = "data/ebola.fasta"
+        sequences = "data/sequences.fasta.zst",
+        metadata = "data/metadata.tsv.zst",
     params:
-        fasta_fields = "strain virus accession collection_date region country division location source locus authors url title journal puburl"
+        sequences_url = "https://data.nextstrain.org/files/workflows/ebola/test/sequences.fasta.zst",
+        metadata_url = "https://data.nextstrain.org/files/workflows/ebola/test/metadata.tsv.zst",
     shell:
         """
-        python3 ../fauna/vdb/download.py \
-            --database vdb \
-            --virus ebola \
-            --fasta_fields {params.fasta_fields} \
-            --resolve_method choose_genbank \
-            --path $(dirname {output.sequences}) \
-            --fstem $(basename {output.sequences} .fasta)
+        curl -fsSL --compressed {params.sequences_url:q} --output {output.sequences}
+        curl -fsSL --compressed {params.metadata_url:q} --output {output.metadata}
         """
 
-rule parse:
-    """Parsing fasta into sequences and metadata"""
+rule decompress:
+    message: "Decompressing sequences and metadata"
     input:
-        sequences = files.input_fasta
+        sequences = "data/sequences.fasta.zst",
+        metadata = "data/metadata.tsv.zst"
     output:
-        sequences = "results/sequences.fasta",
-        metadata = "results/metadata.tsv"
-    params:
-        fasta_fields = "strain virus accession date region country division city db segment authors url title journal paper_url",
-        prettify_fields = "region country division city"
+        sequences = "data/sequences.fasta",
+        metadata = "data/metadata.tsv",
     shell:
         """
-        augur parse \
-            --sequences {input.sequences} \
-            --output-sequences {output.sequences} \
-            --output-metadata {output.metadata} \
-            --fields {params.fasta_fields} \
-            --prettify-fields {params.prettify_fields}
+        zstd -d -c {input.sequences} > {output.sequences}
+        zstd -d -c {input.metadata} > {output.metadata}
+        """
+
+rule wrangle_metadata:
+    input:
+        metadata="data/metadata.tsv",
+    output:
+        metadata="results/wrangled_metadata.tsv",
+    params:
+        strain_id=lambda w: config.get("strain_id_field", "strain"),
+        wrangle_metadata_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/scripts/wrangle_metadata.py",
+    shell:
+        """
+        # (1) Pick curl or wget based on availability    
+        if which curl > /dev/null; then
+            download_cmd="curl -fsSL --output"
+        elif which wget > /dev/null; then
+            download_cmd="wget -O"
+        else
+            echo "ERROR: Neither curl nor wget found. Please install one of them."
+            exit 1
+        fi
+
+        # (2) Download the required scripts if not already present
+        [[ -d bin ]] || mkdir bin
+        [[ -f bin/wrangle_metadata.py ]] || $download_cmd bin/wrangle_metadata.py {params.wrangle_metadata_url}
+        chmod +x bin/*
+        
+        # (3) Run the script
+        python3 ./bin/wrangle_metadata.py --metadata {input.metadata} \
+            --strain-id {params.strain_id} \
+            --output {output.metadata}
         """
 
 rule filter:
@@ -60,8 +85,8 @@ rule filter:
       - excluding strains in {input.exclude}
     """
     input:
-        sequences = "results/sequences.fasta",
-        metadata = "results/metadata.tsv",
+        sequences = "data/sequences.fasta",
+        metadata = "results/wrangled_metadata.tsv",
         include = files.forced_strains,
         exclude = files.dropped_strains
     output:
@@ -129,7 +154,7 @@ rule refine:
     input:
         tree = "results/tree_raw.nwk",
         alignment = "results/aligned.fasta",
-        metadata = "results/metadata.tsv"
+        metadata = "results/wrangled_metadata.tsv"
     output:
         tree = "results/tree.nwk",
         node_data = "results/branch_lengths.json"
@@ -154,7 +179,7 @@ rule ancestral:
     """Reconstructing ancestral sequences and mutations"""
     input:
         tree = "results/tree.nwk",
-        alignment = "results/aligned.fasta"
+        alignment = "results/aligned.fasta",
     output:
         node_data = "results/nt_muts.json"
     params:
@@ -189,7 +214,7 @@ rule traits:
     """Inferring ancestral traits for {params.columns!s}"""
     input:
         tree = "results/tree.nwk",
-        metadata = "results/metadata.tsv"
+        metadata = "results/wrangled_metadata.tsv"
     output:
         node_data = "results/traits.json",
     params:
@@ -208,7 +233,7 @@ rule export:
     """Exporting data files for for auspice"""
     input:
         tree = "results/tree.nwk",
-        metadata = "results/metadata.tsv",
+        metadata = "results/wrangled_metadata.tsv",
         branch_lengths = "results/branch_lengths.json",
         traits = "results/traits.json",
         nt_muts = "results/nt_muts.json",
@@ -218,7 +243,8 @@ rule export:
         auspice_config = files.auspice_config,
         description = files.description
     output:
-        auspice_json = rules.all.input.auspice_json
+        auspice_json = "results/raw_ebola.json",
+        root_sequence="results/raw_ebola_root-sequence.json",
     shell:
         """
         augur export v2 \
@@ -231,6 +257,44 @@ rule export:
             --description {input.description} \
             --include-root-sequence \
             --output {output.auspice_json}
+        """
+
+rule final_strain_name:
+    input:
+        auspice_json="results/raw_ebola.json",
+        metadata="results/wrangled_metadata.tsv",
+        root_sequence="results/raw_ebola_root-sequence.json",
+    output:
+        auspice_json="auspice/ebola.json",
+        root_sequence="auspice/ebola_root-sequence.json",
+    params:
+        display_strain_field=lambda w: config.get("display_strain_field", "strain"),
+        set_final_strain_name_url="https://raw.githubusercontent.com/nextstrain/monkeypox/644d07ebe3fa5ded64d27d0964064fb722797c5d/scripts/set_final_strain_name.py",
+    shell:
+        """
+         # (1) Pick curl or wget based on availability
+        if which curl > /dev/null; then
+            download_cmd="curl -fsSL --output"
+        elif which wget > /dev/null; then
+            download_cmd="wget -O"
+        else
+            echo "ERROR: Neither curl nor wget found. Please install one of them."
+            exit 1
+        fi
+
+        # (2) Download the required scripts if not already present
+        [[ -d bin ]] || mkdir bin
+        [[ -f bin/set_final_strain_name.py ]] || $download_cmd bin/set_final_strain_name.py {params.set_final_strain_name_url}
+        chmod +x bin/*
+        
+        # (3) Run the script
+        python3 bin/set_final_strain_name.py \
+            --metadata {input.metadata} \
+            --input-auspice-json {input.auspice_json} \
+            --display-strain-name {params.display_strain_field} \
+            --output {output.auspice_json}
+
+        cp {input.root_sequence} {output.root_sequence}
         """
 
 rule clean:
