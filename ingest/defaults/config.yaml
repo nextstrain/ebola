@@ -8,7 +8,7 @@
 entrez_search_term: ""
 
 # Required to fetch from NCBI Datasets
-ncbi_taxon_id: ""
+ncbi_taxon_id: "186538"
 
 # The list of NCBI Datasets fields to include from NCBI Datasets output
 # These need to be the "mnemonics" of the NCBI Datasets fields, see docs for full list of fields
