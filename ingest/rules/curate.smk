@@ -87,7 +87,7 @@ rule curate:
         r"""
         (cat {input.sequences_ndjson:q} \
             | augur curate rename \
-                --field-map {params.field_map:q} \
+                --field-map {params.field_map} \
             | augur curate normalize-strings \
             | augur curate transform-strain-name \
                 --strain-regex {params.strain_regex:q} \
