@@ -26,6 +26,16 @@ filter:
       - division
       - year
       - month
+  drc-2018:
+    exclude: "defaults/exclude.txt"
+    include: "defaults/include.txt"
+    subsample_max_sequences: 1000
+    min_date: 2018
+    max_date: 2021
+    group_by:
+      - division
+      - year
+      - month
 
 refine:
   coalescent: skyline
