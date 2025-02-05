@@ -22,11 +22,11 @@ See Augur's usage docs for these commands for more details.
 rule tree:
     """Building tree"""
     input:
-        alignment = "results/aligned.fasta"
+        alignment = "results/{dataset}/aligned.fasta"
     output:
-        tree = "results/tree_raw.nwk"
+        tree = "results/{dataset}/tree_raw.nwk"
     log:
-        "logs/tree.txt"
+        "logs/{dataset}/tree.txt"
     shell:
         r"""
         augur tree \
@@ -44,18 +44,18 @@ rule refine:
       - estimate {params.date_inference} node dates
     """
     input:
-        tree = "results/tree_raw.nwk",
-        alignment = "results/aligned.fasta",
+        tree = "results/{dataset}/tree_raw.nwk",
+        alignment = "results/{dataset}/aligned.fasta",
         metadata = "data/metadata.tsv"
     output:
-        tree = "results/tree.nwk",
-        node_data = "results/branch_lengths.json"
+        tree = "results/{dataset}/tree.nwk",
+        node_data = "results/{dataset}/branch_lengths.json"
     params:
         coalescent = config["refine"]["coalescent"],
         date_inference = config["refine"]["date_inference"],
         id_column = config["id_column"],
     log:
-        "logs/refine.txt"
+        "logs/{dataset}/refine.txt"
     shell:
         r"""
         augur refine \

@@ -25,25 +25,34 @@ This part of the workflow usually includes the following steps:
 See Augur's usage docs for these commands for more details.
 """
 
+rule generate_auspice_config:
+    output:
+        auspice_config = "results/{dataset}/auspice_config.json",
+    shell:
+        r"""
+        ./scripts/generate-auspice-config {wildcards.dataset:q} > {output.auspice_config:q}
+        """
+
+
 rule export:
     """Exporting data files for for auspice"""
     input:
-        tree = "results/tree.nwk",
+        tree = "results/{dataset}/tree.nwk",
         metadata = "data/metadata.tsv",
-        branch_lengths = "results/branch_lengths.json",
-        traits = "results/traits.json",
-        nt_muts = "results/nt_muts.json",
-        aa_muts = "results/aa_muts.json",
+        branch_lengths = "results/{dataset}/branch_lengths.json",
+        traits = "results/{dataset}/traits.json",
+        nt_muts = "results/{dataset}/nt_muts.json",
+        aa_muts = "results/{dataset}/aa_muts.json",
         colors = config["files"]["colors"],
         lat_longs = config["files"]["lat_longs"],
-        auspice_config = config["files"]["auspice_config"],
+        auspice_config = "results/{dataset}/auspice_config.json",
         description = config["files"]["description"],
     output:
-        auspice_json = rules.all.input.auspice_json
+        auspice_json = "auspice/ebola_{dataset}.json"
     params:
         id_column = config["id_column"],
     log:
-        "logs/export.txt"
+        "logs/{dataset}/export.txt"
     shell:
         r"""
         augur export v2 \

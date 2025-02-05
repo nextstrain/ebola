@@ -1,5 +1,10 @@
-{
-  "title": "Genomic epidemiology of the 2013-2016 West African Ebola epidemic",
+#!/usr/bin/env python3
+import json
+from sys import argv, exit, stderr
+
+
+# Start with configuration shared between datasets
+config = {
   "maintainers": [
     {"name": "the Nextstrain team", "url": "https://nextstrain.org/team"}
   ],
@@ -49,3 +54,20 @@
     "author"
   ]
 }
+
+
+def main(dataset):
+    if dataset == "west-africa-2014":
+        config["title"] = "Genomic epidemiology of the 2013-2016 West African Ebola epidemic"
+    else:
+        print(f"No configuration for dataset {dataset!r}.", file=stderr)
+        return 1
+
+    print(json.dumps(config, indent=2))
+
+
+if __name__ == "__main__":
+    if len(argv) != 2:
+        print("Usage: {} <dataset>".format(argv[0]), file=stderr)
+        exit(1)
+    exit(main(argv[1]))

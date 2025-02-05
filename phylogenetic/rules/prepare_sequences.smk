@@ -43,18 +43,18 @@ rule filter:
     input:
         sequences = "data/sequences.fasta",
         metadata = "data/metadata.tsv",
-        exclude = config["filter"]["exclude"],
-        include = config["filter"]["include"],
+        exclude = lambda w: config["filter"][w.dataset]["exclude"],
+        include = lambda w: config["filter"][w.dataset]["include"],
     output:
-        sequences = "results/filtered.fasta"
+        sequences = "results/{dataset}/filtered.fasta"
     params:
         id_column = config["id_column"],
-        min_date = config["filter"]["min_date"],
-        max_date = config["filter"]["max_date"],
-        group_by = config["filter"]["group_by"],
-        subsample_max_sequences = config["filter"]["subsample_max_sequences"],
+        min_date = lambda w: config["filter"][w.dataset]["min_date"],
+        max_date = lambda w: config["filter"][w.dataset]["max_date"],
+        group_by = lambda w: config["filter"][w.dataset]["group_by"],
+        subsample_max_sequences = lambda w: config["filter"][w.dataset]["subsample_max_sequences"],
     log:
-        "logs/filter.txt"
+        "logs/{dataset}/filter.txt"
     shell:
         r"""
         augur filter \
@@ -78,12 +78,12 @@ rule align:
       - removing reference sequence
     """
     input:
-        sequences = "results/filtered.fasta",
+        sequences = "results/{dataset}/filtered.fasta",
         reference = config["files"]["reference"],
     output:
-        alignment = "results/aligned.fasta"
+        alignment = "results/{dataset}/aligned.fasta"
     log:
-        "logs/align.txt"
+        "logs/{dataset}/align.txt"
     shell:
         r"""
         augur align \

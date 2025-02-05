@@ -8,6 +8,13 @@ workdir: workflow.current_basedir
 # Use default configuration values. Override with Snakemake's --configfile/--config options.
 configfile: "defaults/config.yaml"
 
+DATASETS = [
+    "west-africa-2014",
+]
+
+wildcard_constraints:
+    dataset = "|".join(DATASETS),
+
 
 # This is the default rule that Snakemake will run when there are no specified targets.
 # The default output of the phylogenetic workflow is usually the final
@@ -17,7 +24,7 @@ configfile: "defaults/config.yaml"
 rule all:
     input:
         # Fill in path(s) to the final exported Auspice JSON(s)
-        auspice_json="auspice/ebola.json",
+        auspice_json = expand("auspice/ebola_{dataset}.json", dataset=DATASETS),
 
 
 # These rules are imported in the order that they are expected to run.

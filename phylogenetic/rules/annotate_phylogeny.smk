@@ -34,14 +34,14 @@ to the ones produced by Augur commands.
 rule ancestral:
     """Reconstructing ancestral sequences and mutations"""
     input:
-        tree = "results/tree.nwk",
-        alignment = "results/aligned.fasta"
+        tree = "results/{dataset}/tree.nwk",
+        alignment = "results/{dataset}/aligned.fasta"
     output:
-        node_data = "results/nt_muts.json"
+        node_data = "results/{dataset}/nt_muts.json"
     params:
         inference = config["ancestral"]["inference"],
     log:
-        "logs/ancestral.txt"
+        "logs/{dataset}/ancestral.txt"
     shell:
         r"""
         augur ancestral \
@@ -55,13 +55,13 @@ rule ancestral:
 rule translate:
     """Translating amino acid sequences"""
     input:
-        tree = "results/tree.nwk",
-        node_data = "results/nt_muts.json",
+        tree = "results/{dataset}/tree.nwk",
+        node_data = "results/{dataset}/nt_muts.json",
         reference = config["files"]["reference"],
     output:
-        node_data = "results/aa_muts.json"
+        node_data = "results/{dataset}/aa_muts.json"
     log:
-        "logs/translate.txt"
+        "logs/{dataset}/translate.txt"
     shell:
         r"""
         augur translate \
@@ -75,15 +75,15 @@ rule translate:
 rule traits:
     """Inferring ancestral traits for {params.columns!s}"""
     input:
-        tree = "results/tree.nwk",
+        tree = "results/{dataset}/tree.nwk",
         metadata = "data/metadata.tsv"
     output:
-        node_data = "results/traits.json",
+        node_data = "results/{dataset}/traits.json",
     params:
         columns = config["traits"]["columns"],
         id_column = config["id_column"],
     log:
-        "logs/traits.txt"
+        "logs/{dataset}/traits.txt"
     shell:
         r"""
         augur traits \
