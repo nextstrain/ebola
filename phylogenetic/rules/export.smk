@@ -40,16 +40,22 @@ rule export:
         description = files.description
     output:
         auspice_json = rules.all.input.auspice_json
+    benchmark:
+        "benchmarks/export.txt"
+    log:
+        "logs/export.txt"
     shell:
-        """
+        r"""
+        exec &> >(tee {log:q})
+
         augur export v2 \
-            --tree {input.tree} \
-            --metadata {input.metadata} \
-            --node-data {input.branch_lengths} {input.traits} {input.nt_muts} {input.aa_muts} \
-            --colors {input.colors} \
-            --lat-longs {input.lat_longs} \
-            --auspice-config {input.auspice_config} \
-            --description {input.description} \
+            --tree {input.tree:q} \
+            --metadata {input.metadata:q} \
+            --node-data {input.branch_lengths:q} {input.traits:q} {input.nt_muts:q} {input.aa_muts:q} \
+            --colors {input.colors:q} \
+            --lat-longs {input.lat_longs:q} \
+            --auspice-config {input.auspice_config:q} \
+            --description {input.description:q} \
             --include-root-sequence \
-            --output {output.auspice_json}
+            --output {output.auspice_json:q}
         """
