@@ -1,0 +1,7 @@
+# This configuration file should contain all the required configuration parameters
+# for the Nextclade workflow to do a test run with a created dataset
+
+# Custom rules to run as part of the testing workflow
+# The paths should be relative to the phylogenetic directory.
+custom_rules:
+  - build-configs/test-dataset/test_dataset.smk
