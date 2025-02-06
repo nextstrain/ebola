@@ -28,12 +28,12 @@ rule upload_to_s3:
         s3_dst=config["s3_dst"],
         cloudfront_domain=config["cloudfront_domain"],
     shell:
-        """
+        r"""
         ./vendored/upload-to-s3 \
-            {params.quiet} \
+            {params.quiet:q} \
             {input.file_to_upload:q} \
             {params.s3_dst:q}/{wildcards.remote_file:q} \
-            {params.cloudfront_domain} 2>&1 | tee {output}
+            {params.cloudfront_domain:q} 2>&1 | tee {output:q}
         """
 
 

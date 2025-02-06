@@ -23,7 +23,7 @@ rule fetch_general_geolocation_rules:
     params:
         geolocation_rules_url=config["curate"]["geolocation_rules_url"],
     shell:
-        """
+        r"""
         curl {params.geolocation_rules_url} > {output.general_geolocation_rules}
         """
 
@@ -35,8 +35,8 @@ rule concat_geolocation_rules:
     output:
         all_geolocation_rules="data/all-geolocation-rules.tsv",
     shell:
-        """
-        cat {input.general_geolocation_rules} {input.local_geolocation_rules} >> {output.all_geolocation_rules}
+        r"""
+        cat {input.general_geolocation_rules:q} {input.local_geolocation_rules:q} >> {output.all_geolocation_rules:q}
         """
 
 
@@ -84,36 +84,36 @@ rule curate:
         id_field=config["curate"]["output_id_field"],
         sequence_field=config["curate"]["output_sequence_field"],
     shell:
-        """
-        (cat {input.sequences_ndjson} \
+        r"""
+        (cat {input.sequences_ndjson:q} \
             | augur curate rename \
-                --field-map {params.field_map} \
+                --field-map {params.field_map:q} \
             | augur curate normalize-strings \
             | augur curate transform-strain-name \
-                --strain-regex {params.strain_regex} \
-                --backup-fields {params.strain_backup_fields} \
+                --strain-regex {params.strain_regex:q} \
+                --backup-fields {params.strain_backup_fields:q} \
             | augur curate format-dates \
-                --date-fields {params.date_fields} \
-                --expected-date-formats {params.expected_date_formats} \
+                --date-fields {params.date_fields:q} \
+                --expected-date-formats {params.expected_date_formats:q} \
             | augur curate parse-genbank-location \
-                --location-field {params.genbank_location_field} \
+                --location-field {params.genbank_location_field:q} \
             | augur curate titlecase \
-                --titlecase-fields {params.titlecase_fields} \
-                --articles {params.articles} \
-                --abbreviations {params.abbreviations} \
+                --titlecase-fields {params.titlecase_fields:q} \
+                --articles {params.articles:q} \
+                --abbreviations {params.abbreviations:q} \
             | augur curate abbreviate-authors \
-                --authors-field {params.authors_field} \
-                --default-value {params.authors_default_value} \
-                --abbr-authors-field {params.abbr_authors_field} \
+                --authors-field {params.authors_field:q} \
+                --default-value {params.authors_default_value:q} \
+                --abbr-authors-field {params.abbr_authors_field:q} \
             | augur curate apply-geolocation-rules \
-                --geolocation-rules {input.all_geolocation_rules} \
+                --geolocation-rules {input.all_geolocation_rules:q} \
             | augur curate apply-record-annotations \
-                --annotations {input.annotations} \
-                --id-field {params.annotations_id} \
-                --output-metadata {output.metadata} \
-                --output-fasta {output.sequences} \
-                --output-id-field {params.id_field} \
-                --output-seq-field {params.sequence_field} ) 2>> {log}
+                --annotations {input.annotations:q} \
+                --id-field {params.annotations_id:q} \
+                --output-metadata {output.metadata:q} \
+                --output-fasta {output.sequences:q} \
+                --output-id-field {params.id_field:q} \
+                --output-seq-field {params.sequence_field:q} ) 2>> {log:q}
         """
 
 rule add_metadata_columns:
@@ -128,12 +128,12 @@ rule add_metadata_columns:
     params:
         accession=config['curate']['genbank_accession']
     shell:
-        """
+        r"""
         csvtk mutate2 -t \
           -n url \
-          -e '"https://www.ncbi.nlm.nih.gov/nuccore/" + ${params.accession}' \
-          {input.metadata} \
-        > {output.metadata}
+          -e '"https://www.ncbi.nlm.nih.gov/nuccore/" + ${params.accession:q}' \
+          {input.metadata:q} \
+        > {output.metadata:q}
         """
 
 rule subset_metadata:
@@ -144,7 +144,7 @@ rule subset_metadata:
     params:
         metadata_fields=",".join(config["curate"]["metadata_columns"]),
     shell:
-        """
-        csvtk cut -t -f {params.metadata_fields} \
-            {input.metadata} > {output.subset_metadata}
+        r"""
+        csvtk cut -t -f {params.metadata_fields:q} \
+            {input.metadata:q} > {output.subset_metadata:q}
         """
