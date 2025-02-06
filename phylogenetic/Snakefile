@@ -11,6 +11,7 @@ configfile: "defaults/config.yaml"
 DATASETS = [
     "west-africa-2014",
     "drc-2018",
+    "all-outbreaks",
 ]
 
 wildcard_constraints:

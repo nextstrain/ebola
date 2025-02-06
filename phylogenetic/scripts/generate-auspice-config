@@ -61,6 +61,8 @@ def main(dataset):
         config["title"] = "Genomic epidemiology of the 2013-2016 West African Ebola epidemic"
     elif dataset == "drc-2018":
         config["title"] = "Genomic epidemiology of the 2018-2020 Ebola epidemic"
+    elif dataset == "all-outbreaks":
+        config["title"] = "Genomic epidemiology of Zaire ebolavirus"
     else:
         print(f"No configuration for dataset {dataset!r}.", file=stderr)
         return 1

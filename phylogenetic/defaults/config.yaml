@@ -36,6 +36,16 @@ filter:
       - division
       - year
       - month
+  all-outbreaks:
+    # TODO: allow more complex subsampling like "100 sequences from 2012-2017 and 100 sequences from 2018-2020"
+    exclude: "defaults/exclude.txt"
+    include: "defaults/include.txt"
+    subsample_max_sequences: 400
+    min_date: 2012
+    max_date: 2025
+    group_by:
+      - country
+      - year
 
 refine:
   coalescent: skyline
