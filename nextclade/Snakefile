@@ -1,0 +1,48 @@
+"""
+This is the main Nextclade Snakefile that orchestrates the workflow to produce
+a Nextclade dataset.
+"""
+# The workflow filepaths are written relative to this Snakefile's base directory
+workdir: workflow.current_basedir
+
+# Use default configuration values. Override with Snakemake's --configfile/--config options.
+configfile: "defaults/config.yaml"
+
+# This is the default rule that Snakemake will run when there are no specified targets.
+# The default output of the Nextclade workflow is usually the produced Nextclade dataset.
+# See Nextclade docs on expected naming conventions of dataset files
+# https://docs.nextstrain.org/projects/nextclade/page/user/datasets.html
+rule all:
+    input:
+        # Fill in paths to the final exported Nextclade dataset.
+
+
+# These rules are imported in the order that they are expected to run.
+# Each Snakefile will have documented inputs and outputs that should be kept as
+# consistent interfaces across pathogen repos. This allows us to define typical
+# steps that are required for a phylogenetic workflow, but still allow pathogen
+# specific customizations within each step.
+# Note that only PATHOGEN level customizations should be added to these
+# core steps, meaning they are custom rules necessary for all builds of the pathogen.
+# If there are build specific customizations, they should be added with the
+# custom_rules imported below to ensure that the core workflow is not complicated
+# by build specific rules.
+include: "rules/preprocess.smk"
+include: "rules/prepare_sequences.smk"
+include: "rules/construct_phylogeny.smk"
+include: "rules/annotate_phylogeny.smk"
+include: "rules/export.smk"
+
+# Allow users to import custom rules provided via the config.
+# This allows users to run custom rules that can extend or override the workflow.
+# A concrete example of using custom rules is the extension of the workflow with
+# rules to do a test run of `nextclade run` with the produced Nextclade dataset.
+# For extensions, the user will have to specify the custom rule targets when
+# running the workflow.
+# For overrides, the custom Snakefile will have to use the `ruleorder` directive
+# to allow Snakemake to handle ambiguous rules
+# https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#handling-ambiguous-rules
+if "custom_rules" in config:
+    for rule_file in config["custom_rules"]:
+
+        include: rule_file
