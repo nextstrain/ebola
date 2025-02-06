@@ -1,64 +1,38 @@
-# nextstrain.org/ebola
+# Pathogen Repo Guide
 
-[![Build Status](https://github.com/nextstrain/ebola/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/nextstrain/ebola/actions/workflows/ci.yaml)
-
-This is the [Nextstrain](https://nextstrain.org/) build for Ebola, visible at
-[nextstrain.org/ebola](https://nextstrain.org/ebola).
-
-The build encompasses fetching data, preparing it for analysis, doing quality
-control, performing analyses, and saving the results in a format suitable for
-visualization (with [auspice][]).  This involves running components of
-Nextstrain such as [fauna][] and [augur][].
-
-All Ebola-specific steps and functionality for the Nextstrain pipeline should be
-housed in this repository.
+> [!TIP]
+> Follow the Nextstrain tutorial series for [Creating a pathogen repository][]
+> to use the pathogen repo guide as the starting point for a new pathogen repository.
 
 
-## Usage
+This is a Nextstrain pathogen repository guide for setting up a pathogen
+repo to hold the files necessary to run and maintain a Nextstrain pathogen build.
 
-If you're unfamiliar with Nextstrain builds, you may want to follow our
-[quickstart guide][] first and then come back here.
+Using this guide will allow you to start with the general repository
+and workflow organization that is expected of a Nextstrain maintained pathogen.
+However, the workflows will require customizations to support your specific pathogen
+and should not be expected to "just work".
 
-The easiest way to run this pathogen build is using the [Nextstrain
-command-line tool][nextstrain-cli]:
+## Working on this repo
 
-    nextstrain build .
+This repo is configured to use [pre-commit](https://pre-commit.com),
+to help automatically catch common coding errors and syntax issues
+with changes before they are committed to the repo.
 
-See the [nextstrain-cli README][] for how to install the `nextstrain` command.
+If you will be writing new code or otherwise working within this repo,
+please do the following to get started:
 
-Alternatively, you should be able to run the build using `snakemake` within an
-suitably-configured local environment.  Details of setting that up are not yet
-well-documented, but will be in the future.
+1. [install `pre-commit`](https://pre-commit.com/#install) by running
+   either `python -m pip install pre-commit` or `brew install
+   pre-commit`, depending on your preferred package management
+   solution
+2. install the local git hooks by running `pre-commit install` from
+   the root of the repo
+3. when problems are detected, correct them in your local working tree
+   before committing them.
 
-Build output goes into the directories `data/`, `results/` and `auspice/`.
+Note that these pre-commit checks are also run in a GitHub Action when
+changes are pushed to GitHub, so correcting issues locally will
+prevent extra cycles of correction.
 
-Once you've run the build, you can view the results in auspice:
-
-    nextstrain view auspice/
-
-
-## Configuration
-
-Configuration takes place entirely with the `Snakefile`. This can be read top-to-bottom, each rule
-specifies its file inputs and output and also its parameters. There is little redirection and each
-rule should be able to be reasoned with on its own.
-
-
-### fauna / RethinkDB credentials
-
-This build starts by pulling sequences from our live [fauna][] database (a RethinkDB instance). This
-requires environment variables `RETHINK_HOST` and `RETHINK_AUTH_KEY` to be set.
-
-If you don't have access to our database, you can run the build using the example data provided in
-this repository.  Before running the build, copy the example sequences into the `data/` directory
-like so:
-
-    mkdir -p data/ cp example_data/ebola.fasta data/
-
-[fauna]: https://github.com/nextstrain/fauna
-[augur]: https://github.com/nextstrain/augur
-[auspice]: https://github.com/nextstrain/auspice
-[snakemake cli]: https://snakemake.readthedocs.io/en/stable/executable.html#all-options
-[nextstrain-cli]: https://github.com/nextstrain/cli
-[nextstrain-cli README]: https://github.com/nextstrain/cli/blob/master/README.md
-[quickstart guide]: https://nextstrain.org/docs/getting-started/quickstart
+[Creating a pathogen repository]: https://docs.nextstrain.org/en/latest/tutorials/creating-a-pathogen-repo/index.html

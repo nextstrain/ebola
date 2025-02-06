@@ -1,0 +1,7 @@
+# This configuration file contains the custom configurations parameters
+# for the CI workflow to run with the example data.
+
+# Custom rules to run as part of the CI automated workflow
+# The paths should be relative to the phylogenetic directory.
+custom_rules:
+  - build-configs/ci/copy_example_data.smk
