@@ -25,11 +25,17 @@ rule tree:
         alignment = "results/aligned.fasta"
     output:
         tree = "results/tree_raw.nwk"
+    benchmark:
+        "benchmarks/tree.txt"
+    log:
+        "logs/tree.txt"
     shell:
-        """
+        r"""
+        exec &> >(tee {log:q})
+
         augur tree \
-            --alignment {input.alignment} \
-            --output {output.tree} \
+            --alignment {input.alignment:q} \
+            --output {output.tree:q} \
             --nthreads auto
         """
 
@@ -50,16 +56,22 @@ rule refine:
     params:
         coalescent = "skyline",
         date_inference = "marginal"
+    benchmark:
+        "benchmarks/refine.txt"
+    log:
+        "logs/refine.txt"
     shell:
-        """
+        r"""
+        exec &> >(tee {log:q})
+
         augur refine \
-            --tree {input.tree} \
-            --alignment {input.alignment} \
-            --metadata {input.metadata} \
-            --output-tree {output.tree} \
-            --output-node-data {output.node_data} \
+            --tree {input.tree:q} \
+            --alignment {input.alignment:q} \
+            --metadata {input.metadata:q} \
+            --output-tree {output.tree:q} \
+            --output-node-data {output.node_data:q} \
             --timetree \
-            --coalescent {params.coalescent} \
+            --coalescent {params.coalescent:q} \
             --date-confidence \
-            --date-inference {params.date_inference}
+            --date-inference {params.date_inference:q}
         """

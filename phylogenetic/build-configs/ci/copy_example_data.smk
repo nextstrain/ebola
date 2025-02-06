@@ -5,10 +5,16 @@ rule copy_example_data:
     output:
         sequences="data/sequences.fasta",
         metadata="data/metadata.tsv",
+    benchmark:
+        "benchmarks/copy_example_data.txt",
+    log:
+        "logs/copy_example_data.txt",
     shell:
-        """
-        cp -f {input.sequences} {output.sequences}
-        cp -f {input.metadata} {output.metadata}
+        r"""
+        exec &> >(tee {log:q})
+
+        cp -f {input.sequences:q} {output.sequences:q}
+        cp -f {input.metadata:q} {output.metadata:q}
         """
 
 # Add a Snakemake ruleorder directive here if you need to resolve ambiguous rules

@@ -39,17 +39,23 @@ rule filter:
         group_by = "division year month",
         sequences_per_group = 25,
         min_date = 2012
+    benchmark:
+        "benchmarks/filter.txt"
+    log:
+        "logs/filter.txt"
     shell:
-        """
+        r"""
+        exec &> >(tee {log:q})
+
         augur filter \
-            --sequences {input.sequences} \
-            --metadata {input.metadata} \
-            --include {input.include} \
-            --exclude {input.exclude} \
-            --output {output.sequences} \
-            --group-by {params.group_by} \
-            --sequences-per-group {params.sequences_per_group} \
-            --min-date {params.min_date}
+            --sequences {input.sequences:q} \
+            --metadata {input.metadata:q} \
+            --include {input.include:q} \
+            --exclude {input.exclude:q} \
+            --output {output.sequences:q} \
+            --group-by {params.group_by:q} \
+            --sequences-per-group {params.sequences_per_group:q} \
+            --min-date {params.min_date:q}
         """
 
 rule align:
@@ -63,12 +69,18 @@ rule align:
         reference = files.reference
     output:
         alignment = "results/aligned.fasta"
+    benchmark:
+        "benchmarks/align.txt"
+    log:
+        "logs/align.txt"
     shell:
-        """
+        r"""
+        exec &> >(tee {log:q})
+
         augur align \
-            --sequences {input.sequences} \
-            --reference-sequence {input.reference} \
-            --output {output.alignment} \
+            --sequences {input.sequences:q} \
+            --reference-sequence {input.reference:q} \
+            --output {output.alignment:q} \
             --fill-gaps \
             --remove-reference \
             --nthreads auto

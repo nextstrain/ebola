@@ -40,13 +40,19 @@ rule ancestral:
         node_data = "results/nt_muts.json"
     params:
         inference = "joint"
+    benchmark:
+        "benchmarks/ancestral.txt"
+    log:
+        "logs/ancestral.txt"
     shell:
-        """
+        r"""
+        exec &> >(tee {log:q})
+
         augur ancestral \
-            --tree {input.tree} \
-            --alignment {input.alignment} \
-            --output-node-data {output.node_data} \
-            --inference {params.inference}
+            --tree {input.tree:q} \
+            --alignment {input.alignment:q} \
+            --output-node-data {output.node_data:q} \
+            --inference {params.inference:q}
         """
 
 rule translate:
@@ -57,13 +63,19 @@ rule translate:
         reference = files.reference
     output:
         node_data = "results/aa_muts.json"
+    benchmark:
+        "benchmarks/translate.txt"
+    log:
+        "logs/translate.txt"
     shell:
-        """
+        r"""
+        exec &> >(tee {log:q})
+
         augur translate \
-            --tree {input.tree} \
-            --ancestral-sequences {input.node_data} \
-            --reference-sequence {input.reference} \
-            --output {output.node_data} \
+            --tree {input.tree:q} \
+            --ancestral-sequences {input.node_data:q} \
+            --reference-sequence {input.reference:q} \
+            --output {output.node_data:q}
         """
 
 rule traits:
@@ -75,12 +87,18 @@ rule traits:
         node_data = "results/traits.json",
     params:
         columns = "country division"
+    benchmark:
+        "benchmarks/traits.txt"
+    log:
+        "logs/traits.txt"
     shell:
-        """
+        r"""
+        exec &> >(tee {log:q})
+
         augur traits \
-            --tree {input.tree} \
-            --metadata {input.metadata} \
-            --output {output.node_data} \
-            --columns {params.columns} \
+            --tree {input.tree:q} \
+            --metadata {input.metadata:q} \
+            --output {output.node_data:q} \
+            --columns {params.columns:q} \
             --confidence
         """
