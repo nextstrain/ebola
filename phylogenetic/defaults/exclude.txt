@@ -5,3 +5,4 @@ G4837.1 # overly divergent
 LIBR10201 # overly divergent
 MK0868 # overly divergent
 PL7375 # overly divergent
+KR075003 # reference #FIXME: should this be taken care of by `augur align --remove-reference`?

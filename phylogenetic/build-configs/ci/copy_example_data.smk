@@ -6,9 +6,9 @@ rule copy_example_data:
         sequences="data/sequences.fasta",
         metadata="data/metadata.tsv",
     shell:
-        """
-        cp -f {input.sequences} {output.sequences}
-        cp -f {input.metadata} {output.metadata}
+        r"""
+        cp -f {input.sequences:q} {output.sequences:q}
+        cp -f {input.metadata:q} {output.metadata:q}
         """
 
 # Add a Snakemake ruleorder directive here if you need to resolve ambiguous rules

@@ -1,7 +1,7 @@
 {
   "title": "Genomic epidemiology of the 2013-2016 West African Ebola epidemic",
   "maintainers": [
-    {"name": "Trevor Bedford", "url": "http://bedford.io/team/trevor-bedford/"}
+    {"name": "the Nextstrain team", "url": "https://nextstrain.org/team"}
   ],
   "build_url": "https://github.com/nextstrain/ebola",
   "colorings": [
@@ -35,9 +35,13 @@
     "country",
     "division"
   ],
+  "metadata_columns": [
+    "strain"
+  ],
   "display_defaults": {
-    "color_by": "division",
-    "geo_resolution": "division"
+    "color_by": "country",
+    "geo_resolution": "country",
+    "tip_label": "strain"
   },
   "filters": [
     "country",

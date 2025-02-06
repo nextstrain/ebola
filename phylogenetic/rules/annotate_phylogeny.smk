@@ -39,14 +39,17 @@ rule ancestral:
     output:
         node_data = "results/nt_muts.json"
     params:
-        inference = "joint"
+        inference = config["ancestral"]["inference"],
+    log:
+        "logs/ancestral.txt"
     shell:
-        """
+        r"""
         augur ancestral \
-            --tree {input.tree} \
-            --alignment {input.alignment} \
-            --output-node-data {output.node_data} \
-            --inference {params.inference}
+            --tree {input.tree:q} \
+            --alignment {input.alignment:q} \
+            --output-node-data {output.node_data:q} \
+            --inference {params.inference:q} \
+        2>&1 | tee {log}
         """
 
 rule translate:
@@ -54,33 +57,41 @@ rule translate:
     input:
         tree = "results/tree.nwk",
         node_data = "results/nt_muts.json",
-        reference = files.reference
+        reference = config["files"]["reference"],
     output:
         node_data = "results/aa_muts.json"
+    log:
+        "logs/translate.txt"
     shell:
-        """
+        r"""
         augur translate \
-            --tree {input.tree} \
-            --ancestral-sequences {input.node_data} \
-            --reference-sequence {input.reference} \
-            --output {output.node_data} \
+            --tree {input.tree:q} \
+            --ancestral-sequences {input.node_data:q} \
+            --reference-sequence {input.reference:q} \
+            --output {output.node_data:q} \
+        2>&1 | tee {log}
         """
 
 rule traits:
     """Inferring ancestral traits for {params.columns!s}"""
     input:
         tree = "results/tree.nwk",
-        metadata = "results/metadata.tsv"
+        metadata = "data/metadata.tsv"
     output:
         node_data = "results/traits.json",
     params:
-        columns = "country division"
+        columns = config["traits"]["columns"],
+        id_column = config["id_column"],
+    log:
+        "logs/traits.txt"
     shell:
-        """
+        r"""
         augur traits \
-            --tree {input.tree} \
-            --metadata {input.metadata} \
-            --output {output.node_data} \
-            --columns {params.columns} \
-            --confidence
+            --tree {input.tree:q} \
+            --metadata {input.metadata:q} \
+            --metadata-id-columns {params.id_column:q} \
+            --output {output.node_data:q} \
+            --columns {params.columns:q} \
+            --confidence \
+        2>&1 | tee {log}
         """
