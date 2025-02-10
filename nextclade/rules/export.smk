@@ -34,3 +34,39 @@ This part of the workflow usually includes the following steps:
 
 See Augur's usage docs for these commands for more details.
 """
+
+rule export:
+    input:
+        tree = "results/tree.nwk",
+        metadata = "data/metadata.tsv",
+        branch_lengths = "results/branch_lengths.json",
+        clades = "results/clades.json",
+        nt_muts = "results/nt_muts.json",
+        aa_muts = "results/aa_muts.json",
+        colors = config["files"]["colors"],
+        auspice_config = config["files"]["auspice_config"],
+    output:
+        auspice_json = config["files"]["auspice_json"],
+    params:
+        id_column = config["id_column"],
+    log:
+        "logs/export.txt",
+    benchmark:
+        "benchmarks/export.txt",
+    shell:
+        r"""
+        augur export v2 \
+            --tree {input.tree:q} \
+            --metadata {input.metadata:q} \
+            --metadata-id-columns {params.id_column:q} \
+            --node-data {input.branch_lengths:q} {input.nt_muts:q} {input.aa_muts:q} {input.clades:q} \
+            --colors {input.colors:q} \
+            --auspice-config {input.auspice_config:q} \
+            --include-root-sequence-inline \
+            --output {output.auspice_json:q} \
+        2>&1 | tee {log}
+        """
+
+# rule assemble_dataset:
+
+# rule test_dataset:

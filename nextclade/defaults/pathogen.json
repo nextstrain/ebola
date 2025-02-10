@@ -9,9 +9,9 @@
     "changelog": "CHANGELOG.md"
   },
   "attributes": {
-    "name": "Zika virus",
-    "reference name": "Zika virus strain MR 766",
-    "reference accession": "NC_012532.1"
+    "name": "Zaire ebolavirus",
+    "reference name": "Zaire ebolavirus isolate Ebola virus H.sapiens-wt/LBR/2014/Makona-Liberia-DQE14",
+    "reference accession": "KR075003.1"
   },
   "qc": {
     "schemaVersion": "1.2.0",

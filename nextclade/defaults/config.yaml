@@ -3,3 +3,13 @@
 #
 # Define optional config parameters with their default values here so that users
 # do not have to dig through the workflows to figure out the default values
+
+id_column: "accession"
+
+ancestral:
+  inference: joint
+
+files:
+  auspice_config: "defaults/auspice_config.json"
+  auspice_json: "auspice/tree.json"
+  include: "defaults/include.txt"
