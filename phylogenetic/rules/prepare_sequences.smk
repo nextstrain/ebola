@@ -48,7 +48,8 @@ rule filter:
         exclude = lambda w: config["build_params"][w.build]["filter"]["exclude"],
         include = lambda w: config["build_params"][w.build]["filter"]["include"],
     output:
-        sequences = "results/{build}/filtered.fasta"
+        sequences = "results/{build}/filtered.fasta",
+        log = "results/{build}/filter-log.txt",
     params:
         id_column = config["id_column"],
         min_length = lambda w: config["build_params"][w.build]["filter"]["min_length"],
@@ -74,6 +75,7 @@ rule filter:
             --include {input.include:q} \
             --exclude {input.exclude:q} \
             --output-sequences {output.sequences:q} \
+            --output-log {output.log:q} \
             --group-by {params.group_by:q} \
             --subsample-max-sequences {params.subsample_max_sequences:q}
         """
