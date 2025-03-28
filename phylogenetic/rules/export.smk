@@ -25,6 +25,24 @@ This part of the workflow usually includes the following steps:
 See Augur's usage docs for these commands for more details.
 """
 
+rule set_hidden_attribute:
+    input:
+        clades = "results/{build}/clades.json",
+        clade_defs = lambda w: config["build_params"][w.build]["files"].get("clades"),
+    output:
+        hidden = "results/{build}/hidden.json",
+    benchmark:
+        "benchmarks/{build}/set_hidden_attribute.txt"
+    log:
+        "logs/{build}/set_hidden_attribute.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        ./scripts/set-hidden-attribute.py {input.clades:q} {output.hidden:q}
+        """
+
+
 def export_node_data_inputs(w):
     files = [
         f"results/{w.build}/branch_lengths.json",
@@ -35,6 +53,7 @@ def export_node_data_inputs(w):
     if config["build_params"][w.build]["files"].get("clades"):
         files += [
             f"results/{w.build}/clades.json",
+            f"results/{w.build}/hidden.json",
         ]
     return files
 
