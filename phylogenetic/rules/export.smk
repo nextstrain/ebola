@@ -34,7 +34,6 @@ rule export:
         traits = "results/{build}/traits.json",
         nt_muts = "results/{build}/nt_muts.json",
         aa_muts = "results/{build}/aa_muts.json",
-        colors = lambda w: config["build_params"][w.build]["files"]["colors"],
         lat_longs = lambda w: config["build_params"][w.build]["files"]["lat_longs"],
         auspice_config = lambda w: config["build_params"][w.build]["files"]["auspice_config"],
         description = lambda w: config["build_params"][w.build]["files"]["description"],
@@ -55,7 +54,6 @@ rule export:
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.id_column:q} \
             --node-data {input.branch_lengths:q} {input.traits:q} {input.nt_muts:q} {input.aa_muts:q} \
-            --colors {input.colors:q} \
             --lat-longs {input.lat_longs:q} \
             --auspice-config {input.auspice_config:q} \
             --description {input.description:q} \
