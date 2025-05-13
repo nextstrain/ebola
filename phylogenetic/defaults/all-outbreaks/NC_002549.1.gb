@@ -73,22 +73,22 @@ FEATURES             Location/Qualifiers
                      /function="regulation or initiation of RNA replication"
      gene            56..3026
                      /gene="NP"
-                     /locus_tag="ZEBOVgp1"
+                     /locus_tag="NP"
                      /db_xref="GeneID:911830"
      mRNA            56..3026
                      /gene="NP"
-                     /locus_tag="ZEBOVgp1"
+                     /locus_tag="NP"
                      /product="nucleoprotein"
                      /db_xref="GeneID:911830"
      regulatory      56..67
                      /regulatory_class="other"
                      /gene="NP"
-                     /locus_tag="ZEBOVgp1"
+                     /locus_tag="NP"
                      /note="putative; transcription start signal"
                      /citation=[1]
      CDS             470..2689
                      /gene="NP"
-                     /locus_tag="ZEBOVgp1"
+                     /locus_tag="NP"
                      /function="encapsidation of genomic RNA"
                      /codon_start=1
                      /product="nucleoprotein"
@@ -110,28 +110,28 @@ FEATURES             Location/Qualifiers
      regulatory      3015..3026
                      /regulatory_class="polyA_signal_sequence"
                      /gene="NP"
-                     /locus_tag="ZEBOVgp1"
+                     /locus_tag="NP"
      misc_feature    3027..3031
                      /note="intergenic region"
      gene            3032..4407
                      /gene="VP35"
-                     /locus_tag="ZEBOVgp2"
+                     /locus_tag="VP35"
                      /db_xref="GeneID:911827"
      mRNA            3032..4407
                      /gene="VP35"
-                     /locus_tag="ZEBOVgp2"
+                     /locus_tag="VP35"
                      /product="VP35"
                      /citation=[5]
                      /db_xref="GeneID:911827"
      regulatory      3032..3043
                      /regulatory_class="other"
                      /gene="VP35"
-                     /locus_tag="ZEBOVgp2"
+                     /locus_tag="VP35"
                      /note="putative; transcription start signal"
                      /citation=[5]
      CDS             3129..4151
                      /gene="VP35"
-                     /locus_tag="ZEBOVgp2"
+                     /locus_tag="VP35"
                      /function="RNA-dependent RNA polymerase cofactor"
                      /citation=[5]
                      /codon_start=1
@@ -147,28 +147,28 @@ FEATURES             Location/Qualifiers
                      TLGLKI"
      gene            4390..5894
                      /gene="VP40"
-                     /locus_tag="ZEBOVgp3"
+                     /locus_tag="VP40"
                      /db_xref="GeneID:911825"
      mRNA            4390..5894
                      /gene="VP40"
-                     /locus_tag="ZEBOVgp3"
+                     /locus_tag="VP40"
                      /product="VP40"
                      /citation=[5]
                      /db_xref="GeneID:911825"
      regulatory      4390..4401
                      /regulatory_class="other"
                      /gene="VP40"
-                     /locus_tag="ZEBOVgp3"
+                     /locus_tag="VP40"
                      /note="transcription start signal"
                      /citation=[5]
      regulatory      4397..4407
                      /regulatory_class="polyA_signal_sequence"
                      /gene="VP35"
-                     /locus_tag="ZEBOVgp2"
+                     /locus_tag="VP35"
                      /citation=[5]
      CDS             4479..5459
                      /gene="VP40"
-                     /locus_tag="ZEBOVgp3"
+                     /locus_tag="VP40"
                      /note="coalesce nucleocapsids and cell membranes in virion
                      assembly (budding)"
                      /citation=[5]
@@ -185,17 +185,17 @@ FEATURES             Location/Qualifiers
      regulatory      5883..5894
                      /regulatory_class="polyA_signal_sequence"
                      /gene="VP40"
-                     /locus_tag="ZEBOVgp3"
+                     /locus_tag="VP40"
                      /citation=[5]
      misc_feature    5895..5899
                      /note="intergenic region"
      gene            5900..8305
                      /gene="GP"
-                     /locus_tag="ZEBOVgp4"
+                     /locus_tag="sGP"
                      /db_xref="GeneID:911829"
      mRNA            5900..8305
                      /gene="GP"
-                     /locus_tag="ZEBOVgp4"
+                     /locus_tag="sGP"
                      /product="sGP"
                      /note="unedited mRNA"
                      /citation=[4]
@@ -203,12 +203,12 @@ FEATURES             Location/Qualifiers
      regulatory      5900..5911
                      /regulatory_class="other"
                      /gene="GP"
-                     /locus_tag="ZEBOVgp4"
+                     /locus_tag="sGP"
                      /note="putative; transcription start signal"
                      /citation=[4]
      CDS             join(6039..6923,6923..8068)
                      /gene="GP"
-                     /locus_tag="ZEBOVgp4"
+                     /locus_tag="sGP"
                      /function="receptor binding and fusion"
                      /exception="RNA editing"
                      /note="virion spike glycoprotein precursor; an additional
@@ -235,7 +235,7 @@ FEATURES             Location/Qualifiers
                      QIIHDFVDKTLPDQGDNDNWWTGWRQWIPAGIGVTGVIIAVIALFCICKFVF"
      misc_feature    7529..7540
                      /gene="GP"
-                     /locus_tag="ZEBOVgp4"
+                     /locus_tag="sGP"
                      /note="encodes the glycoprotein cleavage site, precursor
                      GP is cleaved by subtilisin-like cellular protease furin
                      into subunits GP1 and GP2 that are linked by a disulfide
@@ -243,15 +243,15 @@ FEATURES             Location/Qualifiers
                      /citation=[3]
      misc_feature    7793..7870
                      /gene="GP"
-                     /locus_tag="ZEBOVgp4"
+                     /locus_tag="sGP"
                      /note="immunosuppressive motif; other site"
      misc_feature    7988..8053
                      /gene="GP"
-                     /locus_tag="ZEBOVgp4"
+                     /locus_tag="sGP"
                      /note="transmembrane anchor; transmembrane region"
      CDS             6039..7133
                      /gene="GP"
-                     /locus_tag="ZEBOVgp4"
+                     /locus_tag="sGP"
                      /note="small non-structural secreted glycoprotein; sGP;
                      sGP, small non-structural, secreted glycoprotein; sGP
                      secreted as an anti-parallel oriented homodimer"
@@ -269,7 +269,7 @@ FEATURES             Location/Qualifiers
                      QLKTTKSWLQKIPLQWFKCTVKEGKLQCRI"
      CDS             join(6039..6922,6924..6933)
                      /gene="GP"
-                     /locus_tag="ZEBOVgp4"
+                     /locus_tag="sGP"
                      /exception="RNA editing"
                      /note="ssGP; second non-structural secreted glycoprotein;
                      super small secreted glycoprotein; secreted in a monomeric
@@ -290,7 +290,7 @@ FEATURES             Location/Qualifiers
      regulatory      6918..6924
                      /regulatory_class="other"
                      /gene="GP"
-                     /locus_tag="ZEBOVgp4"
+                     /locus_tag="sGP"
                      /note="additional A residues are inserted or deleted
                      during transcription of the GP gene by the viral
                      polymerase"
@@ -298,26 +298,26 @@ FEATURES             Location/Qualifiers
                      /function="RNA editing"
      gene            8288..9740
                      /gene="VP30"
-                     /locus_tag="ZEBOVgp5"
+                     /locus_tag="VP30"
                      /db_xref="GeneID:911826"
      mRNA            8288..9740
                      /gene="VP30"
-                     /locus_tag="ZEBOVgp5"
+                     /locus_tag="VP30"
                      /product="VP30"
                      /db_xref="GeneID:911826"
      regulatory      8288..8299
                      /regulatory_class="other"
                      /gene="VP30"
-                     /locus_tag="ZEBOVgp5"
+                     /locus_tag="VP30"
                      /note="putative; transcription start signal"
      regulatory      8295..8305
                      /regulatory_class="polyA_signal_sequence"
                      /gene="GP"
-                     /locus_tag="ZEBOVgp4"
+                     /locus_tag="sGP"
                      /citation=[4]
      CDS             8509..9375
                      /gene="VP30"
-                     /locus_tag="ZEBOVgp5"
+                     /locus_tag="VP30"
                      /function="encapsidation of genomic RNA"
                      /note="polymerase complex protein"
                      /codon_start=1
@@ -333,28 +333,28 @@ FEATURES             Location/Qualifiers
      regulatory      9730..9740
                      /regulatory_class="polyA_signal_sequence"
                      /gene="VP30"
-                     /locus_tag="ZEBOVgp5"
+                     /locus_tag="VP30"
                      /note="putative"
      misc_feature    9741..9884
                      /note="intergenic region"
      gene            9885..11518
                      /gene="VP24"
-                     /locus_tag="ZEBOVgp6"
+                     /locus_tag="VP24"
                      /note="putative"
                      /db_xref="GeneID:911828"
      mRNA            9885..11496
                      /gene="VP24"
-                     /locus_tag="ZEBOVgp6"
+                     /locus_tag="VP24"
                      /product="VP24"
                      /db_xref="GeneID:911828"
      regulatory      9885..9896
                      /regulatory_class="other"
                      /gene="VP24"
-                     /locus_tag="ZEBOVgp6"
+                     /locus_tag="VP24"
                      /note="transcription start signal"
      CDS             10345..11100
                      /gene="VP24"
-                     /locus_tag="ZEBOVgp6"
+                     /locus_tag="VP24"
                      /codon_start=1
                      /product="membrane-associated protein"
                      /protein_id="NP_066250.1"
@@ -367,35 +367,35 @@ FEATURES             Location/Qualifiers
      regulatory      11485..11496
                      /regulatory_class="polyA_signal_sequence"
                      /gene="VP24"
-                     /locus_tag="ZEBOVgp6"
+                     /locus_tag="VP24"
                      /note="putative"
      misc_feature    11497..11500
                      /gene="VP24"
-                     /locus_tag="ZEBOVgp6"
+                     /locus_tag="VP24"
                      /note="intergenic region"
      gene            11501..18282
                      /gene="L"
-                     /locus_tag="ZEBOVgp7"
+                     /locus_tag="L"
                      /db_xref="GeneID:911824"
      mRNA            11501..18282
                      /gene="L"
-                     /locus_tag="ZEBOVgp7"
+                     /locus_tag="L"
                      /product="polymerase"
                      /citation=[1]
                      /db_xref="GeneID:911824"
      regulatory      11501..11512
                      /regulatory_class="other"
                      /gene="L"
-                     /locus_tag="ZEBOVgp7"
+                     /locus_tag="L"
                      /note="transcription start signal"
                      /citation=[1]
      regulatory      11508..11518
                      /regulatory_class="polyA_signal_sequence"
                      /gene="VP24"
-                     /locus_tag="ZEBOVgp6"
+                     /locus_tag="VP24"
      CDS             11581..18219
                      /gene="L"
-                     /locus_tag="ZEBOVgp7"
+                     /locus_tag="L"
                      /function="synthesis of viral RNAs; transcriptional RNA
                      editing"
                      /citation=[1]
@@ -445,7 +445,7 @@ FEATURES             Location/Qualifiers
      regulatory      18272..18282
                      /regulatory_class="polyA_signal_sequence"
                      /gene="L"
-                     /locus_tag="ZEBOVgp7"
+                     /locus_tag="L"
                      /citation=[1]
      3'UTR           18283..18959
                      /note="trailer region"
