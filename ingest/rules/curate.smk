@@ -124,7 +124,7 @@ rule merge:
         metadata_ppx="data/metadata_ppx.tsv",
         metadata_ncbi_entrez="data/metadata_ncbi_entrez.tsv",
     output:
-        metadata="data/all_metadata.tsv",
+        metadata="data/metadata_merged.tsv",
     benchmark:
         "benchmarks/merge.txt"
     log:
@@ -158,6 +158,26 @@ rule merge:
         # Save the merged metadata
         merged.to_csv(output.metadata, sep='\t', index=False)
 
+
+rule extract_from_strain:
+    input:
+        metadata="data/metadata_merged.tsv",
+    output:
+        metadata="data/all_metadata.tsv",
+    benchmark:
+        "benchmarks/extract_from_strain.txt"
+    log:
+        "logs/extract_from_strain.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur curate passthru \
+            --metadata {input.metadata:q} \
+            | scripts/extract_from_strain \
+            | augur curate passthru \
+              --output-metadata {output.metadata:q}
+        """
 
 rule add_metadata_columns:
     """Add columns to metadata
