@@ -110,7 +110,7 @@ rule spike_in_strain_from_ncbi:
         metadata_ppx="data/metadata_ppx.tsv",
         metadata_ncbi_entrez="data/metadata_ncbi_entrez.tsv",
     output:
-        metadata="data/all_metadata.tsv",
+        metadata="data/metadata_merged.tsv",
     benchmark:
         "benchmarks/spike_in_strain_from_ncbi.txt"
     log:
@@ -125,6 +125,26 @@ rule spike_in_strain_from_ncbi:
             --output {output.metadata:q}
         """
 
+
+rule extract_date_from_strain:
+    input:
+        metadata="data/metadata_merged.tsv",
+    output:
+        metadata="data/all_metadata.tsv",
+    benchmark:
+        "benchmarks/extract_date_from_strain.txt"
+    log:
+        "logs/extract_date_from_strain.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur curate passthru \
+            --metadata {input.metadata:q} \
+            | scripts/extract_from_strain.py \
+            | augur curate passthru \
+              --output-metadata {output.metadata:q}
+        """
 
 rule add_accession_urls:
     """Add columns to metadata
