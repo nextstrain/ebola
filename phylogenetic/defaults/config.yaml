@@ -43,6 +43,10 @@ build_params:
         - country
         - division
 
+    export:
+      warning: >-
+        Work in progress.
+
   west-africa-2014:
     ancestral:
       inference: joint
