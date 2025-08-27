@@ -104,3 +104,20 @@ rule traits:
             --columns {params.columns:q} \
             --confidence
         """
+
+rule clades:
+    input:
+        tree = "results/{build}/tree.nwk",
+        nt_muts = "results/{build}/nt_muts.json",
+        aa_muts = "results/{build}/aa_muts.json",
+        clade_defs = lambda w: config["build_params"][w.build]["files"].get("clades")
+    output:
+        clades = "results/{build}/clades.json"
+    shell:
+        """
+        augur clades \
+            --tree {input.tree:q} \
+            --mutations {input.nt_muts:q} {input.aa_muts:q} \
+            --clades {input.clade_defs:q} \
+            --output {output.clades:q}
+        """

@@ -53,7 +53,7 @@
     "restrictedUntil"
   ],
   "display_defaults": {
-    "color_by": "country",
+    "color_by": "clade_membership",
     "geo_resolution": "country",
     "tip_label": "strain"
   },

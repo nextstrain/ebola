@@ -21,6 +21,7 @@ build_params:
       lat_longs: defaults/lat_longs.tsv
       auspice_config: defaults/all-outbreaks/auspice_config.json
       description: defaults/all-outbreaks/description.md
+      clades: defaults/all-outbreaks/clades.tsv
 
     filter:
       min_length: 18000
