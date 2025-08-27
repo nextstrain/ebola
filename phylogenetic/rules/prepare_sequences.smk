@@ -51,6 +51,7 @@ rule filter:
         sequences = "results/{build}/filtered.fasta"
     params:
         id_column = config["id_column"],
+        min_length = lambda w: config["build_params"][w.build]["filter"]["min_length"],
         min_date = lambda w: config["build_params"][w.build]["filter"]["min_date"],
         max_date = lambda w: config["build_params"][w.build]["filter"]["max_date"],
         group_by = lambda w: config["build_params"][w.build]["filter"]["group_by"],
@@ -67,6 +68,7 @@ rule filter:
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.id_column:q} \
+            --min-length {params.min_length:q} \
             --min-date {params.min_date:q} \
             --max-date {params.max_date:q} \
             --include {input.include:q} \
