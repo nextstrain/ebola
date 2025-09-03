@@ -7,9 +7,41 @@
 id_column: "accession"
 
 builds:
-  - west-africa-2014
+  - all-outbreaks
+  # - west-africa-2014
 
 build_params:
+  all-outbreaks:
+    ancestral:
+      inference: joint
+
+    files:
+      reference: defaults/all-outbreaks/NC_002549.1.gb
+      colors: defaults/colors.tsv
+      lat_longs: defaults/lat_longs.tsv
+      auspice_config: defaults/all-outbreaks/auspice_config.json
+      description: defaults/all-outbreaks/description.md
+
+    filter:
+      min_length: 18000
+      exclude_where: is_lab_host=true
+      exclude: defaults/exclude.txt
+      include: defaults/all-outbreaks/include.txt
+      subsample_max_sequences: 400
+      group_by:
+        - country
+        - year
+
+    refine:
+      timetree: true
+      coalescent: skyline
+      date_inference: marginal
+
+    traits:
+      columns:
+        - country
+        - division
+
   west-africa-2014:
     ancestral:
       inference: joint
