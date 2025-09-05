@@ -91,6 +91,7 @@ rule align:
         "benchmarks/align.txt"
     log:
         "logs/align.txt"
+    threads: 4
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -101,5 +102,5 @@ rule align:
             --output {output.alignment:q} \
             --fill-gaps \
             --remove-reference \
-            --nthreads auto
+            --nthreads {threads:q}
         """

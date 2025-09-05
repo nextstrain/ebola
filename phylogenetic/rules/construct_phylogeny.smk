@@ -29,6 +29,7 @@ rule tree:
         "benchmarks/tree.txt"
     log:
         "logs/tree.txt"
+    threads: 4
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -36,7 +37,7 @@ rule tree:
         augur tree \
             --alignment {input.alignment:q} \
             --output {output.tree:q} \
-            --nthreads auto
+            --nthreads {threads:q}
         """
 
 rule refine:
