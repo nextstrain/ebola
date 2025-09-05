@@ -3,6 +3,12 @@
   "maintainers": [
     {"name": "the Nextstrain team", "url": "https://nextstrain.org/team"}
   ],
+  "data_provenance": [
+    {
+      "name": "Pathoplexus",
+      "url": "https://pathoplexus.org"
+    }
+  ],
   "build_url": "https://github.com/nextstrain/ebola",
   "colorings": [
     {
@@ -14,6 +20,11 @@
       "key": "num_date",
       "title": "Date",
       "type": "continuous"
+    },
+    {
+      "key": "dataUseTerms",
+      "title": "Data use terms",
+      "type": "categorical"
     },
     {
       "key": "author",
@@ -36,7 +47,10 @@
     "division"
   ],
   "metadata_columns": [
-    "strain"
+    "strain",
+    "PPX_accession",
+    "INSDC_accession",
+    "restrictedUntil"
   ],
   "display_defaults": {
     "color_by": "country",
