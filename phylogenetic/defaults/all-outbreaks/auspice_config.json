@@ -9,7 +9,7 @@
       "url": "https://pathoplexus.org"
     }
   ],
-  "build_url": "https://github.com/nextstrain/ebola",
+  "build_url": "https://github.com/nextstrain/ebola/pull/18",
   "colorings": [
     {
       "key": "gt",
