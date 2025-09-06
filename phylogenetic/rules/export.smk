@@ -59,6 +59,6 @@ rule export:
             --lat-longs {input.lat_longs:q} \
             --auspice-config {input.auspice_config:q} \
             --description {input.description:q} \
-            --include-root-sequence \
+            --include-root-sequence-inline \
             --output {output.auspice_json:q}
         """
