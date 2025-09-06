@@ -52,6 +52,7 @@ rule all:
 # If there are build specific customizations, they should be added with the
 # custom_rules imported below to ensure that the core workflow is not complicated
 # by build specific rules.
+include: "rules/config.smk"
 include: "rules/prepare_sequences.smk"
 include: "rules/construct_phylogeny.smk"
 include: "rules/annotate_phylogeny.smk"

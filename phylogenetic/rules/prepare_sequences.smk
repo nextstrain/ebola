@@ -53,11 +53,11 @@ rule filter:
         log = "results/{build}/filter-log.txt",
     params:
         id_column = config["id_column"],
-        min_length = lambda w: config["build_params"][w.build]["filter"]["min_length"],
-        min_date = lambda w: config["build_params"][w.build]["filter"]["min_date"],
-        max_date = lambda w: config["build_params"][w.build]["filter"]["max_date"],
-        group_by = lambda w: config["build_params"][w.build]["filter"]["group_by"],
-        subsample_max_sequences = lambda w: config["build_params"][w.build]["filter"]["subsample_max_sequences"],
+        min_length = lambda w: conditional("--min-length", config["build_params"][w.build]["filter"].get("min_length")),
+        min_date = lambda w: conditional("--min-date", config["build_params"][w.build]["filter"].get("min_date")),
+        max_date = lambda w: conditional("--max-date", config["build_params"][w.build]["filter"].get("max_date")),
+        group_by = lambda w: conditional("--group-by", config["build_params"][w.build]["filter"].get("group_by")),
+        subsample_max_sequences = lambda w: conditional("--subsample-max-sequences", config["build_params"][w.build]["filter"].get("subsample_max_sequences")),
     benchmark:
         "benchmarks/{build}/filter.txt"
     log:
@@ -70,16 +70,16 @@ rule filter:
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.id_column:q} \
-            --min-length {params.min_length:q} \
-            --min-date {params.min_date:q} \
-            --max-date {params.max_date:q} \
+            {params.min_length:q} \
+            {params.min_date:q} \
+            {params.max_date:q} \
+            {params.group_by:q} \
+            {params.subsample_max_sequences:q} \
             --include {input.include:q} \
             --exclude {input.exclude:q} \
             --output-sequences {output.sequences:q} \
             --output-metadata {output.metadata:q} \
-            --output-log {output.log:q} \
-            --group-by {params.group_by:q} \
-            --subsample-max-sequences {params.subsample_max_sequences:q}
+            --output-log {output.log:q}
         """
 
 rule align:
