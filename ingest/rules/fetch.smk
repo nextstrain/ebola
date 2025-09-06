@@ -1,5 +1,5 @@
 """
-This part of the workflow handles fetching sequences and metadata from NCBI.
+This part of the workflow handles fetching sequences and metadata from NCBI and Pathoplexus.
 
 REQUIRED INPUTS:
 
@@ -40,6 +40,8 @@ to provide the correct parameter.
    ³ https://github.com/nextstrain/rubella/blob/6492af11bc0a4c7fcf4cfd8d30a94dcc145cf2ed/ingest/rules/fetch_from_ncbi.smk#L123-L143
 """
 
+# FIXME: This entire section is currently unusable due to a broken code path;
+# see comment on config.sources
 ###########################################################################
 ####################### 1. Fetch from NCBI Datasets #######################
 ###########################################################################
@@ -104,9 +106,13 @@ rule extract_ncbi_dataset_sequences:
         """
 
 
+# FIXME: apply csvtk updates. can ncbi_field_map be replaced by ncbi_datasets_fields ?
 rule format_ncbi_dataset_report:
+    # Formats the headers to be the same as before we used NCBI Datasets
+    # The only fields we do not have equivalents for are "title" and "publications"
     input:
         dataset_package="data/ncbi_dataset.zip",
+        ncbi_field_map="defaults/ncbi-dataset-field-map.tsv",
     output:
         ncbi_dataset_tsv=temp("data/ncbi_dataset_report.tsv"),
     params:
@@ -122,11 +128,9 @@ rule format_ncbi_dataset_report:
         dataformat tsv virus-genome \
             --package {input.dataset_package:q} \
             --fields {params.ncbi_datasets_fields:q} \
-            --elide-header \
-            | csvtk fix-quotes -Ht \
-            | csvtk add-header -t -n {params.ncbi_datasets_fields:q} \
-            | csvtk rename -t -f accession -n accession_version \
-            | csvtk -t mutate -f accession_version -n accession -p "^(.+?)\." --at 1 \
+            | csvtk -tl rename2 -F -f '*' -p '(.+)' -r '{{kv}}' -k {input.ncbi_field_map} \
+            | csvtk -tl mutate -f genbank_accession_rev -n genbank_accession -p "^(.+?)\." \
+            | tsv-select -H -f genbank_accession --rest last \
             > {output.ncbi_dataset_tsv:q}
         """
 
@@ -161,6 +165,69 @@ rule fetch_from_ncbi_entrez:
 # the Entrez results and merging with the ncbi_dataset_report.tsv
 # Remember to edit the `ncbi_dataset_tsv` input below to use the new merged TSV.
 
+
+###########################################################################
+########################## 2.5. Fetch from Pathoplexus ####################
+###########################################################################
+
+rule download_ppx_seqs:
+    output:
+        sequences= "data/ppx_sequences.fasta",
+    params:
+        sequences_url=config["ppx_fetch"]["seqs"],
+    benchmark:
+        "benchmarks/download_ppx_seqs.txt"
+    log:
+        "logs/download_ppx_seqs.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        curl {params.sequences_url:q} -o {output.sequences:q}
+        """
+
+rule download_ppx_meta:
+    output:
+        metadata= "data/ppx_metadata.csv"
+    params:
+        metadata_url=config["ppx_fetch"]["meta"],
+        fields = ",".join(config["ppx_metadata_fields"])
+    benchmark:
+        "benchmarks/download_ppx_meta.txt"
+    log:
+        "logs/download_ppx_meta.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        curl '{params.metadata_url}&fields={params.fields}' -o {output.metadata:q}
+        """
+
+rule format_ppx_ndjson:
+    input:
+        sequences="data/ppx_sequences.fasta",
+        metadata="data/ppx_metadata.csv"
+    output:
+        ndjson="data/ppx.ndjson"
+    benchmark:
+        "benchmarks/format_ppx_ndjson.txt"
+    log:
+        "logs/format_ppx_ndjson.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur curate passthru \
+            --metadata {input.metadata} \
+            --fasta {input.sequences} \
+            --seq-id-column accessionVersion \
+            --seq-field sequence \
+            --unmatched-reporting warn \
+            --duplicate-reporting warn \
+            > {output.ndjson}
+        """
+
+
 ###########################################################################
 ###################### 3. Produce final output NDJSON #####################
 ###########################################################################
@@ -186,9 +253,41 @@ rule format_ncbi_datasets_ndjson:
         augur curate passthru \
             --metadata {input.ncbi_dataset_tsv:q} \
             --fasta {input.ncbi_dataset_sequences:q} \
-            --seq-id-column accession_version \
+            --seq-id-column genbank_accession_rev \
             --seq-field sequence \
             --unmatched-reporting warn \
             --duplicate-reporting warn \
             > {output.ndjson:q}
+        """
+
+
+# FIXME: This is just aliasing 'genbank' to 'ncbi'. Doesn't seem necessary.
+# Remove?
+rule fetch_all_genbank_sequences:
+    input:
+        ncbi_ndjson="data/ncbi.ndjson",
+    output:
+        sequences_ndjson="data/genbank.ndjson",
+    shell:
+        """
+        cp {input.ncbi_ndjson} {output.sequences_ndjson}
+        """
+
+
+def _get_all_sources(wildcards):
+    return [f"data/{source}.ndjson" for source in config["sources"]]
+
+
+# FIXME: The code path for having multiple sources here is broken; see comment
+# on config.sources. Even if it did work, does it even make sense? It would be
+# combining the Pathoplexus and GenBank datasets by simple concatenation,
+# which doesn't seem right.
+rule fetch_all_sequences:
+    input:
+        all_sources=_get_all_sources,
+    output:
+        sequences_ndjson="data/sequences.ndjson",
+    shell:
+        """
+        cat {input.all_sources} > {output.sequences_ndjson}
         """

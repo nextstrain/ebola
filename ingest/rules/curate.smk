@@ -1,9 +1,9 @@
 """
-This part of the workflow handles the curation of data from NCBI
+This part of the workflow handles the curation of data from Pathoplexus
 
 REQUIRED INPUTS:
 
-    ndjson      = data/ncbi.ndjson
+    ndjson      = data/ppx.ndjson
 
 OUTPUTS:
 
@@ -31,7 +31,7 @@ def format_field_map(field_map: dict[str, str]) -> list[str]:
 # separate files: a metadata TSV and a sequences FASTA.
 rule curate:
     input:
-        sequences_ndjson="data/ncbi.ndjson",
+        sequences_ndjson="data/ppx.ndjson",
         geolocation_rules=config["curate"]["local_geolocation_rules"],
         annotations=config["curate"]["annotations"],
     output:
@@ -43,7 +43,6 @@ rule curate:
         strain_backup_fields=config["curate"]["strain_backup_fields"],
         date_fields=config["curate"]["date_fields"],
         expected_date_formats=config["curate"]["expected_date_formats"],
-        genbank_location_field=config["curate"]["genbank_location_field"],
         articles=config["curate"]["titlecase"]["articles"],
         abbreviations=config["curate"]["titlecase"]["abbreviations"],
         titlecase_fields=config["curate"]["titlecase"]["fields"],
@@ -71,8 +70,6 @@ rule curate:
             | augur curate format-dates \
                 --date-fields {params.date_fields:q} \
                 --expected-date-formats {params.expected_date_formats:q} \
-            | augur curate parse-genbank-location \
-                --location-field {params.genbank_location_field:q} \
             | augur curate titlecase \
                 --titlecase-fields {params.titlecase_fields:q} \
                 --articles {params.articles:q} \
@@ -102,7 +99,10 @@ rule add_metadata_columns:
     output:
         metadata = temp("data/all_metadata_added.tsv")
     params:
-        accession=config['curate']['genbank_accession']
+        pathoplexus_accession=config['curate']['pathoplexus_accession'],
+        pathoplexus_accession_url=config['curate']['pathoplexus_accession'] + "__url",
+        insdc_accession=config['curate']['insdc_accession'],
+        insdc_accession_url=config['curate']['insdc_accession'] + "__url",
     benchmark:
         "benchmarks/add_metadata_columns.txt"
     log:
@@ -111,10 +111,13 @@ rule add_metadata_columns:
         r"""
         exec &> >(tee {log:q})
 
-        csvtk mutate2 -t \
-          -n url \
-          -e '"https://www.ncbi.nlm.nih.gov/nuccore/" + ${params.accession:q}' \
-          {input.metadata:q} \
+        cat {input.metadata:q} \
+            | csvtk mutate2 -t \
+                -n {params.pathoplexus_accession_url:q} \
+                -e '"https://pathoplexus.org/seq/" + ${params.pathoplexus_accession:q}' \
+            | csvtk mutate2 -t \
+                -n {params.insdc_accession_url:q} \
+                -e '"https://www.ncbi.nlm.nih.gov/nuccore/" + ${params.insdc_accession:q}' \
         > {output.metadata:q}
         """
 
@@ -135,4 +138,28 @@ rule subset_metadata:
 
         csvtk cut -t -f {params.metadata_fields:q} \
             {input.metadata:q} > {output.subset_metadata:q}
+        """
+
+rule extract_open_data:
+    input:
+        metadata = "results/metadata.tsv",
+        sequences = "results/sequences.fasta"
+    output:
+        metadata = "results/metadata_open.tsv",
+        sequences = "results/sequences_open.fasta"
+    benchmark:
+        "benchmarks/extract_open_data.txt"
+    log:
+        "logs/extract_open_data.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur filter \
+            --metadata {input.metadata:q} \
+            --sequences {input.sequences:q} \
+            --metadata-id-columns accession \
+            --exclude-where "dataUseTerms=RESTRICTED" \
+            --output-metadata {output.metadata:q} \
+            --output-sequences {output.sequences:q}
         """

@@ -19,6 +19,8 @@ rule all:
     input:
         "results/sequences.fasta",
         "results/metadata.tsv",
+        "results/sequences_open.fasta",
+        "results/metadata_open.tsv",
 
 
 # Note that only PATHOGEN-level customizations should be added to these
@@ -26,7 +28,7 @@ rule all:
 # If there are build-specific customizations, they should be added with the
 # custom_rules imported below to ensure that the core workflow is not complicated
 # by build-specific rules.
-include: "rules/fetch_from_ncbi.smk"
+include: "rules/fetch.smk"
 include: "rules/curate.smk"
 
 
