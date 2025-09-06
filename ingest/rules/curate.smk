@@ -3,7 +3,8 @@ This part of the workflow handles the curation of data from Pathoplexus
 
 REQUIRED INPUTS:
 
-    ndjson      = data/ppx.ndjson
+    data/ppx.ndjson
+    data/ncbi_entrez.ndjson
 
 OUTPUTS:
 
@@ -29,13 +30,13 @@ def format_field_map(field_map: dict[str, str]) -> list[str]:
 # the input as NDJSON records from stdin and output NDJSON records to stdout.
 # The final step of the pipeline should convert the NDJSON records to two
 # separate files: a metadata TSV and a sequences FASTA.
-rule curate:
+rule curate_ppx:
     input:
         sequences_ndjson="data/ppx.ndjson",
         geolocation_rules=config["curate"]["local_geolocation_rules"],
         annotations=config["curate"]["annotations"],
     output:
-        metadata="data/all_metadata.tsv",
+        metadata="data/metadata_ppx.tsv",
         sequences="results/sequences.fasta",
     params:
         field_map=format_field_map(config["curate"]["field_map"]),
@@ -53,9 +54,9 @@ rule curate:
         id_field=config["curate"]["output_id_field"],
         sequence_field=config["curate"]["output_sequence_field"],
     benchmark:
-        "benchmarks/curate.txt"
+        "benchmarks/curate_ppx.txt"
     log:
-        "logs/curate.txt"
+        "logs/curate_ppx.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -88,6 +89,75 @@ rule curate:
                 --output-id-field {params.id_field:q} \
                 --output-seq-field {params.sequence_field:q}
         """
+
+rule curate_ncbi_entrez:
+    input:
+        metadata_ndjson="data/ncbi_entrez.ndjson",
+    output:
+        metadata="data/metadata_ncbi_entrez.tsv",
+    benchmark:
+        "benchmarks/curate_ncbi_entrez.txt"
+    log:
+        "logs/curate_ncbi_entrez.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        cat {input.metadata_ndjson:q} \
+            | augur curate passthru \
+                --output-metadata {output.metadata:q}
+        """
+
+# Goal: merge the two inputs, joining on 'ppx.insdcAccessionBase' and
+# 'ncbi_entrez.accession'. Note that some ppx.insdcAccessionBase might be empty
+# - just keep those rows as-is. For the rows that are not empty, update the
+# 'strain' column based on this order of preference:
+#
+# 1. ncbi_entrez.strain
+# 2. ncbi_entrez.isolate
+# 3. ppx.strain
+#
+# Note: augur merge can't be used because some ppx sequences don't have
+# insdcAccessionBase.
+rule merge:
+    input:
+        metadata_ppx="data/metadata_ppx.tsv",
+        metadata_ncbi_entrez="data/metadata_ncbi_entrez.tsv",
+    output:
+        metadata="data/all_metadata.tsv",
+    benchmark:
+        "benchmarks/merge.txt"
+    log:
+        "logs/merge.txt"
+    run:
+        import pandas as pd
+
+        # Read input files
+        ppx = pd.read_csv(input.metadata_ppx, sep='\t')
+        ncbi = pd.read_csv(input.metadata_ncbi_entrez, sep='\t')
+
+        # Keep all ppx rows, including those with empty insdcAccessionBase
+        merged = ppx.merge(ncbi, left_on='insdcAccessionBase', right_on='accession',
+                           how='left', suffixes=('', '_ncbi'))
+
+        # Apply strain preference hierarchy for rows that have a match
+        def update_strain(row):
+            # Apply preference: ncbi.strain > ncbi.isolate > ppx.strain
+            if pd.notna(row['strain_ncbi']) and row['strain_ncbi'].strip():
+                return row['strain_ncbi']
+            elif pd.notna(row.get('isolate')) and row['isolate'].strip():
+                return row['isolate']
+            else:
+                return row['strain']
+
+        merged['strain'] = merged.apply(update_strain, axis=1)
+
+        # Remove temporary columns from the merge
+        merged = merged.drop(columns=['strain_ncbi', 'isolate', 'accession_ncbi'])
+
+        # Save the merged metadata
+        merged.to_csv(output.metadata, sep='\t', index=False)
+
 
 rule add_metadata_columns:
     """Add columns to metadata

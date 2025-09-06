@@ -7,11 +7,10 @@ REQUIRED INPUTS:
 
 OUTPUTS:
 
-    ndjson = data/ncbi.ndjson
+    data/ncbi.ndjson
+    data/ncbi_entrez.ndjson
 
 There are two different approaches for fetching data from NCBI.
-Choose the one that works best for the pathogen data and edit the workflow config
-to provide the correct parameter.
 
 1. Fetch with NCBI Datasets (https://www.ncbi.nlm.nih.gov/datasets/)
     - requires `ncbi_taxon_id` config
@@ -161,9 +160,32 @@ rule fetch_from_ncbi_entrez:
         """
 
 
-# If you are using additional Entrez data, add additional rules here for parsing
-# the Entrez results and merging with the ncbi_dataset_report.tsv
-# Remember to edit the `ncbi_dataset_tsv` input below to use the new merged TSV.
+rule parse_genbank_to_ndjson:
+    input:
+        genbank="data/genbank.gb",
+    output:
+        ndjson="data/ncbi_entrez.ndjson",
+    benchmark:
+        "benchmarks/parse_genbank_to_ndjson.txt"
+    log:
+        "logs/parse_genbank_to_ndjson.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        bio json --lines {input.genbank:q} \
+          | jq -c '
+              {{
+                accession: .record.accessions[0],
+                strain:    .record.strain[0],
+                isolate:   .record.isolate[0],
+              }}
+            ' > {output.ndjson:q}
+        """
+
+
+# FIXME: merge with ncbi_dataset_report.tsv and
+# edit the `ncbi_dataset_tsv` input below to use the new merged TSV?
 
 
 ###########################################################################

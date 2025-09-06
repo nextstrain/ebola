@@ -15,7 +15,7 @@ ppx_fetch:
   meta: https://lapis.pathoplexus.org/ebola-zaire/sample/details?dataFormat=csv&versionStatus=LATEST_VERSION
 
 # Required to fetch from Entrez
-entrez_search_term: ""
+entrez_search_term: "txid186538[Primary Organism]"
 
 # Required to fetch from NCBI Datasets
 ncbi_taxon_id: "186538"
