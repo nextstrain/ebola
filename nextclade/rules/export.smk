@@ -42,6 +42,7 @@ rule export:
         tree = "results/tree.nwk",
         branch_lengths = "results/branch_lengths.json",
         muts = "results/muts.json",
+        clades = "results/clades.json",
         years = "results/years.json",
         auspice_config = "defaults/auspice_config.json"
     output:
@@ -52,7 +53,7 @@ rule export:
         --metadata-id-columns accession \
         --metadata {input.metadata} \
         --auspice-config {input.auspice_config} \
-        --node-data {input.branch_lengths} {input.muts} {input.years} \
+        --node-data {input.branch_lengths} {input.muts} {input.years} {input.clades} \
         --include-root-sequence-inline \
         --output {output.auspice_json}
         """

@@ -60,3 +60,17 @@ rule extract_year:
         years_dict_expanded = {k: {'year': v} for k, v in years_dict.items()}
         with open(output.years, 'w') as f:
             json.dump({"nodes": years_dict_expanded}, f)
+rule clades:
+    input:
+        tree = "results/tree.nwk",
+        muts = "results/muts.json",
+        clades = "../shared/clades.tsv",
+    output:
+        clades = "results/clades.json"
+    shell:
+        """
+        augur clades --tree {input.tree} \
+        --mutations {input.muts} \
+        --clade {input.clades} \
+        --output {output.clades}
+        """
