@@ -34,3 +34,48 @@ This part of the workflow usually includes the following steps:
 
 See Augur's usage docs for these commands for more details.
 """
+
+
+rule export:
+    input:
+        metadata = "results/filtered_metadata.tsv",
+        tree = "results/tree.nwk",
+        branch_lengths = "results/branch_lengths.json",
+        muts = "results/muts.json",
+        years = "results/years.json",
+        auspice_config = "defaults/auspice_config.json"
+    output:
+        auspice_json = "results/auspice.json"
+    shell:
+        """
+        augur export v2 --tree {input.tree} \
+        --metadata-id-columns accession \
+        --metadata {input.metadata} \
+        --auspice-config {input.auspice_config} \
+        --node-data {input.branch_lengths} {input.muts} {input.years} \
+        --include-root-sequence-inline \
+        --output {output.auspice_json}
+        """
+
+rule prepare_dataset:
+    input:
+        auspice_json = "results/auspice.json",
+        reference = "../shared/reference.fasta",
+        pathogen = "dataset_files/pathogen.json",
+        genome_annotation = "../shared/annotation.gff",
+        readme = "dataset_files/README.md",
+        changelog = "dataset_files/CHANGELOG.md",
+        example_sequences = "results/example_sequences.fasta"
+    output:
+        dataset_dir = directory("dataset")
+    shell:
+        """
+        mkdir -p {output.dataset_dir}
+        cp {input.auspice_json} {output.dataset_dir}/tree.json
+        cp {input.reference} {output.dataset_dir}/reference.fasta
+        cp {input.pathogen} {output.dataset_dir}/pathogen.json
+        cp {input.genome_annotation} {output.dataset_dir}/genome_annotation.gff3
+        cp {input.readme} {output.dataset_dir}/README.md
+        cp {input.changelog} {output.dataset_dir}/CHANGELOG.md
+        cp {input.example_sequences} {output.dataset_dir}/example_sequences.fasta
+        """

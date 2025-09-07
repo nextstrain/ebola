@@ -22,3 +22,41 @@ This part of the workflow usually includes the following steps:
 
 See Augur's usage docs for these commands for more details.
 """
+
+
+
+rule ancestral:
+    input:
+        tree = "results/tree.nwk",
+        sequences = "results/aligned.fasta",
+        reference = "../shared/reference.gb"
+    output:
+        muts = "results/muts.json"
+    params:
+        translations = "results/%GENE_translations.fasta",
+        genes = ['GP', 'sGP', 'ssGP', 'NP', 'L', 'VP24', 'VP30', 'VP35', 'VP40']
+    shell:
+        """
+        augur ancestral --tree {input.tree} \
+        --alignment {input.sequences} \
+        --annotation {input.reference} \
+        --output-node-data {output.muts} \
+        --root-sequence {input.reference} \
+        --translations {params.translations} \
+        --genes {params.genes}
+        """
+
+rule extract_year:
+    input:
+        metadata = "results/filtered_metadata.tsv"
+    output:
+        years = "results/years.json"
+    run:
+        import pandas as pd
+        import json
+        df = pd.read_csv(input.metadata, sep="\t", dtype=str)
+        df['year'] = df['date'].str.slice(0,4).astype(float)
+        years_dict = df.set_index('accession')['year'].to_dict()
+        years_dict_expanded = {k: {'year': v} for k, v in years_dict.items()}
+        with open(output.years, 'w') as f:
+            json.dump({"nodes": years_dict_expanded}, f)
