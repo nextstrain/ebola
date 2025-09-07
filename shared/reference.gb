@@ -118,8 +118,8 @@ FEATURES             Location/Qualifiers
                      transcription of the GP gene"
                      /exception="RNA editing"
                      /gbkey="CDS"
-                     /gene="GP"
-                     /locus_tag="GP_002"
+                     /gene="ssGP"
+                     /locus_tag="ssGP"
                      /product="second secreted glycoprotein"
                      /protein_id="NP_066248.1"
      CDS             6039..7133
@@ -130,8 +130,8 @@ FEATURES             Location/Qualifiers
                      glycoprotein%3B sGP secreted as an anti-parallel oriented
                      homodimer"
                      /gbkey="CDS"
-                     /gene="GP"
-                     /locus_tag="GP_003"
+                     /gene="sGP"
+                     /locus_tag="sGP"
                      /product="small secreted glycoprotein"
                      /protein_id="NP_066247.1"
      CDS             8509..9375
