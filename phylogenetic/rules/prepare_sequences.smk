@@ -49,6 +49,7 @@ rule filter:
         include = lambda w: config["build_params"][w.build]["filter"]["include"],
     output:
         sequences = "results/{build}/filtered.fasta",
+        metadata = "results/{build}/filtered.tsv",
         log = "results/{build}/filter-log.txt",
     params:
         id_column = config["id_column"],
@@ -75,6 +76,7 @@ rule filter:
             --include {input.include:q} \
             --exclude {input.exclude:q} \
             --output-sequences {output.sequences:q} \
+            --output-metadata {output.metadata:q} \
             --output-log {output.log:q} \
             --group-by {params.group_by:q} \
             --subsample-max-sequences {params.subsample_max_sequences:q}

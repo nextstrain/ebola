@@ -3,7 +3,7 @@ This part of the workflow creates additonal annotations for the phylogenetic tre
 
 REQUIRED INPUTS:
 
-    metadata            = data/metadata.tsv
+    metadata            = results/{build}/filtered.tsv
     prepared_sequences  = results/prepared_sequences.fasta
     tree                = results/tree.nwk
 
@@ -82,7 +82,7 @@ rule traits:
     """Inferring ancestral traits for {params.columns!s}"""
     input:
         tree = "results/{build}/tree.nwk",
-        metadata = "data/metadata.tsv"
+        metadata = "results/{build}/filtered.tsv"
     output:
         node_data = "results/{build}/traits.json",
     params:
