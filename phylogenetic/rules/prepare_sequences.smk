@@ -56,6 +56,7 @@ rule filter:
         min_length = lambda w: conditional("--min-length", config["build_params"][w.build]["filter"].get("min_length")),
         min_date = lambda w: conditional("--min-date", config["build_params"][w.build]["filter"].get("min_date")),
         max_date = lambda w: conditional("--max-date", config["build_params"][w.build]["filter"].get("max_date")),
+        exclude_where = lambda w: conditional("--exclude-where", config["build_params"][w.build]["filter"].get("exclude_where")),
         group_by = lambda w: conditional("--group-by", config["build_params"][w.build]["filter"].get("group_by")),
         subsample_max_sequences = lambda w: conditional("--subsample-max-sequences", config["build_params"][w.build]["filter"].get("subsample_max_sequences")),
     benchmark:
@@ -73,6 +74,7 @@ rule filter:
             {params.min_length:q} \
             {params.min_date:q} \
             {params.max_date:q} \
+            {params.exclude_where:q} \
             {params.group_by:q} \
             {params.subsample_max_sequences:q} \
             --include {input.include:q} \

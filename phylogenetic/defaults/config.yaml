@@ -23,6 +23,7 @@ build_params:
 
     filter:
       min_length: 18000
+      exclude_where: is_lab_host=true
       exclude: defaults/exclude.txt
       include: defaults/west-africa-2014/include.txt
       subsample_max_sequences: 1500
