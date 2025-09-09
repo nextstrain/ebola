@@ -26,6 +26,7 @@ curate:
     sampleCollectionDate: date
     earliestReleaseDate: date_submitted
     hostNameCommon: host
+    isLabHost: is_lab_host
     dataUseTermsRestrictedUntil: restrictedUntil
     dataUseTermsUrl: dataUseTerms__url
     authors: full_authors
@@ -79,6 +80,7 @@ curate:
     "division",
     "location",
     "host",
+    "is_lab_host",
     "date_submitted",
     "sra_accession",
     "authors",
