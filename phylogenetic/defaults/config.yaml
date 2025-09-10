@@ -35,6 +35,7 @@ build_params:
         - month
 
     refine:
+      timetree: true
       coalescent: skyline
       date_inference: marginal
 

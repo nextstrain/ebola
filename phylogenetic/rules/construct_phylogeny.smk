@@ -57,6 +57,7 @@ rule refine:
     params:
         coalescent = lambda w: config["build_params"][w.build]["refine"]["coalescent"],
         date_inference = lambda w: config["build_params"][w.build]["refine"]["date_inference"],
+        timetree = lambda w: conditional("--timetree", config["build_params"][w.build]["refine"].get("timetree")),
         id_column = config["id_column"],
     benchmark:
         "benchmarks/{build}/refine.txt"
@@ -73,7 +74,7 @@ rule refine:
             --metadata-id-columns {params.id_column:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
-            --timetree \
+            {params.timetree:q} \
             --coalescent {params.coalescent:q} \
             --date-confidence \
             --date-inference {params.date_inference:q}
