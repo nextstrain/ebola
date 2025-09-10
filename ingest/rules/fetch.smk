@@ -125,3 +125,14 @@ rule parse_genbank_to_ndjson:
               }}
             ' > {output.ndjson:q}
         """
+
+###########################################################################
+########################## 3. Fetch from INRB #############################
+###########################################################################
+
+rule fetch_inrb_nord_kivu_metadata:
+    output: "data/inrb-drc-nord-kivu-metadata.tsv"
+    shell:
+        r"""
+        curl https://raw.githubusercontent.com/inrb-drc/ebola-nord-kivu/refs/heads/ba9b9b48ba1e8db83486d653f3043d9671611594/data/metadata.tsv -o {output:q}
+        """

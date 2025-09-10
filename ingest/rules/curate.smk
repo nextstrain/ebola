@@ -107,7 +107,7 @@ rule spike_in_strain_from_ncbi:
         metadata_ppx="data/metadata_ppx.tsv",
         metadata_ncbi_entrez="data/metadata_ncbi_entrez.tsv",
     output:
-        metadata="data/metadata_merged.tsv",
+        metadata="data/metadata_merged_ncbi.tsv",
     benchmark:
         "benchmarks/spike_in_strain_from_ncbi.txt"
     log:
@@ -123,9 +123,29 @@ rule spike_in_strain_from_ncbi:
         """
 
 
+rule spike_in_inrb_metadata:
+    input:
+        metadata="data/metadata_merged_ncbi.tsv",
+        nord_kivu_metadata="data/inrb-drc-nord-kivu-metadata.tsv",
+    output:
+        metadata="data/metadata_merged_inrb.tsv",
+    benchmark:
+        "benchmarks/spike_in_inrb_metadata.txt"
+    log:
+        "logs/spike_in_inrb_metadata.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        scripts/cross_reference_inrb.py \
+            --metadata {input.metadata:q} \
+            --nord-kivu-metadata {input.nord_kivu_metadata:q} \
+            --output {output.metadata:q}
+        """
+
 rule extract_date_from_strain:
     input:
-        metadata="data/metadata_merged.tsv",
+        metadata="data/metadata_merged_inrb.tsv",
     output:
         metadata="data/metadata_date_improvements.tsv",
     benchmark:
