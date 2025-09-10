@@ -1,7 +1,8 @@
 {
-  "title": "Genomic epidemiology of the 2013-2016 West African Ebola epidemic",
+  "title": "Nexxtclade dataset for analysis of Ebola virus genomes",
   "maintainers": [
-    {"name": "Trevor Bedford", "url": "http://bedford.io/team/trevor-bedford/"}
+    {"name": "Eddy Lusamaki,  Institut National de Recherche Biomédicale", "url": "https://inrb.net/"},
+    {"name": "Nextstrain", "url": "http://nextstrain.org"}
   ],
   "data_provenance": [
     {

@@ -22,12 +22,34 @@ This part of the workflow usually includes the following steps:
 See Nextclade's and Augur's usage docs for these commands for more details.
 """
 
+rule include_file:
+    input:
+        include = "defaults/include_genbank.txt",
+        metadata = "data/metadata.tsv"
+    output:
+        include = "results/include.txt"
+    run:
+        import pandas as pd
+        df = pd.read_csv(input.metadata, sep="\t", dtype=str)
+        # genbank to ppx accession conversion
+        gb_to_ppx = { k.split('.')[0]: v for k,v in zip(df['INSDC_accession'], df['accession']) if pd.notna(k) and pd.notna(v)}
+
+        with open(input.include) as f:
+            include = []
+            for line in f:
+                entry = line.strip()
+                if entry:
+                    include.append(gb_to_ppx.get(entry, entry))
+
+        with open(output.include, 'w') as f:
+            f.writelines("\n".join(include))
 
 
 rule filter:
     input:
         metadata = "data/metadata.tsv",
-        sequences = "data/sequences.fasta"
+        sequences = "data/sequences.fasta",
+        include = "results/include.txt"
     output:
         filtered_sequences = "results/filtered_sequences.fasta",
         filtered_metadata = "results/filtered_metadata.tsv"
@@ -36,6 +58,7 @@ rule filter:
         augur filter --metadata {input.metadata} \
         --sequences {input.sequences} \
         --group-by country year \
+        --include {input.include} \
         --min-length 16000 \
         --exclude-where 'region!=Africa' \
         --metadata-id accession \
