@@ -14,14 +14,14 @@ There are currently two separate workflows:
 
 ### Outbreak-specific
 
-This workflow produces a single analysis of the West Africa outbreak.
+This workflow produces analyses of specific ebola outbreaks. Configure which outbreaks in [outbreak-specific/config.yaml](./outbreak-specific/config.yaml).
 
 The workflow can be run from the top level pathogen repo directory:
 ```
 nextstrain build phylogenetic --snakefile outbreak-specific/Snakefile
 ```
 
-The resulting dataset can be viewed in a web browser:
+The resulting datasets can be viewed in a web browser:
 ```
 nextstrain view phylogenetic/outbreak-specific
 ```

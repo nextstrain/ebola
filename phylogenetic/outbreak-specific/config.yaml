@@ -7,9 +7,36 @@
 id_column: "accession"
 
 builds:
-  - west-africa-2014
+  - drc-2025
+  # - west-africa-2014
 
 build_params:
+  drc-2025:
+    ancestral:
+      inference: joint
+
+    files:
+      reference: drc-2025/NC_002549.1.gb  # FIXME: use another reference?
+      lat_longs: ../defaults/lat_longs.tsv
+      auspice_config: drc-2025/auspice_config.json
+      description: drc-2025/description.md
+
+    filter:
+      min_length: 18000
+      exclude: ../defaults/exclude.txt
+      include: drc-2025/include.txt
+      min_date: "2025-08-01"
+
+    refine:
+      timetree: false
+      coalescent: skyline
+      date_inference: marginal
+
+    traits:
+      columns:
+        - country
+        - division
+
   west-africa-2014:
     ancestral:
       inference: joint
