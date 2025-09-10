@@ -2,7 +2,7 @@
 
 | Key                    | Value                                                                           |
 | ---------------------- | ------------------------------------------------------------------------------- |
-| authors                | [Cornelius Roemer](https://neherlab.org), [Richard Neher](https://neherlab.org) |
+| authors                | [Eddy Lusamaki, Institut National de Recherche Biomédicale](https://inrb.net), [Nextstrain](https://nextstrain.org) |
 | data source            | Pathoplexus and Genbank                                                                         |
 | nextclade dataset path | nextstrain/ebola/zaire                                                          |
 | annotation             | [NC_002549.1](https://www.ncbi.nlm.nih.gov/nuccore/NC_002549)                   |
