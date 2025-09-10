@@ -26,6 +26,7 @@ build_params:
       exclude: ../defaults/exclude.txt
       include: drc-2025/include.txt
       min_date: "2025-08-01"
+      exclude_ambiguous_dates_by: month
 
     refine:
       timetree: false
