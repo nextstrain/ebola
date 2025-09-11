@@ -84,7 +84,7 @@ rule curate:
                 --output-seq-field {params.sequence_field:q}
         """
 
-rule add_metadata_columns:
+rule add_accession_urls:
     """Add columns to metadata
     Notable columns:
     - url: URL linking to the NCBI GenBank record ('https://www.ncbi.nlm.nih.gov/nuccore/*').
@@ -99,9 +99,9 @@ rule add_metadata_columns:
         insdc_accession=config['curate']['insdc_accession'],
         insdc_accession_url=config['curate']['insdc_accession'] + "__url",
     benchmark:
-        "benchmarks/add_metadata_columns.txt"
+        "benchmarks/add_accession_urls.txt"
     log:
-        "logs/add_metadata_columns.txt"
+        "logs/add_accession_urls.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
