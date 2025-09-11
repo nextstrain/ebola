@@ -143,9 +143,29 @@ rule spike_in_inrb_metadata:
             --output {output.metadata:q}
         """
 
-rule extract_date_from_strain:
+rule spike_in_fauna_metadata:
     input:
         metadata="data/metadata_merged_inrb.tsv",
+        fauna_metadata="defaults/west-africa-2013-metadata.tsv",
+    output:
+        metadata="data/metadata_merged_fauna.tsv",
+    benchmark:
+        "benchmarks/spike_in_fauna_metadata.txt"
+    log:
+        "logs/spike_in_fauna_metadata.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        scripts/cross_reference_fauna.py \
+            --metadata {input.metadata:q} \
+            --fauna {input.fauna_metadata:q} \
+            --output {output.metadata:q}
+        """
+
+rule extract_date_from_strain:
+    input:
+        metadata="data/metadata_merged_fauna.tsv",
     output:
         metadata="data/metadata_date_improvements.tsv",
     benchmark:
