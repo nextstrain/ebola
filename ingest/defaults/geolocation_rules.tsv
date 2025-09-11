@@ -18,3 +18,33 @@ Africa/Democratic Republic of the Congo/Yangdongi/	Africa/Democratic Republic of
 Africa/Democratic Republic of the Congo/Zaire/*	Africa/Democratic Republic of the Congo//
 Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 */Zaire/*/*	Africa/Democratic Republic of the Congo//
+
+# There's a few Liberia samples which have the division field as `<location>, <division>`
+# and who also misspell 'Montserrado' as 'Monstserrado'
+# The <location> is often overly specific -- e.g. 'battery factory', 'st paul bridge' so I've
+# dropped them where I see fit. Update as required.
+*/Liberia/Dupont Road, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Soul Clinic, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Battery Factory, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Redlight, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/St Paul Bridge, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Bensonville, Monstserrado/*	*/Liberia/Montserrado/Bensonville
+*/Liberia/Bonja, Monstserrado/*	*/Liberia/Montserrado/Bonja
+*/Liberia/Vioja, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Jallah'S Town, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Harbel, Margibi/*	*/Liberia/Margibi/Harbel
+# `buchanan` is also misspelt. P.S. Buchanan used to be called Grand Bassa, which is also the province
+*/Liberia/Buchana, Grand Bassa/*	*/Liberia/Grand Bassa/Buchanan
+*/Liberia/Needowein, Margibi/*	*/Liberia/Margibi/
+*/Liberia/Barclay Farm, Margibi/*	*/Liberia/Margibi/
+
+*/Guinea/Dubreka/*	*/Guinea/Dubréka/*
+*/Guinea/Conacry/*	*/Guinea/Conakry/*
+
+# There's >100 division='Kailahun' and a single division="Kailahun District"
+*/Sierra Leone/Kailahun District/*	*/Sierra Leone/Kailahun/
+
+*/Democratic Republic of the Congo/Unknown/*	*/Democratic Republic of the Congo/Unknown//
+
+*/Missing/*/*	*///
+
