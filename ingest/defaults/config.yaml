@@ -13,9 +13,6 @@ entrez_search_term: "txid186538[Primary Organism]"
 
 # Config parameters related to the curate pipeline
 curate:
-  # The path to the local geolocation rules within the pathogen repo
-  # The path should be relative to the ingest directory.
-  local_geolocation_rules: "defaults/geolocation_rules.tsv"
   # List of field names to change where the key is the original field name and the value is the new field name
   # This is the first step in the pipeline, so any references to field names in the configs below should use the new field names
   field_map:
@@ -90,6 +87,18 @@ curate:
     "dataUseTerms__url",
     "restrictedUntil",
   ]
+
+curate_geography:
+  id_column: "accession" # unversioned PPX accession
+  # The path to the local geolocation rules within the pathogen repo
+  # The path should be relative to the ingest directory.
+  local_geolocation_rules: "defaults/geolocation_rules.tsv"
+  # Path to the manual annotations file
+  # The path should be relative to the ingest directory
+  annotations: "defaults/annotations_geo.tsv"
+  # The ID field in the metadata to use to merge the manual annotations
+  annotations_id: "accession" # unversioned PPX accession
+  # The ID field in the metadata to use as the sequence id in the output FASTA file
 
 ppx_metadata_fields:
  - "accessionVersion"

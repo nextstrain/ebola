@@ -33,7 +33,6 @@ def format_field_map(field_map: dict[str, str]) -> list[str]:
 rule curate_ppx:
     input:
         sequences_ndjson="data/sequences.ndjson",
-        geolocation_rules=config["curate"]["local_geolocation_rules"],
         annotations=config["curate"]["annotations"],
     output:
         metadata="data/metadata_ppx.tsv",
@@ -74,8 +73,6 @@ rule curate_ppx:
                 --authors-field {params.authors_field:q} \
                 --default-value {params.authors_default_value:q} \
                 --abbr-authors-field {params.abbr_authors_field:q} \
-            | augur curate apply-geolocation-rules \
-                --geolocation-rules {input.geolocation_rules:q} \
             | augur curate apply-record-annotations \
                 --annotations {input.annotations:q} \
                 --id-field {params.annotations_id:q} \
@@ -130,7 +127,7 @@ rule extract_date_from_strain:
     input:
         metadata="data/metadata_merged.tsv",
     output:
-        metadata="data/all_metadata.tsv",
+        metadata="data/metadata_date_improvements.tsv",
     benchmark:
         "benchmarks/extract_date_from_strain.txt"
     log:
@@ -146,13 +143,43 @@ rule extract_date_from_strain:
               --output-metadata {output.metadata:q}
         """
 
+
+rule curate_geography:
+    input:
+        metadata="data/metadata_date_improvements.tsv",
+        geolocation_rules=config["curate_geography"]["local_geolocation_rules"],
+        annotations=config["curate_geography"]["annotations"],
+    output:
+        metadata="data/metadata_geo_improvements.tsv",
+    params:
+        id_column=config["curate_geography"]["id_column"],
+        annotations_id=config["curate_geography"]["annotations_id"],
+    benchmark:
+        "benchmarks/curate_geography.txt"
+    log:
+        "logs/curate_geography.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur curate apply-geolocation-rules \
+                --metadata {input.metadata:q} \
+                --id-column {params.id_column:q} \
+                --geolocation-rules {input.geolocation_rules:q} \
+            | augur curate apply-record-annotations \
+                --annotations {input.annotations:q} \
+                --id-field {params.annotations_id:q} \
+                --output-metadata {output.metadata:q}
+        """
+
+
 rule add_accession_urls:
     """Add columns to metadata
     Notable columns:
     - url: URL linking to the NCBI GenBank record ('https://www.ncbi.nlm.nih.gov/nuccore/*').
     """
     input:
-        metadata = "data/all_metadata.tsv"
+        metadata = "data/metadata_geo_improvements.tsv",
     output:
         metadata = temp("data/all_metadata_added.tsv")
     params:

@@ -1,4 +1,4 @@
-# Manually curated annotations TSV file for non-geographical fixes
+# Manually curated annotations TSV file for geographical fixes
 # The TSV should not have a header and should have exactly three columns:
 # id to match existing metadata, field name, and field value
 # If there are multiple annotations for the same id and field, then the last value is used
