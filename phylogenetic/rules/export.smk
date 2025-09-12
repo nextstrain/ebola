@@ -28,24 +28,24 @@ See Augur's usage docs for these commands for more details.
 rule export:
     """Exporting data files for for auspice"""
     input:
-        tree = "results/tree.nwk",
+        tree = "results/{build}/tree.nwk",
         metadata = "data/metadata.tsv",
-        branch_lengths = "results/branch_lengths.json",
-        traits = "results/traits.json",
-        nt_muts = "results/nt_muts.json",
-        aa_muts = "results/aa_muts.json",
-        colors = config["files"]["colors"],
-        lat_longs = config["files"]["lat_longs"],
-        auspice_config = config["files"]["auspice_config"],
-        description = config["files"]["description"],
+        branch_lengths = "results/{build}/branch_lengths.json",
+        traits = "results/{build}/traits.json",
+        nt_muts = "results/{build}/nt_muts.json",
+        aa_muts = "results/{build}/aa_muts.json",
+        colors = lambda w: config["build_params"][w.build]["files"]["colors"],
+        lat_longs = lambda w: config["build_params"][w.build]["files"]["lat_longs"],
+        auspice_config = lambda w: config["build_params"][w.build]["files"]["auspice_config"],
+        description = lambda w: config["build_params"][w.build]["files"]["description"],
     output:
-        auspice_json = rules.all.input.auspice_json
+        auspice_json = "auspice/ebola_{build}.json"
     params:
         id_column = config["id_column"],
     benchmark:
-        "benchmarks/export.txt"
+        "benchmarks/{build}/export.txt"
     log:
-        "logs/export.txt"
+        "logs/{build}/export.txt"
     shell:
         r"""
         exec &> >(tee {log:q})

@@ -6,32 +6,37 @@
 
 id_column: "accession"
 
-ancestral:
-  inference: joint
+builds:
+  - west-africa-2014
 
-files:
-  reference: defaults/ebola_outgroup.gb
-  colors: defaults/colors.tsv
-  lat_longs: defaults/lat_longs.tsv
-  auspice_config: defaults/auspice_config.json
-  description: defaults/description.md
+build_params:
+  west-africa-2014:
+    ancestral:
+      inference: joint
 
-filter:
-  exclude: defaults/exclude.txt
-  include: defaults/include.txt
-  subsample_max_sequences: 1500
-  min_date: 2012
-  max_date: 2017
-  group_by:
-    - division
-    - year
-    - month
+    files:
+      reference: defaults/west-africa-2014/ebola_outgroup.gb
+      colors: defaults/colors.tsv
+      lat_longs: defaults/lat_longs.tsv
+      auspice_config: defaults/west-africa-2014/auspice_config.json
+      description: defaults/west-africa-2014/description.md
 
-refine:
-  coalescent: skyline
-  date_inference: marginal
+    filter:
+      exclude: defaults/exclude.txt
+      include: defaults/west-africa-2014/include.txt
+      subsample_max_sequences: 1500
+      min_date: 2012
+      max_date: 2017
+      group_by:
+        - division
+        - year
+        - month
 
-traits:
-  columns:
-    - country
-    - division
+    refine:
+      coalescent: skyline
+      date_inference: marginal
+
+    traits:
+      columns:
+        - country
+        - division

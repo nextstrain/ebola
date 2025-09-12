@@ -22,13 +22,13 @@ See Augur's usage docs for these commands for more details.
 rule tree:
     """Building tree"""
     input:
-        alignment = "results/aligned.fasta"
+        alignment = "results/{build}/aligned.fasta"
     output:
-        tree = "results/tree_raw.nwk"
+        tree = "results/{build}/tree_raw.nwk"
     benchmark:
-        "benchmarks/tree.txt"
+        "benchmarks/{build}/tree.txt"
     log:
-        "logs/tree.txt"
+        "logs/{build}/tree.txt"
     threads: 4
     shell:
         r"""
@@ -48,20 +48,20 @@ rule refine:
       - estimate {params.date_inference} node dates
     """
     input:
-        tree = "results/tree_raw.nwk",
-        alignment = "results/aligned.fasta",
+        tree = "results/{build}/tree_raw.nwk",
+        alignment = "results/{build}/aligned.fasta",
         metadata = "data/metadata.tsv"
     output:
-        tree = "results/tree.nwk",
-        node_data = "results/branch_lengths.json"
+        tree = "results/{build}/tree.nwk",
+        node_data = "results/{build}/branch_lengths.json"
     params:
-        coalescent = config["refine"]["coalescent"],
-        date_inference = config["refine"]["date_inference"],
+        coalescent = lambda w: config["build_params"][w.build]["refine"]["coalescent"],
+        date_inference = lambda w: config["build_params"][w.build]["refine"]["date_inference"],
         id_column = config["id_column"],
     benchmark:
-        "benchmarks/refine.txt"
+        "benchmarks/{build}/refine.txt"
     log:
-        "logs/refine.txt"
+        "logs/{build}/refine.txt"
     shell:
         r"""
         exec &> >(tee {log:q})

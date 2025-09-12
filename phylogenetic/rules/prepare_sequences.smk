@@ -45,20 +45,20 @@ rule filter:
     input:
         sequences = "data/sequences.fasta",
         metadata = "data/metadata.tsv",
-        exclude = config["filter"]["exclude"],
-        include = config["filter"]["include"],
+        exclude = lambda w: config["build_params"][w.build]["filter"]["exclude"],
+        include = lambda w: config["build_params"][w.build]["filter"]["include"],
     output:
-        sequences = "results/filtered.fasta"
+        sequences = "results/{build}/filtered.fasta"
     params:
         id_column = config["id_column"],
-        min_date = config["filter"]["min_date"],
-        max_date = config["filter"]["max_date"],
-        group_by = config["filter"]["group_by"],
-        subsample_max_sequences = config["filter"]["subsample_max_sequences"],
+        min_date = lambda w: config["build_params"][w.build]["filter"]["min_date"],
+        max_date = lambda w: config["build_params"][w.build]["filter"]["max_date"],
+        group_by = lambda w: config["build_params"][w.build]["filter"]["group_by"],
+        subsample_max_sequences = lambda w: config["build_params"][w.build]["filter"]["subsample_max_sequences"],
     benchmark:
-        "benchmarks/filter.txt"
+        "benchmarks/{build}/filter.txt"
     log:
-        "logs/filter.txt"
+        "logs/{build}/filter.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -83,14 +83,14 @@ rule align:
       - removing reference sequence
     """
     input:
-        sequences = "results/filtered.fasta",
-        reference = config["files"]["reference"],
+        sequences = "results/{build}/filtered.fasta",
+        reference = lambda w: config["build_params"][w.build]["files"]["reference"],
     output:
-        alignment = "results/aligned.fasta"
+        alignment = "results/{build}/aligned.fasta"
     benchmark:
-        "benchmarks/align.txt"
+        "benchmarks/{build}/align.txt"
     log:
-        "logs/align.txt"
+        "logs/{build}/align.txt"
     threads: 4
     shell:
         r"""

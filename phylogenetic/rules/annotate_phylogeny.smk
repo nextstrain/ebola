@@ -34,16 +34,16 @@ to the ones produced by Augur commands.
 rule ancestral:
     """Reconstructing ancestral sequences and mutations"""
     input:
-        tree = "results/tree.nwk",
-        alignment = "results/aligned.fasta"
+        tree = "results/{build}/tree.nwk",
+        alignment = "results/{build}/aligned.fasta"
     output:
-        node_data = "results/nt_muts.json"
+        node_data = "results/{build}/nt_muts.json"
     params:
-        inference = config["ancestral"]["inference"],
+        inference = lambda w: config["build_params"][w.build]["ancestral"]["inference"],
     benchmark:
-        "benchmarks/ancestral.txt"
+        "benchmarks/{build}/ancestral.txt"
     log:
-        "logs/ancestral.txt"
+        "logs/{build}/ancestral.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -58,15 +58,15 @@ rule ancestral:
 rule translate:
     """Translating amino acid sequences"""
     input:
-        tree = "results/tree.nwk",
-        node_data = "results/nt_muts.json",
-        reference = config["files"]["reference"],
+        tree = "results/{build}/tree.nwk",
+        node_data = "results/{build}/nt_muts.json",
+        reference = lambda w: config["build_params"][w.build]["files"]["reference"],
     output:
-        node_data = "results/aa_muts.json"
+        node_data = "results/{build}/aa_muts.json"
     benchmark:
-        "benchmarks/translate.txt"
+        "benchmarks/{build}/translate.txt"
     log:
-        "logs/translate.txt"
+        "logs/{build}/translate.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -81,17 +81,17 @@ rule translate:
 rule traits:
     """Inferring ancestral traits for {params.columns!s}"""
     input:
-        tree = "results/tree.nwk",
+        tree = "results/{build}/tree.nwk",
         metadata = "data/metadata.tsv"
     output:
-        node_data = "results/traits.json",
+        node_data = "results/{build}/traits.json",
     params:
-        columns = config["traits"]["columns"],
+        columns = lambda w: config["build_params"][w.build]["traits"]["columns"],
         id_column = config["id_column"],
     benchmark:
-        "benchmarks/traits.txt"
+        "benchmarks/{build}/traits.txt"
     log:
-        "logs/traits.txt"
+        "logs/{build}/traits.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
