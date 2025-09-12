@@ -49,13 +49,14 @@ rule refine:
     input:
         tree = "results/tree_raw.nwk",
         alignment = "results/aligned.fasta",
-        metadata = "results/metadata.tsv"
+        metadata = "data/metadata.tsv"
     output:
         tree = "results/tree.nwk",
         node_data = "results/branch_lengths.json"
     params:
-        coalescent = "skyline",
-        date_inference = "marginal"
+        coalescent = config["refine"]["coalescent"],
+        date_inference = config["refine"]["date_inference"],
+        id_column = config["id_column"],
     benchmark:
         "benchmarks/refine.txt"
     log:
@@ -68,6 +69,7 @@ rule refine:
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
             --metadata {input.metadata:q} \
+            --metadata-id-columns {params.id_column:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
             --timetree \

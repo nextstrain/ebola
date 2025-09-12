@@ -21,6 +21,20 @@ This part of the workflow usually includes the following steps:
 See Augur's usage docs for these commands for more details.
 """
 
+# TODO: upload ingest results to data.nextstrain.org and download them here.
+rule copy_ingest_files:
+    input:
+        sequences = "../ingest/results/sequences.fasta",
+        metadata = "../ingest/results/metadata.tsv"
+    output:
+        sequences = "data/sequences.fasta",
+        metadata = "data/metadata.tsv"
+    shell:
+        r"""
+        mkdir -p data
+        cp ../ingest/results/* data
+        """
+
 rule filter:
     """
     Filtering to
@@ -29,16 +43,18 @@ rule filter:
       - excluding strains in {input.exclude}
     """
     input:
-        sequences = "results/sequences.fasta",
-        metadata = "results/metadata.tsv",
-        include = files.forced_strains,
-        exclude = files.dropped_strains
+        sequences = "data/sequences.fasta",
+        metadata = "data/metadata.tsv",
+        exclude = config["filter"]["exclude"],
+        include = config["filter"]["include"],
     output:
         sequences = "results/filtered.fasta"
     params:
-        group_by = "division year month",
-        sequences_per_group = 25,
-        min_date = 2012
+        id_column = config["id_column"],
+        min_date = config["filter"]["min_date"],
+        max_date = config["filter"]["max_date"],
+        group_by = config["filter"]["group_by"],
+        subsample_max_sequences = config["filter"]["subsample_max_sequences"],
     benchmark:
         "benchmarks/filter.txt"
     log:
@@ -50,12 +66,14 @@ rule filter:
         augur filter \
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
+            --metadata-id-columns {params.id_column:q} \
+            --min-date {params.min_date:q} \
+            --max-date {params.max_date:q} \
             --include {input.include:q} \
             --exclude {input.exclude:q} \
-            --output {output.sequences:q} \
+            --output-sequences {output.sequences:q} \
             --group-by {params.group_by:q} \
-            --sequences-per-group {params.sequences_per_group:q} \
-            --min-date {params.min_date:q}
+            --subsample-max-sequences {params.subsample_max_sequences:q}
         """
 
 rule align:
@@ -66,7 +84,7 @@ rule align:
     """
     input:
         sequences = "results/filtered.fasta",
-        reference = files.reference
+        reference = config["files"]["reference"],
     output:
         alignment = "results/aligned.fasta"
     benchmark:

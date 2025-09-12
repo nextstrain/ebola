@@ -39,7 +39,7 @@ rule ancestral:
     output:
         node_data = "results/nt_muts.json"
     params:
-        inference = "joint"
+        inference = config["ancestral"]["inference"],
     benchmark:
         "benchmarks/ancestral.txt"
     log:
@@ -60,7 +60,7 @@ rule translate:
     input:
         tree = "results/tree.nwk",
         node_data = "results/nt_muts.json",
-        reference = files.reference
+        reference = config["files"]["reference"],
     output:
         node_data = "results/aa_muts.json"
     benchmark:
@@ -82,11 +82,12 @@ rule traits:
     """Inferring ancestral traits for {params.columns!s}"""
     input:
         tree = "results/tree.nwk",
-        metadata = "results/metadata.tsv"
+        metadata = "data/metadata.tsv"
     output:
         node_data = "results/traits.json",
     params:
-        columns = "country division"
+        columns = config["traits"]["columns"],
+        id_column = config["id_column"],
     benchmark:
         "benchmarks/traits.txt"
     log:
@@ -98,6 +99,7 @@ rule traits:
         augur traits \
             --tree {input.tree:q} \
             --metadata {input.metadata:q} \
+            --metadata-id-columns {params.id_column:q} \
             --output {output.node_data:q} \
             --columns {params.columns:q} \
             --confidence

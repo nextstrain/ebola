@@ -29,17 +29,19 @@ rule export:
     """Exporting data files for for auspice"""
     input:
         tree = "results/tree.nwk",
-        metadata = "results/metadata.tsv",
+        metadata = "data/metadata.tsv",
         branch_lengths = "results/branch_lengths.json",
         traits = "results/traits.json",
         nt_muts = "results/nt_muts.json",
         aa_muts = "results/aa_muts.json",
-        colors = files.colors,
-        lat_longs = files.lat_longs,
-        auspice_config = files.auspice_config,
-        description = files.description
+        colors = config["files"]["colors"],
+        lat_longs = config["files"]["lat_longs"],
+        auspice_config = config["files"]["auspice_config"],
+        description = config["files"]["description"],
     output:
         auspice_json = rules.all.input.auspice_json
+    params:
+        id_column = config["id_column"],
     benchmark:
         "benchmarks/export.txt"
     log:
@@ -51,6 +53,7 @@ rule export:
         augur export v2 \
             --tree {input.tree:q} \
             --metadata {input.metadata:q} \
+            --metadata-id-columns {params.id_column:q} \
             --node-data {input.branch_lengths:q} {input.traits:q} {input.nt_muts:q} {input.aa_muts:q} \
             --colors {input.colors:q} \
             --lat-longs {input.lat_longs:q} \

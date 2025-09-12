@@ -17,7 +17,7 @@ configfile: "defaults/config.yaml"
 rule all:
     input:
         # Fill in path(s) to the final exported Auspice JSON(s)
-        auspice_json="",
+        auspice_json="auspice/ebola.json",
 
 
 # These rules are imported in the order that they are expected to run.
