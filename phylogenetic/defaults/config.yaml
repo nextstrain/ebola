@@ -43,3 +43,6 @@ build_params:
       columns:
         - country
         - division
+
+    export:
+      warning: defaults/west-africa-2014/description.md

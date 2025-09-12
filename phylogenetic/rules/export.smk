@@ -41,6 +41,7 @@ rule export:
         auspice_json = "auspice/ebola_{build}.json"
     params:
         id_column = config["id_column"],
+        warning = lambda w: conditional("--warning", config["build_params"][w.build].get("export", {}).get("warning")),
     benchmark:
         "benchmarks/{build}/export.txt"
     log:
@@ -57,6 +58,7 @@ rule export:
             --lat-longs {input.lat_longs:q} \
             --auspice-config {input.auspice_config:q} \
             --description {input.description:q} \
+            {params.warning:q} \
             --include-root-sequence-inline \
             --output {output.auspice_json:q}
         """
