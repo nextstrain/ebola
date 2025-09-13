@@ -12,7 +12,7 @@ cloudfront_domain: "data.nextstrain.org"
 
 # Nextstrain AWS S3 Bucket with pathogen prefix
 # Replace <pathogen> with the pathogen repo name.
-s3_dst: "s3://nextstrain-data/files/workflows/<pathogen>"
+s3_dst: "s3://nextstrain-data/files/workflows/ebola"
 
 # Mapping of files to upload
 files_to_upload:

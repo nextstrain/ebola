@@ -1,7 +1,7 @@
 # Ingest
 
-This workflow ingests public data from NCBI and outputs curated metadata and
-sequences that can be used as input for the phylogenetic workflow.
+This workflow ingests public data from Pathoplexus and outputs curated metadata
+and sequences that can be used as input for the phylogenetic workflow.
 
 If you have another data source or private data that needs to be formatted for
 the phylogenetic workflow, then you can use a similar workflow to curate your
@@ -24,18 +24,6 @@ This produces the default outputs of the ingest workflow:
 
 - metadata      = results/metadata.tsv
 - sequences     = results/sequences.fasta
-
-### Dumping the full raw metadata from NCBI Datasets
-
-The workflow has a target for dumping the full raw metadata from NCBI Datasets.
-
-```
-nextstrain build ingest dump_ncbi_dataset_report
-```
-
-This will produce the file `ingest/data/ncbi_dataset_report_raw.tsv`,
-which you can inspect to determine what fields and data to use if you want to
-configure the workflow for your pathogen.
 
 ## Defaults
 

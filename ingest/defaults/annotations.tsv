@@ -1,6 +1,10 @@
-# Manually curated annotations TSV file
+# Manually curated annotations TSV file for non-geographical fixes
 # The TSV should not have a header and should have exactly three columns:
 # id to match existing metadata, field name, and field value
 # If there are multiple annotations for the same id and field, then the last value is used
 # Lines starting with '#' are treated as comments
 # Any '#' after the field value are treated as comments.
+
+# Russian sample from <https://www.ncbi.nlm.nih.gov/nuccore/EU224440.2>
+# title: Genetic factors of Ebola virus virulence in guinea pigs
+PP_000LD2A	is_lab_host	True

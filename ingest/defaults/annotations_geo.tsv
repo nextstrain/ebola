@@ -1,0 +1,77 @@
+# Manually curated annotations TSV file for geographical fixes
+# The TSV should not have a header and should have exactly three columns:
+# id to match existing metadata, field name, and field value
+# If there are multiple annotations for the same id and field, then the last value is used
+# Lines starting with '#' are treated as comments
+# Any '#' after the field value are treated as comments.
+
+# from Whitmer et al.
+# <https://doi.org/10.1093/infdis/jiw177>
+# "patient 2 acquired EBOV infection from patient 1"
+# patient 1: KP240933/PP_000LMXB (Liberia)
+# patient 2: KP240934/PP_000LMY9 (USA)
+# patient 2: KP240935/PP_000LMZ7 (USA)
+PP_000LMY9	country	Liberia
+PP_000LMY9	region	Africa
+PP_000LMZ7	country	Liberia
+PP_000LMZ7	region	Africa
+
+# from Bell, Lewandowski, et al.
+# <https://doi.org/10.2807/1560-7917.ES2015.20.20.21131>
+# table better seen here: <https://pdfs.semanticscholar.org/4a37/810b87275033556b0cba8413fd70e89cd1b3.pdf>
+# "Between August 2014 and March 2015, three HCWs … from the United Kingdom … were infected with EBOV … in Sierra Leone."
+# Makona-UK1: KP120616/PP_000LMRP
+# Makona-UK2: KP658432/PP_000LN9M
+# Makona-UK3: KR025228/PP_000LS01
+PP_000LMRP	division	
+PP_000LMRP	country	Sierra Leone
+PP_000LMRP	region	Africa
+PP_000LN9M	country	Sierra Leone
+PP_000LN9M	region	Africa
+PP_000LS01	country	Sierra Leone
+PP_000LS01	region	Africa
+# Makona-UK1.1: KP184503/PP_000LMTK
+# no direct reference to this accession, but from the strain name, it can be inferred to be a duplicate of KP120616.
+PP_000LMTK	country	Sierra Leone
+PP_000LMTK	region	Africa
+
+# from Thomson et al.
+# <https://doi.org/10.1016/S0140-6736(16)30386-5>
+# "A 39-year-old female nurse from Scotland, who had assisted the humanitarian effort in Sierra Leone … was found to have Ebola virus in cerebrospinal fluid (CSF)."
+# "We monitored Ebola virus RNA in CSF and plasma, and sequenced the viral genome using an unbiased metagenomic approach."
+# "… the original sequence from plasma (NCBI accession numbers KU052669 and KU052670; appendix)"
+# KU052669/PP_000MC7Z
+# KU052670/PP_000MC8X
+# Note: these might be duplicates of UK1/2/3 above
+PP_000MC7Z	country	Sierra Leone
+PP_000MC7Z	region	Africa
+PP_000MC8X	country	Sierra Leone
+PP_000MC8X	region	Africa
+
+# from Hain et al.
+# <https://doi.org/10.1128/genomeA.01011-16>
+# "Here, we report the complete genome sequence of a virus isolate from a patient who contracted the disease in Sierra Leone and was treated in Frankfurt, Germany."
+# "The complete genome sequence … has been deposited at the European Nucleotide Archive under the accession no. LT605058."
+# LT605058/PP_000NGH6
+PP_000NGH6	country	Sierra Leone
+PP_000NGH6	region	Africa
+
+# from Schibler et al.
+# <https://doi.org/10.1016/S1473-3099(15)00229-7>
+# "A 43-year-old medical doctor who contracted an Ebola virus infection in Sierra Leone … was airlifted to Geneva University Hospitals, Geneva, Switzerland, on day 5 after disease onset."
+# "We … analysed the viral genome via high-throughput sequencing"
+# "Viral HTS data from the first two plasma samples provided sufficient coverage depth to establish a consensus sequence (GenBank reference KP728283)"
+# KP728283/PP_000LNBH
+PP_000LNBH	country	Sierra Leone
+PP_000LNBH	region	Africa
+
+# from Castilletti, Carletti et al.
+# <https://doi.org/10.1128/genomea.00639-15>
+# Genbank TITLE entry: "Molecular Characterization of the First Ebola Virus Isolated in Italy, from a Health Care Worker Repatriated from Sierra Leone"
+# KP701371/PP_000LNAK
+PP_000LNAK	country	Sierra Leone
+PP_000LNAK	region	Africa
+# GenBank TITLE entry: "Full genome sequence of the second Ebola Virus Isolated in Italy, from a Health Care Worker who developed EBOV infection after returning from Sierra Leone, May 2015"
+# KT961624/PP_000MC45
+PP_000MC45	country	Sierra Leone
+PP_000MC45	region	Africa

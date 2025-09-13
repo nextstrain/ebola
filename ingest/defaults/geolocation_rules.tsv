@@ -4,3 +4,47 @@
 # If creating a general rule, then the raw field value can be substituted with '*'
 # Lines starting with '#' will be ignored as comments.
 # Trailing '#' will be ignored as comments.
+
+# Copied from the rsv repo.
+# <https://github.com/nextstrain/rsv/blob/1831d49a38394f50424e37729d24e396e168cc2d/ingest/source-data/geolocation-rules.tsv#L1-L11>
+Africa/Cote d'Ivoire/*/*	Africa/Côte d'Ivoire/*/*
+Africa/Cote d'Ivoire/Tai National Park/*	Africa/Côte d'Ivoire/Bas-Sassandra/Tai National Park
+Africa/Democratic Republic of the Congo/Province Bandundu/*	Africa/Democratic Republic of the Congo/Bandundu/*
+Africa/Democratic Republic of the Congo/Province Equateur/*	Africa/Democratic Republic of the Congo/Équateur/*
+Africa/Democratic Republic of the Congo/Province Kasai Occidental/*	Africa/Democratic Republic of the Congo/Kasaï-Occidental/*
+Africa/Democratic Republic of the Congo/Province Kasai Oriental/*	Africa/Democratic Republic of the Congo/Kasaï-Oriental/*
+Africa/Democratic Republic of the Congo/Province P. Oriental/*	Africa/Democratic Republic of the Congo/Orientale/*
+Africa/Democratic Republic of the Congo/Yangdongi/	Africa/Democratic Republic of the Congo/Mongala/Yangdongi
+Africa/Democratic Republic of the Congo/Zaire/*	Africa/Democratic Republic of the Congo//
+Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
+*/Zaire/*/*	Africa/Democratic Republic of the Congo//
+
+# There's a few Liberia samples which have the division field as `<location>, <division>`
+# and who also misspell 'Montserrado' as 'Monstserrado'
+# The <location> is often overly specific -- e.g. 'battery factory', 'st paul bridge' so I've
+# dropped them where I see fit. Update as required.
+*/Liberia/Dupont Road, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Soul Clinic, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Battery Factory, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Redlight, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/St Paul Bridge, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Bensonville, Monstserrado/*	*/Liberia/Montserrado/Bensonville
+*/Liberia/Bonja, Monstserrado/*	*/Liberia/Montserrado/Bonja
+*/Liberia/Vioja, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Jallah'S Town, Monstserrado/*	*/Liberia/Montserrado/
+*/Liberia/Harbel, Margibi/*	*/Liberia/Margibi/Harbel
+# `buchanan` is also misspelt. P.S. Buchanan used to be called Grand Bassa, which is also the province
+*/Liberia/Buchana, Grand Bassa/*	*/Liberia/Grand Bassa/Buchanan
+*/Liberia/Needowein, Margibi/*	*/Liberia/Margibi/
+*/Liberia/Barclay Farm, Margibi/*	*/Liberia/Margibi/
+
+*/Guinea/Dubreka/*	*/Guinea/Dubréka/*
+*/Guinea/Conacry/*	*/Guinea/Conakry/*
+
+# There's >100 division='Kailahun' and a single division="Kailahun District"
+*/Sierra Leone/Kailahun District/*	*/Sierra Leone/Kailahun/
+
+*/Democratic Republic of the Congo/Unknown/*	*/Democratic Republic of the Congo/Unknown//
+
+*/Missing/*/*	*///
+
