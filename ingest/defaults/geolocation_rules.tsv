@@ -4,3 +4,17 @@
 # If creating a general rule, then the raw field value can be substituted with '*'
 # Lines starting with '#' will be ignored as comments.
 # Trailing '#' will be ignored as comments.
+
+# Copied from the rsv repo.
+# <https://github.com/nextstrain/rsv/blob/1831d49a38394f50424e37729d24e396e168cc2d/ingest/source-data/geolocation-rules.tsv#L1-L11>
+Africa/Cote d'Ivoire/*/*	Africa/Côte d'Ivoire/*/*
+Africa/Cote d'Ivoire/Tai National Park/*	Africa/Côte d'Ivoire/Bas-Sassandra/Tai National Park
+Africa/Democratic Republic of the Congo/Province Bandundu/*	Africa/Democratic Republic of the Congo/Bandundu/*
+Africa/Democratic Republic of the Congo/Province Equateur/*	Africa/Democratic Republic of the Congo/Équateur/*
+Africa/Democratic Republic of the Congo/Province Kasai Occidental/*	Africa/Democratic Republic of the Congo/Kasaï-Occidental/*
+Africa/Democratic Republic of the Congo/Province Kasai Oriental/*	Africa/Democratic Republic of the Congo/Kasaï-Oriental/*
+Africa/Democratic Republic of the Congo/Province P. Oriental/*	Africa/Democratic Republic of the Congo/Orientale/*
+Africa/Democratic Republic of the Congo/Yangdongi/	Africa/Democratic Republic of the Congo/Mongala/Yangdongi
+Africa/Democratic Republic of the Congo/Zaire/*	Africa/Democratic Republic of the Congo//
+Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
+*/Zaire/*/*	Africa/Democratic Republic of the Congo//
