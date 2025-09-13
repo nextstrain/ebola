@@ -1,3 +1,10 @@
+> [!WARNING]
+> This repository is a work in progress. The dataset at
+> [nextstrain.org/ebola](https://nextstrain.org/ebola) was created by an older
+> version
+> ([src](https://github.com/nextstrain/ebola/tree/0a9401b6e0d4220cdbc3dcb564a3085c1e518864)).
+
+
 # Nextstrain repository for ebola virus
 
 This repository contains three workflows for the analysis of ebola virus data:

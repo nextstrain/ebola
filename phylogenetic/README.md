@@ -3,14 +3,6 @@
 This workflow uses metadata and sequences to produce one or multiple [Nextstrain datasets][]
 that can be visualized in Auspice.
 
-> [!IMPORTANT]
-> We do not have a generalized phylogenetic workflow so the rules files are empty and
-> will need to be filled in with your own rules. We suggest that you go through the
-> ["Creating a phylogenetic workflow" tutorial](https://docs.nextstrain.org/en/latest/tutorials/creating-a-phylogenetic-workflow.html)
-> to understand the simplified zika-tutorial workflow. Then use [zika](https://github.com/nextstrain/zika)
-> and [mpox](https://github.com/nextstrain/mpox) as examples to create
-> your own phylogenetic workflow.
-
 ## Workflow Usage
 
 The workflow can be run from the top level pathogen repo directory:

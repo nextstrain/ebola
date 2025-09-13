@@ -3,7 +3,7 @@ This part of the workflow constructs the phylogenetic tree.
 
 REQUIRED INPUTS:
 
-    metadata            = data/metadata.tsv
+    metadata            = results/{build}/filtered.tsv
     prepared_sequences  = results/prepared_sequences.fasta
 
 OUTPUTS:
@@ -22,13 +22,14 @@ See Augur's usage docs for these commands for more details.
 rule tree:
     """Building tree"""
     input:
-        alignment = "results/aligned.fasta"
+        alignment = "results/{build}/aligned.fasta"
     output:
-        tree = "results/tree_raw.nwk"
+        tree = "results/{build}/tree_raw.nwk"
     benchmark:
-        "benchmarks/tree.txt"
+        "benchmarks/{build}/tree.txt"
     log:
-        "logs/tree.txt"
+        "logs/{build}/tree.txt"
+    threads: 4
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -36,7 +37,7 @@ rule tree:
         augur tree \
             --alignment {input.alignment:q} \
             --output {output.tree:q} \
-            --nthreads auto
+            --nthreads {threads:q}
         """
 
 rule refine:
@@ -47,19 +48,21 @@ rule refine:
       - estimate {params.date_inference} node dates
     """
     input:
-        tree = "results/tree_raw.nwk",
-        alignment = "results/aligned.fasta",
-        metadata = "results/metadata.tsv"
+        tree = "results/{build}/tree_raw.nwk",
+        alignment = "results/{build}/aligned.fasta",
+        metadata = "results/{build}/filtered.tsv"
     output:
-        tree = "results/tree.nwk",
-        node_data = "results/branch_lengths.json"
+        tree = "results/{build}/tree.nwk",
+        node_data = "results/{build}/branch_lengths.json"
     params:
-        coalescent = "skyline",
-        date_inference = "marginal"
+        coalescent = lambda w: config["build_params"][w.build]["refine"]["coalescent"],
+        date_inference = lambda w: config["build_params"][w.build]["refine"]["date_inference"],
+        timetree = lambda w: conditional("--timetree", config["build_params"][w.build]["refine"].get("timetree")),
+        id_column = config["id_column"],
     benchmark:
-        "benchmarks/refine.txt"
+        "benchmarks/{build}/refine.txt"
     log:
-        "logs/refine.txt"
+        "logs/{build}/refine.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -68,9 +71,10 @@ rule refine:
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
             --metadata {input.metadata:q} \
+            --metadata-id-columns {params.id_column:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
-            --timetree \
+            {params.timetree:q} \
             --coalescent {params.coalescent:q} \
             --date-confidence \
             --date-inference {params.date_inference:q}

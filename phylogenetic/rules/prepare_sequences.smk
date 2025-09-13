@@ -21,6 +21,20 @@ This part of the workflow usually includes the following steps:
 See Augur's usage docs for these commands for more details.
 """
 
+# TODO: upload ingest results to data.nextstrain.org and download them here.
+rule copy_ingest_files:
+    input:
+        sequences = "../ingest/results/sequences.fasta",
+        metadata = "../ingest/results/metadata.tsv"
+    output:
+        sequences = "data/sequences.fasta",
+        metadata = "data/metadata.tsv"
+    shell:
+        r"""
+        mkdir -p data
+        cp ../ingest/results/* data
+        """
+
 rule filter:
     """
     Filtering to
@@ -29,20 +43,26 @@ rule filter:
       - excluding strains in {input.exclude}
     """
     input:
-        sequences = "results/sequences.fasta",
-        metadata = "results/metadata.tsv",
-        include = files.forced_strains,
-        exclude = files.dropped_strains
+        sequences = "data/sequences.fasta",
+        metadata = "data/metadata.tsv",
+        exclude = lambda w: config["build_params"][w.build]["filter"]["exclude"],
+        include = lambda w: config["build_params"][w.build]["filter"]["include"],
     output:
-        sequences = "results/filtered.fasta"
+        sequences = "results/{build}/filtered.fasta",
+        metadata = "results/{build}/filtered.tsv",
+        log = "results/{build}/filter-log.txt",
     params:
-        group_by = "division year month",
-        sequences_per_group = 25,
-        min_date = 2012
+        id_column = config["id_column"],
+        min_length = lambda w: conditional("--min-length", config["build_params"][w.build]["filter"].get("min_length")),
+        min_date = lambda w: conditional("--min-date", config["build_params"][w.build]["filter"].get("min_date")),
+        max_date = lambda w: conditional("--max-date", config["build_params"][w.build]["filter"].get("max_date")),
+        exclude_where = lambda w: conditional("--exclude-where", config["build_params"][w.build]["filter"].get("exclude_where")),
+        group_by = lambda w: conditional("--group-by", config["build_params"][w.build]["filter"].get("group_by")),
+        subsample_max_sequences = lambda w: conditional("--subsample-max-sequences", config["build_params"][w.build]["filter"].get("subsample_max_sequences")),
     benchmark:
-        "benchmarks/filter.txt"
+        "benchmarks/{build}/filter.txt"
     log:
-        "logs/filter.txt"
+        "logs/{build}/filter.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -50,12 +70,18 @@ rule filter:
         augur filter \
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
+            --metadata-id-columns {params.id_column:q} \
+            {params.min_length:q} \
+            {params.min_date:q} \
+            {params.max_date:q} \
+            {params.exclude_where:q} \
+            {params.group_by:q} \
+            {params.subsample_max_sequences:q} \
             --include {input.include:q} \
             --exclude {input.exclude:q} \
-            --output {output.sequences:q} \
-            --group-by {params.group_by:q} \
-            --sequences-per-group {params.sequences_per_group:q} \
-            --min-date {params.min_date:q}
+            --output-sequences {output.sequences:q} \
+            --output-metadata {output.metadata:q} \
+            --output-log {output.log:q}
         """
 
 rule align:
@@ -65,14 +91,15 @@ rule align:
       - removing reference sequence
     """
     input:
-        sequences = "results/filtered.fasta",
-        reference = files.reference
+        sequences = "results/{build}/filtered.fasta",
+        reference = lambda w: config["build_params"][w.build]["files"]["reference"],
     output:
-        alignment = "results/aligned.fasta"
+        alignment = "results/{build}/aligned.fasta"
     benchmark:
-        "benchmarks/align.txt"
+        "benchmarks/{build}/align.txt"
     log:
-        "logs/align.txt"
+        "logs/{build}/align.txt"
+    threads: 4
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -83,5 +110,5 @@ rule align:
             --output {output.alignment:q} \
             --fill-gaps \
             --remove-reference \
-            --nthreads auto
+            --nthreads {threads:q}
         """

@@ -8,6 +8,28 @@ workdir: workflow.current_basedir
 # Use default configuration values. Override with Snakemake's --configfile/--config options.
 configfile: "defaults/config.yaml"
 
+# Validate 'builds'
+from textwrap import dedent
+
+def indented_list(xs, prefix):
+    return f"\n{prefix}".join(xs)
+
+if invalid_builds := set(config["builds"]) - set(config["build_params"]):
+    print(dedent(f"""\
+        ERROR: The following names in 'builds' are not defined in 'build_params':
+
+            {indented_list(invalid_builds, "            ")}
+
+        Available builds are:
+
+            {indented_list(config['build_params'], "            ")}
+        """))
+    exit(1)
+
+builds = config["builds"]
+
+wildcard_constraints:
+    build = "|".join(builds)
 
 # This is the default rule that Snakemake will run when there are no specified targets.
 # The default output of the phylogenetic workflow is usually the final
@@ -17,7 +39,7 @@ configfile: "defaults/config.yaml"
 rule all:
     input:
         # Fill in path(s) to the final exported Auspice JSON(s)
-        auspice_json="",
+        auspice_json=expand("auspice/ebola_{build}.json", build=builds),
 
 
 # These rules are imported in the order that they are expected to run.
@@ -30,6 +52,7 @@ rule all:
 # If there are build specific customizations, they should be added with the
 # custom_rules imported below to ensure that the core workflow is not complicated
 # by build specific rules.
+include: "rules/config.smk"
 include: "rules/prepare_sequences.smk"
 include: "rules/construct_phylogeny.smk"
 include: "rules/annotate_phylogeny.smk"

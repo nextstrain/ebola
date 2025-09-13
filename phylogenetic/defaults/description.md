@@ -1,3 +1,0 @@
-This work is made possible by the open sharing of genetic data by research groups from all over the world. We gratefully acknowledge their contributions.
-
-Special thanks to Nick Loman, Matt Cotten, Ian Goodfellow and Paul Kellam for spearheading data sharing efforts during the outbreak. For a more complete phylogeographic analysis of these data see [Dudas et al](http://dx.doi.org/10.1038/nature22040). Curated data used in the paper are available at [github.com/ebov/space-time](https://github.com/ebov/space-time). The animation shown here was inspired by [a work](https://youtu.be/eWnIhWUpQiQ) by [Gytis Dudas](https://evogytis.github.io/).
