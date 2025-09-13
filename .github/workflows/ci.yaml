@@ -1,9 +1,16 @@
 name: CI
 
 on:
-  - push
-  - pull_request
+  push:
+    branches:
+      - master
+  pull_request:
+  workflow_dispatch:
+  # Routinely check that we continue to work in the face of external changes.
+  schedule:
+    # Every day at 18:37 UTC / 10:37 Seattle (winter) / 11:37 Seattle (summer)
+    - cron: "37 18 * * *"
 
 jobs:
   ci:
-    uses: nextstrain/.github/.github/workflows/pathogen-repo-ci.yaml@v0
+    uses: nextstrain/.github/.github/workflows/pathogen-repo-ci.yaml@master
