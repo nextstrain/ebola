@@ -163,9 +163,40 @@ rule spike_in_fauna_metadata:
             --output {output.metadata:q}
         """
 
-rule extract_date_from_strain:
+rule add_nextclade_clades:
+    """
+    Normally we use nextclade for a varity of metadata fields, but here we only add
+    the 'clade' column, renaming it to 'outbreak'
+    """
     input:
         metadata="data/metadata_merged_fauna.tsv",
+        nextclade="data/nextclade.tsv",
+    output:
+        nextclade_subset=temp("data/nextclade_subset.tsv"),
+        metadata="data/metadata_merged_outbreak.tsv",
+    benchmark:
+        "benchmarks/add_nextclade_clades.txt"
+    log:
+        "logs/add_nextclade_clades.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        cat {input.nextclade} \
+            | csvtk -t cut -f seqName,clade \
+            | csvtk -t rename -f seqName,clade -n accession,outbreak \
+            > {output.nextclade_subset:q}
+
+        augur merge \
+            --metadata metadata={input.metadata:q} nextclade={output.nextclade_subset:q} \
+            --metadata-id-columns accession \
+            --output-metadata {output.metadata:q} \
+            --no-source-columns
+        """
+
+rule extract_date_from_strain:
+    input:
+        metadata="data/metadata_merged_outbreak.tsv",
     output:
         metadata="data/metadata_date_improvements.tsv",
     benchmark:
@@ -182,7 +213,6 @@ rule extract_date_from_strain:
             | augur curate passthru \
               --output-metadata {output.metadata:q}
         """
-
 
 rule curate_geography:
     input:
@@ -265,12 +295,15 @@ rule subset_metadata:
         """
 
 rule extract_open_data:
+    # NOTE: the nextclade translations are not yet subset to open data only
     input:
         metadata = "results/metadata.tsv",
-        sequences = "results/sequences.fasta"
+        sequences = "results/sequences.fasta",
+        alignment = "results/alignment.fasta",
     output:
         metadata = "results/metadata_open.tsv",
-        sequences = "results/sequences_open.fasta"
+        sequences = "results/sequences_open.fasta",
+        alignment = "results/alignment_open.fasta",
     benchmark:
         "benchmarks/extract_open_data.txt"
     log:
@@ -286,4 +319,11 @@ rule extract_open_data:
             --exclude-where "dataUseTerms=RESTRICTED" \
             --output-metadata {output.metadata:q} \
             --output-sequences {output.sequences:q}
+
+        augur filter \
+            --metadata {input.metadata:q} \
+            --sequences {input.alignment:q} \
+            --metadata-id-columns accession \
+            --exclude-where "dataUseTerms=RESTRICTED" \
+            --output-sequences {output.alignment:q}
         """
