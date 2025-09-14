@@ -4,12 +4,12 @@ This part of the workflow constructs the reference tree for the Nextclade datase
 REQUIRED INPUTS:
 
     metadata            = data/metadata.tsv
-    prepared_sequences  = results/prepared_sequences.fasta
+    prepared_sequences  = results/{build}/prepared_sequences.fasta
 
 OUTPUTS:
 
-    tree            = results/tree.nwk
-    branch_lengths  = results/branch_lengths.json
+    tree            = results/{build}/tree.nwk
+    branch_lengths  = results/{build}/branch_lengths.json
 
 This part of the workflow usually includes the following steps:
 
@@ -22,9 +22,9 @@ See Augur's usage docs for these commands for more details.
 
 rule tree:
     input:
-        sequences = "results/aligned.fasta"
+        sequences = "results/{build}/aligned.fasta"
     output:
-        tree = "results/tree_raw.nwk"
+        tree = "results/{build}/tree_raw.nwk"
     shell:
         """
         augur tree --alignment {input.sequences} \
@@ -35,12 +35,12 @@ rule tree:
 
 rule refine:
     input:
-        tree = "results/tree_raw.nwk",
-        metadata = "results/filtered_metadata.tsv",
-        sequences = "results/aligned.fasta"
+        tree = "results/{build}/tree_raw.nwk",
+        metadata = "results/{build}/filtered_metadata.tsv",
+        sequences = "results/{build}/aligned.fasta"
     output:
-        refined_tree = "results/tree.nwk",
-        branch_lengths = "results/branch_lengths.json"
+        refined_tree = "results/{build}/tree.nwk",
+        branch_lengths = "results/{build}/branch_lengths.json"
     shell:
         """
         augur refine --tree {input.tree} \

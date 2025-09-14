@@ -6,14 +6,14 @@ REQUIRED INPUTS:
 
     augur export:
         metadata            = data/metadata.tsv
-        tree                = results/tree.nwk
-        branch_lengths      = results/branch_lengths.json
-        nt_muts             = results/nt_muts.json
-        aa_muts             = results/aa_muts.json
-        clades              = results/clades.json
+        tree                = results/{build}/tree.nwk
+        branch_lengths      = results/{build}/branch_lengths.json
+        nt_muts             = results/{build}/nt_muts.json
+        aa_muts             = results/{build}/aa_muts.json
+        clades              = results/{build}/clades.json
 
     Nextclade dataset files:
-        reference           = ../shared/reference.fasta
+        reference           = ../shared/{build}/reference.fasta
         pathogen            = config/pathogen.json
         genome_annotation   = config/genome_annotation.gff3
         readme              = config/README.md
@@ -38,15 +38,15 @@ See Augur's usage docs for these commands for more details.
 
 rule export:
     input:
-        metadata = "results/filtered_metadata.tsv",
-        tree = "results/tree.nwk",
-        branch_lengths = "results/branch_lengths.json",
-        muts = "results/muts.json",
-        clades = "results/clades.json",
-        years = "results/years.json",
+        metadata = "results/{build}/filtered_metadata.tsv",
+        tree = "results/{build}/tree.nwk",
+        branch_lengths = "results/{build}/branch_lengths.json",
+        muts = "results/{build}/muts.json",
+        clades = "results/{build}/clades.json",
+        years = "results/{build}/years.json",
         auspice_config = "defaults/auspice_config.json"
     output:
-        auspice_json = "results/auspice.json"
+        auspice_json = "results/{build}/auspice.json"
     shell:
         """
         augur export v2 --tree {input.tree} \
@@ -60,15 +60,15 @@ rule export:
 
 rule prepare_dataset:
     input:
-        auspice_json = "results/auspice.json",
-        reference = "../shared/reference.fasta",
-        pathogen = "dataset_files/pathogen.json",
-        genome_annotation = "../shared/annotation.gff",
-        readme = "dataset_files/README.md",
-        changelog = "dataset_files/CHANGELOG.md",
-        example_sequences = "results/example_sequences.fasta"
+        auspice_json = "results/{build}/auspice.json",
+        reference = "../shared/{build}/reference.fasta",
+        pathogen = "dataset_files/{build}/pathogen.json",
+        genome_annotation = "../shared/{build}/annotation.gff",
+        readme = "dataset_files/{build}/README.md",
+        changelog = "dataset_files/{build}/CHANGELOG.md",
+        example_sequences = "results/{build}/example_sequences.fasta"
     output:
-        dataset_dir = directory("dataset")
+        dataset_dir = directory("dataset/{build}")
     shell:
         """
         mkdir -p {output.dataset_dir}
