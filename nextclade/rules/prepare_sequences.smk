@@ -4,13 +4,13 @@ of the Nextclade dataset.
 
 REQUIRED INPUTS:
 
-    metadata    = data/metadata.tsv
-    sequences   = data/sequences.fasta
+    metadata    = data/{build}/metadata.tsv
+    sequences   = data/{build}/sequences.fasta
     reference   = ../shared/reference.fasta
 
 OUTPUTS:
 
-    prepared_sequences = results/prepared_sequences.fasta
+    prepared_sequences = results/{build}/prepared_sequences.fasta
 
 This part of the workflow usually includes the following steps:
 
@@ -24,10 +24,10 @@ See Nextclade's and Augur's usage docs for these commands for more details.
 
 rule include_file:
     input:
-        include = "defaults/include_genbank.txt",
-        metadata = "data/metadata.tsv"
+        include = "defaults/include_genbank_{build}.txt",
+        metadata = "data/{build}/metadata.tsv"
     output:
-        include = "results/include.txt"
+        include = "results/{build}/include.txt"
     run:
         import pandas as pd
         df = pd.read_csv(input.metadata, sep="\t", dtype=str)
@@ -47,12 +47,12 @@ rule include_file:
 
 rule filter:
     input:
-        metadata = "data/metadata.tsv",
-        sequences = "data/sequences.fasta",
-        include = "results/include.txt"
+        metadata = "data/{build}/metadata.tsv",
+        sequences = "data/{build}/sequences.fasta",
+        include = "results/{build}/include.txt"
     output:
-        filtered_sequences = "results/filtered_sequences.fasta",
-        filtered_metadata = "results/filtered_metadata.tsv"
+        filtered_sequences = "results/{build}/filtered_sequences.fasta",
+        filtered_metadata = "results/{build}/filtered_metadata.tsv"
     shell:
         """
         augur filter --metadata {input.metadata} \
@@ -69,10 +69,10 @@ rule filter:
 
 rule example_sequences:
     input:
-        metadata = "data/metadata.tsv",
-        sequences = "data/sequences.fasta"
+        metadata = "data/{build}/metadata.tsv",
+        sequences = "data/{build}/sequences.fasta"
     output:
-        filtered_sequences = "results/example_sequences.fasta"
+        filtered_sequences = "results/{build}/example_sequences.fasta"
     shell:
         """
         augur filter --metadata {input.metadata} \
@@ -87,14 +87,14 @@ rule example_sequences:
 
 rule align:
     input:
-        reference = "../shared/reference.fasta",
-        filtered_sequences = "results/filtered_sequences.fasta",
-        pathogen_json = "dataset_files/pathogen.json",
-        annotation = "../shared/annotation.gff"
+        reference = "../shared/{build}/reference.fasta",
+        filtered_sequences = "results/{build}/filtered_sequences.fasta",
+        pathogen_json = "dataset_files/{build}/pathogen.json",
+        annotation = "../shared/{build}/annotation.gff"
     output:
-        aligned_sequences = "results/aligned.fasta",
+        aligned_sequences = "results/{build}/aligned.fasta",
     params:
-        translations = lambda w: f"results/{{cds}}_translations.fasta",
+        translations = lambda w: f"results/{w.build}/{{cds}}_translations.fasta",
     shell:
         """
         nextclade run --input-ref {input.reference} \
