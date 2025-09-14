@@ -75,6 +75,7 @@ curate:
     "INSDC_accession__url",
     "strain",
     "date",
+    "outbreak",
     "region",
     "country",
     "division",

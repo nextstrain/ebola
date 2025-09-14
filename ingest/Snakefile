@@ -30,6 +30,7 @@ rule all:
 # by build-specific rules.
 include: "rules/fetch.smk"
 include: "rules/curate.smk"
+include: "rules/nextclade.smk"
 
 
 # We are pushing to standardize ingest workflows with Nextclade runs to include
