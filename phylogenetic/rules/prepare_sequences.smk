@@ -32,7 +32,7 @@ rule copy_ingest_files:
     shell:
         r"""
         mkdir -p data
-        cp ../ingest/results/* data
+        cp -r ../ingest/results/* data
         """
 
 rule filter:
