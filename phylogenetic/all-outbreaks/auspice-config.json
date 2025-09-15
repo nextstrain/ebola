@@ -1,0 +1,73 @@
+{
+  "title": "Evolutionary history of Zaire ebolavirus outbreaks",
+  "maintainers": [
+    {"name": "the Nextstrain team", "url": "https://nextstrain.org/team"}
+  ],
+  "data_provenance": [
+    {"name": "Pathoplexus", "url": "https://pathoplexus.org"},
+    {"name": "INRB (DRC)", "url": "https://github.com/inrb-drc/ebola-nord-kivu"},
+    {"name": "GenBank", "url": "https://www.ncbi.nlm.nih.gov/genbank/"}
+  ],
+  "build_url": "https://github.com/nextstrain/ebola",
+  "colorings": [
+    {
+      "key": "gt",
+      "title": "Genotype",
+      "type": "categorical"
+    },
+    {"key": "outbreak", "title": "Outbreak (Nextclade name)", "type": "categorical", "scale": [["Ebov-1976", "#511EA8"], ["Ebov-1994", "#4236C1"], ["Ebov-1995", "#3F55CE"], ["Ebov-1996a", "#4273CE"], ["Ebov-1996b", "#4A8CC2"], ["Ebov-2001a", "#569FAF"], ["Ebov-2003", "#64AD98"], ["Ebov-2007", "#76B680"], ["Ebov-2013", "#8BBB6A"], ["Ebov-2014", "#A1BE58"], ["Ebov-2017", "#B7BC4B"], ["Ebov-2018a", "#CCB742"], ["Ebov-2018b", "#DCAB3C"], ["Ebov-2020", "#E59638"], ["Ebov-2013/r2021", "#E67932"], ["Ebov-2022", "#E1552B"], ["Ebov-2025", "#DC2F24"]]},
+    {"key": "outbreak_geo", "title": "Outbreak (Geographic name)", "type": "categorical", "scale": [["Yambuku 1976", "#511EA8"], ["Gabon 1994", "#4236C1"], ["Kikwit 1995", "#3F55CE"], ["Gabon 1996 A", "#4273CE"], ["Gabon 1996 B", "#4A8CC2"], ["Gabon 2001", "#569FAF"], ["Kelle 2003", "#64AD98"], ["Luebo 2007", "#76B680"], ["West Africa 2013", "#8BBB6A"], ["Boende 2014", "#A1BE58"], ["Likati 2017", "#B7BC4B"], ["Tumba 2018", "#CCB742"], ["Nord-Kivu 2018", "#DCAB3C"], ["Mbandaka 2020", "#E59638"], ["Mbandaka 2022", "#E1552B"], ["Bulape 2025", "#DC2F24"]]},
+    {
+      "key": "year",
+      "title": "Sampling Year",
+      "type": "categorical",
+      "scale": [["1976", "#511EA8"], ["1977", "#4333BE"], ["1994", "#3F4ECB"], ["1995", "#4169CF"], ["1996", "#4682C9"], ["2001", "#4F96BB"], ["2002", "#5AA5A8"], ["2003", "#68AF92"], ["2007", "#78B77D"], ["2008", "#8BBB6A"], ["2014", "#9EBE59"], ["2015", "#B3BD4D"], ["2016", "#C5B945"], ["2017", "#D5B03F"], ["2018", "#E0A23A"], ["2019", "#E68D36"], ["2020", "#E67231"], ["2021", "#E1502A"], ["2025", "#DC2F24"]]
+    },
+    {
+      "key": "country",
+      "title": "Country",
+      "type": "categorical",
+      "scale": [
+        ["Guinea", "#3F4DCB"],
+        ["Sierra Leone", "#4681C9"],
+        ["Liberia", "#5AA4A8"],
+        ["Mali", "#78B67E"],
+        ["Nigeria", "#9EBE5A"],
+        ["Gabon", "#C5B945"],
+        ["Republic of the Congo", "#E0A23A"],
+        ["Democratic Republic of the Congo", "#E67231"],
+        ["Uganda", "#DC2F24"]
+      ] 
+    },
+    {
+      "key": "dataUseTerms",
+      "title": "Data use terms",
+      "type": "categorical"
+    },
+    {
+      "key": "author",
+      "title": "Author",
+      "type":"categorical"
+    }
+  ],
+  "geo_resolutions": [
+    "country"
+  ],
+  "metadata_columns": [
+    "strain",
+    "PPX_accession",
+    "INSDC_accession",
+    "restrictedUntil"
+  ],
+  "display_defaults": {
+    "color_by": "country",
+    "geo_resolution": "country",
+    "stream_label": "outbreak",
+    "tip_label": "strain",
+    "branch_label": "outbreak"
+  },
+  "filters": [
+    "country",
+    "author"
+  ]
+}
