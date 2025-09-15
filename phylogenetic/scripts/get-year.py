@@ -55,7 +55,7 @@ def suggest_colors(years):
         "scale": [[year, c[idx]] for idx,year in enumerate(years)]
     }
 
-    print(f"Suggested auspice-config colors entry:")
+    print("Suggested auspice-config colors entry:")
     print(json.dumps(config))
 
 
