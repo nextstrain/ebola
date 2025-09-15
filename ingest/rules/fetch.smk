@@ -134,5 +134,5 @@ rule fetch_inrb_nord_kivu_metadata:
     output: "data/inrb-drc-nord-kivu-metadata.tsv"
     shell:
         r"""
-        curl -fsSL https://raw.githubusercontent.com/inrb-drc/ebola-nord-kivu/refs/heads/ba9b9b48ba1e8db83486d653f3043d9671611594/data/metadata.tsv -o {output:q}
+        curl -fsSL https://github.com/inrb-drc/ebola-nord-kivu/raw/ba9b9b48ba1e8db83486d653f3043d9671611594/data/metadata.tsv -o {output:q}
         """
