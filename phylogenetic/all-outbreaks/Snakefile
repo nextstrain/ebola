@@ -2,7 +2,7 @@
 This is the all-outbreaks phylogenetic Snakefile.
 
 HOW TO RUN:
-Within the phylogenetic directory run `snakemake --cores 1 --snakefile all-outbreaks/Snakefile`
+Within the phylogenetic directory run `snakemake --cores 1 --snakefile all-outbreaks/Snakefile auspice/ebola_all-outbreaks.json`
 """
 
 inputs = {
@@ -93,7 +93,7 @@ rule refine:
     shell:
         r"""
         exec &> >(tee {log:q})
-        
+
         augur refine \
             --tree {input.tree:q} \
             --keep-root \
