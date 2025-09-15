@@ -15,4 +15,3 @@
 The reference tree in this dataset sources data from Pathoplexus and includes RESTRICTED sequences.
 These sequences were generously shared pre-publication by the authors to aid public health response.
 It is not allowed to use these sequences in preprints or publications without permission of the authors, see [Pathoplexus data use terms](https://pathoplexus.org/about/terms-of-use/data-use-terms) for details.
-
