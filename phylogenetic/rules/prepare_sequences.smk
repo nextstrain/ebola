@@ -22,19 +22,6 @@ See Augur's usage docs for these commands for more details.
 """
 
 # TODO: upload ingest results to data.nextstrain.org and download them here.
-rule copy_ingest_files:
-    input:
-        sequences = "../ingest/results/sequences.fasta",
-        metadata = "../ingest/results/metadata.tsv"
-    output:
-        sequences = "data/sequences.fasta",
-        metadata = "data/metadata.tsv"
-    shell:
-        r"""
-        mkdir -p data
-        cp ../ingest/results/* data
-        """
-
 rule filter:
     """
     Filtering to
@@ -43,8 +30,8 @@ rule filter:
       - excluding strains in {input.exclude}
     """
     input:
-        sequences = "data/sequences.fasta",
-        metadata = "data/metadata.tsv",
+        sequences = "../ingest/results/sequences.fasta",
+        metadata = "../ingest/results/metadata.tsv",
         exclude = lambda w: config["build_params"][w.build]["filter"]["exclude"],
         include = lambda w: config["build_params"][w.build]["filter"]["include"],
     output:
