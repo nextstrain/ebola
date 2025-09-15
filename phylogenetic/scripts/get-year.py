@@ -47,7 +47,7 @@ def suggest_colors(years):
     # A categorical scale looks better and helps understand the different outbreaks (IMO)
     # cf a continuous scale, although that would be more technically accurate
     c = colors[len(years)] # colors is 1-indexed
-    
+
     config = {
         "key": "year",
         "title": "Sampling Year",
@@ -75,4 +75,3 @@ if __name__ == "__main__":
         suggest_colors(sorted(set([x['year'] for x in nodes.values()])))
     except:
         print("Failed to suggest colours for the auspice config")
-

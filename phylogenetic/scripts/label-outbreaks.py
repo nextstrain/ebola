@@ -4,7 +4,7 @@ from Bio import Phylo
 from augur.io import read_metadata
 import json
 
-# A mapping of nextclade clade names to geographic ones, following 
+# A mapping of nextclade clade names to geographic ones, following
 # <https://virological.org/t/the-16th-ebola-virus-disease-outbreak-in-bulape-health-zone-kasai-democratic-republic-of-the-congo-a-new-spillover-event-from-an-unknown-reservoir-host/1003>
 # as well as other names used by INRB, e.g. "Nord-Kivu"
 geo_names = {
