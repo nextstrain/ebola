@@ -1,0 +1,207 @@
+"""
+This is the all-outbreaks phylogenetic Snakefile.
+
+HOW TO RUN:
+Within the phylogenetic directory run `snakemake --cores 1 --snakefile all-outbreaks/Snakefile`
+"""
+
+inputs = {
+  "metadata": "../ingest/results/metadata.tsv",
+  "alignment": "../ingest/results/alignment.fasta",
+}
+
+include: "../../shared/vendored/snakemake/remote_files.smk"
+
+rule filter:
+    input:
+        alignment = lambda w: path_or_url(inputs['alignment']),
+        metadata = lambda w: path_or_url(inputs['metadata']),
+        exclude = "defaults/exclude.txt",
+        include = "all-outbreaks/include.txt",
+    output:
+        sequences = "results/all-outbreaks/filtered.fasta",
+        metadata = "results/all-outbreaks/filtered.tsv",
+        log = "results/all-outbreaks/filter-log.txt",
+    benchmark:
+        "benchmarks/all-outbreaks/filter.txt"
+    log:
+        "logs/all-outbreaks/filter.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur filter \
+            --sequences {input.alignment:q} \
+            --metadata {input.metadata:q} \
+            --metadata-id-columns accession \
+            --exclude {input.exclude} \
+            --include {input.include} \
+            --group-by outbreak country year \
+            --sequences-per-group 20 \
+            --min-length 18000 \
+            --exclude-where is_lab_host=true \
+            --output-sequences {output.sequences:q} \
+            --output-metadata {output.metadata:q} \
+            --output-log {output.log:q}
+        """
+
+rule tree:
+    input:
+        alignment = "results/all-outbreaks/filtered.fasta"
+    output:
+        tree = "results/all-outbreaks/tree_raw.nwk"
+    benchmark:
+        "benchmarks/all-outbreaks/tree.txt"
+    log:
+        "logs/all-outbreaks/tree.txt"
+    threads: 4
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur tree \
+            --alignment {input.alignment:q} \
+            --output {output.tree:q} \
+            --nthreads {threads:q}
+        """
+
+rule root:
+    # See <https://virological.org/t/on-the-rooting-of-the-ebola-virus-phylogeny-and-its-consequences-for-understanding-the-diversity-in-the-reservoir/1005> for rooting approach
+    input:
+        tree = "results/all-outbreaks/tree_raw.nwk",
+    output:
+        tree = "results/all-outbreaks/tree_rooted.nwk",
+    run:
+        from Bio import Phylo
+        T = Phylo.read(input.tree, "newick")
+        T.root_at_midpoint()
+        strains = ['PP_000LE61', 'PP_000NUJS']
+        ca = T.common_ancestor(strains)
+        T.root_with_outgroup(ca)
+        Phylo.write(T, output.tree, "newick")
+
+rule refine:
+    input:
+        tree = "results/all-outbreaks/tree_rooted.nwk",
+    output:
+        tree = "results/all-outbreaks/tree.nwk",
+        node_data = "results/all-outbreaks/branch_lengths.json"
+    benchmark:
+        "benchmarks/all-outbreaks/refine.txt"
+    log:
+        "logs/all-outbreaks/refine.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+        
+        augur refine \
+            --tree {input.tree:q} \
+            --keep-root \
+            --output-tree {output.tree:q} \
+            --output-node-data {output.node_data:q}
+        """
+
+
+rule ancestral:
+    """Reconstructing ancestral sequences and mutations"""
+    input:
+        tree = "results/all-outbreaks/tree.nwk",
+        alignment = "results/all-outbreaks/filtered.fasta",
+        annotation = "all-outbreaks/NC_002549.1.gb",
+    output:
+        node_data = "results/all-outbreaks/muts.json"
+    params:
+        inference = "joint",
+        genes = ["NP", "VP35", "VP40", "GP", "ssGP", "sGP", "VP30" , "VP24", "L"],
+        translations = "../ingest/results/translations/%GENE.fasta",
+    benchmark:
+        "benchmarks/all-outbreaks/ancestral.txt"
+    log:
+        "logs/all-outbreaks/ancestral.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur ancestral \
+            --tree {input.tree:q} \
+            --alignment {input.alignment:q} \
+            --annotation {input.annotation:q} \
+            --translations {params.translations:q} \
+            --genes {params.genes:q} \
+            --output-node-data {output.node_data:q} \
+            --inference {params.inference:q}
+        """
+
+rule get_year:
+    input:
+        metadata = "results/all-outbreaks/filtered.tsv",
+    output:
+        node_data = "results/all-outbreaks/year.json"
+    benchmark:
+        "benchmarks/all-outbreaks/get_year.txt"
+    log:
+        "logs/all-outbreaks/get_year.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        python scripts/get-year.py \
+            --metadata {input.metadata:q} \
+            --output {output.node_data:q}
+        """
+
+rule label_outbreaks:
+    input:
+        metadata = "results/all-outbreaks/filtered.tsv",
+        tree = "results/all-outbreaks/tree.nwk",
+    output:
+        node_data = "results/all-outbreaks/outbreaks.json"
+    benchmark:
+        "benchmarks/all-outbreaks/label_outbreaks.txt"
+    log:
+        "logs/all-outbreaks/label_outbreaks.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        python scripts/label-outbreaks.py \
+            --metadata {input.metadata:q} \
+            --tree {input.tree:q} \
+            --output {output.node_data:q}
+        """
+
+rule export:
+    """Exporting data files for for auspice"""
+    input:
+        tree = "results/all-outbreaks/tree.nwk",
+        metadata = "results/all-outbreaks/filtered.tsv",
+        branch_lengths = "results/all-outbreaks/branch_lengths.json",
+        muts = "results/all-outbreaks/muts.json",
+        year = "results/all-outbreaks/year.json",
+        outbreaks = "results/all-outbreaks/outbreaks.json",
+        lat_longs = "defaults/lat_longs.tsv",
+        auspice_config = "all-outbreaks/auspice-config.json",
+        description = "all-outbreaks/description.md",
+    output:
+        auspice_json = "auspice/ebola_all-outbreaks.json"
+    params:
+        id_column = "accession",
+    benchmark:
+        "benchmarks/all-outbreaks/export.txt"
+    log:
+        "logs/all-outbreaks/export.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur export v2 \
+            --tree {input.tree:q} \
+            --metadata {input.metadata:q} \
+            --metadata-id-columns {params.id_column:q} \
+            --node-data {input.branch_lengths:q} {input.muts:q} {input.year:q} {input.outbreaks:q} \
+            --lat-longs {input.lat_longs:q} \
+            --auspice-config {input.auspice_config:q} \
+            --description {input.description:q} \
+            --include-root-sequence-inline \
+            --output {output.auspice_json:q}
+        """

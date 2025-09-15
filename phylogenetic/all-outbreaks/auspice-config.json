@@ -1,0 +1,77 @@
+{
+  "title": "Evolutionary history of Zaire ebolavirus outbreaks",
+  "maintainers": [
+    {"name": "the Nextstrain team", "url": "https://nextstrain.org/team"}
+  ],
+  "data_provenance": [
+    {
+      "name": "Pathoplexus",
+      "url": "https://pathoplexus.org"
+    }
+  ],
+  "build_url": "https://github.com/nextstrain/ebola",
+  "colorings": [
+    {
+      "key": "gt",
+      "title": "Genotype",
+      "type": "categorical"
+    },
+    {
+      "key": "outbreakgeo",
+      "title": "Outbreak (Geographic name)",
+      "type": "categorical"
+    },
+    {
+      "key": "outbreaknextclade",
+      "title": "Outbreak (Nextclade name)",
+      "type": "categorical"
+    },
+    {
+      "key": "year",
+      "title": "Sampling Year",
+      "type": "categorical",
+      "scale": [["1976", "#511EA8"], ["1977", "#4333BE"], ["1994", "#3F4ECB"], ["1995", "#4169CF"], ["1996", "#4682C9"], ["2001", "#4F96BB"], ["2002", "#5AA5A8"], ["2003", "#68AF92"], ["2007", "#78B77D"], ["2008", "#8BBB6A"], ["2014", "#9EBE59"], ["2015", "#B3BD4D"], ["2016", "#C5B945"], ["2017", "#D5B03F"], ["2018", "#E0A23A"], ["2019", "#E68D36"], ["2020", "#E67231"], ["2021", "#E1502A"], ["2025", "#DC2F24"]]
+    },
+    {
+      "key": "country",
+      "title": "Country",
+      "type": "categorical"
+    },
+    {
+      "key": "division",
+      "title": "Division",
+      "type": "categorical"
+    },
+    {
+      "key": "dataUseTerms",
+      "title": "Data use terms",
+      "type": "categorical"
+    },
+    {
+      "key": "author",
+      "title": "Author",
+      "type":"categorical"
+    }
+  ],
+  "geo_resolutions": [
+    "country",
+    "division"
+  ],
+  "metadata_columns": [
+    "strain",
+    "PPX_accession",
+    "INSDC_accession",
+    "restrictedUntil"
+  ],
+  "display_defaults": {
+    "color_by": "outbreakgeo",
+    "geo_resolution": "country",
+    "tip_label": "strain",
+    "branch_label": "outbreakgeo"
+  },
+  "filters": [
+    "country",
+    "division",
+    "author"
+  ]
+}
