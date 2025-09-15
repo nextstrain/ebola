@@ -5,7 +5,7 @@
 # do not have to dig through the workflows to figure out the default values
 
 ppx_fetch:
-  seqs: https://lapis.pathoplexus.org/ebola-zaire/sample/unalignedNucleotideSequences
+  seqs: https://lapis.pathoplexus.org/ebola-zaire/sample/unalignedNucleotideSequences?versionStatus=LATEST_VERSION
   meta: https://lapis.pathoplexus.org/ebola-zaire/sample/details?dataFormat=csv&versionStatus=LATEST_VERSION
 
 # Required to fetch from Entrez
