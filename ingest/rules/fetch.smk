@@ -31,7 +31,7 @@ rule download_ppx_seqs:
         r"""
         exec &> >(tee {log:q})
 
-        curl {params.sequences_url:q} -o {output.sequences:q}
+        curl -fsSL {params.sequences_url:q} -o {output.sequences:q}
         """
 
 rule download_ppx_meta:
@@ -50,7 +50,7 @@ rule download_ppx_meta:
         r"""
         exec &> >(tee {log:q})
 
-        curl '{params.metadata_url}&fields={params.fields}' -o {output.metadata:q}
+        curl -fsSL '{params.metadata_url}&fields={params.fields}' -o {output.metadata:q}
         """
 
 rule format_ppx_ndjson:
@@ -134,5 +134,5 @@ rule fetch_inrb_nord_kivu_metadata:
     output: "data/inrb-drc-nord-kivu-metadata.tsv"
     shell:
         r"""
-        curl https://raw.githubusercontent.com/inrb-drc/ebola-nord-kivu/refs/heads/ba9b9b48ba1e8db83486d653f3043d9671611594/data/metadata.tsv -o {output:q}
+        curl -fsSL https://github.com/inrb-drc/ebola-nord-kivu/raw/ba9b9b48ba1e8db83486d653f3043d9671611594/data/metadata.tsv -o {output:q}
         """
