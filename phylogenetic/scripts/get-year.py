@@ -73,5 +73,5 @@ if __name__ == "__main__":
 
     try:
         suggest_colors(sorted(set([x['year'] for x in nodes.values()])))
-    except:
+    except KeyError:
         print("Failed to suggest colours for the auspice config")
