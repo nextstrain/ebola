@@ -1,0 +1,3 @@
+[tool.ruff]
+# Ignore F541 (f-string without any placeholders)
+ignore = ["F541"]

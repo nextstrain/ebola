@@ -1,0 +1,4 @@
+# Original DRC 1976 outbreak -- EBOV/H.sapiens-tc/COD/1977/Bonduni
+PP_000LE61
+# DRC 1995 outbreak -- Ebolavirus Kikwit H. sapiens-tc/COD/1995
+PP_000NUJS

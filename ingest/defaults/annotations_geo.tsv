@@ -75,3 +75,13 @@ PP_000LNAK	region	Africa
 # KT961624/PP_000MC45
 PP_000MC45	country	Sierra Leone
 PP_000MC45	region	Africa
+
+# -------- Temporary -----------
+# Change the nextclade outbreak call for certain (newly uploaded) strains
+# This should be removed once the Nextclade dataset has been updated.
+# We do this here because `defaults/annotations.tsv` is applied _before_ Nextclade runs
+# See <https://github.com/nextstrain/nextclade_data/pull/184#issuecomment-3305094552>
+PP_003V5MS	outbreak	Ebov-2022
+PP_003V5NQ	outbreak	Ebov-2022
+PP_003V5PN	outbreak	Ebov-2022
+PP_003V5QL	outbreak	Ebov-2022

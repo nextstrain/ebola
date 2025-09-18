@@ -18,24 +18,22 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
-      - id: trailing-whitespace
-      - id: check-ast
-      - id: check-case-conflict
-      - id: check-docstring-first
+      - id: check-ast # Check Python files for valid syntax
+      - id: check-case-conflict # Check for files with names that would conflict on case-insensitive filesystems
+      - id: check-docstring-first # Check Python files have docstrings before imports
       - id: check-json
       - id: check-executables-have-shebangs
-      - id: check-merge-conflict
+      - id: check-merge-conflict # Check for merge conflict markers 
       - id: check-shebang-scripts-are-executable
       - id: check-symlinks
       - id: check-toml
       - id: check-yaml
-      - id: destroyed-symlinks
-      - id: detect-private-key
-      - id: end-of-file-fixer
-      - id: fix-byte-order-marker
+      - id: destroyed-symlinks # Check for symlinks pointing to non-existent files
+      - id: detect-private-key # Check for private keys accidentally committed
+      - id: fix-byte-order-marker # Remove byte order marker from files
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    # Ruff version.
     rev: v0.4.6
     hooks:
-      # Run the linter.
+      # Run the python linter `ruff` to enforce style and catch issues
+      # See the `pyproject.toml` file for configuration
       - id: ruff
