@@ -27,32 +27,46 @@ region	West Asia	34.604403366209084	43.32277708212641
 country	France	46.2276	2.2137
 country	Netherlands	52.1326	5.2913
 
+# division	Bas Uele	3.0000	27.0000
 division	Bas-Uele	3.626	25.145
+# division	Cuvette Ouest	0.7500	11.0000
 division	Equateur	0.229	18.914
+# division	Equateur	0.5640	20.3309
 division	Haut-Katanga	-10.469	27.836
 division	Haut-Lomami	-8.237	25.429
 division	Haut-Uele	3.345	28.588
 division	Ituri	1.754	29.497
 division	Kasai	-4.947	21.106
+# division	Kasai Occidental	-5.5000	21.0000
 division	Kasai-Central	-6.226	22.489
 division	Kasai-Oriental	-6.151	23.519
 division	Kinshasa	-4.437	15.904
 division	Kongo-Central	-5.293	14.317
 division	Kwango	-6.434	17.865
+# division	Kwilu	-4.6000	18.9000
 division	Kwilu	-4.783	18.655
 division	Lomami	-6.214	24.682
 division	Lualaba	-9.838	23.893
 division	Maindombe	-2.696	18.529
 division	Maniema	-3.085	26.423
+# division	Mongala	2.0667	21.5167
 division	Mongala	2.097	21.513
 division	Nord Kivu	-0.607	28.702
+# division	Nord-Kivu	-0.6667	28.7500
 division	Nord-Ubangi	3.867	21.068
+# division	North Kivu	-0.6667	28.7500
+# division	Nzerekore	7.7500	-8.8167
+# division	Ogooue-Ivindo	0.8500	12.8667
 division	Sankuru	-3.482	23.605
+# division	South Kivu	-3.0000	28.5000
 division	Sud Kivu	-3.221	28.258
+# division	Sud-Kivu	-3.0000	28.5000
 division	Sud-Ubangi	3.091	19.355
+# division	Sud-Ubangi	3.2300	19.1880
 division	Tanganyika	-6.567	28.2
 division	Tshopo	0.481	25.207
 division	Tshuapa	-0.668	21.756
+# division	Tshuapa	-1.5000	21.7500
 division	Yandongi	2.838	22.334
 
 location	Aba	3.664	30.301
