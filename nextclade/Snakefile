@@ -14,7 +14,7 @@ configfile: "defaults/config.yaml"
 # https://docs.nextstrain.org/projects/nextclade/page/user/datasets.html
 rule all:
     input:
-        # Fill in paths to the final exported Nextclade dataset.
+        tree = "dataset/zaire/"
 
 
 # These rules are imported in the order that they are expected to run.

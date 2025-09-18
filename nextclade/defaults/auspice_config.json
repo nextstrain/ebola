@@ -47,8 +47,8 @@
     "division"
   ],
   "display_defaults": {
-    "color_by": "division",
-    "geo_resolution": "division"
+    "color_by": "clade_membership",
+    "geo_resolution": "country"
   },
   "filters": [
     "country",
