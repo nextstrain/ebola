@@ -25,6 +25,7 @@ geo_names = {
     "Ebov-2018a": {"name": "Tumba 2018", "label": True},
     "Ebov-2018b": {"name": "Nord-Kivu 2018", "label": True},
     "Ebov-2020": {"name": "Mbandaka 2020", "label": True},
+    "Ebov-2022": {"name": "Mbandaka 2022", "label": True},
     "Ebov-2025": {"name": "Bulape 2025", "label": True},
 }
 
