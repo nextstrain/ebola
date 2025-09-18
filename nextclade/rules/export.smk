@@ -44,7 +44,8 @@ rule export:
         muts = "results/{build}/muts.json",
         clades = "results/{build}/clades.json",
         years = "results/{build}/years.json",
-        auspice_config = "defaults/auspice_config.json"
+        auspice_config = "defaults/auspice_config.json",
+        latlongs = "../phylogenetic/defaults/lat_longs.tsv"
     output:
         auspice_json = "results/{build}/auspice.json"
     shell:
@@ -52,6 +53,7 @@ rule export:
         augur export v2 --tree {input.tree} \
         --metadata-id-columns accession \
         --metadata {input.metadata} \
+        --lat-longs {input.latlongs} \
         --auspice-config {input.auspice_config} \
         --node-data {input.branch_lengths} {input.muts} {input.years} {input.clades} \
         --include-root-sequence-inline \
