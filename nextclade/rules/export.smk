@@ -45,7 +45,8 @@ rule export:
         clades = "results/{build}/clades.json",
         years = "results/{build}/years.json",
         auspice_config = "defaults/auspice_config.json",
-        latlongs = "../phylogenetic/defaults/lat_longs.tsv"
+        latlongs = "../phylogenetic/defaults/lat_longs.tsv",
+        description = "defaults/description.md"
     output:
         auspice_json = "results/{build}/auspice.json"
     shell:
@@ -55,6 +56,7 @@ rule export:
         --metadata {input.metadata} \
         --lat-longs {input.latlongs} \
         --auspice-config {input.auspice_config} \
+        --description {input.description} \
         --node-data {input.branch_lengths} {input.muts} {input.years} {input.clades} \
         --include-root-sequence-inline \
         --output {output.auspice_json}
