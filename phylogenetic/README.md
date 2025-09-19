@@ -35,7 +35,7 @@ and the phylogeny is currently divergence-only.
 
 The workflow can be run from the top level pathogen repo directory:
 ```
-nextstrain build phylogenetic --snakefile all-outbreaks/Snakefile -pf export
+nextstrain build phylogenetic --snakefile all-outbreaks/Snakefile
 ```
 
 The resulting dataset can be viewed in a web browser:
