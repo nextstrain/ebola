@@ -57,12 +57,12 @@ rule filter:
         """
         augur filter --metadata {input.metadata} \
         --sequences {input.sequences} \
-        --group-by country year \
+        --group-by year \
         --include {input.include} \
         --min-length 16000 \
         --exclude-where 'region!=Africa' \
         --metadata-id accession \
-        --sequences-per-group 10 \
+        --sequences-per-group 20 \
         --output-sequences {output.filtered_sequences} \
         --output-metadata {output.filtered_metadata}
         """

@@ -47,11 +47,27 @@ Ebov-2018b	L	1753	S
 Ebov-2020	L	1517	V
 Ebov-2020	L	1610	P
 
-Ebov-2022	L	1718	Y
-Ebov-2022	VP35	20	V
+Ebov-2018a/r2020	clade	Ebov-2018a
+Ebov-2018a/r2020	L	287	F
+Ebov-2018a/r2020	L	507	L
 
 Ebov-2013/r2021	L	888	S
 Ebov-2013/r2021	L	1240	T
+
+Ebov-2018b/r2021a	clade	Ebov-2018b
+Ebov-2018b/r2021a	NP	579	A
+Ebov-2018b/r2021a	L	229	I
+
+Ebov-2018b/r2021b	clade	Ebov-2018b
+Ebov-2018b/r2021b	GP	248	L
+Ebov-2018b/r2021b	VP35	61	K
+
+Ebov-2022	L	1718	Y
+Ebov-2022	VP35	20	V
+
+Ebov-2018b/r2022	clade	Ebov-2018b
+Ebov-2018b/r2022	NP	623	G
+Ebov-2018b/r2022	L	1428	T
 
 Ebov-2025	L	479	G
 Ebov-2025	L	937	R
