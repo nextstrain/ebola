@@ -9,6 +9,9 @@ inputs = {
 
 include: "../../shared/vendored/snakemake/remote_files.smk"
 
+rule all:
+    input: "auspice/ebola_all-outbreaks.json"
+
 rule filter:
     input:
         alignment = lambda w: path_or_url(inputs['alignment']),

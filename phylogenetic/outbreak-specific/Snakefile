@@ -6,7 +6,7 @@ workflow and defines its default output(s).
 workdir: workflow.current_basedir
 
 # Use default configuration values. Override with Snakemake's --configfile/--config options.
-configfile: "defaults/config.yaml"
+configfile: "config.yaml"
 
 # Validate 'builds'
 from textwrap import dedent
@@ -33,7 +33,7 @@ wildcard_constraints:
 
 # This is the default rule that Snakemake will run when there are no specified targets.
 # The default output of the phylogenetic workflow is usually the final
-# Nexstrain dataset(s) or Auspice JSON(s) that are output from `rules/export.smk`
+# Nexstrain dataset(s) or Auspice JSON(s) that are output from `../rules/export.smk`
 # See Nextstrain docs on expected naming conventions of dataset files
 # https://docs.nextstrain.org/page/reference/data-formats.html
 rule all:
@@ -52,11 +52,11 @@ rule all:
 # If there are build specific customizations, they should be added with the
 # custom_rules imported below to ensure that the core workflow is not complicated
 # by build specific rules.
-include: "rules/config.smk"
-include: "rules/prepare_sequences.smk"
-include: "rules/construct_phylogeny.smk"
-include: "rules/annotate_phylogeny.smk"
-include: "rules/export.smk"
+include: "../rules/config.smk"
+include: "../rules/prepare_sequences.smk"
+include: "../rules/construct_phylogeny.smk"
+include: "../rules/annotate_phylogeny.smk"
+include: "../rules/export.smk"
 
 # Allow users to import custom rules provided via the config.
 # This allows users to run custom rules that can extend or override the workflow.
