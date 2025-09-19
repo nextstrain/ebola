@@ -16,7 +16,6 @@ build_params:
 
     files:
       reference: defaults/west-africa-2014/ebola_outgroup.gb
-      colors: defaults/colors.tsv
       lat_longs: defaults/lat_longs.tsv
       auspice_config: defaults/west-africa-2014/auspice_config.json
       description: defaults/west-africa-2014/description.md
