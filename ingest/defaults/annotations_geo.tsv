@@ -76,12 +76,16 @@ PP_000LNAK	region	Africa
 PP_000MC45	country	Sierra Leone
 PP_000MC45	region	Africa
 
+
 # -------- Temporary -----------
-# Change the nextclade outbreak call for certain (newly uploaded) strains
+# Add outbreak calls for Ebov-2014 (Boende 2014) which isn't being called by the latest nextclade dataset
 # This should be removed once the Nextclade dataset has been updated.
 # We do this here because `defaults/annotations.tsv` is applied _before_ Nextclade runs
-# See <https://github.com/nextstrain/nextclade_data/pull/184#issuecomment-3305094552>
-PP_003V5MS	outbreak	Ebov-2022
-PP_003V5NQ	outbreak	Ebov-2022
-PP_003V5PN	outbreak	Ebov-2022
-PP_003V5QL	outbreak	Ebov-2022
+PP_000NSAB	outbreak	Ebov-2014
+PP_000NSB9	outbreak	Ebov-2014
+PP_000LMLZ	outbreak	Ebov-2014
+PP_000NS8F	outbreak	Ebov-2014
+PP_000LN4X	outbreak	Ebov-2014
+PP_000NS9D	outbreak	Ebov-2014
+PP_000M5MB	outbreak	Ebov-2014
+PP_000LN6T	outbreak	Ebov-2014
