@@ -70,7 +70,7 @@
     "restrictedUntil"
   ],
   "display_defaults": {
-    "color_by": "country",
+    "color_by": "year",
     "geo_resolution": "country",
     "stream_label": "outbreak",
     "tip_label": "strain",
