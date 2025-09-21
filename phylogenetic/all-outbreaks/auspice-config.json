@@ -15,8 +15,18 @@
       "title": "Genotype",
       "type": "categorical"
     },
-    {"key": "outbreak", "title": "Outbreak (Nextclade name)", "type": "categorical", "scale": [["Ebov-1976", "#511EA8"], ["Ebov-1994", "#4236C1"], ["Ebov-1995", "#3F55CE"], ["Ebov-1996a", "#4273CE"], ["Ebov-1996b", "#4A8CC2"], ["Ebov-2001a", "#569FAF"], ["Ebov-2003", "#64AD98"], ["Ebov-2007", "#76B680"], ["Ebov-2013", "#8BBB6A"], ["Ebov-2014", "#A1BE58"], ["Ebov-2017", "#B7BC4B"], ["Ebov-2018a", "#CCB742"], ["Ebov-2018b", "#DCAB3C"], ["Ebov-2020", "#E59638"], ["Ebov-2013/r2021", "#E67932"], ["Ebov-2022", "#E1552B"], ["Ebov-2025", "#DC2F24"]]},
-    {"key": "outbreak_geo", "title": "Outbreak (Geographic name)", "type": "categorical", "scale": [["Yambuku 1976", "#511EA8"], ["Gabon 1994", "#4236C1"], ["Kikwit 1995", "#3F55CE"], ["Gabon 1996 A", "#4273CE"], ["Gabon 1996 B", "#4A8CC2"], ["Gabon 2001", "#569FAF"], ["Kelle 2003", "#64AD98"], ["Luebo 2007", "#76B680"], ["West Africa 2013", "#8BBB6A"], ["Boende 2014", "#A1BE58"], ["Likati 2017", "#B7BC4B"], ["Tumba 2018", "#CCB742"], ["Nord-Kivu 2018", "#DCAB3C"], ["Mbandaka 2020", "#E59638"], ["Mbandaka 2022", "#E1552B"], ["Bulape 2025", "#DC2F24"]]},
+    {
+      "key": "outbreak",
+      "title": "Outbreak (Nextclade name)",
+      "type": "categorical",
+      "scale": [["Ebov-1976", "#511EA8"], ["Ebov-1994", "#4531BC"], ["Ebov-1995", "#3F48C9"], ["Ebov-1996b", "#3F61D0"], ["Ebov-1996a", "#4379CD"], ["Ebov-2001a", "#4A8CC2"], ["Ebov-2003", "#539CB4"], ["Ebov-2007", "#5EA9A2"], ["Ebov-2013", "#6BB18E"], ["Ebov-2014", "#7AB77B"], ["Ebov-2017", "#8BBB6A"], ["Ebov-2018b", "#9CBE5B"], ["Ebov-2018a", "#AFBD4F"], ["Ebov-2018a/r2020", "#C0BA47"], ["Ebov-2020", "#CFB541"], ["Ebov-2013/r2021", "#DCAB3C"], ["Ebov-2018b/r2021b", "#E39B39"], ["Ebov-2018b/r2021a", "#E68534"], ["Ebov-2018b/r2022", "#E56B2F"], ["Ebov-2022", "#E04D29"], ["Ebov-2025", "#DC2F24"]]
+    },
+    {
+      "key": "outbreak_geo",
+      "title": "Outbreak (Geographic name)",
+      "type": "categorical",
+      "scale": [["Yambuku 1976", "#511EA8"], ["Gabon 1994", "#4138C3"], ["Kikwit 1995", "#3E59CF"], ["Gabon 1996 A", "#4379CD"], ["Gabon 1996 B", "#4D92BE"], ["Gabon 2001", "#5AA5A8"], ["Kelle 2003", "#6BB18E"], ["Luebo 2007", "#7FB975"], ["West Africa 2013", "#96BD5F"], ["Boende 2014", "#AFBD4F"], ["Likati 2017", "#C5B945"], ["Nord-Kivu 2018", "#D8AE3E"], ["Tumba 2018", "#E39B39"], ["Mbandaka 2020", "#E67D33"], ["Mbandaka 2022", "#E2572B"], ["Bulape 2025", "#DC2F24"]]
+    },
     {
       "key": "year",
       "title": "Sampling Year",
