@@ -15,17 +15,17 @@ build_params:
       inference: joint
 
     files:
-      reference: defaults/west-africa-2014/ebola_outgroup.gb
-      lat_longs: defaults/lat_longs.tsv
-      auspice_config: defaults/west-africa-2014/auspice_config.json
-      description: defaults/west-africa-2014/description.md
+      reference: west-africa-2014/ebola_outgroup.gb
+      lat_longs: ../defaults/lat_longs.tsv
+      auspice_config: west-africa-2014/auspice_config.json
+      description: west-africa-2014/description.md
 
     filter:
       min_length: 18000
       exclude_where: is_lab_host=true
-      exclude: defaults/exclude.txt
-      include: defaults/west-africa-2014/include.txt
-      subsample_max_sequences: 1500
+      exclude: ../defaults/exclude.txt
+      include: west-africa-2014/include.txt
+      subsample_max_sequences: 30
       min_date: 2012
       max_date: 2017
       group_by:
@@ -44,4 +44,4 @@ build_params:
         - division
 
     export:
-      warning: defaults/west-africa-2014/description.md
+      warning: west-africa-2014/description.md
