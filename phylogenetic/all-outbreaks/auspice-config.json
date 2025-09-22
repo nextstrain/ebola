@@ -50,6 +50,11 @@
       ] 
     },
     {
+      "key": "host",
+      "title": "Host",
+      "type": "categorical"
+    },
+    {
       "key": "dataUseTerms",
       "title": "Data use terms",
       "type": "categorical"

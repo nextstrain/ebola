@@ -28,6 +28,19 @@ def update_strain(row):
     else:
         return row['strain']
 
+
+def update_host(row):
+    """
+    Apply host using NCBI data if there's no PPX information    
+    (As of 2025-09-22 no host information is in PPX)
+    """
+    if pd.notna(row['host']):
+        return row['host']
+    if pd.notna(row['host_ncbi']) and row['host_ncbi'].strip():
+        return row['host_ncbi'].strip()
+    return ''
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--metadata-ppx", required=True, help="PPX metadata TSV file")
@@ -48,6 +61,9 @@ if __name__ == "__main__":
 
     # Apply strain preference hierarchy for rows that have a match
     merged['strain'] = merged.apply(update_strain, axis=1)
+
+    # Apply host preference hierarchy for rows that have a match
+    merged['host'] = merged.apply(update_host, axis=1)
 
     # Remove all ncbi columns from the merge unless they're in `--add-fields`, in which case keep them!
     if len(args.add_fields):

@@ -122,6 +122,7 @@ rule parse_genbank_to_ndjson:
                 accession: .record.accessions[0],
                 strain:    .record.strain[0],
                 isolate:   .record.isolate[0],
+                host:      .record.host[0],
                 title:     .record.references[0].title,
                 note:      .record.note[0],
               }}

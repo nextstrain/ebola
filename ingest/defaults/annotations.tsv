@@ -19,3 +19,5 @@ PP_000MQMS	is_lab_host	True
 PP_000MMZ5	is_lab_host	True
 PP_000N0GR	is_lab_host	True
 
+# host 'Homo sapiens; F; 65Y' in the INSDC record (KR867676)
+PP_000M5Q5	host	Homo sapiens
