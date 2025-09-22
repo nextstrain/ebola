@@ -77,6 +77,108 @@ PP_000MC45	country	Sierra Leone
 PP_000MC45	region	Africa
 
 
+# 1976 outbreak was entirely in Northen Zaire (DRC)
+# From WHO bulletin "Ebola haemorrhagic fever in Zaire, 1976" <https://pmc.ncbi.nlm.nih.gov/articles/PMC2395567/>
+# "Between 1 September and 24 October 1976, 318 cases of acute viral haemorrhagic fever occurred in northern Zaire." 
+# "most of the cases were recorded within a radius of 70 km of Yambuku, although a few patients sought medical attention in Bumba, Abumombazi, and the capital city of Kinshasa, where individual secondary and tertiary cases occurred."
+# These strains have no geographic information, but genetically they're from the 1976 outbreak.
+# Many don't have strain names. Where they do it's often "Mayinga" or "Yambuku-Mayinga"
+# (Mayinga was the nurse incorrectly ID'd as the index, and the virus has been called "strain Mayinga", "variant Mayinga" or "EBOV/May")
+# (Yambuku is the index village in Mongala Province)
+PP_000LAXN	region	Africa
+PP_000LAXN	country	Democratic Republic of the Congo
+PP_000LAYL	region	Africa
+PP_000LAYL	country	Democratic Republic of the Congo
+PP_000LAZJ	region	Africa
+PP_000LAZJ	country	Democratic Republic of the Congo
+PP_000LB72	region	Africa
+PP_000LB72	country	Democratic Republic of the Congo
+PP_000LCCR	region	Africa
+PP_000LCCR	country	Democratic Republic of the Congo
+PP_000LD38	region	Africa
+PP_000LD38	country	Democratic Republic of the Congo
+PP_000LD54	region	Africa
+PP_000LD54	country	Democratic Republic of the Congo
+PP_000LD62	region	Africa
+PP_000LD62	country	Democratic Republic of the Congo
+PP_000LD70	region	Africa
+PP_000LD70	country	Democratic Republic of the Congo
+PP_000LD8Y	region	Africa
+PP_000LD8Y	country	Democratic Republic of the Congo
+PP_000LD9W	region	Africa
+PP_000LD9W	country	Democratic Republic of the Congo
+PP_000LDBS	region	Africa
+PP_000LDBS	country	Democratic Republic of the Congo
+PP_000LDCQ	region	Africa
+PP_000LDCQ	country	Democratic Republic of the Congo
+PP_000LDDN	region	Africa
+PP_000LDDN	country	Democratic Republic of the Congo
+PP_000LDP1	region	Africa
+PP_000LDP1	country	Democratic Republic of the Congo
+PP_000LDTT	region	Africa
+PP_000LDTT	country	Democratic Republic of the Congo
+PP_000ME35	region	Africa
+PP_000ME35	country	Democratic Republic of the Congo
+PP_000ME43	region	Africa
+PP_000ME43	country	Democratic Republic of the Congo
+PP_000ME51	region	Africa
+PP_000ME51	country	Democratic Republic of the Congo
+PP_000ME6Z	region	Africa
+PP_000ME6Z	country	Democratic Republic of the Congo
+PP_000ME7X	region	Africa
+PP_000ME7X	country	Democratic Republic of the Congo
+PP_000ME8V	region	Africa
+PP_000ME8V	country	Democratic Republic of the Congo
+PP_000LERW	region	Africa
+PP_000LERW	country	Democratic Republic of the Congo
+PP_000NF7U	region	Africa
+PP_000NF7U	country	Democratic Republic of the Congo
+PP_000NJBH	region	Africa
+PP_000NJBH	country	Democratic Republic of the Congo
+PP_000PGZ6	region	Africa
+PP_000PGZ6	country	Democratic Republic of the Congo
+PP_000PHH3	region	Africa
+PP_000PHH3	country	Democratic Republic of the Congo
+PP_000PHJ1	region	Africa
+PP_000PHJ1	country	Democratic Republic of the Congo
+PP_000PHSK	region	Africa
+PP_000PHSK	country	Democratic Republic of the Congo
+PP_000PHUF	region	Africa
+PP_000PHUF	country	Democratic Republic of the Congo
+PP_000PHVD	region	Africa
+PP_000PHVD	country	Democratic Republic of the Congo
+PP_000PHWB	region	Africa
+PP_000PHWB	country	Democratic Republic of the Congo
+PP_000PJ3X	region	Africa
+PP_000PJ3X	country	Democratic Republic of the Congo
+PP_000PJ4V	region	Africa
+PP_000PJ4V	country	Democratic Republic of the Congo
+PP_000PJ5T	region	Africa
+PP_000PJ5T	country	Democratic Republic of the Congo
+PP_000PJ6R	region	Africa
+PP_000PJ6R	country	Democratic Republic of the Congo
+PP_000PJ7P	region	Africa
+PP_000PJ7P	country	Democratic Republic of the Congo
+
+# These strains are missing geographic info, but are genetically from the 1995 Kikwit outbreak
+# I'm unsure whether all cases were confined to Kikwit, <https://pubmed.ncbi.nlm.nih.gov/9988168/> may have more information
+PP_000LB80	region	Africa
+PP_000LB80	country	Democratic Republic of the Congo
+PP_000MBZF	region	Africa
+PP_000MBZF	country	Democratic Republic of the Congo
+PP_000MC0D	region	Africa
+PP_000MC0D	country	Democratic Republic of the Congo
+
+# The following strains are missing all geographic information, but are all genetically from the West-African 2013- outbreak
+# and have informative strain names. Note: The dates are are all XXXX-XX-XX and have been updated in annotations.tsv
+# Ebola virus/H.sapiens-rec/LBR/2014/Makona-L2014
+PP_000LE29	region	Africa
+PP_000LE29	country	Liberia
+# NML/BALB/c-lab/GIN/2014/Makona-Gueckedou-C07-rgMA
+PP_000NU8D	region	Africa
+PP_000NU8D	country	Guinea
+
+
 # -------- Temporary -----------
 # Add outbreak calls for Ebov-2014 (Boende 2014) which isn't being called by the latest nextclade dataset
 # This should be removed once the Nextclade dataset has been updated.

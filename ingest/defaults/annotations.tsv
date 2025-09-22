@@ -5,6 +5,19 @@
 # Lines starting with '#' are treated as comments
 # Any '#' after the field value are treated as comments.
 
-# Russian sample from <https://www.ncbi.nlm.nih.gov/nuccore/EU224440.2>
-# title: Genetic factors of Ebola virus virulence in guinea pigs
-PP_000LD2A	is_lab_host	True
+# The following strains are missing temporal information, but are all genetically from the West-African 2013- outbreak
+# and have informative strain names. Note: Geographic info updated in annotations_geo.tsv
+# Ebola virus/H.sapiens-rec/LBR/2014/Makona-L2014
+PP_000LE29	date	2014-XX-XX
+# NML/BALB/c-lab/GIN/2014/Makona-Gueckedou-C07-rgMA
+PP_000NU8D	date	2014-XX-XX
+
+# These 3 samples are genetically from the Kikwit 1995 outbreak but are all collected in
+# 2012 and from Macaca mulatta (rhesus macaque). Since they're sequenced by USAMRIID
+# my assumption is that they're lab experiments 
+PP_000MQMS	is_lab_host	True
+PP_000MMZ5	is_lab_host	True
+PP_000N0GR	is_lab_host	True
+
+# host 'Homo sapiens; F; 65Y' in the INSDC record (KR867676)
+PP_000M5Q5	host	Homo sapiens

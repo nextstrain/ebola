@@ -16,7 +16,7 @@ rule filter:
     input:
         alignment = lambda w: path_or_url(inputs['alignment']),
         metadata = lambda w: path_or_url(inputs['metadata']),
-        exclude = "defaults/exclude.txt",
+        exclude = "all-outbreaks/exclude.txt",
         include = "all-outbreaks/include.txt",
     output:
         sequences = "results/all-outbreaks/filtered.fasta",

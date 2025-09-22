@@ -50,6 +50,16 @@
       ] 
     },
     {
+      "key": "host",
+      "title": "Host",
+      "type": "categorical"
+    },
+    {
+      "key": "date_submitted",
+      "title": "Date Submitted (PPX)",
+      "type": "temporal"
+    },
+    {
       "key": "dataUseTerms",
       "title": "Data use terms",
       "type": "categorical"
