@@ -102,23 +102,26 @@ rule curate_ncbi_entrez:
 
 # Note: augur merge can't be used because some ppx sequences don't have
 # insdcAccessionBase.
-rule spike_in_strain_from_ncbi:
+rule spike_in_ncbi_data:
     input:
         metadata_ppx="data/metadata_ppx.tsv",
         metadata_ncbi_entrez="data/metadata_ncbi_entrez.tsv",
     output:
         metadata="data/metadata_merged_ncbi.tsv",
+    params:
+        fields=["title", "note"]
     benchmark:
-        "benchmarks/spike_in_strain_from_ncbi.txt"
+        "benchmarks/spike_in_ncbi_data.txt"
     log:
-        "logs/spike_in_strain_from_ncbi.txt"
+        "logs/spike_in_ncbi_data.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
 
-        scripts/spike_in_strain_from_ncbi.py \
+        scripts/spike_in_ncbi_data.py \
             --metadata-ppx {input.metadata_ppx:q} \
             --metadata-ncbi-entrez {input.metadata_ncbi_entrez:q} \
+            --add-fields {params.fields:q} \
             --output {output.metadata:q}
         """
 
@@ -214,9 +217,28 @@ rule extract_date_from_strain:
               --output-metadata {output.metadata:q}
         """
 
+rule lab_hosts:
+    """Mark strains as is_lab_host=True via metadata matching"""
+    input:
+        metadata = "data/metadata_date_improvements.tsv",
+    output:
+        metadata="data/metadata_lab_host_improvements.tsv",
+    benchmark:
+        "benchmarks/lab_hosts.txt"
+    log:
+        "logs/lab_hosts.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        scripts/lab_hosts.py \
+            --metadata {input.metadata:q} \
+            --output {output.metadata:q}
+        """
+
 rule curate_geography:
     input:
-        metadata="data/metadata_date_improvements.tsv",
+        metadata="data/metadata_lab_host_improvements.tsv",
         geolocation_rules=config["curate_geography"]["local_geolocation_rules"],
         annotations=config["curate_geography"]["annotations"],
     output:

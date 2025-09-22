@@ -28,35 +28,31 @@ def update_strain(row):
     else:
         return row['strain']
 
-def spike_in_strain_from_ncbi(metadata_ppx, metadata_ncbi_entrez, output_file):
-    """
-    Merge PPX and NCBI metadata, applying strain preference hierarchy.
-    """
-    ppx = pd.read_csv(metadata_ppx, sep='\t')
-    ncbi = pd.read_csv(metadata_ncbi_entrez, sep='\t')
-
-    # Keep all ppx rows, including those with empty insdcAccessionBase
-    merged = ppx.merge(ncbi, left_on='insdcAccessionBase', right_on='accession',
-                       how='left', suffixes=('', '_ncbi'))
-
-    # Apply strain preference hierarchy for rows that have a match
-    merged['strain'] = merged.apply(update_strain, axis=1)
-
-    # Remove temporary columns from the merge
-    merged = merged.drop(columns=['strain_ncbi', 'isolate', 'accession_ncbi'])
-
-    merged.to_csv(output_file, sep='\t', index=False)
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--metadata-ppx", required=True, help="PPX metadata TSV file")
     parser.add_argument("--metadata-ncbi-entrez", required=True, help="NCBI Entrez metadata TSV file")
     parser.add_argument("--output", required=True, help="Output merged metadata TSV file")
+    parser.add_argument("--add-fields", required=False, nargs="+", help="Columns in the NCBI table to add to the output")
 
     args = parser.parse_args()
 
-    spike_in_strain_from_ncbi(
-        args.metadata_ppx,
-        args.metadata_ncbi_entrez,
-        args.output
-    )
+    ppx = pd.read_csv(args.metadata_ppx, sep='\t')
+    ncbi = pd.read_csv(args.metadata_ncbi_entrez, sep='\t')
+
+    # rename NCBI columns so we can track attribution
+    ncbi.columns = ncbi.columns + '_ncbi'
+
+    # Keep all ppx rows, including those with empty insdcAccessionBase
+    merged = ppx.merge(ncbi, left_on='insdcAccessionBase', right_on='accession_ncbi', how='left', suffixes=('', ''))
+
+    # Apply strain preference hierarchy for rows that have a match
+    merged['strain'] = merged.apply(update_strain, axis=1)
+
+    # Remove all ncbi columns from the merge unless they're in `--add-fields`, in which case keep them!
+    if len(args.add_fields):
+        merged = merged.rename(columns={x+"_ncbi":x for x in args.add_fields})
+    merged = merged.drop(columns=[x for x in merged.columns if x.endswith('_ncbi')])
+
+    merged.to_csv(args.output, sep='\t', index=False)
+
