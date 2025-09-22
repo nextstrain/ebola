@@ -5,3 +5,10 @@
 # Lines starting with '#' are treated as comments
 # Any '#' after the field value are treated as comments.
 
+# The following strains are missing temporal information, but are all genetically from the West-African 2013- outbreak
+# and have informative strain names. Note: Geographic info updated in annotations_geo.tsv
+# Ebola virus/H.sapiens-rec/LBR/2014/Makona-L2014
+PP_000LE29	date	2014-XX-XX
+# NML/BALB/c-lab/GIN/2014/Makona-Gueckedou-C07-rgMA
+PP_000NU8D	date	2014-XX-XX
+
