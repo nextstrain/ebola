@@ -12,3 +12,10 @@ PP_000LE29	date	2014-XX-XX
 # NML/BALB/c-lab/GIN/2014/Makona-Gueckedou-C07-rgMA
 PP_000NU8D	date	2014-XX-XX
 
+# These 3 samples are genetically from the Kikwit 1995 outbreak but are all collected in
+# 2012 and from Macaca mulatta (rhesus macaque). Since they're sequenced by USAMRIID
+# my assumption is that they're lab experiments 
+PP_000MQMS	is_lab_host	True
+PP_000MMZ5	is_lab_host	True
+PP_000N0GR	is_lab_host	True
+
