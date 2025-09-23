@@ -9,7 +9,7 @@
     "gapAlignmentSide": "left"
   },
   "attributes": {
-    "name": "Ebolavirus",
+    "name": "Ebola virus",
     "reference accession": "NC_002549.1",
     "reference name": "COD/1976/Yambuku-Mayinga"
   },
@@ -70,6 +70,7 @@
   "schemaVersion": "3.0.0",
   "shortcuts": [
     "ebola",
-    "ebola/zaire"
+    "nextstrain/ebola",
+    "nextstrain/ebola/zaire"
   ]
 }

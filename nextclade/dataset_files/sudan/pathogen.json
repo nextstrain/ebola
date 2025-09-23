@@ -69,5 +69,6 @@
   },
   "schemaVersion": "3.0.0",
   "shortcuts": [
+    "nextstrain/ebola/sudan"
   ]
 }
