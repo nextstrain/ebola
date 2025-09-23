@@ -1,4 +1,4 @@
-# Nextclade dataset for Ebolavirus (formerly Zaire Ebolavirus)
+# Nextclade dataset for Ebola virus (formerly Zaire Ebola virus)
 
 | Key                    | Value                                                                           |
 | ---------------------- | ------------------------------------------------------------------------------- |
@@ -7,8 +7,8 @@
 | nextclade dataset path | nextstrain/orthoebolavirus/ebov                                                          |
 | annotation             | [NC_002549.1](https://www.ncbi.nlm.nih.gov/nuccore/NC_002549)                   |
 
-This dataset allows users to assign Ebolavirus (EBOV) sequences to reportknown EBOV outbreaks for which high-quality genomes are available.
-Ebolavirus was formerly known as Ebolavirus Zaire, but has been [renamed as Ebolavirus (EBOV) in the genus Orthoebolavirus by ICTV](https://ictv.global/report/chapter/filoviridae/filoviridae/orthoebolavirus).
+This dataset allows users to assign Ebola virus (EBOV) sequences to known EBOV outbreaks for which high-quality genomes are available.
+Ebola virus was formerly known as Ebola virus Zaire, but has been [renamed as Ebola virus (EBOV) in the genus Orthoebolavirus by ICTV](https://ictv.global/report/chapter/filoviridae/filoviridae/orthoebolavirus).
 
 
 ## Data provenance and Acknowledgements
