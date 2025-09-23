@@ -49,7 +49,8 @@ rule filter:
     input:
         metadata = "data/{build}/metadata.tsv",
         sequences = "data/{build}/sequences.fasta",
-        include = "results/{build}/include.txt"
+        include = "results/{build}/include.txt",
+        exclude = "defaults/exclude_{build}.txt"
     output:
         filtered_sequences = "results/{build}/filtered_sequences.fasta",
         filtered_metadata = "results/{build}/filtered_metadata.tsv"
@@ -60,6 +61,7 @@ rule filter:
         --group-by year \
         --include {input.include} \
         --min-length 16000 \
+        --exclude {input.exclude} \
         --exclude-where 'region!=Africa' \
         --metadata-id accession \
         --sequences-per-group 20 \
