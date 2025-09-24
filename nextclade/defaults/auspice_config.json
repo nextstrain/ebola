@@ -1,0 +1,63 @@
+{
+  "title": "Nextclade dataset for analysis of Ebola virus genomes",
+  "maintainers": [
+    {"name": "Eddy Lusamaki,  Institut National de Recherche Biomédicale", "url": "https://inrb.net/"},
+    {"name": "Nextstrain", "url": "http://nextstrain.org"}
+  ],
+  "data_provenance": [
+    {
+      "name": "GenBank",
+      "url": "https://www.ncbi.nlm.nih.gov/genbank/"
+    },
+    {
+      "name": "Pathoplexus",
+      "url": "https://pathoplexus.org"
+    }
+  ],
+  "build_url": "https://github.com/nextstrain/ebola",
+  "colorings": [
+    {
+      "key": "gt",
+      "title": "Genotype",
+      "type": "categorical"
+    },
+    {
+      "key": "author",
+      "title": "Author",
+      "type":"categorical"
+    },
+    {
+      "key": "country",
+      "title": "Country",
+      "type": "categorical"
+    },
+    {
+      "key": "division",
+      "title": "Division",
+      "type": "categorical"
+    },
+    {
+      "key": "dataUseTerms",
+      "title": "Data use terms",
+      "type": "categorical"
+    }
+  ],
+  "geo_resolutions": [
+    "country",
+    "division"
+  ],
+  "display_defaults": {
+    "color_by": "clade_membership",
+    "geo_resolution": "country"
+  },
+  "filters": [
+    "country",
+    "division",
+    "author"
+  ],
+  "metadata_columns": [
+    "PPX_accession",
+    "INSDC_accession",
+    "restrictedUntil"
+  ]
+}

@@ -1,0 +1,74 @@
+clade	gene	site	alt
+Ebov-1976	L	79	V
+Ebov-1976	L	130	E
+Ebov-1976	L	1383	S
+
+Ebov-1994	L	614	A
+Ebov-1994	L	944	G
+Ebov-1994	NP	729	D
+
+Ebov-1995	L	1060	R
+Ebov-1995	L	1662	R
+
+Ebov-1996a	L	614	A
+Ebov-1996a	L	944	G
+Ebov-1996a	L	139	A
+
+Ebov-1996b	L	614	A
+Ebov-1996b	L	944	G
+Ebov-1996b	L	1103	T
+
+Ebov-2001a	L	269	D
+Ebov-2001a	L	345	D
+Ebov-2001a	L	874	H
+
+Ebov-2003	L	1433	T
+Ebov-2003	L	1832	A
+
+Ebov-2007	L	202	S
+Ebov-2007	L	1685	G
+
+Ebov-2013	L	197	L
+Ebov-2013	L	215	T
+Ebov-2013	L	337	I
+
+Ebov-2014	L	122	D
+Ebov-2014	VP35	40	I
+
+Ebov-2017	L	1648	K
+Ebov-2017	L	1702	A
+
+Ebov-2018a	L	1704	T
+Ebov-2018a	L	1745	Y
+
+Ebov-2018b	L	1657	G
+Ebov-2018b	L	1753	S
+
+Ebov-2020	L	1517	V
+Ebov-2020	L	1610	P
+
+Ebov-2018a/r2020	clade	Ebov-2018a
+Ebov-2018a/r2020	L	287	F
+Ebov-2018a/r2020	L	507	L
+
+Ebov-2013/r2021	L	888	S
+Ebov-2013/r2021	L	1240	T
+
+Ebov-2018b/r2021a	clade	Ebov-2018b
+Ebov-2018b/r2021a	NP	579	A
+Ebov-2018b/r2021a	L	229	I
+
+Ebov-2018b/r2021b	clade	Ebov-2018b
+Ebov-2018b/r2021b	GP	248	L
+Ebov-2018b/r2021b	VP35	61	K
+
+Ebov-2022	L	1718	Y
+Ebov-2022	VP35	20	V
+
+Ebov-2018b/r2022	clade	Ebov-2018b
+Ebov-2018b/r2022	NP	623	G
+Ebov-2018b/r2022	L	1428	T
+
+Ebov-2025	L	479	G
+Ebov-2025	L	937	R
+
