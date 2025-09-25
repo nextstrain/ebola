@@ -13,18 +13,15 @@ inputs:
 
 builds:
   - drc-2025
-  # - west-africa-2014
+  - west-africa-2014
 
 build_params:
   drc-2025:
     ancestral:
       inference: joint
 
-    files:
-      reference: outbreak-specific/drc-2025/NC_002549.1.gb  # FIXME: use another reference?
-      lat_longs: defaults/lat_longs.tsv
-      auspice_config: outbreak-specific/drc-2025/auspice_config.json
-      description: outbreak-specific/drc-2025/description.md
+    align:
+      reference: outbreak-specific/drc-2025/NC_002549.1.gb # Yambuku_Mayinga_Reference
 
     filter:
       min_length: 18000
@@ -38,6 +35,7 @@ build_params:
       coalescent: skyline
       date_inference: marginal
 
+
     traits:
       columns:
         - country
@@ -46,16 +44,16 @@ build_params:
     export:
       warning: >-
         Work in progress.
+      lat_longs: defaults/lat_longs.tsv
+      auspice_config: outbreak-specific/drc-2025/auspice_config.json
+      description: outbreak-specific/drc-2025/description.md
 
   west-africa-2014:
     ancestral:
       inference: joint
 
-    files:
-      reference: outbreak-specific/west-africa-2014/ebola_outgroup.gb
-      lat_longs: defaults/lat_longs.tsv
-      auspice_config: outbreak-specific/west-africa-2014/auspice_config.json
-      description: outbreak-specific/west-africa-2014/description.md
+    align:
+      reference: outbreak-specific/west-africa-2014/ebola_outgroup.gb # Makona_Liberia_Reference
 
     filter:
       min_length: 18000
@@ -82,3 +80,6 @@ build_params:
 
     export:
       warning: outbreak-specific/west-africa-2014/description.md
+      lat_longs: defaults/lat_longs.tsv
+      auspice_config: outbreak-specific/west-africa-2014/auspice_config.json
+      description: outbreak-specific/west-africa-2014/description.md
