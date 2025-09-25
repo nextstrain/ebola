@@ -41,7 +41,7 @@ rule export:
         auspice_json = "auspice/ebola_{build}.json"
     params:
         id_column = config["id_column"],
-        warning = lambda w: conditional("--warning", config["build_params"][w.build].get("export", {}).get("warning")),
+        warning = conditional_config("--warning", "export", "warning"),
     benchmark:
         "benchmarks/{build}/export.txt"
     log:
