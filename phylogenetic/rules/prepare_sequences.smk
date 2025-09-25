@@ -32,8 +32,8 @@ rule filter:
     input:
         sequences = lambda w: path_or_url(config["inputs"][0]['sequences']),
         metadata = lambda w: path_or_url(config["inputs"][0]['metadata']),
-        exclude = lambda w: config["build_params"][w.build]["filter"]["exclude"],
-        include = lambda w: config["build_params"][w.build]["filter"]["include"],
+        exclude = config_path("filter", "exclude"),
+        include = config_path("filter", "include"),
     output:
         sequences = "results/{build}/filtered.fasta",
         metadata = "results/{build}/filtered.tsv",
@@ -81,7 +81,7 @@ rule align:
     """
     input:
         sequences = "results/{build}/filtered.fasta",
-        reference = lambda w: config["build_params"][w.build]["files"]["reference"],
+        reference = config_path("files", "reference"),
     output:
         alignment = "results/{build}/aligned.fasta"
     benchmark:
