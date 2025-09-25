@@ -2,8 +2,6 @@
 This is the main phylogenetic Snakefile that orchestrates the full phylogenetic
 workflow and defines its default output(s).
 """
-# The workflow filepaths are written relative to this Snakefile's base directory
-workdir: workflow.current_basedir
 
 # Use default configuration values. Override with Snakemake's --configfile/--config options.
 configfile: "config.yaml"
