@@ -39,3 +39,24 @@ def conditional(option, argument):
     if isinstance(argument, int) or isinstance(argument, float) or isinstance(argument, str):
         return [option, argument]
     raise WorkflowError(f"Workflow function conditional() received an argument value of unexpected type: {type(argument).__name__}")
+
+include: "../../shared/vendored/snakemake/config.smk"
+
+# Modify the vendored `resolve_config_path` to suite the config style of this repo
+def config_path(*rule_parts):
+    def _resolve(wildcards):
+        try:
+            config_block = config['build_params'][wildcards.build]
+        except KeyError:
+            raise WorkflowError(f"Failed to retrieve the config block for {wildcards.build=} when resolving the config path for {path=}")
+
+        # now retrieve the actual value from nested dicts
+        try:
+            config_lookup = config_block
+            for i,rule_key in enumerate(rule_parts):
+                config_lookup = config_lookup[rule_key]
+        except KeyError:
+            raise WorkflowError(f"Config block for {wildcards.build=} missing entry for " + ''.join(['["'+rule_parts[j]+'"]' for j in range(0,i+1)]))
+
+        return resolve_config_path(config_lookup, PHYLO_DIR)
+    return _resolve
