@@ -3,8 +3,8 @@ This is the main phylogenetic Snakefile that orchestrates the full phylogenetic
 workflow and defines its default output(s).
 """
 
-# Use default configuration values. Override with Snakemake's --configfile/--config options.
-configfile: "config.yaml"
+# Immediately include the `config.smk` ruleset to set the `config` structure as soon as possible
+include: "../rules/config.smk"
 
 # Validate 'builds'
 from textwrap import dedent
@@ -50,7 +50,6 @@ rule all:
 # If there are build specific customizations, they should be added with the
 # custom_rules imported below to ensure that the core workflow is not complicated
 # by build specific rules.
-include: "../rules/config.smk"
 include: "../rules/prepare_sequences.smk"
 include: "../rules/construct_phylogeny.smk"
 include: "../rules/annotate_phylogeny.smk"

@@ -1,3 +1,19 @@
+
+# Load the default config YAML which must exist as a sister-file to the Snakefile
+if not os.path.exists(os.path.join(workflow.basedir, 'config.yaml')):
+    raise InvalidConfigError("No default config - this is the result of an error/bug in the underlying workflow.")
+configfile: os.path.join(workflow.basedir, 'config.yaml')
+
+# Merge in a config.yaml file if it exists in the current working directory
+# (most often the directory where you ran `snakemake` from, but can be changed via `--directory`)
+if os.path.exists("config.yaml"):
+    configfile: "config.yaml"
+
+# NOTE: Any extra configuration (--configfile, --config) will have been merged into the `config` structure
+# such that the precedence of "configfile: < --configfile < --config" is maintained. This happens within
+# `configfile` directives.
+
+
 def conditional(option, argument):
     """Used for config-defined arguments whose presence necessitates a command-line option
     (e.g. --foo) prepended and whose absence should result in no option/arguments in the CLI command.
