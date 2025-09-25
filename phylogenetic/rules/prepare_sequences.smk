@@ -81,7 +81,7 @@ rule align:
     """
     input:
         sequences = "results/{build}/filtered.fasta",
-        reference = config_path("files", "reference"),
+        reference = config_path("align", "reference"),
     output:
         alignment = "results/{build}/aligned.fasta"
     benchmark:

@@ -34,9 +34,9 @@ rule export:
         traits = "results/{build}/traits.json",
         nt_muts = "results/{build}/nt_muts.json",
         aa_muts = "results/{build}/aa_muts.json",
-        lat_longs = config_path("files", "lat_longs"),
-        auspice_config = config_path("files", "auspice_config"),
-        description = config_path("files", "description"),
+        lat_longs = config_path("export", "lat_longs"),
+        auspice_config = config_path("export", "auspice_config"),
+        description = config_path("export", "description"),
     output:
         auspice_json = "auspice/ebola_{build}.json"
     params:
