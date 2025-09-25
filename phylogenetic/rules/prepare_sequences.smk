@@ -30,8 +30,8 @@ rule filter:
       - excluding strains in {input.exclude}
     """
     input:
-        sequences = "../../ingest/results/sequences.fasta",
-        metadata = "../../ingest/results/metadata.tsv",
+        sequences = lambda w: path_or_url(config["inputs"][0]['sequences']),
+        metadata = lambda w: path_or_url(config["inputs"][0]['metadata']),
         exclude = lambda w: config["build_params"][w.build]["filter"]["exclude"],
         include = lambda w: config["build_params"][w.build]["filter"]["include"],
     output:

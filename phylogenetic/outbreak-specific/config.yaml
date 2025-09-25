@@ -6,6 +6,11 @@
 
 id_column: "accession"
 
+inputs:
+  - name: local_ingest
+    metadata: ../ingest/results/metadata.tsv
+    sequences: ../ingest/results/sequences.fasta
+
 builds:
   - drc-2025
   # - west-africa-2014

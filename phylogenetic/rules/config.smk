@@ -14,6 +14,14 @@ if os.path.exists("config.yaml"):
 # `configfile` directives.
 
 
+# ------------------------------------ TEMPORARY ------------------------------------
+# We don't yet support multiple inputs, but we use the config interface which will support them
+# so check here we aren't trying to use multiple inputs
+if 'additional_inputs' in config or len(config['inputs'])!=1:
+    print("This workflow is not yet set up for multiple inputs.")
+    exit(1)
+
+
 def conditional(option, argument):
     """Used for config-defined arguments whose presence necessitates a command-line option
     (e.g. --foo) prepended and whose absence should result in no option/arguments in the CLI command.
