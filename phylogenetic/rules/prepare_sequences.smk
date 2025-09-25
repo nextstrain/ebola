@@ -40,13 +40,13 @@ rule filter:
         log = "results/{build}/filter-log.txt",
     params:
         id_column = config["id_column"],
-        min_length = lambda w: conditional("--min-length", config["build_params"][w.build]["filter"].get("min_length")),
-        min_date = lambda w: conditional("--min-date", config["build_params"][w.build]["filter"].get("min_date")),
-        max_date = lambda w: conditional("--max-date", config["build_params"][w.build]["filter"].get("max_date")),
-        exclude_ambiguous_dates_by = lambda w: conditional("--exclude-ambiguous-dates-by", config["build_params"][w.build]["filter"].get("exclude_ambiguous_dates_by")),
-        exclude_where = lambda w: conditional("--exclude-where", config["build_params"][w.build]["filter"].get("exclude_where")),
-        group_by = lambda w: conditional("--group-by", config["build_params"][w.build]["filter"].get("group_by")),
-        subsample_max_sequences = lambda w: conditional("--subsample-max-sequences", config["build_params"][w.build]["filter"].get("subsample_max_sequences")),
+        min_length = conditional("--min-length", "filter", "min_length"),
+        min_date = conditional("--min-date", "filter", "min_date"),
+        max_date = conditional("--max-date", "filter", "max_date"),
+        exclude_ambiguous_dates_by = conditional("--exclude-ambiguous-dates-by", "filter", "exclude_ambiguous_dates_by"),
+        exclude_where = conditional("--exclude-where", "filter", "exclude_where"),
+        group_by = conditional("--group-by", "filter", "group_by"),
+        subsample_max_sequences = conditional("--subsample-max-sequences", "filter", "subsample_max_sequences"),
     benchmark:
         "benchmarks/{build}/filter.txt"
     log:
