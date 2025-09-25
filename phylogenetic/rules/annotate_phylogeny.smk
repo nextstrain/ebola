@@ -60,7 +60,7 @@ rule translate:
     input:
         tree = "results/{build}/tree.nwk",
         node_data = "results/{build}/nt_muts.json",
-        reference = config_path("files", "reference"),
+        reference = config_path("translate", "reference"),
     output:
         node_data = "results/{build}/aa_muts.json"
     benchmark:
