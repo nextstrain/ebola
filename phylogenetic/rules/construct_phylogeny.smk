@@ -55,9 +55,12 @@ rule refine:
         tree = "results/{build}/tree.nwk",
         node_data = "results/{build}/branch_lengths.json"
     params:
-        coalescent = lambda w: config["build_params"][w.build]["refine"]["coalescent"],
-        date_inference = lambda w: config["build_params"][w.build]["refine"]["date_inference"],
-        timetree = lambda w: conditional("--timetree", config["build_params"][w.build]["refine"].get("timetree")),
+        coalescent = conditional_config("--coalescent", "refine", "coalescent"),
+        date_inference = conditional_config("--date-inference", "refine", "date_inference"),
+        confidence = conditional_config("--date-confidence", "refine", "confidence"),
+        timetree = conditional_config("--timetree", "refine", "timetree"),
+        root = conditional_config("--root", "refine", "root"),
+        remove_outgroup = conditional_config("--remove-outgroup", "refine", "remove_outgroup"),
         id_column = config["id_column"],
     benchmark:
         "benchmarks/{build}/refine.txt"
@@ -72,10 +75,12 @@ rule refine:
             --alignment {input.alignment:q} \
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.id_column:q} \
-            --output-tree {output.tree:q} \
-            --output-node-data {output.node_data:q} \
             {params.timetree:q} \
-            --coalescent {params.coalescent:q} \
-            --date-confidence \
-            --date-inference {params.date_inference:q}
+            {params.date_inference:q} \
+            {params.coalescent:q} \
+            {params.confidence:q} \
+            {params.root:q} \
+            {params.remove_outgroup:q} \
+            --output-tree {output.tree:q} \
+            --output-node-data {output.node_data:q}
         """
