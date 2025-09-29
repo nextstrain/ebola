@@ -21,7 +21,7 @@ build_params:
       inference: joint
 
     align:
-      reference: &Yambuku_Mayinga_Reference outbreak-specific/drc-2025/NC_002549.1.gb  # FIXME: use another reference?
+      reference: &Yambuku_Mayinga_Reference outbreak-specific/drc-2025/NC_002549.1.gb
 
     filter:
       min_length: 10000
