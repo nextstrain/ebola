@@ -32,8 +32,10 @@ rule filter:
     input:
         sequences = lambda w: path_or_url(config["inputs"][0]['sequences']),
         metadata = lambda w: path_or_url(config["inputs"][0]['metadata']),
-        exclude = config_path("filter", "exclude"),
-        include = config_path("filter", "include"),
+        # include/exclude are optional and the input values are handled as params
+        # (the `config_path` helper doesn't allow the config values to be optional)
+        exclude = lambda w: config["build_params"][w.build]["filter"].get("exclude", []),
+        include = lambda w: config["build_params"][w.build]["filter"].get("include", []),
     output:
         sequences = "results/{build}/filtered.fasta",
         metadata = "results/{build}/filtered.tsv",
@@ -47,6 +49,9 @@ rule filter:
         exclude_where = conditional_config("--exclude-where", "filter", "exclude_where"),
         group_by = conditional_config("--group-by", "filter", "group_by"),
         subsample_max_sequences = conditional_config("--subsample-max-sequences", "filter", "subsample_max_sequences"),
+        query = conditional_config("--query", "filter", "query"),
+        exclude =  lambda w, input: conditional_arg("--exclude", input.exclude),
+        include =  lambda w, input: conditional_arg("--include", input.include),
     benchmark:
         "benchmarks/{build}/filter.txt"
     log:
@@ -66,8 +71,9 @@ rule filter:
             {params.exclude_where:q} \
             {params.group_by:q} \
             {params.subsample_max_sequences:q} \
-            --include {input.include:q} \
-            --exclude {input.exclude:q} \
+            {params.query:q} \
+            {params.include:q} \
+            {params.exclude:q} \
             --output-sequences {output.sequences:q} \
             --output-metadata {output.metadata:q} \
             --output-log {output.log:q}

@@ -65,6 +65,8 @@ def conditional_arg(option, argument):
     if argument is True: # must come before `isinstance(argument, int)` as bool is a subclass of int
         return [option]
     if isinstance(argument, list):
+        if len(argument)==0:
+            return "" # empty list interpreted as no command line args (empty string)
         return [option, *argument]
     if isinstance(argument, int) or isinstance(argument, float) or isinstance(argument, str):
         return [option, argument]
