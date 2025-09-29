@@ -30,8 +30,8 @@ build_params:
 
     refine:
       timetree: false
-      coalescent: skyline
-      date_inference: marginal
+      root: PP_000PHH3 # Yambuku_Mayinga_Reference, force-included in include.txt
+      remove_outgroup: true
 
     translate:
       reference: *Yambuku_Mayinga_Reference
@@ -71,6 +71,7 @@ build_params:
 
     refine:
       timetree: true
+      confidence: true
       coalescent: skyline
       date_inference: marginal
 
