@@ -24,11 +24,9 @@ build_params:
       reference: outbreak-specific/drc-2025/NC_002549.1.gb # Yambuku_Mayinga_Reference
 
     filter:
-      min_length: 18000
-      exclude: defaults/exclude.txt
+      min_length: 10000
+      query: outbreak=="Ebov-2025"
       include: outbreak-specific/drc-2025/include.txt
-      min_date: "2025-08-01"
-      exclude_ambiguous_dates_by: month
 
     refine:
       timetree: false
@@ -58,11 +56,9 @@ build_params:
     filter:
       min_length: 18000
       exclude_where: is_lab_host=true
-      exclude: defaults/exclude.txt
-      include: outbreak-specific/west-africa-2014/include.txt
+      query: (outbreak=="Ebov-2013" | outbreak=="Ebov-2013/r2021")
       subsample_max_sequences: 30
-      min_date: 2012
-      max_date: 2017
+      include: outbreak-specific/west-africa-2014/include.txt
       group_by:
         - division
         - year
