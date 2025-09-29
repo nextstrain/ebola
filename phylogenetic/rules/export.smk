@@ -42,6 +42,7 @@ rule export:
     params:
         id_column = config["id_column"],
         warning = conditional_config("--warning", "export", "warning"),
+        colors = conditional_config("--colors", "export", "colors"),
     benchmark:
         "benchmarks/{build}/export.txt"
     log:
@@ -59,6 +60,7 @@ rule export:
             --auspice-config {input.auspice_config:q} \
             --description {input.description:q} \
             {params.warning:q} \
+            {params.colors:q} \
             --include-root-sequence-inline \
             --output {output.auspice_json:q}
         """
