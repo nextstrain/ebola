@@ -84,3 +84,4 @@ build_params:
       lat_longs: defaults/lat_longs.tsv
       auspice_config: outbreak-specific/west-africa-2014/auspice_config.json
       description: outbreak-specific/west-africa-2014/description.md
+      colors: outbreak-specific/west-africa-2014/colors.txt
