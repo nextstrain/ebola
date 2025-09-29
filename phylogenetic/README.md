@@ -26,6 +26,19 @@ The resulting datasets can be viewed in a web browser:
 nextstrain view phylogenetic/outbreak-specific
 ```
 
+There are currently two datasets configured, and each is a work in progress.
+
+#### Ebov-2013 / West-Africa 2014
+
+* The temporal analysis is wrong (root pushed back), which I think is due to the inclusion of relapse cases. We could try specifying a rate or explore ways to infer the rate based on a subset of samples within treetime. 
+* Missing colors & lat-longs. Some of this is misspelt geographical metadata to be fixed in ingest.
+* Alignment (mafft) takes a long time cf. nextclade alignment. We should compare the two approaches.
+
+#### Ebov-2025
+
+* Currently (2025-09-29) there are 4 available genomes. At this time [this virological post](https://virological.org/t/the-16th-ebola-virus-disease-outbreak-in-bulape-health-zone-kasai-democratic-republic-of-the-congo-a-new-spillover-event-from-an-unknown-reservoir-host/1003) is a better summary of the genomic situation.
+
+
 ### All-outbreaks
 
 This workflow subsamples genomes across outbreaks to present an overview of the known genomic history
