@@ -1,9 +1,5 @@
 
 
-# NOTE: The dataset name/address is currently hardcoded here and points to the ebola branch
-# (see https://github.com/nextstrain/nextclade_data/pull/184)
-# This URL is expected to break once that PR is merged / the branch is deleted. At that point we
-# should update the invocation and use config variables accordingly.
 rule get_nextclade_dataset:
     """Download Nextclade dataset"""
     output:
@@ -17,7 +13,6 @@ rule get_nextclade_dataset:
         exec &> >(tee {log:q})
 
         nextclade3 dataset get \
-            --server https://raw.githubusercontent.com/nextstrain/nextclade_data/refs/heads/ebola/data_output/ \
             --name nextstrain/ebola/zaire \
             --output-zip {output.dataset:q}
         """

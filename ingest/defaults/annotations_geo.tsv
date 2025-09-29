@@ -177,17 +177,3 @@ PP_000LE29	country	Liberia
 # NML/BALB/c-lab/GIN/2014/Makona-Gueckedou-C07-rgMA
 PP_000NU8D	region	Africa
 PP_000NU8D	country	Guinea
-
-
-# -------- Temporary -----------
-# Add outbreak calls for Ebov-2014 (Boende 2014) which isn't being called by the latest nextclade dataset
-# This should be removed once the Nextclade dataset has been updated.
-# We do this here because `defaults/annotations.tsv` is applied _before_ Nextclade runs
-PP_000NSAB	outbreak	Ebov-2014
-PP_000NSB9	outbreak	Ebov-2014
-PP_000LMLZ	outbreak	Ebov-2014
-PP_000NS8F	outbreak	Ebov-2014
-PP_000LN4X	outbreak	Ebov-2014
-PP_000NS9D	outbreak	Ebov-2014
-PP_000M5MB	outbreak	Ebov-2014
-PP_000LN6T	outbreak	Ebov-2014
