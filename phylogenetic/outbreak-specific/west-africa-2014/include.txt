@@ -1,1 +1,3 @@
 PP_000LGK6 # flare-up index case. NCBI accession: KR817153. Sample name in original analysis: EM_076610
+PP_000LESU # used for rooting (KJ660346) (Kissidougou-C15)
+PP_000LLG9 # used for rooting (KR817226) (EM_079915)

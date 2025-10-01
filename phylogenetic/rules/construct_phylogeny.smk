@@ -81,6 +81,7 @@ rule refine:
             {params.confidence:q} \
             {params.root:q} \
             {params.remove_outgroup:q} \
+            --clock-rate 0.00105 \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q}
         """

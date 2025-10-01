@@ -59,7 +59,7 @@ build_params:
       min_length: 18000
       exclude_where: is_lab_host=true
       query: (outbreak=="Ebov-2013" | outbreak=="Ebov-2013/r2021")
-      subsample_max_sequences: 30
+      subsample_max_sequences: 2000
       include: outbreak-specific/west-africa-2014/include.txt
       group_by:
         - division
@@ -74,6 +74,7 @@ build_params:
       confidence: true
       coalescent: skyline
       date_inference: marginal
+      root: [PP_000LESU, PP_000LLG9]
 
     traits:
       columns:
