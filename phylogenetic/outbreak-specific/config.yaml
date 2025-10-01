@@ -4,7 +4,7 @@
 # Define optional config parameters with their default values here so that users
 # do not have to dig through the workflows to figure out the default values
 
-id_column: "accession"
+id_column: &id_column "accession"
 
 inputs:
   - name: local_ingest
@@ -24,11 +24,13 @@ build_params:
       reference: &Yambuku_Mayinga_Reference outbreak-specific/drc-2025/NC_002549.1.gb
 
     filter:
+      id_column: *id_column
       min_length: 10000
       query: outbreak=="Ebov-2025"
       include: outbreak-specific/drc-2025/include.txt
 
     refine:
+      id_column: *id_column
       timetree: false
       root: PP_000PHH3 # Yambuku_Mayinga_Reference, force-included in include.txt
       remove_outgroup: true
@@ -56,10 +58,11 @@ build_params:
       reference: &Makona_Liberia_Reference outbreak-specific/west-africa-2014/ebola_outgroup.gb
 
     filter:
+      id_column: *id_column
       min_length: 18000
       exclude_where: is_lab_host=true
       query: (outbreak=="Ebov-2013" | outbreak=="Ebov-2013/r2021")
-      subsample_max_sequences: 2000
+      subsample_max_sequences: 20
       include: outbreak-specific/west-africa-2014/include.txt
       group_by:
         - division
@@ -70,6 +73,7 @@ build_params:
       reference: *Makona_Liberia_Reference
 
     refine:
+      id_column: *id_column
       timetree: true
       confidence: true
       coalescent: skyline

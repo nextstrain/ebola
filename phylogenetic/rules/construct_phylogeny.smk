@@ -55,13 +55,7 @@ rule refine:
         tree = "results/{build}/tree.nwk",
         node_data = "results/{build}/branch_lengths.json"
     params:
-        coalescent = conditional_config("--coalescent", "refine", "coalescent"),
-        date_inference = conditional_config("--date-inference", "refine", "date_inference"),
-        confidence = conditional_config("--date-confidence", "refine", "confidence"),
-        timetree = conditional_config("--timetree", "refine", "timetree"),
-        root = conditional_config("--root", "refine", "root"),
-        remove_outgroup = conditional_config("--remove-outgroup", "refine", "remove_outgroup"),
-        id_column = config["id_column"],
+        args = get_config_args("refine"),
     benchmark:
         "benchmarks/{build}/refine.txt"
     log:
@@ -74,13 +68,7 @@ rule refine:
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
             --metadata {input.metadata:q} \
-            --metadata-id-columns {params.id_column:q} \
-            {params.timetree:q} \
-            {params.date_inference:q} \
-            {params.coalescent:q} \
-            {params.confidence:q} \
-            {params.root:q} \
-            {params.remove_outgroup:q} \
+            {params.args:q} \
             --clock-rate 0.00105 \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q}

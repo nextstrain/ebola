@@ -93,3 +93,79 @@ def config_path(*rule_parts):
 
         return resolve_config_path(config_lookup, PHYLO_DIR)
     return _resolve
+
+# mapping of (rule-specific) YAML config keys to their associated command-line args
+# In reality, the schema or some centralised schema/meta-config would define these
+# for most rules, but it's hardcoded here for the prototype.
+# Values are the argument (e.g. "--foo") and whether the expected arg value for the
+# command is a path which needs resolving.
+ARG_MAPS = {
+    "filter": {
+        # YAML key name: (argument name, is value a path?)
+        "id_column": ("--metadata-id-columns", False), 
+        "min_length": ("--min-length", False), 
+        "min_date": ("--min-date", False), 
+        "max_date": ("--max-date", False), 
+        "exclude_ambiguous_dates_by": ("--exclude-ambiguous-dates-by", False), 
+        "exclude_where": ("--exclude-where", False), 
+        "group_by": ("--group-by", False), 
+        "subsample_max_sequences": ("--subsample-max-sequences", False), 
+        "query": ("--query", False), 
+        "include": ("--include", True), 
+        "exclude": ("--exclude", True), 
+    },
+    "refine": {
+        "id_column": ("--metadata-id-columns", False), 
+        "coalescent": ("--coalescent", False),
+        "date_inference": ("--date-inference", False),
+        "confidence": ("--date-confidence", False),
+        "timetree": ("--timetree", False),
+        "root": ("--root", False),
+        "remove_outgroup": ("--remove-outgroup", False),
+    }
+}
+
+def per_rule_args(rule_config, arg_map):
+    """Given the (user-defined) config keys & values for a specific rule (e.g. filter, align),
+    return a list of the command line argument words to parameterise the rule.
+    """
+    args = [] # unquoted words to be passed to the command (use snakemake :q (shlex.quote) within the rule)
+    for key, value in rule_config.items():
+        try:
+            arg_name, arg_value_is_path = arg_map[key]
+        except KeyError:
+            raise WorkflowError(f"Config {key=} missing from hardcoded arg_map")
+        if value is False: # special case False, which means no args at all
+            continue
+        args.append(arg_name)
+        if value is True: # and special case True, which means just the arg name without any values (e.g. --timetree)
+            continue
+        if arg_value_is_path:
+            # call the resolver with empty wildcards for EBOV config structure, but other repos may want to create a wildcards structure
+            args.append(resolve_config_path(value, PHYLO_DIR)({}))
+        elif type(value)==str or type(value)==int:
+            args.append(str(value))
+        elif type(value)==list and all([type(x)==str for x in value]):
+            args.extend([v for v in value])
+        else:
+            raise WorkflowError(f"Unknown config value type for filter block {key=} {value=}")
+    return args
+
+def process_config():
+    builds = [*config['builds']]
+    processed_config = {build_name:{} for build_name in builds}
+    for build_name in builds:
+        config_block = config['build_params'][build_name] # very pathogen dependent
+        processed_config[build_name]['filter'] = per_rule_args(config_block['filter'], ARG_MAPS['filter'])
+        processed_config[build_name]['refine'] = per_rule_args(config_block['refine'], ARG_MAPS['refine'])
+
+    print(f"{processed_config=}", file=sys.stderr)
+    return processed_config
+
+processed_config = process_config()
+
+def get_config_args(rule):
+    """Snakemake params function to retrieve the command line args (list)"""
+    def fn(wildcards):
+        return processed_config[wildcards.build][rule]
+    return fn

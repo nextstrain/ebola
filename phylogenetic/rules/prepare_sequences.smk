@@ -32,26 +32,12 @@ rule filter:
     input:
         sequences = lambda w: path_or_url(config["inputs"][0]['sequences']),
         metadata = lambda w: path_or_url(config["inputs"][0]['metadata']),
-        # include/exclude are optional and the input values are handled as params
-        # (the `config_path` helper doesn't allow the config values to be optional)
-        exclude = lambda w: config["build_params"][w.build]["filter"].get("exclude", []),
-        include = lambda w: config["build_params"][w.build]["filter"].get("include", []),
     output:
         sequences = "results/{build}/filtered.fasta",
         metadata = "results/{build}/filtered.tsv",
         log = "results/{build}/filter-log.txt",
     params:
-        id_column = config["id_column"],
-        min_length = conditional_config("--min-length", "filter", "min_length"),
-        min_date = conditional_config("--min-date", "filter", "min_date"),
-        max_date = conditional_config("--max-date", "filter", "max_date"),
-        exclude_ambiguous_dates_by = conditional_config("--exclude-ambiguous-dates-by", "filter", "exclude_ambiguous_dates_by"),
-        exclude_where = conditional_config("--exclude-where", "filter", "exclude_where"),
-        group_by = conditional_config("--group-by", "filter", "group_by"),
-        subsample_max_sequences = conditional_config("--subsample-max-sequences", "filter", "subsample_max_sequences"),
-        query = conditional_config("--query", "filter", "query"),
-        exclude =  lambda w, input: conditional_arg("--exclude", input.exclude),
-        include =  lambda w, input: conditional_arg("--include", input.include),
+        args = get_config_args("filter"),
     benchmark:
         "benchmarks/{build}/filter.txt"
     log:
@@ -63,17 +49,7 @@ rule filter:
         augur filter \
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
-            --metadata-id-columns {params.id_column:q} \
-            {params.min_length:q} \
-            {params.min_date:q} \
-            {params.max_date:q} \
-            {params.exclude_ambiguous_dates_by:q} \
-            {params.exclude_where:q} \
-            {params.group_by:q} \
-            {params.subsample_max_sequences:q} \
-            {params.query:q} \
-            {params.include:q} \
-            {params.exclude:q} \
+            {params.args:q} \
             --output-sequences {output.sequences:q} \
             --output-metadata {output.metadata:q} \
             --output-log {output.log:q}
