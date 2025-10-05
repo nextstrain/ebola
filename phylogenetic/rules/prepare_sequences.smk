@@ -30,22 +30,28 @@ rule filter:
       - excluding strains in {input.exclude}
     """
     input:
-        sequences = "../../ingest/results/sequences.fasta",
-        metadata = "../../ingest/results/metadata.tsv",
-        exclude = lambda w: config["build_params"][w.build]["filter"]["exclude"],
-        include = lambda w: config["build_params"][w.build]["filter"]["include"],
+        sequences = lambda w: path_or_url(config["inputs"][0]['sequences']),
+        metadata = lambda w: path_or_url(config["inputs"][0]['metadata']),
+        # include/exclude are optional and the input values are handled as params
+        # (the `config_path` helper doesn't allow the config values to be optional)
+        exclude = lambda w: config["build_params"][w.build]["filter"].get("exclude", []),
+        include = lambda w: config["build_params"][w.build]["filter"].get("include", []),
     output:
         sequences = "results/{build}/filtered.fasta",
         metadata = "results/{build}/filtered.tsv",
         log = "results/{build}/filter-log.txt",
     params:
         id_column = config["id_column"],
-        min_length = lambda w: conditional("--min-length", config["build_params"][w.build]["filter"].get("min_length")),
-        min_date = lambda w: conditional("--min-date", config["build_params"][w.build]["filter"].get("min_date")),
-        max_date = lambda w: conditional("--max-date", config["build_params"][w.build]["filter"].get("max_date")),
-        exclude_where = lambda w: conditional("--exclude-where", config["build_params"][w.build]["filter"].get("exclude_where")),
-        group_by = lambda w: conditional("--group-by", config["build_params"][w.build]["filter"].get("group_by")),
-        subsample_max_sequences = lambda w: conditional("--subsample-max-sequences", config["build_params"][w.build]["filter"].get("subsample_max_sequences")),
+        min_length = conditional_config("--min-length", "filter", "min_length"),
+        min_date = conditional_config("--min-date", "filter", "min_date"),
+        max_date = conditional_config("--max-date", "filter", "max_date"),
+        exclude_ambiguous_dates_by = conditional_config("--exclude-ambiguous-dates-by", "filter", "exclude_ambiguous_dates_by"),
+        exclude_where = conditional_config("--exclude-where", "filter", "exclude_where"),
+        group_by = conditional_config("--group-by", "filter", "group_by"),
+        subsample_max_sequences = conditional_config("--subsample-max-sequences", "filter", "subsample_max_sequences"),
+        query = conditional_config("--query", "filter", "query"),
+        exclude =  lambda w, input: conditional_arg("--exclude", input.exclude),
+        include =  lambda w, input: conditional_arg("--include", input.include),
     benchmark:
         "benchmarks/{build}/filter.txt"
     log:
@@ -61,11 +67,13 @@ rule filter:
             {params.min_length:q} \
             {params.min_date:q} \
             {params.max_date:q} \
+            {params.exclude_ambiguous_dates_by:q} \
             {params.exclude_where:q} \
             {params.group_by:q} \
             {params.subsample_max_sequences:q} \
-            --include {input.include:q} \
-            --exclude {input.exclude:q} \
+            {params.query:q} \
+            {params.include:q} \
+            {params.exclude:q} \
             --output-sequences {output.sequences:q} \
             --output-metadata {output.metadata:q} \
             --output-log {output.log:q}
@@ -79,7 +87,7 @@ rule align:
     """
     input:
         sequences = "results/{build}/filtered.fasta",
-        reference = lambda w: config["build_params"][w.build]["files"]["reference"],
+        reference = config_path("align", "reference"),
     output:
         alignment = "results/{build}/aligned.fasta"
     benchmark:
