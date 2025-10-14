@@ -182,6 +182,7 @@ rule export:
         lat_longs = "defaults/lat_longs.tsv",
         auspice_config = "all-outbreaks/auspice-config.json",
         description = "all-outbreaks/description.md",
+        header = "all-outbreaks/header.md",
     output:
         auspice_json = "auspice/ebola_all-outbreaks.json"
     params:
@@ -203,5 +204,6 @@ rule export:
             --auspice-config {input.auspice_config:q} \
             --description {input.description:q} \
             --include-root-sequence-inline \
+            --warning {input.header} \
             --output {output.auspice_json:q}
         """
