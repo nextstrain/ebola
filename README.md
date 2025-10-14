@@ -1,6 +1,6 @@
 > [!WARNING]
-> This repository is a work in progress. The dataset at
-> [nextstrain.org/ebola](https://nextstrain.org/ebola) was created by an older
+> This repository is a work in progress. The ebov-2013 (West-African outbreak) dataset at
+> [nextstrain.org/ebola/ebov-2013](https://nextstrain.org/ebola/ebov-2013), and formerly at `/ebola`, was created by an older
 > version
 > ([src](https://github.com/nextstrain/ebola/tree/0a9401b6e0d4220cdbc3dcb564a3085c1e518864)).
 
