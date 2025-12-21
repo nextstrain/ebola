@@ -1,0 +1,106 @@
+name: Ingest to phylogenetic
+
+# NOTE: Currently this just runs the all-outbreaks workflow
+# As we add more workflows we should revisit this action
+
+defaults:
+  run:
+    # This is the same as GitHub Action's `bash` keyword as of 20 June 2023:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
+    #
+    # Completely spelling it out here so that GitHub can't change it out from under us
+    # and we don't have to refer to the docs to know the expected behavior.
+    shell: bash --noprofile --norc -eo pipefail {0}
+
+on:
+  # TODO XXX - add schedule
+  workflow_dispatch:
+    inputs:
+      image:
+        description: 'Specific container image to use (will override the default of "nextstrain build")'
+        required: false
+
+jobs:
+  ingest:
+    permissions:
+      id-token: write
+    uses: nextstrain/.github/.github/workflows/pathogen-repo-build.yaml@master
+    secrets: inherit  
+    with:
+      runtime: docker
+      env: |
+        NEXTSTRAIN_DOCKER_IMAGE: ${{ inputs.image }}
+      run: |
+        nextstrain build ingest \
+          upload_all \
+          --configfile build-configs/nextstrain-automation/config.yaml 
+      # Specifying artifact name to differentiate ingest build outputs from the phylogenetic build outputs
+      artifact-name: ingest-output
+      artifact-paths: |
+        ingest/benchmarks/
+        ingest/logs/
+        ingest/.snakemake/log/
+  
+
+  # Check if ingest results include new data by checking for the cache
+  # of the file with the results' Metadata.sh256sum (which should have been added within upload-to-s3)
+  # GitHub will remove any cache entries that have not been accessed in over 7 days,
+  # so if the workflow has not been run over 7 days then it will trigger phylogenetic.
+  check-new-data:
+    needs: [ingest]
+    runs-on: ubuntu-latest
+    outputs:
+      cache-hit: ${{ steps.check-cache.outputs.cache-hit }}
+    steps:
+      - name: Get sha256sum
+        id: get-sha256sum
+        env:
+          AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
+        run: |
+          s3_urls=(
+            "s3://nextstrain-data/files/workflows/ebola/metadata.tsv.zst"
+          )
+
+          # Code below is modified from ingest/upload-to-s3
+          # https://github.com/nextstrain/ingest/blob/c0b4c6bb5e6ccbba86374d2c09b42077768aac23/upload-to-s3#L23-L29
+
+          no_hash=0000000000000000000000000000000000000000000000000000000000000000
+
+          for s3_url in "${s3_urls[@]}"; do
+            s3path="${s3_url#s3://}"
+            bucket="${s3path%%/*}"
+            key="${s3path#*/}"
+
+            s3_hash="$(aws s3api head-object --no-sign-request --bucket "$bucket" --key "$key" --query Metadata.sha256sum --output text 2>/dev/null || echo "$no_hash")"
+            echo "${s3_hash}" | tee -a ingest-output-sha256sum
+          done
+
+      - name: Check cache
+        id: check-cache
+        uses: actions/cache@v4
+        with:
+          path: ingest-output-sha256sum
+          key: ingest-output-sha256sum-${{ hashFiles('ingest-output-sha256sum') }}
+          lookup-only: true
+
+
+  phylogenetic:
+    needs: [check-new-data]
+    if: ${{ needs.check-new-data.outputs.cache-hit != 'true' }}
+    permissions:
+      id-token: write
+    uses: nextstrain/.github/.github/workflows/pathogen-repo-build.yaml@master
+    secrets: inherit
+    with:
+      runtime: docker
+      env: |
+        NEXTSTRAIN_DOCKER_IMAGE: ${{ inputs.image }}
+      run: |
+        nextstrain build phylogenetic \
+          upload \
+          --config s3=True
+      artifact-name: phylo-all-outbreaks-output
+      artifact-paths: |
+        phylogenetic/benchmarks/
+        phylogenetic/logs/
+        phylogenetic/.snakemake/log/
