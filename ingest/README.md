@@ -69,4 +69,10 @@ moving the Nextclade related config parameters from the `defaults/nextclade_conf
 The build-configs directory contains custom configs and rules that override and/or
 extend the default workflow.
 
-- [nextstrain-automation](build-configs/nextstrain-automation/) - automated internal Nextstrain builds.
+#### [nextstrain-automation](build-configs/nextstrain-automation/) - automated internal Nextstrain builds
+
+Uploads results files to our S3 bucket
+
+```
+nextstrain build ingest --configfile build-configs/nextstrain-automation/config.yaml -f upload_all
+```
