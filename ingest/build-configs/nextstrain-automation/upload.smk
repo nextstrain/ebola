@@ -22,7 +22,7 @@ rule upload_to_s3:
     input:
         file_to_upload=lambda wildcards: config["files_to_upload"][wildcards.remote_file],
     output:
-        "results/upload/{remote_file}.upload",
+        touch("results/upload/{remote_file}.upload"),
     params:
         quiet="" if send_notifications else "--quiet",
         s3_dst=config["s3_dst"],

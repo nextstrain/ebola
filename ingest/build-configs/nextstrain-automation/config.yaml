@@ -11,13 +11,14 @@ custom_rules:
 cloudfront_domain: "data.nextstrain.org"
 
 # Nextstrain AWS S3 Bucket with pathogen prefix
-# Replace <pathogen> with the pathogen repo name.
 s3_dst: "s3://nextstrain-data/files/workflows/ebola"
 
 # Mapping of files to upload
 files_to_upload:
-  ncbi.ndjson.zst: data/ncbi.ndjson
   metadata.tsv.zst: results/metadata.tsv
+  metadata_open.tsv.zst: results/metadata_open.tsv
   sequences.fasta.zst: results/sequences.fasta
-  alignments.fasta.zst: results/alignment.fasta
-  translations.zip: results/translations.zip
+  sequences_open.fasta.zst: results/sequences_open.fasta
+  alignment.fasta.zst: results/alignment.fasta
+  alignment_open.fasta.zst: results/alignment_open.fasta
+  translations.zip: results/translations.zip # note - no 'open' translations yet
