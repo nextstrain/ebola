@@ -1,10 +1,17 @@
 """
 This is the all-outbreaks phylogenetic Snakefile.
+
+Note: This does not conform to our modern config-based workflow.
 """
 
 inputs = {
-  "metadata": "../ingest/results/metadata.tsv",
-  "alignment": "../ingest/results/alignment.fasta",
+    "metadata": "s3://nextstrain-data/files/workflows/ebola/metadata.tsv.zst",
+    "alignment": "s3://nextstrain-data/files/workflows/ebola/alignment.fasta.zst",
+    "translations": "s3://nextstrain-data/files/workflows/ebola/translations.zip",
+} if config.get('s3', False) is True else {
+    "metadata": "../ingest/results/metadata.tsv",
+    "alignment": "../ingest/results/alignment.fasta",
+    "translations": "../ingest/results/translations.zip",
 }
 
 include: "../../shared/vendored/snakemake/remote_files.smk"
@@ -101,6 +108,20 @@ rule refine:
             --output-node-data {output.node_data:q}
         """
 
+GENES = ["NP", "VP35", "VP40", "GP", "ssGP", "sGP", "VP30" , "VP24", "L"]
+
+rule unzip_translations:
+    input: path_or_url(inputs['translations'])
+    output: expand("results/translations/{gene}.fasta", gene=GENES)
+    log: "logs/unzip-translations.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        mkdir -p results/translations
+        
+        unzip -o {input[0]} -d results/translations
+        """
 
 rule ancestral:
     """Reconstructing ancestral sequences and mutations"""
@@ -108,12 +129,13 @@ rule ancestral:
         tree = "results/all-outbreaks/tree.nwk",
         alignment = "results/all-outbreaks/filtered.fasta",
         annotation = "all-outbreaks/NC_002549.1.gb",
+        translations = expand("results/translations/{gene}.fasta", gene=GENES),
     output:
         node_data = "results/all-outbreaks/muts.json"
     params:
         inference = "joint",
         genes = ["NP", "VP35", "VP40", "GP", "ssGP", "sGP", "VP30" , "VP24", "L"],
-        translations = "../ingest/results/translations/%GENE.fasta",
+        translations = "results/translations/%GENE.fasta",
     benchmark:
         "benchmarks/all-outbreaks/ancestral.txt"
     log:
@@ -127,7 +149,7 @@ rule ancestral:
             --alignment {input.alignment:q} \
             --annotation {input.annotation:q} \
             --translations {params.translations:q} \
-            --genes {params.genes:q} \
+            --genes {params.genes} \
             --output-node-data {output.node_data:q} \
             --inference {params.inference:q}
         """
@@ -206,4 +228,15 @@ rule export:
             --include-root-sequence-inline \
             --warning {input.header} \
             --output {output.auspice_json:q}
+        """
+
+rule upload:
+    input: "auspice/ebola_all-outbreaks.json"
+    output: touch("results/all-outbreaks/upload.done")
+    log: "logs/all-outbreaks/upload.txt"
+    shell:
+        r"""
+            exec &> >(tee {log:q})
+
+            nextstrain remote upload s3://nextstrain-data {input[0]}
         """

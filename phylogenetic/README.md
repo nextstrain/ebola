@@ -43,6 +43,12 @@ The resulting dataset can be viewed in a web browser:
 nextstrain view phylogenetic
 ```
 
+**Input data**
+
+By default the workflow requires locally ingested data.
+You can our canonical data from s3 by adding `--config s3=True` to your command.
+
+
 ## Data Requirements
 
 The phylogenetic workflows will use metadata values as-is, so please do any
