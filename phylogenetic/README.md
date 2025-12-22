@@ -48,6 +48,12 @@ nextstrain view phylogenetic
 By default the workflow requires locally ingested data.
 You can our canonical data from s3 by adding `--config s3=True` to your command.
 
+> [!NOTE]
+> The local & S3 data sources currently include restricted PPX data.
+> If you are sharing these analyses you must ensure you abide by Pathoplexus'
+> [Restricted Data Terms of Use](https://pathoplexus.org/about/terms-of-use/restricted-data)
+
+
 
 ## Data Requirements
 
