@@ -96,8 +96,9 @@ jobs:
       env: |
         NEXTSTRAIN_DOCKER_IMAGE: ${{ inputs.image }}
       run: |
-        nextstrain build phylogenetic \
-          upload \
+        nextstrain build phylogenetic
+          -f upload \
+          --snakefile all-outbreaks/Snakefile \
           --config s3=True
       artifact-name: phylo-all-outbreaks-output
       artifact-paths: |
