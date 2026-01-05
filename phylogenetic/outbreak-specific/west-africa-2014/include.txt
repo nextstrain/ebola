@@ -1,1 +1,1 @@
-EM_076610 # flare-up index case
+PP_000LGK6 # flare-up index case. NCBI accession: KR817153. Sample name in original analysis: EM_076610

@@ -14,17 +14,30 @@ There are currently two separate workflows:
 
 ### Outbreak-specific
 
-This workflow produces a single analysis of the West Africa outbreak.
+This workflow produces analyses of specific ebola outbreaks. Configure which outbreaks in [outbreak-specific/config.yaml](./outbreak-specific/config.yaml).
 
 The workflow can be run from the top level pathogen repo directory:
 ```
 nextstrain build phylogenetic --snakefile outbreak-specific/Snakefile
 ```
 
-The resulting dataset can be viewed in a web browser:
+The resulting datasets can be viewed in a web browser:
 ```
 nextstrain view phylogenetic/outbreak-specific
 ```
+
+There are currently two datasets configured, and each is a work in progress.
+
+#### Ebov-2013 / West-Africa 2014
+
+* The temporal analysis is wrong (root pushed back), which I think is due to the inclusion of relapse cases. We could try specifying a rate or explore ways to infer the rate based on a subset of samples within treetime. 
+* Missing colors & lat-longs. Some of this is misspelt geographical metadata to be fixed in ingest.
+* Alignment (mafft) takes a long time cf. nextclade alignment. We should compare the two approaches.
+
+#### Ebov-2025
+
+* Currently (2025-09-29) there are 4 available genomes. At this time [this virological post](https://virological.org/t/the-16th-ebola-virus-disease-outbreak-in-bulape-health-zone-kasai-democratic-republic-of-the-congo-a-new-spillover-event-from-an-unknown-reservoir-host/1003) is a better summary of the genomic situation.
+
 
 ### All-outbreaks
 
