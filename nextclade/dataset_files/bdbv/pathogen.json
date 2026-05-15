@@ -9,9 +9,9 @@
     "gapAlignmentSide": "left"
   },
   "attributes": {
-    "name": "Sudan virus",
-    "reference accession": "NC_006432.1",
-    "reference name": "UGA/2000/Gulu-808892",
+    "name": "Bundibugyo ebolavirus",
+    "reference accession": "NC_014373.1",
+    "reference name": "UGA/2007/Butalya-811250",
     "experimental": true
   },
   "compatibility": {
@@ -19,6 +19,7 @@
     "web": "3.0.0-alpha.0"
   },
   "files": {
+    "treeJson": "tree.json",
     "changelog": "CHANGELOG.md",
     "examples": "examples.fasta",
     "genomeAnnotation": "genome_annotation.gff3",
@@ -26,6 +27,7 @@
     "readme": "README.md",
     "reference": "reference.fasta"
   },
+  "defaultCds": "GP",
   "qc": {
     "frameShifts": {
       "enabled": true,
@@ -63,7 +65,7 @@
   },
   "schemaVersion": "3.0.0",
   "shortcuts": [
-    "nextstrain/ebola/sudan"
+    "nextstrain/ebola/bdbv"
   ],
   "version": {
     "updatedAt": "2026-04-14T11:55:23Z",

@@ -1,18 +1,11 @@
-# Nextclade dataset for "Zaire Ebolavirus"
+# Nextclade dataset for Sudan virus (formerly Ebola virus Sudan)
 
 | Key                    | Value                                                                           |
 | ---------------------- | ------------------------------------------------------------------------------- |
-| authors                | [Eddy Lusamaki, Institut National de Recherche Biomédicale](https://inrb.net), [Nextstrain](https://nextstrain.org) |
-| data source            | Pathoplexus and Genbank                                                                         |
-| nextclade dataset path | nextstrain/ebola/zaire                                                          |
-| annotation             | [NC_002549.1](https://www.ncbi.nlm.nih.gov/nuccore/NC_002549)                   |
-| related datasets       | Sudan Ebolavirus: `nextstrain/ebola/zaire`                                      |
+| authors                | [Cornelius Roemer](https://neherlab.org), [Richard Neher](https://neherlab.org) |
+| data source            | Genbank                                                                         |
+| nextclade dataset path | nextstrain/orthoebolavirus/sudv                                                          |
+| annotation             | [NC_006432.1](https://www.ncbi.nlm.nih.gov/nuccore/NC_006432)                   |
 
-
-
-## Sequence provenance
-
-The reference tree in this dataset sources data from Pathoplexus and includes RESTRICTED sequences.
-These sequences were generously shared pre-publication by the authors to aid public health response.
-It is not allowed to use these sequences in preprints or publications without permission of the authors, see [Pathoplexus data use terms](https://pathoplexus.org/about/terms-of-use/data-use-terms) for details.
+Sudan virus was formerly known as Ebola virus Sudan, but has been [renamed as Sudan virus (SUDV) in the genus Orthoebolavirus by ICTV](https://ictv.global/report/chapter/filoviridae/filoviridae/orthoebolavirus).
 
