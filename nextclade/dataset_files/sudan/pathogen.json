@@ -9,9 +9,9 @@
     "gapAlignmentSide": "left"
   },
   "attributes": {
-    "name": "Ebolavirus Zaire",
-    "reference accession": "NC_002549.1",
-    "reference name": "COD/1976/Yambuku-Mayinga",
+    "name": "Sudan virus",
+    "reference accession": "NC_006432.1",
+    "reference name": "UGA/2000/Gulu-808892",
     "experimental": true
   },
   "compatibility": {
@@ -19,9 +19,8 @@
     "web": "3.0.0-alpha.0"
   },
   "files": {
-    "treeJson": "tree.json",
     "changelog": "CHANGELOG.md",
-    "examples": "example_sequences.fasta",
+    "examples": "examples.fasta",
     "genomeAnnotation": "genome_annotation.gff3",
     "pathogenJson": "pathogen.json",
     "readme": "README.md",
@@ -31,7 +30,7 @@
     "frameShifts": {
       "enabled": true,
       "ignoredFrameShifts": [],
-      "scoreWeight": 50
+      "scoreWeight": 20
     },
     "missingData": {
       "enabled": true,
@@ -40,14 +39,14 @@
     },
     "mixedSites": {
       "enabled": true,
-      "mixedSitesThreshold": 20
+      "mixedSitesThreshold": 40
     },
     "privateMutations": {
-      "cutoff": 30,
+      "cutoff": 300,
       "enabled": true,
-      "typical": 10,
-      "weightLabeledSubstitutions": 4,
-      "weightReversionSubstitutions": 2,
+      "typical": 50,
+      "weightLabeledSubstitutions": 6,
+      "weightReversionSubstitutions": 6,
       "weightUnlabeledSubstitutions": 1
     },
     "snpClusters": {
@@ -59,11 +58,19 @@
     "stopCodons": {
       "enabled": true,
       "ignoredStopCodons": [],
-      "scoreWeight": 50
+      "scoreWeight": 20
     }
   },
   "schemaVersion": "3.0.0",
   "shortcuts": [
     "nextstrain/ebola/sudan"
-  ]
+  ],
+  "version": {
+    "updatedAt": "2026-04-14T11:55:23Z",
+    "tag": "2026-04-14--11-55-23Z",
+    "compatibility": {
+      "cli": "3.0.0-alpha.0",
+      "web": "3.0.0-alpha.0"
+    }
+  }
 }
