@@ -43,7 +43,7 @@ colors = [ # <https://github.com/nextstrain/auspice/blob/master/src/util/globals
 ]
 
 
-def suggest_colors(years):
+def suggest_colors(years, fname):
     # A categorical scale looks better and helps understand the different outbreaks (IMO)
     # cf a continuous scale, although that would be more technically accurate
     c = colors[len(years)] # colors is 1-indexed
@@ -57,6 +57,9 @@ def suggest_colors(years):
 
     print(f"Suggested auspice-config colors entry:")
     print(json.dumps(config))
+    if fname:
+        with open(fname, 'w') as fh:
+            json.dump(config, fh, indent=2)
 
 
 if __name__ == "__main__":
@@ -64,6 +67,8 @@ if __name__ == "__main__":
     parser.add_argument("--metadata", required=True, help="Metadata TSV")
     parser.add_argument("--id-columns", nargs="+", help="ID columns in Metadata TSV", default=['accession'])
     parser.add_argument("--output", required=True, help="Node Data JSON output")
+    parser.add_argument("--output-config", required=False, help="JSON coloring entry for an auspice-config JSON")
+
     args = parser.parse_args()
 
     m = read_metadata(args.metadata, id_columns=args.id_columns)
@@ -72,7 +77,9 @@ if __name__ == "__main__":
         json.dump({"nodes": nodes}, fh)
 
     try:
-        suggest_colors(sorted(set([x['year'] for x in nodes.values()])))
+        suggest_colors(sorted(set([x['year'] for x in nodes.values()])), args.output_config)
     except Exception:
         print("Failed to suggest colours for the auspice config")
+        if args.output_config:
+            raise Exception()
 
