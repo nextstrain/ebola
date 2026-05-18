@@ -1,16 +1,5 @@
 """
 This part of the workflow handles the curation of data from Pathoplexus
-
-REQUIRED INPUTS:
-
-    data/sequences.ndjson
-    data/ncbi_entrez.ndjson
-
-OUTPUTS:
-
-    metadata    = data/subset_metadata.tsv
-    sequences   = results/sequences.fasta
-
 """
 
 
@@ -32,11 +21,11 @@ def format_field_map(field_map: dict[str, str]) -> list[str]:
 # separate files: a metadata TSV and a sequences FASTA.
 rule curate_ppx:
     input:
-        sequences_ndjson="data/sequences.ndjson",
+        sequences_ndjson="data/{species}/sequences.ndjson",
         annotations=config["curate"]["annotations"],
     output:
-        metadata="data/metadata_ppx.tsv",
-        sequences="results/sequences.fasta",
+        metadata="data/{species}/metadata_ppx.tsv",
+        sequences="results/{species}/sequences.fasta",
     params:
         field_map=format_field_map(config["curate"]["field_map"]),
         date_fields=config["curate"]["date_fields"],
@@ -51,9 +40,9 @@ rule curate_ppx:
         id_field=config["curate"]["output_id_field"],
         sequence_field=config["curate"]["output_sequence_field"],
     benchmark:
-        "benchmarks/curate_ppx.txt"
+        "benchmarks/{species}/curate_ppx.txt"
     log:
-        "logs/curate_ppx.txt"
+        "logs/{species}/curate_ppx.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -84,13 +73,15 @@ rule curate_ppx:
 
 rule curate_ncbi_entrez:
     input:
-        metadata_ndjson="data/ncbi_entrez.ndjson",
+        metadata_ndjson="data/{species}/ncbi_entrez.ndjson",
     output:
-        metadata="data/metadata_ncbi_entrez.tsv",
+        metadata="data/{species}/metadata_ncbi_entrez.tsv",
     benchmark:
-        "benchmarks/curate_ncbi_entrez.txt"
+        "benchmarks/{species}/curate_ncbi_entrez.txt"
     log:
-        "logs/curate_ncbi_entrez.txt"
+        "logs/{species}/curate_ncbi_entrez.txt"
+    wildcard_constraints:
+        species='ebov'
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -104,16 +95,18 @@ rule curate_ncbi_entrez:
 # insdcAccessionBase.
 rule spike_in_ncbi_data:
     input:
-        metadata_ppx="data/metadata_ppx.tsv",
-        metadata_ncbi_entrez="data/metadata_ncbi_entrez.tsv",
+        metadata_ppx="data/{species}/metadata_ppx.tsv",
+        metadata_ncbi_entrez="data/{species}/metadata_ncbi_entrez.tsv",
     output:
-        metadata="data/metadata_merged_ncbi.tsv",
+        metadata="data/{species}/metadata_ppx-ncbi.tsv",
     params:
         fields=["title", "note"]
     benchmark:
-        "benchmarks/spike_in_ncbi_data.txt"
+        "benchmarks/{species}/spike_in_ncbi_data.txt"
     log:
-        "logs/spike_in_ncbi_data.txt"
+        "logs/{species}/spike_in_ncbi_data.txt"
+    wildcard_constraints:
+        species='ebov'
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -128,14 +121,16 @@ rule spike_in_ncbi_data:
 
 rule spike_in_inrb_metadata:
     input:
-        metadata="data/metadata_merged_ncbi.tsv",
-        nord_kivu_metadata="data/inrb-drc-nord-kivu-metadata.tsv",
+        metadata="data/{species}/metadata_ppx-ncbi.tsv",
+        nord_kivu_metadata="data/{species}/inrb-drc-nord-kivu-metadata.tsv",
     output:
-        metadata="data/metadata_merged_inrb.tsv",
+        metadata="data/{species}/metadata_ppx-ncbi-inrb.tsv",
     benchmark:
-        "benchmarks/spike_in_inrb_metadata.txt"
+        "benchmarks/{species}/spike_in_inrb_metadata.txt"
     log:
-        "logs/spike_in_inrb_metadata.txt"
+        "logs/{species}/spike_in_inrb_metadata.txt"
+    wildcard_constraints:
+        species='ebov'
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -148,14 +143,16 @@ rule spike_in_inrb_metadata:
 
 rule spike_in_fauna_metadata:
     input:
-        metadata="data/metadata_merged_inrb.tsv",
+        metadata="data/{species}/metadata_ppx-ncbi-inrb.tsv",
         fauna_metadata="defaults/west-africa-2013-metadata.tsv",
     output:
-        metadata="data/metadata_merged_fauna.tsv",
+        metadata="data/{species}/metadata_ppx-ncbi-inrb-fauna.tsv",
     benchmark:
-        "benchmarks/spike_in_fauna_metadata.txt"
+        "benchmarks/{species}/spike_in_fauna_metadata.txt"
     log:
-        "logs/spike_in_fauna_metadata.txt"
+        "logs/{species}/spike_in_fauna_metadata.txt"
+    wildcard_constraints:
+        species='ebov'
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -166,46 +163,23 @@ rule spike_in_fauna_metadata:
             --output {output.metadata:q}
         """
 
-rule add_nextclade_clades:
-    """
-    Normally we use nextclade for a varity of metadata fields, but here we only add
-    the 'clade' column, renaming it to 'outbreak'
-    """
-    input:
-        metadata="data/metadata_merged_fauna.tsv",
-        nextclade="data/nextclade.tsv",
-    output:
-        nextclade_subset=temp("data/nextclade_subset.tsv"),
-        metadata="data/metadata_merged_outbreak.tsv",
-    benchmark:
-        "benchmarks/add_nextclade_clades.txt"
-    log:
-        "logs/add_nextclade_clades.txt"
-    shell:
-        r"""
-        exec &> >(tee {log:q})
 
-        cat {input.nextclade} \
-            | csvtk -t cut -f seqName,clade \
-            | csvtk -t rename -f seqName,clade -n accession,outbreak \
-            > {output.nextclade_subset:q}
+def get_base_metadata(wildcards):
+    # Zaire has a bunch of extra sources spiked in
+    if wildcards.species == 'ebov':
+        return "data/ebov/metadata_ppx-ncbi-inrb-fauna.tsv"
+    return f"data/{wildcards.species}/metadata_ppx.tsv"
 
-        augur merge \
-            --metadata metadata={input.metadata:q} nextclade={output.nextclade_subset:q} \
-            --metadata-id-columns accession \
-            --output-metadata {output.metadata:q} \
-            --no-source-columns
-        """
 
 rule extract_date_from_strain:
     input:
-        metadata="data/metadata_merged_outbreak.tsv",
+        metadata=get_base_metadata,
     output:
-        metadata="data/metadata_date_improvements.tsv",
+        metadata="data/{species}/metadata_date-improvements.tsv",
     benchmark:
-        "benchmarks/extract_date_from_strain.txt"
+        "benchmarks/{species}/extract_date_from_strain.txt"
     log:
-        "logs/extract_date_from_strain.txt"
+        "logs/{species}/extract_date_from_strain.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -220,13 +194,13 @@ rule extract_date_from_strain:
 rule lab_hosts:
     """Mark strains as is_lab_host=True via metadata matching"""
     input:
-        metadata = "data/metadata_date_improvements.tsv",
+        metadata = "data/{species}/metadata_date-improvements.tsv",
     output:
-        metadata="data/metadata_lab_host_improvements.tsv",
+        metadata="data/{species}/metadata_lab-host-improvements.tsv",
     benchmark:
-        "benchmarks/lab_hosts.txt"
+        "benchmarks/{species}/lab_hosts.txt"
     log:
-        "logs/lab_hosts.txt"
+        "logs/{species}/lab_hosts.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -236,20 +210,21 @@ rule lab_hosts:
             --output {output.metadata:q}
         """
 
+
 rule curate_geography:
     input:
-        metadata="data/metadata_lab_host_improvements.tsv",
+        metadata="data/{species}/metadata_lab-host-improvements.tsv",
         geolocation_rules=config["curate_geography"]["local_geolocation_rules"],
         annotations=config["curate_geography"]["annotations"],
     output:
-        metadata="data/metadata_geo_improvements.tsv",
+        metadata="data/{species}/metadata_geo-improvements.tsv",
     params:
         id_column=config["curate_geography"]["id_column"],
         annotations_id=config["curate_geography"]["annotations_id"],
     benchmark:
-        "benchmarks/curate_geography.txt"
+        "benchmarks/{species}/curate_geography.txt"
     log:
-        "logs/curate_geography.txt"
+        "logs/{species}/curate_geography.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -271,18 +246,18 @@ rule add_accession_urls:
     - url: URL linking to the NCBI GenBank record ('https://www.ncbi.nlm.nih.gov/nuccore/*').
     """
     input:
-        metadata = "data/metadata_geo_improvements.tsv",
+        metadata = "data/{species}/metadata_geo-improvements.tsv",
     output:
-        metadata = temp("data/all_metadata_added.tsv")
+        metadata = "data/{species}/metadata_acessions.tsv",
     params:
         pathoplexus_accession=config['curate']['pathoplexus_accession'],
         pathoplexus_accession_url=config['curate']['pathoplexus_accession'] + "__url",
         insdc_accession=config['curate']['insdc_accession'],
         insdc_accession_url=config['curate']['insdc_accession'] + "__url",
     benchmark:
-        "benchmarks/add_accession_urls.txt"
+        "benchmarks/{species}/add_accession_urls.txt"
     log:
-        "logs/add_accession_urls.txt"
+        "logs/{species}/add_accession_urls.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -297,17 +272,67 @@ rule add_accession_urls:
         > {output.metadata:q}
         """
 
+
+rule add_nextclade_clades:
+    """
+    Normally we use nextclade for a varity of metadata fields, but here we only add
+    the 'clade' column, renaming it to 'outbreak'.
+    This is only applicable for Zaire Ebolavirus at the moment
+    """
+    input:
+        metadata="data/{species}/metadata_acessions.tsv",
+        nextclade="data/{species}/nextclade.tsv",
+    output:
+        nextclade_subset=temp("data/{species}/nextclade_clade-only.tsv"),
+        metadata="data/{species}/metadata_outbreak-clade.tsv",
+    benchmark:
+        "benchmarks/{species}/add_nextclade_clades.txt"
+    log:
+        "logs/{species}/add_nextclade_clades.txt"
+    wildcard_constraints:
+        species='ebov'
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        cat {input.nextclade} \
+            | csvtk -t cut -f seqName,clade \
+            | csvtk -t rename -f seqName,clade -n accession,outbreak \
+            > {output.nextclade_subset:q}
+
+        augur merge \
+            --metadata metadata={input.metadata:q} nextclade={output.nextclade_subset:q} \
+            --metadata-id-columns accession \
+            --output-metadata {output.metadata:q} \
+            --no-source-columns
+        """
+
+
+def metadata_all_fields(wildcards):
+    # Zaire has Nextclade outbreak (clade) annotation
+    if wildcards.species == 'ebov':
+        return "data/ebov/metadata_outbreak-clade.tsv"
+    return f"data/{wildcards.species}/metadata_acessions.tsv"
+
+def metadata_fields(wildcards):
+    config_values = config["curate"]["metadata_columns"]
+    if not wildcards.species == 'ebov':
+        config_values = [x for x in config_values if x!='outbreak']
+    return ",".join(config_values)
+
+    
+
 rule subset_metadata:
     input:
-        metadata="data/all_metadata_added.tsv",
+        metadata=metadata_all_fields,
     output:
-        subset_metadata="data/subset_metadata.tsv",
+        subset_metadata="results/{species}/metadata.tsv",
     params:
-        metadata_fields=",".join(config["curate"]["metadata_columns"]),
+        metadata_fields=metadata_fields,
     benchmark:
-        "benchmarks/subset_metadata.txt"
+        "benchmarks/{species}/subset_metadata.txt"
     log:
-        "logs/subset_metadata.txt"
+        "logs/{species}/subset_metadata.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -316,20 +341,18 @@ rule subset_metadata:
             {input.metadata:q} > {output.subset_metadata:q}
         """
 
-rule extract_open_data:
-    # NOTE: the nextclade translations are not yet subset to open data only
+rule extract_open_seqs_metadata:
+    # NOTE: we don't yet extract open data for the nextclade translations!
     input:
-        metadata = "results/metadata.tsv",
-        sequences = "results/sequences.fasta",
-        alignment = "results/alignment.fasta",
+        metadata = "results/{species}/metadata.tsv",
+        sequences = "results/{species}/sequences.fasta",
     output:
-        metadata = "results/metadata_open.tsv",
-        sequences = "results/sequences_open.fasta",
-        alignment = "results/alignment_open.fasta",
+        metadata = "results/{species}/metadata_open.tsv",
+        sequences = "results/{species}/sequences_open.fasta",
     benchmark:
-        "benchmarks/extract_open_data.txt"
+        "benchmarks/{species}/extract_open_seqs_metadata.txt"
     log:
-        "logs/extract_open_data.txt"
+        "logs/{species}/extract_open_seqs_metadata.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -341,6 +364,25 @@ rule extract_open_data:
             --exclude-where "dataUseTerms=RESTRICTED" \
             --output-metadata {output.metadata:q} \
             --output-sequences {output.sequences:q}
+        """
+
+rule extract_open_alignment:
+    # alignments are only produced for species with a nextclade dataset
+    # which currently is only EBOV 
+    input:
+        metadata = "results/{species}/metadata.tsv",
+        alignment = "results/{species}/alignment.fasta",
+    output:
+        alignment = "results/{species}/alignment_open.fasta",
+    benchmark:
+        "benchmarks/{species}/extract_open_alignment.txt"
+    log:
+        "logs/{species}/extract_open_alignment.txt"
+    wildcard_constraints:
+            species='ebov'
+    shell:
+        r"""
+        exec &> >(tee {log:q})
 
         augur filter \
             --metadata {input.metadata:q} \
