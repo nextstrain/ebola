@@ -1,7 +1,10 @@
-## 2026-04-14T11:55:23Z
+## Unreleased
 
-- Align `pathogen.json` metadata with the current Nextclade schema layout.
+- Add outbreak annotation
+- add GP_003:367 to known stop codons
+- Include 2026 genomes
 
-## 2025-09-24T07:29:03Z
+
+## 2026-05-15T16:16:45Z
 
 Initial release of this dataset.

@@ -164,7 +164,7 @@ rule ancestral:
 rule outbreaks:
     input:
         tree="results/{species}/tree.nwk",
-        clades="defaults/{species}/outbreaks.tsv",
+        clades="dataset_files/{species}/outbreaks.tsv",
         mutations="results/{species}/muts.json",
     output:
         clades="results/{species}/outbreaks.json",
@@ -220,7 +220,8 @@ rule export:
         metadata="results/{species}/metadata.tsv",
         ancestral_seqs="results/{species}/muts.json",
         auspice_config="results/{species}/auspice_config.json",
-        # outbreaks="results/{species}/outbreaks.json",
+        outbreaks="results/{species}/outbreaks.json",
+        description="dataset_files/{species}/description.md",
     output:
         auspice_tree="results/{species}/tree.json",
     shell:
@@ -228,8 +229,9 @@ rule export:
         augur export v2 --tree {input.tree} \
                     --metadata {input.metadata} \
                     --metadata-id-columns accession \
-                    --auspice-config {input.auspice_config} \
-                    --node-data {input.ancestral_seqs} \
+                    --description {input.description} \
+                    --auspice-config {input.auspice_config}  \
+                    --node-data {input.ancestral_seqs} {input.outbreaks}\
                     --include-root-sequence-inline \
                     --output {output.auspice_tree} \
         """
