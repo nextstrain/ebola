@@ -15,10 +15,19 @@ s3_dst: "s3://nextstrain-data/files/workflows/ebola"
 
 # Mapping of files to upload
 files_to_upload:
-  metadata.tsv.zst: results/metadata.tsv
-  metadata_open.tsv.zst: results/metadata_open.tsv
-  sequences.fasta.zst: results/sequences.fasta
-  sequences_open.fasta.zst: results/sequences_open.fasta
-  alignment.fasta.zst: results/alignment.fasta
-  alignment_open.fasta.zst: results/alignment_open.fasta
-  translations.zip: results/translations.zip # note - no 'open' translations yet
+  ebov/metadata.tsv.zst: results/ebov/metadata.tsv
+  ebov/metadata_open.tsv.zst: results/ebov/metadata_open.tsv
+  ebov/sequences.fasta.zst: results/ebov/sequences.fasta
+  ebov/sequences_open.fasta.zst: results/ebov/sequences_open.fasta
+  # Only ebov has Nextclade outputs
+  ebov/alignment.fasta.zst: results/ebov/alignment.fasta
+  ebov/alignment_open.fasta.zst: results/ebov/alignment_open.fasta
+  ebov/translations.zip: results/ebov/translations.zip # note - no 'open' translations yet
+  bdbv/metadata.tsv.zst: results/bdbv/metadata.tsv
+  bdbv/metadata_open.tsv.zst: results/bdbv/metadata_open.tsv
+  bdbv/sequences.fasta.zst: results/bdbv/sequences.fasta
+  bdbv/sequences_open.fasta.zst: results/bdbv/sequences_open.fasta
+  sudv/metadata.tsv.zst: results/sudv/metadata.tsv
+  sudv/metadata_open.tsv.zst: results/sudv/metadata_open.tsv
+  sudv/sequences.fasta.zst: results/sudv/sequences.fasta
+  sudv/sequences_open.fasta.zst: results/sudv/sequences_open.fasta
