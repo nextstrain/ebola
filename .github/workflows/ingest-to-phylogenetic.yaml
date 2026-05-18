@@ -102,7 +102,7 @@ jobs:
 
   phylogenetic:
     needs: [check-new-data]
-    if: ${{ needs.check-new-data.outputs.cache-hit != 'true' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || needs.check-new-data.outputs.cache-hit != 'true' }}
     permissions:
       id-token: write
     uses: nextstrain/.github/.github/workflows/pathogen-repo-build.yaml@master
