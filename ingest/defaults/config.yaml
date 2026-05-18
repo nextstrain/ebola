@@ -5,8 +5,16 @@
 # do not have to dig through the workflows to figure out the default values
 
 ppx_fetch:
-  seqs: https://lapis.pathoplexus.org/ebola-zaire/sample/unalignedNucleotideSequences?versionStatus=LATEST_VERSION
-  meta: https://lapis.pathoplexus.org/ebola-zaire/sample/details?dataFormat=csv&versionStatus=LATEST_VERSION
+  ebov: # zaire
+    seqs: https://lapis.pathoplexus.org/ebola-zaire/sample/unalignedNucleotideSequences?versionStatus=LATEST_VERSION
+    meta: https://lapis.pathoplexus.org/ebola-zaire/sample/details?dataFormat=csv&versionStatus=LATEST_VERSION
+  bdbv:
+    seqs: https://lapis.pathoplexus.org/ebola-bdbv/sample/unalignedNucleotideSequences?versionStatus=LATEST_VERSION
+    meta: https://lapis.pathoplexus.org/ebola-bdbv/sample/details?dataFormat=csv&versionStatus=LATEST_VERSION
+  sudv:
+    seqs: https://lapis.pathoplexus.org/ebola-sudan/sample/unalignedNucleotideSequences?versionStatus=LATEST_VERSION
+    meta: https://lapis.pathoplexus.org/ebola-sudan/sample/details?dataFormat=csv&versionStatus=LATEST_VERSION
+
 
 # Required to fetch from Entrez
 entrez_search_term: "txid186538[Primary Organism]"
@@ -75,7 +83,7 @@ curate:
     "INSDC_accession__url",
     "strain",
     "date",
-    "outbreak",
+    "outbreak", # this is for EBOV datasets only as it requires a nextclade dataset
     "region",
     "country",
     "division",

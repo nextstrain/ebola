@@ -115,10 +115,10 @@ def is_lab_host(row):
     """
     if row['is_lab_host'] is True:
         return True
-    if row['title'] in LAB_TITLES:
+    if row.get('title', '') in LAB_TITLES:
         excluded['title'][row['title']].append(row)
         return True
-    if row['note'] in NOTES:
+    if row.get('note', '') in NOTES:
         excluded['note'][row['note']].append(row)
         return True
     return ''

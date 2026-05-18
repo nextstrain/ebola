@@ -1,15 +1,5 @@
 """
 This part of the workflow handles fetching sequences and metadata from Pathoplexus.
-
-REQUIRED INPUTS:
-
-    None
-
-OUTPUTS:
-
-    data/sequences.ndjson
-    data/ncbi_entrez.ndjson
-
 """
 
 ###########################################################################
@@ -18,15 +8,15 @@ OUTPUTS:
 
 rule download_ppx_seqs:
     output:
-        sequences= "data/ppx_sequences.fasta",
+        sequences= "data/{species}/ppx_sequences.fasta",
     params:
-        sequences_url=config["ppx_fetch"]["seqs"],
+        sequences_url=lambda w: config["ppx_fetch"][w.species]["seqs"],
     # Allow retries in case of network errors
     retries: 5
     benchmark:
-        "benchmarks/download_ppx_seqs.txt"
+        "benchmarks/{species}/download_ppx_seqs.txt"
     log:
-        "logs/download_ppx_seqs.txt"
+        "logs/{species}/download_ppx_seqs.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -36,16 +26,16 @@ rule download_ppx_seqs:
 
 rule download_ppx_meta:
     output:
-        metadata= "data/ppx_metadata.csv"
+        metadata= "data/{species}/ppx_metadata.csv"
     params:
-        metadata_url=config["ppx_fetch"]["meta"],
+        metadata_url=lambda w: config["ppx_fetch"][w.species]["meta"],
         fields = ",".join(config["ppx_metadata_fields"])
     # Allow retries in case of network errors
     retries: 5
     benchmark:
-        "benchmarks/download_ppx_meta.txt"
+        "benchmarks/{species}/download_ppx_meta.txt"
     log:
-        "logs/download_ppx_meta.txt"
+        "logs/{species}/download_ppx_meta.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -55,14 +45,14 @@ rule download_ppx_meta:
 
 rule format_ppx_ndjson:
     input:
-        sequences="data/ppx_sequences.fasta",
-        metadata="data/ppx_metadata.csv"
+        sequences="data/{species}/ppx_sequences.fasta",
+        metadata="data/{species}/ppx_metadata.csv"
     output:
-        ndjson="data/sequences.ndjson"
+        ndjson="data/{species}/sequences.ndjson"
     benchmark:
-        "benchmarks/format_ppx_ndjson.txt"
+        "benchmarks/{species}/format_ppx_ndjson.txt"
     log:
-        "logs/format_ppx_ndjson.txt"
+        "logs/{species}/format_ppx_ndjson.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -78,7 +68,7 @@ rule format_ppx_ndjson:
         """
 
 ###########################################################################
-########################## 2. Fetch from Entrez ###########################
+########### 2. Fetch from Entrez (Zaire Ebolavirus only) ##################
 ###########################################################################
 
 
@@ -86,13 +76,13 @@ rule fetch_from_ncbi_entrez:
     params:
         term=config["entrez_search_term"],
     output:
-        genbank="data/genbank.gb",
+        genbank="data/ebov/genbank.gb", # zaire ebolavirus only
     # Allow retries in case of network errors
     retries: 5
     benchmark:
-        "benchmarks/fetch_from_ncbi_entrez.txt"
+        "benchmarks/ebov/fetch_from_ncbi_entrez.txt"
     log:
-        "logs/fetch_from_ncbi_entrez.txt",
+        "logs/ebov/fetch_from_ncbi_entrez.txt",
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -105,13 +95,13 @@ rule fetch_from_ncbi_entrez:
 
 rule parse_genbank_to_ndjson:
     input:
-        genbank="data/genbank.gb",
+        genbank="data/ebov/genbank.gb",
     output:
-        ndjson="data/ncbi_entrez.ndjson",
+        ndjson="data/ebov/ncbi_entrez.ndjson",
     benchmark:
-        "benchmarks/parse_genbank_to_ndjson.txt"
+        "benchmarks/ebov/parse_genbank_to_ndjson.txt"
     log:
-        "logs/parse_genbank_to_ndjson.txt"
+        "logs/ebov/parse_genbank_to_ndjson.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -130,11 +120,11 @@ rule parse_genbank_to_ndjson:
         """
 
 ###########################################################################
-########################## 3. Fetch from INRB #############################
+############# 3. Fetch from INRB (Zaire Ebolavirus only) ##################
 ###########################################################################
 
 rule fetch_inrb_nord_kivu_metadata:
-    output: "data/inrb-drc-nord-kivu-metadata.tsv"
+    output: "data/ebov/inrb-drc-nord-kivu-metadata.tsv"
     shell:
         r"""
         curl -fsSL https://github.com/inrb-drc/ebola-nord-kivu/raw/ba9b9b48ba1e8db83486d653f3043d9671611594/data/metadata.tsv -o {output:q}
