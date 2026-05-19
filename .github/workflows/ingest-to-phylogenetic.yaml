@@ -41,7 +41,7 @@ jobs:
     permissions:
       id-token: write
     uses: nextstrain/.github/.github/workflows/pathogen-repo-build.yaml@master
-    secrets: inherit  
+    secrets: inherit
     with:
       runtime: docker
       env: |
@@ -49,14 +49,14 @@ jobs:
       run: |
         nextstrain build ingest \
           upload_all \
-          --configfile build-configs/nextstrain-automation/config.yaml 
+          --configfile build-configs/nextstrain-automation/config.yaml
       # Specifying artifact name to differentiate ingest build outputs from the phylogenetic build outputs
       artifact-name: ingest-output
       artifact-paths: |
         ingest/benchmarks/
         ingest/logs/
         ingest/.snakemake/log/
-  
+
 
   # Check if ingest results include new data by checking for the cache
   # of the file with the results' Metadata.sh256sum (which should have been added within upload-to-s3)
@@ -74,7 +74,7 @@ jobs:
           AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
         run: |
           s3_urls=(
-            "s3://nextstrain-data/files/workflows/ebola/metadata.tsv.zst"
+            "s3://nextstrain-data/files/workflows/ebola/ebov/metadata.tsv.zst"
           )
 
           # Code below is modified from ingest/upload-to-s3
@@ -102,7 +102,7 @@ jobs:
 
   phylogenetic:
     needs: [check-new-data]
-    if: ${{ needs.check-new-data.outputs.cache-hit != 'true' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || needs.check-new-data.outputs.cache-hit != 'true' }}
     permissions:
       id-token: write
     uses: nextstrain/.github/.github/workflows/pathogen-repo-build.yaml@master

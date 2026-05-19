@@ -5,13 +5,13 @@ Note: This does not conform to our modern config-based workflow.
 """
 
 inputs = {
-    "metadata": "s3://nextstrain-data/files/workflows/ebola/metadata.tsv.zst",
-    "alignment": "s3://nextstrain-data/files/workflows/ebola/alignment.fasta.zst",
-    "translations": "s3://nextstrain-data/files/workflows/ebola/translations.zip",
+    "metadata": "s3://nextstrain-data/files/workflows/ebola/ebov/metadata.tsv.zst",
+    "alignment": "s3://nextstrain-data/files/workflows/ebola/ebov/alignment.fasta.zst",
+    "translations": "s3://nextstrain-data/files/workflows/ebola/ebov/translations.zip",
 } if config.get('s3', False) is True else {
-    "metadata": "../ingest/results/metadata.tsv",
-    "alignment": "../ingest/results/alignment.fasta",
-    "translations": "../ingest/results/translations.zip",
+    "metadata": "../ingest/results/ebov/metadata.tsv",
+    "alignment": "../ingest/results/ebov/alignment.fasta",
+    "translations": "../ingest/results/ebov/translations.zip",
 }
 
 include: "../../shared/vendored/snakemake/remote_files.smk"
@@ -100,7 +100,7 @@ rule refine:
     shell:
         r"""
         exec &> >(tee {log:q})
-        
+
         augur refine \
             --tree {input.tree:q} \
             --keep-root \
@@ -119,7 +119,7 @@ rule unzip_translations:
         exec &> >(tee {log:q})
 
         mkdir -p results/translations
-        
+
         unzip -o {input[0]} -d results/translations
         """
 

@@ -8,7 +8,7 @@ workdir: workflow.current_basedir
 # Use default configuration values. Override with Snakemake's --configfile/--config options.
 configfile: "defaults/config.yaml"
 
-SPECIES = ['ebov', 'bdbv', 'sudv']
+SPECIES = config["species"]
 
 # This is the default rule that Snakemake will run when there are no specified targets.
 # The default output of the ingest workflow is usually the curated metadata and sequences.
