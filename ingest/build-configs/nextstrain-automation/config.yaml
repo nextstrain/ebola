@@ -1,6 +1,10 @@
 # This configuration file should contain all required configuration parameters
 # for the ingest workflow to run with additional Nextstrain automation rules.
 
+# Only run ebov because the bdbv/sudv workflows are not set up to pull data from S3
+species:
+  - ebov
+
 # Custom rules to run as part of the Nextstrain automated workflow
 # The paths should be relative to the ingest directory.
 custom_rules:
@@ -19,15 +23,6 @@ files_to_upload:
   ebov/metadata_open.tsv.zst: results/ebov/metadata_open.tsv
   ebov/sequences.fasta.zst: results/ebov/sequences.fasta
   ebov/sequences_open.fasta.zst: results/ebov/sequences_open.fasta
-  # Only ebov has Nextclade outputs
   ebov/alignment.fasta.zst: results/ebov/alignment.fasta
   ebov/alignment_open.fasta.zst: results/ebov/alignment_open.fasta
   ebov/translations.zip: results/ebov/translations.zip # note - no 'open' translations yet
-  bdbv/metadata.tsv.zst: results/bdbv/metadata.tsv
-  bdbv/metadata_open.tsv.zst: results/bdbv/metadata_open.tsv
-  bdbv/sequences.fasta.zst: results/bdbv/sequences.fasta
-  bdbv/sequences_open.fasta.zst: results/bdbv/sequences_open.fasta
-  sudv/metadata.tsv.zst: results/sudv/metadata.tsv
-  sudv/metadata_open.tsv.zst: results/sudv/metadata_open.tsv
-  sudv/sequences.fasta.zst: results/sudv/sequences.fasta
-  sudv/sequences_open.fasta.zst: results/sudv/sequences_open.fasta
