@@ -53,7 +53,7 @@
   ],
   "display_defaults": {
     "tip_label": "strain",
-    "color_by": "year",
+    "color_by": "date",
     "geo_resolution": "division"
   },
   "filters": [
