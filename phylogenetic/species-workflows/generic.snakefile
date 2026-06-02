@@ -85,7 +85,9 @@ rule tree:
     shell:
         """
         augur tree \
+            --method iqtree \
             --alignment {input.aligned} \
+            --tree-builder-args="--polytomy" \
             --output {output.tree}
         """
 
