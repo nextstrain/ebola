@@ -12,6 +12,8 @@ env.d/
 
 # Snakemake
 .snakemake/
+# PDFs of snakemake DAGs, often created during development work
+dag*.pdf
 
 # For Python #
 ##############
