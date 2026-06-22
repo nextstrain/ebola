@@ -21,3 +21,21 @@ builds:
    - sudv/all-outbreaks
    - ebov/all-outbreaks
 
+nextclade:
+  ebov:
+    dataset-name: nextstrain/orthoebolavirus/ebov
+    columns:
+      - [clade, outbreak]
+      - [qc.overallStatus, nextclade_qc]
+      - [coverage, genome_coverage]
+  bdbv:
+    dataset-name: nextstrain/orthoebolavirus/bdbv 
+    columns:
+      - [outbreak, outbreak]
+      - [qc.overallStatus, nextclade_qc]
+      - [coverage, genome_coverage]
+  sudv:
+    dataset-name: nextstrain/orthoebolavirus/sudv
+    columns:
+      - [qc.overallStatus, nextclade_qc]
+      - [coverage, genome_coverage]

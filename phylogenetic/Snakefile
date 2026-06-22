@@ -15,11 +15,12 @@ validate_config()
 
 include: "../shared/vendored/snakemake/remote_files.smk"
 include: "rules/multiple_inputs.smk"
+include: "rules/nextclade.smk"
 
 SPECIES = [b.split('/')[0] for b in config['builds']]
 
 rule all:
     input:
         # TODO - update as capabilities added...
-        expand("results/{species}/sequences.fasta", species=SPECIES),
-        expand("results/{species}/metadata.tsv", species=SPECIES),
+        expand("results/{species}/alignment.fasta", species=SPECIES),
+        expand("results/{species}/metadata_extended.tsv", species=SPECIES),
