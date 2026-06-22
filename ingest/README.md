@@ -2,10 +2,24 @@
 
 This workflow ingests public data from Pathoplexus and outputs curated metadata
 and sequences that can be used as input for the phylogenetic workflow.
+We currently ingest data for three species:
+  - ebov (_Zaire ebolavirus_)
+  - bdbv (_Bundibugyo ebolavirus_)
+  - sudv (_Sudan ebolavirus_)
+
+and for each species we produce a separate sequences FASTA & metadata TSV for open and [restricted](<https://pathoplexus.org/about/terms-of-use/restricted-data>) data.
+
 
 If you have another data source or private data that needs to be formatted for
 the phylogenetic workflow, then you can use a similar workflow to curate your
 own data.
+
+## TL;DR
+
+```
+cd ingest
+snakemake --cores 4 -pf --forceall
+```
 
 ## Workflow Usage
 
@@ -22,8 +36,26 @@ nextstrain build .
 
 This produces the default outputs of the ingest workflow:
 
-- metadata      = results/metadata.tsv
-- sequences     = results/sequences.fasta
+```
+results/
+├── bdbv
+│   ├── metadata_open.tsv
+│   ├── metadata_restricted.tsv
+│   ├── sequences_open.fasta
+│   └── sequences_restricted.fasta
+├── ebov
+│   ├── metadata_open.tsv
+│   ├── metadata_restricted.tsv
+│   ├── sequences_open.fasta
+│   └── sequences_restricted.fasta
+└── sudv
+    ├── metadata_open.tsv
+    ├── metadata_restricted.tsv
+    ├── sequences_open.fasta
+    └── sequences_restricted.fasta
+
+
+```
 
 ## Defaults
 
@@ -44,25 +76,6 @@ inputs/outputs should be relative to the ingest directory.
 Modules are all [included](https://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html#includes)
 in the main Snakefile in the order that they are expected to run.
 
-### Nextclade
-
-Nextstrain is pushing to standardize ingest workflows with Nextclade runs to include Nextclade outputs in our publicly
-hosted data. However, if a Nextclade dataset does not already exist, it requires curated data as input, so we are making
-Nextclade steps optional here.
-
-If Nextclade config values are included, the Nextclade rules will create the final metadata TSV by joining the Nextclade
-output with the metadata. If Nextclade configs are not included, we rename the subset metadata TSV to the final metadata TSV.
-
-To run Nextclade rules, include the `defaults/nextclade_config.yaml` config file with:
-
-```
-nextstrain build ingest --configfile defaults/nextclade_config.yaml
-```
-
-> [!TIP]
-> If the Nextclade dataset is stable and you always want to run the Nextclade rules as part of ingest, we recommend
-moving the Nextclade related config parameters from the `defaults/nextclade_config.yaml` file to the default config file
-`defaults/config.yaml`.
 
 ## Build configs
 

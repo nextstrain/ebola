@@ -1,10 +1,6 @@
 # This configuration file should contain all required configuration parameters
 # for the ingest workflow to run with additional Nextstrain automation rules.
 
-# Only run ebov because the bdbv/sudv workflows are not set up to pull data from S3
-species:
-  - ebov
-
 # Custom rules to run as part of the Nextstrain automated workflow
 # The paths should be relative to the ingest directory.
 custom_rules:
@@ -19,10 +15,18 @@ s3_dst: "s3://nextstrain-data/files/workflows/ebola"
 
 # Mapping of files to upload
 files_to_upload:
-  ebov/metadata.tsv.zst: results/ebov/metadata.tsv
   ebov/metadata_open.tsv.zst: results/ebov/metadata_open.tsv
-  ebov/sequences.fasta.zst: results/ebov/sequences.fasta
+  ebov/metadata_restricted.tsv.zst: results/ebov/metadata_restricted.tsv
   ebov/sequences_open.fasta.zst: results/ebov/sequences_open.fasta
-  ebov/alignment.fasta.zst: results/ebov/alignment.fasta
-  ebov/alignment_open.fasta.zst: results/ebov/alignment_open.fasta
-  ebov/translations.zip: results/ebov/translations.zip # note - no 'open' translations yet
+  ebov/sequences_restricted.fasta.zst: results/ebov/sequences_restricted.fasta
+
+  bdbv/metadata_open.tsv.zst: results/bdbv/metadata_open.tsv
+  bdbv/metadata_restricted.tsv.zst: results/bdbv/metadata_restricted.tsv
+  bdbv/sequences_open.fasta.zst: results/bdbv/sequences_open.fasta
+  bdbv/sequences_restricted.fasta.zst: results/bdbv/sequences_restricted.fasta
+
+  sudv/metadata_open.tsv.zst: results/sudv/metadata_open.tsv
+  sudv/metadata_restricted.tsv.zst: results/sudv/metadata_restricted.tsv
+  sudv/sequences_open.fasta.zst: results/sudv/sequences_open.fasta
+  sudv/sequences_restricted.fasta.zst: results/sudv/sequences_restricted.fasta
+  

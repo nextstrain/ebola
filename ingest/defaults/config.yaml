@@ -87,7 +87,6 @@ curate:
     "INSDC_accession__url",
     "strain",
     "date",
-    "outbreak", # this is for EBOV datasets only as it requires a nextclade dataset
     "region",
     "country",
     "division",
