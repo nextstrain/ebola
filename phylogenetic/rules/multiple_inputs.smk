@@ -1,157 +1,88 @@
-"""
-This part of the workflow merges inputs based on what is defined in the config.
 
-OUTPUTS:
+def _gather_inputs(species):
+    """Inputs ('inputs' + 'additional_inputs') are validated and collected for
+    each species independently
+    """
 
-    metadata  = results/metadata.tsv
-    sequences = results/sequences.fasta
-
-The config dict is expected to have a top-level `inputs` list that defines the
-separate inputs' name, metadata, and sequences. Optionally, the config can have
-a top-level `additional-inputs` list that is used to define additional data that
-are combined with the default inputs:
-
-```yaml
-inputs:
-    - name: default
-      metadata: <path-or-url>
-      sequences: <path-or-url>
-
-additional_inputs:
-    - name: private
-      metadata: <path-or-url>
-      sequences: <path-or-url>
-```
-
-Supports any of the compression formats that are supported by `augur read-file`,
-see <https://docs.nextstrain.org/projects/augur/page/usage/cli/read-file.html>
-"""
-from pathlib import Path
-
-
-def _gather_inputs():
-    all_inputs = [*config['inputs'], *config.get('additional_inputs', [])]
-
+    # Note: some basic checking of the expected structures done ahead-of-time in validate_config
+    all_inputs = [i for i in [*config['inputs'], *config.get('additional_inputs', [])] if i['species']==species]
+    
     if len(all_inputs)==0:
-        raise InvalidConfigError("Config must define at least one element in config.inputs or config.additional_inputs lists")
-    if not all([isinstance(i, dict) for i in all_inputs]):
-        raise InvalidConfigError("All of the elements in config.inputs and config.additional_inputs lists must be dictionaries. "
-            "If you've used a command line '--config' double check your quoting.")
+        raise InvalidConfigError("Config must define at least one element in config.inputs or config.additional_inputs lists"
+            f"for species {species!r}, as this species was part of the config-specified builds")
     if len({i['name'] for i in all_inputs})!=len(all_inputs):
-        raise InvalidConfigError("Names of inputs (config.inputs and config.additional_inputs) must be unique")
+        raise InvalidConfigError(f"Names of inputs (config.inputs and config.additional_inputs) must be unique for species {species!r}")
     if not all(['name' in i and ('sequences' in i or 'metadata' in i) for i in all_inputs]):
-        raise InvalidConfigError("Each input (config.inputs and config.additional_inputs) must have a 'name' and 'metadata' and/or 'sequences'")
+        raise InvalidConfigError(f"Each input (config.inputs and config.additional_inputs) must have a 'name', and 'metadata' and/or 'sequences' for species {species!r}")
     if not any(['metadata' in i for i in all_inputs]):
-        raise InvalidConfigError("At least one input must have 'metadata'")
+        raise InvalidConfigError(f"At least one input must have 'metadata' for species {species!r}")
     if not any (['sequences' in i for i in all_inputs]):
-        raise InvalidConfigError("At least one input must have 'sequences'")
+        raise InvalidConfigError(f"At least one input must have 'sequences' for species {species!r}")
 
-    available_keys = set(['name', 'metadata', 'sequences'])
+    available_keys = set(['name', 'species', 'metadata', 'sequences'])
     if any([len(set(el.keys())-available_keys)>0 for el in all_inputs]):
         raise InvalidConfigError(f"Each input (config.inputs and config.additional_inputs) can only include keys of {', '.join(available_keys)}")
 
-    return {el['name']: {k:(v if k=='name' else path_or_url(v)) for k,v in el.items()} for el in all_inputs}
-
-input_sources = _gather_inputs()
-_input_metadata = [info['metadata'] for info in input_sources.values() if info.get('metadata', None)]
-_input_sequences = [info['sequences'] for info in input_sources.values() if info.get('sequences', None)]
+    return {el['name']: {k:(v if k in ['name', 'species'] else path_or_url(v)) for k,v in el.items()} for el in all_inputs}
 
 
-if len(_input_metadata) == 1:
+def _named_metadata_files(wildcards):
+    inputs = _gather_inputs(wildcards.species)
+    return [(name, info['metadata']) for name, info in inputs.items() if info.get('metadata')]
 
-    rule decompress_metadata:
-        """
-        This rule is invoked when there is a single metadata input to
-        ensure that we have a decompressed input for downstream rules to match
-        the output of rule.merge_metadata.
-        """
-        input:
-            metadata = _input_metadata[0],
-        output:
-            metadata = "results/metadata.tsv",
-        log:
-            "logs/decompress_metadata.txt",
-        benchmark:
-            "benchmarks/decompress_metadata.txt",
-        shell:
-            r"""
-            exec &> >(tee {log:q})
+def _named_sequence_files(wildcards):
+    inputs = _gather_inputs(wildcards.species)
+    return [(name, info['sequences']) for name, info in inputs.items() if info.get('sequences')]
 
-            augur read-file {input.metadata:q} > {output.metadata:q}
-            """
 
-else:
+rule gather_metadata:
+    """Produce a canonical (per-species) metadata table from a single input or multiple inputs"""
+    input:
+        lambda w: [meta for _name, meta in _named_metadata_files(w)],
+    params:
+        n = lambda w, input: len(input),
+        pairs = lambda w: [f"{name}={meta}" for name, meta in _named_metadata_files(w)],
+        id_field = config['strain_id_field'],
+    output:
+        metadata = "results/{species}/metadata.tsv"
+    benchmark:
+        "benchmarks/{species}/gather_metadata.txt"
+    log:
+        "logs/{species}/gather_metadata.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
 
-    rule merge_metadata:
-        """
-        This rule is invoked when there are multiple defined metadata inputs
-        (config.inputs + config.additional_inputs)
-        """
-        input:
-            **{name: info['metadata'] for name,info in input_sources.items() if info.get('metadata', None)}
-        params:
-            metadata = lambda w, input: list(map("=".join, input.items())),
-            id_field = config['strain_id_field'],
-        output:
-            metadata = "results/metadata.tsv"
-        log:
-            "logs/merge_metadata.txt",
-        benchmark:
-            "benchmarks/merge_metadata.txt"
-        shell:
-            r"""
-            exec &> >(tee {log:q})
-
-            augur merge \
-                --metadata {params.metadata:q} \
+        if [[ {params.n} -eq 1 ]]; then
+            augur read-file {input:q} > {output.metadata:q}
+        else
+            augur merge --metadata {params.pairs:q} \
                 --metadata-id-columns {params.id_field:q} \
                 --output-metadata {output.metadata:q}
-            """
-
-
-if len(_input_sequences) == 1:
-
-    rule decompress_sequences:
+        fi
         """
-        This rule is invoked when there is a single sequences input to
-        ensure that we have a decompressed input for downstream rules to match
-        the output of rule.merge_sequences.
-        """
-        input:
-            sequences = _input_sequences[0],
-        output:
-            sequences = "results/sequences.fasta",
-        log:
-            "logs/decompress_sequences.txt",
-        benchmark:
-            "benchmarks/decompress_sequences.txt",
-        shell:
-            r"""
-            exec &> >(tee {log:q})
 
-            augur read-file {input.sequences:q} > {output.sequences:q}
-            """
+rule gather_sequences:
+    """Produce a canonical (per-species) set of sequences from a single input or multiple inputs"""
+    input:
+        lambda w: [seqs for _name, seqs in _named_sequence_files(w)],
+    params:
+        n = lambda w, input: len(input),
+        id_field = config['strain_id_field'],
+    output:
+        sequences = "results/{species}/sequences.fasta"
+    benchmark:
+        "benchmarks/{species}/gather_sequences.txt"
+    log:
+        "logs/{species}/gather_sequences.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
 
-else:
-
-    rule merge_sequences:
-        """
-        This rule is invoked when there are multiple defined sequences inputs
-        (config.inputs + config.additional_inputs)
-        """
-        input:
-            **{name: info['sequences'] for name,info in input_sources.items() if info.get('sequences', None)}
-        output:
-            sequences = "results/sequences.fasta",
-        log:
-            "logs/merge_sequences.txt",
-        benchmark:
-            "benchmarks/merge_sequences.txt"
-        shell:
-            r"""
-            exec &> >(tee {log:q})
-
-            augur merge \
-                --sequences {input:q} \
+        if [[ {params.n} -eq 1 ]]; then
+            augur read-file {input:q} > {output.sequences:q}
+        else
+            augur merge --sequences {input:q} \
                 --output-sequences {output.sequences:q}
-            """
+        fi
+        """

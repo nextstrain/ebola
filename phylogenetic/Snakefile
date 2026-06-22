@@ -1,0 +1,25 @@
+from snakemake.utils import min_version
+import os 
+
+# Minimum Snakemake version needed for the storage plugins used in remote_files.smk
+min_version("8.0.0")
+
+# Set up config structure first
+include: "../shared/vendored/snakemake/config.smk"
+include: "rules/config.smk"
+
+configfile: os.path.join(workflow.basedir, 'defaults', 'config.yaml')
+if os.path.exists("config.yaml"):
+    configfile: "config.yaml"
+validate_config()
+
+include: "../shared/vendored/snakemake/remote_files.smk"
+include: "rules/multiple_inputs.smk"
+
+SPECIES = [b.split('/')[0] for b in config['builds']]
+
+rule all:
+    input:
+        # TODO - update as capabilities added...
+        expand("results/{species}/sequences.fasta", species=SPECIES),
+        expand("results/{species}/metadata.tsv", species=SPECIES),

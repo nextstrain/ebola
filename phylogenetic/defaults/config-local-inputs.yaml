@@ -1,0 +1,31 @@
+# This config sources inputs from the local ingest directory
+# It will not work for external analysis directories, as input paths are evaluated
+# relative to the analysis directory.
+# These inputs use RESTRICTED Pathoplexus data
+
+inputs:
+  - name: ppx_open
+    species: ebov
+    metadata: ../ingest/results/ebov/metadata_open.tsv
+    sequences: ../ingest/results/ebov/sequences_open.fasta
+  - name: ppx_restricted
+    species: ebov
+    metadata: ../ingest/results/ebov/metadata_restricted.tsv
+    sequences: ../ingest/results/ebov/sequences_restricted.fasta
+  - name: ppx_open
+    species: bdbv
+    metadata: ../ingest/results/bdbv/metadata_open.tsv
+    sequences: ../ingest/results/bdbv/sequences_open.fasta
+  - name: ppx_restricted
+    species: bdbv
+    metadata: ../ingest/results/bdbv/metadata_restricted.tsv
+    sequences: ../ingest/results/bdbv/sequences_restricted.fasta
+  - name: ppx_open
+    species: sudv
+    metadata: ../ingest/results/sudv/metadata_open.tsv
+    sequences: ../ingest/results/sudv/sequences_open.fasta
+  # TEMPORARY: make sudv a single-input source (it has no restricted data anyway) to test single-input behaviour
+  # - name: ppx_restricted
+  #   species: sudv
+  #   metadata: ../ingest/results/sudv/metadata_restricted.tsv
+  #   sequences: ../ingest/results/sudv/sequences_restricted.fasta
