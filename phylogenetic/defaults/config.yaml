@@ -18,8 +18,10 @@ strain_id_field: accession # TODO XXX - this isn't ergonomic for injecting priva
 
 builds:
    - bdbv/all-outbreaks
+   - bdbv/2026 # TODO XXX - is this the best name?
    - sudv/all-outbreaks
    - ebov/all-outbreaks
+   - ebov/west-africa-2014
 
 nextclade:
   ebov:
@@ -39,3 +41,38 @@ nextclade:
     columns:
       - [qc.overallStatus, nextclade_qc]
       - [coverage, genome_coverage]
+
+# See <https://docs.nextstrain.org/projects/augur/en/latest/usage/cli/subsample.html> for subsample
+# config schema docs
+subsample:
+  ebov/all-outbreaks:
+    samples:
+      everything:
+         min_length: 18000
+         include: defaults/include_ebov_all-outbreaks.txt
+         group_by: [outbreak, country, year]
+         sequences_per_group: 25
+         exclude_where: is_lab_host=true
+  ebov/west-africa-2014:
+    samples:
+      outbreak:
+        min_length: 18000
+        include: defaults/include_ebov_west-africa-2014.txt
+        group_by: [division, year, month]
+        sequences_per_group: 30
+        exclude_where: is_lab_host=true
+        query: '(outbreak=="Ebov-2013" | outbreak=="Ebov-2013/r2021")'
+  bdbv/all-outbreaks:
+    samples:
+      everything:
+         min_length: 5000
+  bdbv/2026:
+    samples:
+      outbreak:
+        min_length: 5000
+        exclude_where: outbreak!=Bdbv-2026
+  sudv/all-outbreaks:
+    samples:
+      everything:
+        min_length: 5000
+        exclude: defaults/exclude_sudv.txt

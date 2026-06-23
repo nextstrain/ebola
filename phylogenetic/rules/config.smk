@@ -32,3 +32,9 @@ def validate_config():
         raise InvalidConfigError("onfig.builds must be a list with at least one value; values must be strings")
     if not all([len(b.split('/'))==2 for b in config['builds']]):
         raise InvalidConfigError("Each value in config.builds must have the format {species}/{build}, e.g. 'ebov/all-outbreaks'")
+
+def write_subsample_configs():
+    for build_pair in config["builds"]:
+        species, build = build_pair.split('/')
+        write_config(f"results/{species}/{build}/subsample_config.yaml", section=["subsample", build_pair])
+

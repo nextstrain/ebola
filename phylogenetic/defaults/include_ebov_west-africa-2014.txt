@@ -1,0 +1,2 @@
+# west-africa flare-up index case. GenBank KR817153. Current strain: Guinea/PP_000LGK6.3/2014-11-03; former strain name: GIN/2014/Makona-EM_076610
+PP_000LGK6 

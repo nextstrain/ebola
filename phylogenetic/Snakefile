@@ -12,15 +12,22 @@ configfile: os.path.join(workflow.basedir, 'defaults', 'config.yaml')
 if os.path.exists("config.yaml"):
     configfile: "config.yaml"
 validate_config()
+write_subsample_configs()
+
+# certain commands (but not all) use SEARCH_PATHS
+SEARCH_PATHS = [workflow.basedir, os.getcwd()]
+
+wildcard_constraints:
+    species=r"[^/_]+",
+    build=r"[^/_]+",
 
 include: "../shared/vendored/snakemake/remote_files.smk"
 include: "rules/multiple_inputs.smk"
 include: "rules/nextclade.smk"
+include: "rules/subsample.smk"
 
-SPECIES = [b.split('/')[0] for b in config['builds']]
 
 rule all:
     input:
         # TODO - update as capabilities added...
-        expand("results/{species}/alignment.fasta", species=SPECIES),
-        expand("results/{species}/metadata_extended.tsv", species=SPECIES),
+        expand("results/{build_pair}/subsampled.fasta", build_pair=config['builds']),
