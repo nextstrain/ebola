@@ -25,9 +25,10 @@ include: "../shared/vendored/snakemake/remote_files.smk"
 include: "rules/multiple_inputs.smk"
 include: "rules/nextclade.smk"
 include: "rules/subsample.smk"
+include: "rules/construct_phylogeny.smk"
 
 
 rule all:
     input:
         # TODO - update as capabilities added...
-        expand("results/{build_pair}/subsampled.fasta", build_pair=config['builds']),
+        expand("results/{build_pair}/tree.nwk", build_pair=config['builds']),
