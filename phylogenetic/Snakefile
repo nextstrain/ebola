@@ -8,6 +8,11 @@ min_version("8.0.0")
 include: "../shared/vendored/snakemake/config.smk"
 include: "rules/config.smk"
 
+print("Relative filepaths will be searched for using the `AUGUR_SEARCH_PATHS`"
+   " env variable, which has the following directories:"
+    "\n\t" + "\n\t".join(os.environ["AUGUR_SEARCH_PATHS"].split(':')) + "\n",
+    file=sys.stderr)
+
 configfile: os.path.join(workflow.basedir, 'defaults', 'config.yaml')
 if os.path.exists("config.yaml"):
     configfile: "config.yaml"

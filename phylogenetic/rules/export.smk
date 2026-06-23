@@ -38,7 +38,7 @@ def _warning(wildcards):
     if warning:=block.get('warning'):
         return ['--warning', warning]
     if warning_file:=block.get('warning_file'):
-        return ['--warning', resolve_config_path(warning_file, workflow.basedir)({})]
+        return ['--warning', resolve_config_path(warning_file)({})]
     return []
 
 
@@ -49,7 +49,7 @@ def _description(wildcards):
     is resolved (and thus must exist).
     """
     if fname:=config['export'][f"{wildcards.species}/{wildcards.build}"].get('description'):
-        return ['--description', resolve_config_path(fname, workflow.basedir)({})]
+        return ['--description', resolve_config_path(fname)({})]
     return []
 
 def _colors(wildcards):
@@ -58,7 +58,7 @@ def _colors(wildcards):
     colors (if defined in config).
     """
     if fname:=config['export'][f"{wildcards.species}/{wildcards.build}"].get('colors'):
-        return ['--colors', resolve_config_path(fname, workflow.basedir)({})]
+        return ['--colors', resolve_config_path(fname)({})]
     return []
 
 
@@ -81,7 +81,7 @@ def _auspice_configs(wildcards):
     """
     build = config['export'][f"{wildcards.species}/{wildcards.build}"]
     jsons = [
-        resolve_config_path(build['auspice_config'], workflow.basedir)({}),
+        resolve_config_path(build['auspice_config'])({}),
     ]
     if _uses_sampling_year(wildcards):
         jsons.append(f"results/{wildcards.species}/{wildcards.build}/sampling-year.config.json")

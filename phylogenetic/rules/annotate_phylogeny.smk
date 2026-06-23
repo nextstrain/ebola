@@ -5,7 +5,7 @@ def _root_seq(wildcards):
     which avoids the need to use Snakemake's input functionaly.
     """
     if p:=config['ancestral'][f"{wildcards.species}/{wildcards.build}"].get('root-sequence', False):
-        resolved = resolve_config_path(p, workflow.basedir)({})
+        resolved = resolve_config_path(p)({})
         return ['--root-sequence', resolved]
     return []
 
@@ -15,7 +15,7 @@ rule ancestral:
     input:
         tree = "results/{species}/{build}/tree.nwk",
         alignment = "results/{species}/{build}/subsampled.fasta", # unmasked
-        annotation = lambda w: resolve_config_path(config['ancestral'][f"{w.species}/{w.build}"]['annotation'], workflow.basedir)({}),
+        annotation = lambda w: resolve_config_path(config['ancestral'][f"{w.species}/{w.build}"]['annotation'])({}),
     output:
         node_data = "results/{species}/{build}/muts.json"
     params:

@@ -6,15 +6,13 @@ rule subsample:
         config = "results/{species}/{build}/subsample_config.yaml",
         sequences = "results/{species}/alignment.fasta",
         metadata = "results/{species}/metadata_extended.tsv",
-        referenced_files = lambda w: get_referenced_files(f"results/{w.species}/{w.build}/subsample_config.yaml",
-            None, # config section to navigate to
-            SEARCH_PATHS),
+        # note: get_referenced_files will use the env variable AUGUR_SEARCH_PATHS
+        referenced_files = lambda w: get_referenced_files(f"results/{w.species}/{w.build}/subsample_config.yaml")
     output:
         sequences = "results/{species}/{build}/subsampled.fasta",
         metadata = "results/{species}/{build}/metadata.tsv",
     params:
         id_field = config['strain_id_field'],
-        search_paths = SEARCH_PATHS,
     log:
         "logs/{species}/{build}/subsample.txt",
     benchmark:
@@ -25,7 +23,6 @@ rule subsample:
 
         augur subsample \
             --config {input.config} \
-            --search-paths {params.search_paths} \
             --sequences {input.sequences} \
             --metadata {input.metadata} \
             --metadata-id-columns {params.id_field} \
