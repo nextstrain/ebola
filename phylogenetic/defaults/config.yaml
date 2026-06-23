@@ -114,3 +114,62 @@ refine:
     --date-inference marginal
     --coalescent skyline
     --date-confidence
+
+# Ancestral per-build blocks may define 'inference' & 'root-sequence'
+# Leave out (or falsify) a build to skip ancestral inference
+ancestral:
+  ebov/all-outbreaks: &ebov_ancestral
+    genes: NP VP35 VP40 GP sGP ssGP VP30 VP24 L
+    annotation: ../shared/zaire/reference.gb
+  ebov/west-africa-2014:
+    <<: *ebov_ancestral
+  sudv/all-outbreaks:
+    genes: NP VP35 VP40 GP sGP ssGP VP30 VP24 L
+    annotation: ../shared/sudan/reference.gb
+  bdbv/all-outbreaks: &bdbv_ancestral
+    genes: NP VP35 VP40 GP GP_003 VP30 VP24 L
+    annotation: ../shared/bdbv/reference.gb
+  bdbv/2026:
+    <<: *bdbv_ancestral
+
+# Leave out (or falsify) a build to skip trait reconstruction
+traits:
+  ebov/west-africa-2014:
+    columns: [country, division]
+    confidence: true
+
+sampling_year_coloring:
+  bdbv/all-outbreaks: true
+  sudv/all-outbreaks: true
+  ebov/all-outbreaks: true
+  ebov/west-africa-2014: true
+
+
+label_outbreaks:
+  ebov/all-outbreaks: true
+
+# Export block:
+# warning (string) takes precedence over warning_file (filename)
+# per-build lat-longs can be provided which will be combined with the repo's hardcoded defaults/lat_longs.tsv
+export:
+  ebov/all-outbreaks:
+    auspice_config: defaults/auspice-config_ebov_all-outbreaks.json
+    description: defaults/description_ebov_all-outbreaks.md
+    warning_file: defaults/warning_ebov_all-outbreaks.md
+  ebov/west-africa-2014:
+    auspice_config: defaults/auspice-config_ebov_west-africa-2014.json
+    description: defaults/description_ebov_west-africa-2014.md
+    warning_file: defaults/description_ebov_west-africa-2014.md # same file is both description & warning
+  sudv/all-outbreaks:
+    auspice_config: defaults/auspice-config_sudv_all-outbreaks.json
+    description: ../nextclade/defaults/description.md
+  bdbv/all-outbreaks:
+    auspice_config: defaults/auspice-config_bdbv_all-outbreaks.json
+    description: ../nextclade/defaults/description.md
+    warning: &bdbv_warning >-
+      This dataset sources RESTRICTED sequences from [Pathoplexus](https://pathoplexus.org/).
+      Please see [virological](https://virological.org/t/initial-genomes-from-may-2026-bundibugyo-virus-disease-outbreak-in-the-democratic-republic-of-the-congo-and-uganda/1032) for more detail on the ongoing outbreak in DRC & Uganda.
+  bdbv/2026:
+    auspice_config: defaults/auspice-config_bdbv_all-outbreaks.json # TODO XXX
+    description: ../nextclade/defaults/description.md
+    warning: *bdbv_warning

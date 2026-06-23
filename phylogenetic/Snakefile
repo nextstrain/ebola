@@ -26,9 +26,9 @@ include: "rules/multiple_inputs.smk"
 include: "rules/nextclade.smk"
 include: "rules/subsample.smk"
 include: "rules/construct_phylogeny.smk"
-
+include: "rules/annotate_phylogeny.smk"
+include: "rules/export.smk"
 
 rule all:
     input:
-        # TODO - update as capabilities added...
-        expand("results/{build_pair}/tree.nwk", build_pair=config['builds']),
+        expand("auspice/ebola_{build_pair}.json", build_pair=[b.replace('/', '_') for b in config['builds']]),

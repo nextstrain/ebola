@@ -55,11 +55,12 @@ def suggest_colors(years, fname):
         "scale": [[year, c[idx]] for idx,year in enumerate(years)]
     }
 
-    print(f"Suggested auspice-config colors entry:")
-    print(json.dumps(config))
     if fname:
         with open(fname, 'w') as fh:
             json.dump(config, fh, indent=2)
+    else:
+        print(f"Suggested auspice-config colors entry:")
+        print(json.dumps(config))
 
 
 if __name__ == "__main__":

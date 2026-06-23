@@ -22,6 +22,11 @@
       "type": "continuous"
     },
     {
+      "key": "outbreak",
+      "title": "Outbreak (Nextclade name)",
+      "type": "categorical"
+    },
+    {
       "key": "dataUseTerms",
       "title": "Data use terms",
       "type": "categorical"
