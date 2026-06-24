@@ -158,6 +158,7 @@ export:
     warning_file: defaults/warning_ebov_all-outbreaks.md
   ebov/west-africa-2014:
     auspice_config: defaults/auspice-config_ebov_west-africa-2014.json
+    colors: defaults/colors-ebov-west-africa-2014.txt
     description: defaults/description_ebov_west-africa-2014.md
     warning_file: defaults/description_ebov_west-africa-2014.md # same file is both description & warning
   sudv/all-outbreaks:

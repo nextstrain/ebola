@@ -52,6 +52,15 @@ def _description(wildcards):
         return ['--description', resolve_config_path(fname, workflow.basedir)({})]
     return []
 
+def _colors(wildcards):
+    """
+    Returns a list of arguments to be supplied to `augur export v2` for custom, per-dataset
+    colors (if defined in config).
+    """
+    if fname:=config['export'][f"{wildcards.species}/{wildcards.build}"].get('colors'):
+        return ['--colors', resolve_config_path(fname, workflow.basedir)({})]
+    return []
+
 
 BASE_LAT_LONGS = os.path.join(workflow.basedir, 'defaults', 'lat_longs.tsv')
 
@@ -101,6 +110,7 @@ rule export:
         id_field = config['strain_id_field'],
         warning = _warning,
         description = _description,
+        colors = _colors,
     benchmark:
         "benchmarks/{species}/{build}/export.txt"
     log:
@@ -117,6 +127,7 @@ rule export:
             --node-data {input.node_data_jsons:q} \
             --lat-longs {input.lat_longs:q} \
             --include-root-sequence-inline \
+            {params.colors:q} \
             {params.warning:q} \
             {params.description:q} \
             --output {output.auspice_json:q}
