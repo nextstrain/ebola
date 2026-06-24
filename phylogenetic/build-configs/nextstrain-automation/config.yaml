@@ -1,0 +1,35 @@
+# This configuration file should contain all required configuration parameters
+# for the ingest workflow to run with additional Nextstrain automation rules.
+
+# Only a subset of builds are run via our automation
+builds:
+   - bdbv/all-outbreaks
+   - sudv/all-outbreaks
+   - ebov/all-outbreaks
+
+rename_jsons_to_reflect_urls:
+  bdbv/all-outbreaks: ebola_bdbv.json
+  sudv/all-outbreaks: ebola_sudv.json
+  ebov/all-outbreaks: ebola_all-outbreaks.json
+
+custom_rules:
+  - build-configs/nextstrain-automation/deploy.smk
+
+deploy_url: "s3://nextstrain-data"
+
+# NOTE: These files contain restricted sequences. If you are using these in
+# your own analysis, please refer to the Pathoplexus Data Use Terms.
+# <https://pathoplexus.org/about/terms-of-use/restricted-data>
+additional_inputs:
+  - name: ppx_restricted
+    species: ebov
+    metadata: "s3://nextstrain-data/files/workflows/ebola/ebov/metadata_restricted.tsv.zst"
+    sequences: "s3://nextstrain-data/files/workflows/ebola/ebov/sequences_restricted.fasta.zst"
+  - name: ppx_restricted
+    species: bdbv
+    metadata: "s3://nextstrain-data/files/workflows/ebola/bdbv/metadata_restricted.tsv.zst"
+    sequences: "s3://nextstrain-data/files/workflows/ebola/bdbv/sequences_restricted.fasta.zst"
+  - name: ppx_restricted
+    species: sudv
+    metadata: "s3://nextstrain-data/files/workflows/ebola/sudv/metadata_restricted.tsv.zst"
+    sequences: "s3://nextstrain-data/files/workflows/ebola/sudv/sequences_restricted.fasta.zst"

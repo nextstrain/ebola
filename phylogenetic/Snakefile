@@ -32,3 +32,17 @@ include: "rules/export.smk"
 rule all:
     input:
         expand("auspice/ebola_{build_pair}.json", build_pair=[b.replace('/', '_') for b in config['builds']]),
+
+# Allow users to import custom rules provided via the config.
+# This allows users to run custom rules that can extend or override the workflow.
+# A concrete example of using custom rules is the extension of the workflow with
+# rules to support the Nextstrain automation that uploads files and sends internal
+# Slack notifications.
+# For extensions, the user will have to specify the custom rule targets when
+# running the workflow.
+# For overrides, the custom Snakefile will have to use the `ruleorder` directive
+# to allow Snakemake to handle ambiguous rules
+# https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#handling-ambiguous-rules
+if "custom_rules" in config:
+    for rule_file in config["custom_rules"]:
+        include: rule_file
