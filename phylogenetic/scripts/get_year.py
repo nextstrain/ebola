@@ -49,10 +49,14 @@ def suggest_colors(years, fname):
     c = colors[len(years)] # colors is 1-indexed
     
     config = {
-        "key": "year",
-        "title": "Sampling Year",
-        "type": "categorical",
-        "scale": [[year, c[idx]] for idx,year in enumerate(years)]
+        "colorings": [
+            {
+                "key": "year",
+                "title": "Sampling Year",
+                "type": "categorical",
+                "scale": [[year, c[idx]] for idx,year in enumerate(years)]
+            }
+        ]
     }
 
     if fname:

@@ -74,26 +74,26 @@ rule concatenate_lat_longs:
     shell:
         """cat {input.base} {input.user} > {output.lat_longs}"""
 
-
-# Modification of auspic config is currently via adding sampling-year coloring info
-# We could extend this to allow merging of config-yaml specified fields, e.g.
-# title / maintainers etc.
-rule modify_auspice_config:
-    input:
-        auspice_config = lambda w: resolve_config_path(config['export'][f"{w.species}/{w.build}"].get('auspice_config'), workflow.basedir)({}),
-        sampling_year_coloring = lambda w: "results/{species}/{build}/sampling-year.config.json" if _uses_sampling_year(w) else [],
-    output:
-        auspice_config = "results/{species}/{build}/auspice_config.json",
-    run:
+def _auspice_configs(wildcards):
+    """returns a list of JSON files for consumption by `augur export v2`. If the config defines
+    'auspice_config_overlay' then this config section is written into its own config JSON
+    and that file is part of the returned list of files.
+    """
+    build = config['export'][f"{wildcards.species}/{wildcards.build}"]
+    jsons = [
+        resolve_config_path(build['auspice_config'], workflow.basedir)({}),
+    ]
+    if _uses_sampling_year(wildcards):
+        jsons.append(f"results/{wildcards.species}/{wildcards.build}/sampling-year.config.json")
+    if overlay:=build.get('auspice_config_overlay'):
+        if not isinstance(overlay, dict):
+            raise InvalidConfigError(f"config.export.<build_pair>.auspice_config_overlay must be a dictionary; use auspice_config to provide the base JSON")
         import json
-        with open(input.auspice_config) as f:
-            auspice_config = json.load(f)
-        if input.sampling_year_coloring:
-            with open(input.sampling_year_coloring) as f:
-                sampling_year = json.load(f)
-            auspice_config['colorings'].insert(1, sampling_year)
-        with open(output.auspice_config, "w") as f:
-            json.dump(auspice_config, f, indent=2)
+        fname = f"results/{wildcards.species}/{wildcards.build}/auspice_config_overlay.json"
+        with open(fname, 'w') as fh:
+            json.dump(overlay, fh, indent=2)
+        jsons.append(fname)
+    return jsons
 
 
 rule export:
@@ -103,7 +103,7 @@ rule export:
         metadata = "results/{species}/{build}/metadata.tsv",
         node_data_jsons = node_data_files,
         lat_longs = lambda w: "results/{species}/{build}/lat_longs.tsv" if config['export'][f"{w.species}/{w.build}"].get('lat_longs') else BASE_LAT_LONGS,
-        auspice_config = "results/{species}/{build}/auspice_config.json",
+        auspice_config = _auspice_configs,
     output:
         auspice_json = "auspice/ebola_{species}_{build}.json" # TODO XXX remap name to match URLs?
     params:

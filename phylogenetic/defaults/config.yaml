@@ -153,24 +153,68 @@ label_outbreaks:
 # per-build lat-longs can be provided which will be combined with the repo's hardcoded defaults/lat_longs.tsv
 export:
   ebov/all-outbreaks:
-    auspice_config: defaults/auspice-config_ebov_all-outbreaks.json
+    # TODO XXX
+    auspice_config: "defaults/auspice-config-base.json"
+    auspice_config_overlay:
+      title: Evolutionary history of Zaire ebolavirus outbreaks
+      maintainers: 
+        - {name: Eddy Lusamaki,  Institut National de Recherche Biomédicale, url: 'https://inrb.net/'}
+        - {name: Nextstrain, url: "https://nextstrain.org"}
+      data_provenance:
+        - {name: INRB (DRC), url: "https://github.com/inrb-drc/ebola-nord-kivu"}
+      display_defaults:
+        color_by: year
+        geo_resolution: country
+        stream_label: outbreak
+        branch_label: outbreak
     description: defaults/description_ebov_all-outbreaks.md
     warning_file: defaults/warning_ebov_all-outbreaks.md
+
   ebov/west-africa-2014:
     auspice_config: defaults/auspice-config_ebov_west-africa-2014.json
     colors: defaults/colors-ebov-west-africa-2014.txt
     description: defaults/description_ebov_west-africa-2014.md
     warning_file: defaults/description_ebov_west-africa-2014.md # same file is both description & warning
+
   sudv/all-outbreaks:
-    auspice_config: defaults/auspice-config_sudv_all-outbreaks.json
+    auspice_config: "defaults/auspice-config-base.json"
+    auspice_config_overlay:
+      title: Sudan ebolavirus genomes
+      maintainers: 
+        - {"name": Eddy Lusamaki,  Institut National de Recherche Biomédicale, url: 'https://inrb.net/'}
+        - {"name": Nextstrain, url: 'https://nextstrain.org'}
+      geo_resolutions: [country, division]
+      display_defaults:
+        color_by: year
+        geo_resolution: country
     description: ../nextclade/defaults/description.md
+
   bdbv/all-outbreaks:
-    auspice_config: defaults/auspice-config_bdbv_all-outbreaks.json
+    auspice_config: "defaults/auspice-config-base.json"
+    auspice_config_overlay:
+      title: Bundibugyo ebolavirus genomes
+      maintainers: 
+        - {"name": Eddy Lusamaki,  Institut National de Recherche Biomédicale, url: 'https://inrb.net/'}
+        - {"name": Nextstrain, url: 'https://nextstrain.org'}
+      geo_resolutions: [country, division]
+      display_defaults:
+        color_by: date
+        geo_resolution: country
     description: ../nextclade/defaults/description.md
     warning: &bdbv_warning >-
       This dataset sources RESTRICTED sequences from [Pathoplexus](https://pathoplexus.org/).
       Please see [virological](https://virological.org/t/initial-genomes-from-may-2026-bundibugyo-virus-disease-outbreak-in-the-democratic-republic-of-the-congo-and-uganda/1032) for more detail on the ongoing outbreak in DRC & Uganda.
+  
   bdbv/2026:
-    auspice_config: defaults/auspice-config_bdbv_all-outbreaks.json # TODO XXX
+    auspice_config: "defaults/auspice-config-base.json"
+    auspice_config_overlay:
+      title: Ongoing 2026 Bundibugyo ebolavirus outbreak in DRC & Uganda
+      maintainers: 
+        - {"name": Eddy Lusamaki,  Institut National de Recherche Biomédicale, url: 'https://inrb.net/'}
+        - {"name": Nextstrain, url: 'https://nextstrain.org'}
+      geo_resolutions: [country, division]
+      display_defaults:
+        color_by: num_date
+        geo_resolution: division
     description: ../nextclade/defaults/description.md
     warning: *bdbv_warning

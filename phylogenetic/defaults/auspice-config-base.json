@@ -1,12 +1,8 @@
 {
-  "title": "Evolutionary history of Zaire ebolavirus outbreaks",
-  "maintainers": [
-    {"name": "the Nextstrain team", "url": "https://nextstrain.org/team"}
-  ],
+  "title": "Ebolavirus analysis",
   "data_provenance": [
-    {"name": "Pathoplexus", "url": "https://pathoplexus.org"},
-    {"name": "INRB (DRC)", "url": "https://github.com/inrb-drc/ebola-nord-kivu"},
-    {"name": "GenBank", "url": "https://www.ncbi.nlm.nih.gov/genbank/"}
+    {"name": "GenBank", "url": "https://www.ncbi.nlm.nih.gov/genbank/"},
+    {"name": "Pathoplexus", "url": "https://pathoplexus.org"}
   ],
   "build_url": "https://github.com/nextstrain/ebola",
   "colorings": [
@@ -14,6 +10,16 @@
       "key": "gt",
       "title": "Genotype",
       "type": "categorical"
+    },
+    {
+      "key": "year",
+      "title": "Sampling Year",
+      "type": "categorical"
+    },
+    {
+      "key": "date",
+      "title": "Sampling Date",
+      "type": "temporal"
     },
     {
       "key": "outbreak",
@@ -41,7 +47,26 @@
         ["Republic of the Congo", "#E0A23A"],
         ["Democratic Republic of the Congo", "#E67231"],
         ["Uganda", "#DC2F24"]
-      ] 
+      ]
+    },
+    {
+      "key": "division",
+      "title": "Division",
+      "type": "categorical"
+    },
+    {
+      "key": "dataUseTerms",
+      "title": "Data use terms",
+      "type": "categorical",
+      "scale": [
+        ["RESTRICTED", "#fc8d59"],
+        ["OPEN", "#1d91c0"]
+      ]
+    },
+    {
+      "key": "author",
+      "title": "Author",
+      "type": "categorical"
     },
     {
       "key": "host",
@@ -54,34 +79,38 @@
       "type": "temporal"
     },
     {
-      "key": "dataUseTerms",
-      "title": "Data use terms",
-      "type": "categorical"
+      "key": "nextclade_qc",
+      "title": "sequence QC (Nextclade)",
+      "type": "categorical",
+      "scale": [
+        ["good", "#225ea8"],
+        ["mediocre", "#fe9929"],
+        ["bad", "#d53e4f"]
+      ]
     },
     {
-      "key": "author",
-      "title": "Author",
-      "type":"categorical"
+      "key": "genome_coverage",
+      "title": "Genome coverage",
+      "type": "continuous"
     }
   ],
   "geo_resolutions": [
     "country"
   ],
-  "metadata_columns": [
-    "strain",
-    "PPX_accession",
-    "INSDC_accession",
-    "restrictedUntil"
-  ],
   "display_defaults": {
-    "color_by": "year",
-    "geo_resolution": "country",
-    "stream_label": "outbreak",
-    "tip_label": "strain",
-    "branch_label": "outbreak"
+    "tip_label": "strain"
   },
   "filters": [
     "country",
+    "division",
     "author"
+  ],
+  "metadata_columns": [
+    "strain",
+    "date",
+    "division",
+    "PPX_accession",
+    "INSDC_accession",
+    "restrictedUntil"
   ]
 }
