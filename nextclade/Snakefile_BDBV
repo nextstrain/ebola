@@ -37,8 +37,8 @@ rule all:
 
 rule filter:
     input:
-        data=lambda w: f"data/{w.species}/sequences.fasta",
-        metadata=lambda w: f"data/{w.species}/metadata.tsv",
+        data=lambda w: f"../ingest/results/{w.species}/sequences.fasta",
+        metadata=lambda w: f"../ingest/results/{w.species}/metadata.tsv",
         exclude="defaults/exclude_{species}.txt",
     output:
         filtered_data="results/{species}/sequences.fasta",
@@ -202,16 +202,16 @@ rule augment_auspice_config:
             json.dump(config, f, indent=2)
 
 
-# generated changelog by fetching from GitHub raw URL specified in config.yaml, then prepending "## Unreleased" header to the top of the changelog content
-# rule generate_changelog:
-#     output:
-#         changelog="results/{species}/CHANGELOG.md",
-#     params:
-#         changelog_url=lambda w: config["changelog_url"].format(species=w.species),
-#     shell:
-#         """
-#         curl -s {params.changelog_url} | cat <(printf "## Unreleased\n\n{default_update_message}\n\n") - > {output.changelog}
-#         """
+# generate changelog by fetching from GitHub raw URL specified in config.yaml, then prepending "## Unreleased" header to the top of the changelog content
+rule generate_changelog:
+    output:
+        changelog="results/{species}/CHANGELOG.md",
+    params:
+        changelog_url=lambda w: config["changelog_url"].format(species=w.species),
+    shell:
+        """
+        curl -s {params.changelog_url} | cat <(printf "## Unreleased\n\n{default_update_message}\n\n") - > {output.changelog}
+        """
 
 
 rule export:
@@ -300,4 +300,14 @@ rule assemble_dataset:
         cp {input.changelog} {params.dataset_dir}/CHANGELOG.md
         cp dataset_files/{wildcards.species}/README.md {params.dataset_dir}/README.md
 
+        """
+
+
+rule clean_bdbv:
+    shell:
+        """
+        rm -rf results/bdbv/*
+        rm -rf datasets/bdbv/*
+        rm -rf auspice/tree_*.json
+        rm -rf data/bdbv/*
         """

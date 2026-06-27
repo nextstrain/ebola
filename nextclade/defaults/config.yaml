@@ -5,3 +5,5 @@
 # do not have to dig through the workflows to figure out the default values
 
 cores: 8
+
+changelog_url: "https://raw.githubusercontent.com/nextstrain/nextclade_data/refs/heads/master/data/nextstrain/orthoebolavirus/{species}/CHANGELOG.md"
