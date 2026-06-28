@@ -18,7 +18,7 @@ strain_id_field: accession # TODO XXX - this isn't ergonomic for injecting priva
 
 builds:
    - bdbv/all-outbreaks
-   - bdbv/2026 # TODO XXX - is this the best name?
+   - bdbv/drc-uganda-2026
    - sudv/all-outbreaks
    - ebov/all-outbreaks
    - ebov/west-africa-2014
@@ -66,7 +66,7 @@ subsample:
     samples:
       everything:
          min_length: 5000
-  bdbv/2026:
+  bdbv/drc-uganda-2026:
     samples:
       outbreak:
         min_length: 5000
@@ -84,7 +84,7 @@ mask:
     end: 50
   bdbv/all-outbreaks:
     <<: *generic-masking
-  bdbv/2026:
+  bdbv/drc-uganda-2026:
     <<: *generic-masking
 
 # per-build tree re-rooting (before refine). Optional.
@@ -108,8 +108,8 @@ refine:
   sudv/all-outbreaks: >-
     --root mid_point
     --keep-polytomies
-  # bdbv/2026 is a WIP - starting with the same args as west-africa
-  bdbv/2026: >-
+  # bdbv/drc-uganda-2026 is a WIP - starting with the same args as west-africa
+  bdbv/drc-uganda-2026: >-
     --timetree
     --date-inference marginal
     --coalescent skyline
@@ -129,7 +129,7 @@ ancestral:
   bdbv/all-outbreaks: &bdbv_ancestral
     genes: NP VP35 VP40 GP GP_003 VP30 VP24 L
     annotation: ../shared/bdbv/reference.gb
-  bdbv/2026:
+  bdbv/drc-uganda-2026:
     <<: *bdbv_ancestral
 
 # Leave out (or falsify) a build to skip trait reconstruction
@@ -205,7 +205,7 @@ export:
       This dataset sources RESTRICTED sequences from [Pathoplexus](https://pathoplexus.org/).
       Please see [virological](https://virological.org/t/initial-genomes-from-may-2026-bundibugyo-virus-disease-outbreak-in-the-democratic-republic-of-the-congo-and-uganda/1032) for more detail on the ongoing outbreak in DRC & Uganda.
   
-  bdbv/2026:
+  bdbv/drc-uganda-2026:
     auspice_config: "defaults/auspice-config-base.json"
     auspice_config_overlay:
       title: Ongoing 2026 Bundibugyo ebolavirus outbreak in DRC & Uganda
