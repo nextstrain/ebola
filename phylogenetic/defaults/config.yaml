@@ -1,18 +1,17 @@
 
-# TODO XXX - move inputs to nextstrain-data before PR merge
 inputs:
   - name: ppx_open
     species: ebov
-    metadata: "s3://nextstrain-staging/files/workflows/ebola/ebov/metadata_open.tsv.zst"
-    sequences: "s3://nextstrain-staging/files/workflows/ebola/ebov/sequences_open.fasta.zst"
+    metadata: "s3://nextstrain-data/files/workflows/ebola/ebov/metadata_open.tsv.zst"
+    sequences: "s3://nextstrain-data/files/workflows/ebola/ebov/sequences_open.fasta.zst"
   - name: ppx_open
     species: bdbv
-    metadata: "s3://nextstrain-staging/files/workflows/ebola/bdbv/metadata_open.tsv.zst"
-    sequences: "s3://nextstrain-staging/files/workflows/ebola/bdbv/sequences_open.fasta.zst"
+    metadata: "s3://nextstrain-data/files/workflows/ebola/bdbv/metadata_open.tsv.zst"
+    sequences: "s3://nextstrain-data/files/workflows/ebola/bdbv/sequences_open.fasta.zst"
   - name: ppx_open
     species: sudv
-    metadata: "s3://nextstrain-staging/files/workflows/ebola/sudv/metadata_open.tsv.zst"
-    sequences: "s3://nextstrain-staging/files/workflows/ebola/sudv/sequences_open.fasta.zst"
+    metadata: "s3://nextstrain-data/files/workflows/ebola/sudv/metadata_open.tsv.zst"
+    sequences: "s3://nextstrain-data/files/workflows/ebola/sudv/sequences_open.fasta.zst"
 
 strain_id_field: accession # TODO XXX - this isn't ergonomic for injecting private data
 
