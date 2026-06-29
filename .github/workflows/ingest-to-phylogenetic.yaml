@@ -113,9 +113,8 @@ jobs:
         NEXTSTRAIN_DOCKER_IMAGE: ${{ inputs.image }}
       run: |
         nextstrain build phylogenetic \
-          -f upload \
-          --snakefile all-outbreaks/Snakefile \
-          --config s3=True
+          deploy_all \
+          --configfile build-configs/nextstrain-automation/config.yaml
       artifact-name: phylo-all-outbreaks-output
       artifact-paths: |
         phylogenetic/benchmarks/

@@ -1,34 +1,40 @@
-"""
-This part of the workflow constructs the phylogenetic tree.
 
-REQUIRED INPUTS:
+rule mask:
+    input:
+        alignment="results/{species}/{build}/subsampled.fasta",
+    output:
+        alignment="results/{species}/{build}/masked.fasta",
+    params:
+        mask_beginning=lambda w: config['mask'][f"{w.species}/{w.build}"]['beginning'],
+        mask_end=lambda w: config['mask'][f"{w.species}/{w.build}"]['end'],
+    shell:
+        r"""
+        augur mask --sequences {input.alignment} \
+                    --mask-from-beginning {params.mask_beginning} \
+                    --mask-from-end {params.mask_end} \
+                    --output {output.alignment}
+        """
 
-    metadata            = results/{build}/filtered.tsv
-    prepared_sequences  = results/prepared_sequences.fasta
 
-OUTPUTS:
+def alignment_for_tree(wildcards):
+    """If masking is defined (for this build) this returns the masked alignment,
+    else returns the unmasked (but subsampled) alignment
+    """
+    if config.get('mask', {}).get(f"{wildcards.species}/{wildcards.build}", False):
+        return f"results/{wildcards.species}/{wildcards.build}/masked.fasta",
+    return f"results/{wildcards.species}/{wildcards.build}/subsampled.fasta",
 
-    tree            = results/tree.nwk
-    branch_lengths  = results/branch_lengths.json
-
-This part of the workflow usually includes the following steps:
-
-    - augur tree
-    - augur refine
-
-See Augur's usage docs for these commands for more details.
-"""
 
 rule tree:
     """Building tree"""
     input:
-        alignment = "results/{build}/aligned.fasta"
+        alignment = alignment_for_tree,
     output:
-        tree = "results/{build}/tree_raw.nwk"
+        tree = "results/{species}/{build}/tree_raw.nwk"
     benchmark:
-        "benchmarks/{build}/tree.txt"
+        "benchmarks/{species}/{build}/tree.txt"
     log:
-        "logs/{build}/tree.txt"
+        "logs/{species}/{build}/tree.txt"
     threads: 4
     shell:
         r"""
@@ -40,6 +46,34 @@ rule tree:
             --nthreads {threads:q}
         """
 
+rule reroot_tree:
+    input:
+        tree = "results/{species}/{build}/tree_raw.nwk"
+    output:
+        tree = "results/{species}/{build}/tree_raw_rooted.nwk"
+    params:
+        strains = lambda w: config['reroot_tree'][f"{w.species}/{w.build}"]['strains'],
+    run:
+        from Bio import Phylo
+        T = Phylo.read(input.tree, "newick")
+        T.root_at_midpoint()
+        strains = params.strains
+        print("Rooting tree using the common ancestor of these strains as the outgroup:", strains)
+        ca = T.common_ancestor(strains)
+        T.root_with_outgroup(ca)
+        Phylo.write(T, output.tree, "newick")
+
+
+def tree_for_refine(wildcards):
+    """Typically returns the newick tree from rule tree (augur tree)
+    but some builds may us a different / additional rule to (e.g.)
+    reroot the tree.
+    """
+    if config.get('reroot_tree', {}).get(f"{wildcards.species}/{wildcards.build}", False):
+        return f"results/{wildcards.species}/{wildcards.build}/tree_raw_rooted.nwk",
+    return f"results/{wildcards.species}/{wildcards.build}/tree_raw.nwk",
+
+
 rule refine:
     """
     Refining tree
@@ -48,21 +82,19 @@ rule refine:
       - estimate {params.date_inference} node dates
     """
     input:
-        tree = "results/{build}/tree_raw.nwk",
-        alignment = "results/{build}/aligned.fasta",
-        metadata = "results/{build}/filtered.tsv"
+        tree = tree_for_refine,
+        alignment = alignment_for_tree,
+        metadata = "results/{species}/{build}/metadata.tsv"
     output:
-        tree = "results/{build}/tree.nwk",
-        node_data = "results/{build}/branch_lengths.json"
+        tree = "results/{species}/{build}/tree.nwk",
+        node_data = "results/{species}/{build}/branch_lengths.json"
     params:
-        coalescent = lambda w: config["build_params"][w.build]["refine"]["coalescent"],
-        date_inference = lambda w: config["build_params"][w.build]["refine"]["date_inference"],
-        timetree = lambda w: conditional("--timetree", config["build_params"][w.build]["refine"].get("timetree")),
-        id_column = config["id_column"],
+        args = lambda w: config['refine'][f"{w.species}/{w.build}"],
+        id_field = config['strain_id_field'],
     benchmark:
-        "benchmarks/{build}/refine.txt"
+        "benchmarks/{species}/{build}/refine.txt"
     log:
-        "logs/{build}/refine.txt"
+        "logs/{species}/{build}/refine.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -71,11 +103,8 @@ rule refine:
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
             --metadata {input.metadata:q} \
-            --metadata-id-columns {params.id_column:q} \
+            --metadata-id-columns {params.id_field:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
-            {params.timetree:q} \
-            --coalescent {params.coalescent:q} \
-            --date-confidence \
-            --date-inference {params.date_inference:q}
+            {params.args}
         """

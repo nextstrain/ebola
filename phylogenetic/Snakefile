@@ -1,0 +1,53 @@
+from snakemake.utils import min_version
+import os 
+
+# Minimum Snakemake version needed for the storage plugins used in remote_files.smk
+min_version("8.0.0")
+
+# Set up config structure first
+include: "../shared/vendored/snakemake/config.smk"
+include: "rules/config.smk"
+
+print("Relative filepaths will be searched for using the `AUGUR_SEARCH_PATHS`"
+   " env variable, which has the following directories:"
+    "\n\t" + "\n\t".join(os.environ["AUGUR_SEARCH_PATHS"].split(':')) + "\n",
+    file=sys.stderr)
+
+configfile: os.path.join(workflow.basedir, 'defaults', 'config.yaml')
+if os.path.exists("config.yaml"):
+    configfile: "config.yaml"
+validate_config()
+write_subsample_configs()
+
+# certain commands (but not all) use SEARCH_PATHS
+SEARCH_PATHS = [workflow.basedir, os.getcwd()]
+
+wildcard_constraints:
+    species=r"[^/_]+",
+    build=r"[^/_]+",
+
+include: "../shared/vendored/snakemake/remote_files.smk"
+include: "rules/multiple_inputs.smk"
+include: "rules/nextclade.smk"
+include: "rules/subsample.smk"
+include: "rules/construct_phylogeny.smk"
+include: "rules/annotate_phylogeny.smk"
+include: "rules/export.smk"
+
+rule all:
+    input:
+        expand("auspice/ebola_{build_pair}.json", build_pair=[b.replace('/', '_') for b in config['builds']]),
+
+# Allow users to import custom rules provided via the config.
+# This allows users to run custom rules that can extend or override the workflow.
+# A concrete example of using custom rules is the extension of the workflow with
+# rules to support the Nextstrain automation that uploads files and sends internal
+# Slack notifications.
+# For extensions, the user will have to specify the custom rule targets when
+# running the workflow.
+# For overrides, the custom Snakefile will have to use the `ruleorder` directive
+# to allow Snakemake to handle ambiguous rules
+# https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#handling-ambiguous-rules
+if "custom_rules" in config:
+    for rule_file in config["custom_rules"]:
+        include: rule_file

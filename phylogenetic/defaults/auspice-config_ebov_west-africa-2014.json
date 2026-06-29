@@ -1,14 +1,9 @@
 {
-  "title": "Bundibugyo ebolavirus genomes",
+  "title": "Genomic epidemiology of the 2013-2016 West African Ebola epidemic",
   "maintainers": [
-    {"name": "Eddy Lusamaki,  Institut National de Recherche Biomédicale", "url": "https://inrb.net/"},
-    {"name": "Nextstrain", "url": "http://nextstrain.org"}
+    {"name": "the Nextstrain team", "url": "https://nextstrain.org/team"}
   ],
   "data_provenance": [
-    {
-      "name": "GenBank",
-      "url": "https://www.ncbi.nlm.nih.gov/genbank/"
-    },
     {
       "name": "Pathoplexus",
       "url": "https://pathoplexus.org"
@@ -22,9 +17,19 @@
       "type": "categorical"
     },
     {
-      "key": "date",
-      "title": "Sampling Date",
-      "type": "temporal"
+      "key": "num_date",
+      "title": "Date",
+      "type": "continuous"
+    },
+    {
+      "key": "outbreak",
+      "title": "Outbreak (Nextclade name)",
+      "type": "categorical"
+    },
+    {
+      "key": "dataUseTerms",
+      "title": "Data use terms",
+      "type": "categorical"
     },
     {
       "key": "author",
@@ -40,31 +45,26 @@
       "key": "division",
       "title": "Division",
       "type": "categorical"
-    },
-    {
-      "key": "dataUseTerms",
-      "title": "Data use terms",
-      "type": "categorical"
     }
   ],
   "geo_resolutions": [
     "country",
     "division"
   ],
+  "metadata_columns": [
+    "strain",
+    "PPX_accession",
+    "INSDC_accession",
+    "restrictedUntil"
+  ],
   "display_defaults": {
-    "tip_label": "strain",
-    "color_by": "date",
-    "geo_resolution": "division"
+    "color_by": "country",
+    "geo_resolution": "country",
+    "tip_label": "strain"
   },
   "filters": [
     "country",
     "division",
     "author"
-  ],
-  "metadata_columns": [
-    "PPX_accession",
-    "INSDC_accession",
-    "restrictedUntil",
-    "strain"
   ]
 }

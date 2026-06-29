@@ -19,10 +19,10 @@ SPECIES = config["species"]
 # TODO: Add link to centralized docs on standard Nextstrain metadata fields
 rule all:
     input:
-        expand("results/{species}/sequences.fasta", species=SPECIES),
-        expand("results/{species}/metadata.tsv", species=SPECIES),
         expand("results/{species}/sequences_open.fasta", species=SPECIES),
         expand("results/{species}/metadata_open.tsv", species=SPECIES),
+        expand("results/{species}/sequences_restricted.fasta", species=SPECIES),
+        expand("results/{species}/metadata_restricted.tsv", species=SPECIES),
 
 
 # Note that only PATHOGEN-level customizations should be added to these
@@ -32,7 +32,6 @@ rule all:
 # by build-specific rules.
 include: "rules/fetch.smk"
 include: "rules/curate.smk"
-include: "rules/nextclade.smk"
 
 
 # Allow users to import custom rules provided via the config.

@@ -25,7 +25,7 @@ rule curate_ppx:
         annotations=config["curate"]["annotations"],
     output:
         metadata="data/{species}/metadata_ppx.tsv",
-        sequences="results/{species}/sequences.fasta",
+        sequences="data/{species}/sequences.fasta",
     params:
         field_map=format_field_map(config["curate"]["field_map"]),
         date_fields=config["curate"]["date_fields"],
@@ -272,63 +272,13 @@ rule add_accession_urls:
         > {output.metadata:q}
         """
 
-
-rule add_nextclade_clades:
-    """
-    Normally we use nextclade for a varity of metadata fields, but here we only add
-    the 'clade' column, renaming it to 'outbreak'.
-    This is only applicable for Zaire Ebolavirus at the moment
-    """
-    input:
-        metadata="data/{species}/metadata_acessions.tsv",
-        nextclade="data/{species}/nextclade.tsv",
-    output:
-        nextclade_subset=temp("data/{species}/nextclade_clade-only.tsv"),
-        metadata="data/{species}/metadata_outbreak-clade.tsv",
-    benchmark:
-        "benchmarks/{species}/add_nextclade_clades.txt"
-    log:
-        "logs/{species}/add_nextclade_clades.txt"
-    wildcard_constraints:
-        species='ebov'
-    shell:
-        r"""
-        exec &> >(tee {log:q})
-
-        cat {input.nextclade} \
-            | csvtk -t cut -f seqName,clade \
-            | csvtk -t rename -f seqName,clade -n accession,outbreak \
-            > {output.nextclade_subset:q}
-
-        augur merge \
-            --metadata metadata={input.metadata:q} nextclade={output.nextclade_subset:q} \
-            --metadata-id-columns accession \
-            --output-metadata {output.metadata:q} \
-            --no-source-columns
-        """
-
-
-def metadata_all_fields(wildcards):
-    # Zaire has Nextclade outbreak (clade) annotation
-    if wildcards.species == 'ebov':
-        return "data/ebov/metadata_outbreak-clade.tsv"
-    return f"data/{wildcards.species}/metadata_acessions.tsv"
-
-def metadata_fields(wildcards):
-    config_values = config["curate"]["metadata_columns"]
-    if not wildcards.species == 'ebov':
-        config_values = [x for x in config_values if x!='outbreak']
-    return ",".join(config_values)
-
-    
-
 rule subset_metadata:
     input:
-        metadata=metadata_all_fields,
+        metadata="data/{species}/metadata_acessions.tsv",
     output:
-        subset_metadata="results/{species}/metadata.tsv",
+        subset_metadata="data/{species}/metadata.tsv",
     params:
-        metadata_fields=metadata_fields,
+        metadata_columns=",".join(config["curate"]["metadata_columns"]),
     benchmark:
         "benchmarks/{species}/subset_metadata.txt"
     log:
@@ -337,22 +287,21 @@ rule subset_metadata:
         r"""
         exec &> >(tee {log:q})
 
-        csvtk cut -t -f {params.metadata_fields:q} \
+        csvtk cut -t -f {params.metadata_columns:q} \
             {input.metadata:q} > {output.subset_metadata:q}
         """
 
-rule extract_open_seqs_metadata:
-    # NOTE: we don't yet extract open data for the nextclade translations!
+rule subset_to_open_data:
     input:
-        metadata = "results/{species}/metadata.tsv",
-        sequences = "results/{species}/sequences.fasta",
+        metadata = "data/{species}/metadata.tsv",
+        sequences = "data/{species}/sequences.fasta",
     output:
         metadata = "results/{species}/metadata_open.tsv",
         sequences = "results/{species}/sequences_open.fasta",
     benchmark:
-        "benchmarks/{species}/extract_open_seqs_metadata.txt"
+        "benchmarks/{species}/subset_to_open_data.txt"
     log:
-        "logs/{species}/extract_open_seqs_metadata.txt"
+        "logs/{species}/subset_to_open_data.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
@@ -366,28 +315,38 @@ rule extract_open_seqs_metadata:
             --output-sequences {output.sequences:q}
         """
 
-rule extract_open_alignment:
-    # alignments are only produced for species with a nextclade dataset
-    # which currently is only EBOV 
+
+rule subset_to_restricted_data:
     input:
-        metadata = "results/{species}/metadata.tsv",
-        alignment = "results/{species}/alignment.fasta",
+        metadata = "data/{species}/metadata.tsv",
+        sequences = "data/{species}/sequences.fasta",
     output:
-        alignment = "results/{species}/alignment_open.fasta",
+        metadata = "results/{species}/metadata_restricted.tsv",
+        sequences = "results/{species}/sequences_restricted.fasta",
     benchmark:
-        "benchmarks/{species}/extract_open_alignment.txt"
+        "benchmarks/{species}/subset_to_restricted_data.txt"
     log:
-        "logs/{species}/extract_open_alignment.txt"
-    wildcard_constraints:
-            species='ebov'
+        "logs/{species}/subset_to_restricted_data.txt"
     shell:
         r"""
         exec &> >(tee {log:q})
 
-        augur filter \
-            --metadata {input.metadata:q} \
-            --sequences {input.alignment:q} \
-            --metadata-id-columns accession \
-            --exclude-where "dataUseTerms=RESTRICTED" \
-            --output-sequences {output.alignment:q}
+        # Some species have no RESTRICTED records at all, in which case augur
+        # filter would error ("All samples have been dropped!"). Check for the
+        # presence of any RESTRICTED record first, and only run augur filter
+        # when there's something to extract; otherwise write header-only
+        # metadata and an empty FASTA so downstream rules see valid files.
+        if csvtk cut -t -f dataUseTerms {input.metadata:q} | grep -qw RESTRICTED; then
+            augur filter \
+                --metadata {input.metadata:q} \
+                --sequences {input.sequences:q} \
+                --metadata-id-columns accession \
+                --exclude-where "dataUseTerms!=RESTRICTED" \
+                --output-metadata {output.metadata:q} \
+                --output-sequences {output.sequences:q}
+        else
+            echo "No RESTRICTED records found; writing empty outputs."
+            head -n 1 {input.metadata:q} > {output.metadata:q}
+            : > {output.sequences:q}
+        fi
         """

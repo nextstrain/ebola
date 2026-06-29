@@ -1,0 +1,220 @@
+
+# TODO XXX - move inputs to nextstrain-data before PR merge
+inputs:
+  - name: ppx_open
+    species: ebov
+    metadata: "s3://nextstrain-staging/files/workflows/ebola/ebov/metadata_open.tsv.zst"
+    sequences: "s3://nextstrain-staging/files/workflows/ebola/ebov/sequences_open.fasta.zst"
+  - name: ppx_open
+    species: bdbv
+    metadata: "s3://nextstrain-staging/files/workflows/ebola/bdbv/metadata_open.tsv.zst"
+    sequences: "s3://nextstrain-staging/files/workflows/ebola/bdbv/sequences_open.fasta.zst"
+  - name: ppx_open
+    species: sudv
+    metadata: "s3://nextstrain-staging/files/workflows/ebola/sudv/metadata_open.tsv.zst"
+    sequences: "s3://nextstrain-staging/files/workflows/ebola/sudv/sequences_open.fasta.zst"
+
+strain_id_field: accession # TODO XXX - this isn't ergonomic for injecting private data
+
+builds:
+   - bdbv/all-outbreaks
+   - bdbv/drc-uganda-2026
+   - sudv/all-outbreaks
+   - ebov/all-outbreaks
+   - ebov/west-africa-2014
+
+nextclade:
+  ebov:
+    dataset-name: nextstrain/orthoebolavirus/ebov
+    columns:
+      - [clade, outbreak]
+      - [qc.overallStatus, nextclade_qc]
+      - [coverage, genome_coverage]
+  bdbv:
+    dataset-name: nextstrain/orthoebolavirus/bdbv 
+    columns:
+      - [outbreak, outbreak]
+      - [qc.overallStatus, nextclade_qc]
+      - [coverage, genome_coverage]
+  sudv:
+    dataset-name: nextstrain/orthoebolavirus/sudv
+    columns:
+      - [qc.overallStatus, nextclade_qc]
+      - [coverage, genome_coverage]
+
+# See <https://docs.nextstrain.org/projects/augur/en/latest/usage/cli/subsample.html> for subsample
+# config schema docs
+subsample:
+  ebov/all-outbreaks:
+    samples:
+      everything:
+         min_length: 18000
+         include: defaults/include_ebov_all-outbreaks.txt
+         group_by: [outbreak, country, year]
+         sequences_per_group: 25
+         exclude_where: is_lab_host=true
+  ebov/west-africa-2014:
+    samples:
+      outbreak:
+        min_length: 18000
+        include: defaults/include_ebov_west-africa-2014.txt
+        group_by: [division, year, month]
+        sequences_per_group: 30
+        exclude_where: is_lab_host=true
+        query: '(outbreak=="Ebov-2013" | outbreak=="Ebov-2013/r2021")'
+  bdbv/all-outbreaks:
+    samples:
+      everything:
+         min_length: 5000
+  bdbv/drc-uganda-2026:
+    samples:
+      outbreak:
+        min_length: 5000
+        exclude_where: outbreak!=Bdbv-2026
+  sudv/all-outbreaks:
+    samples:
+      everything:
+        min_length: 5000
+        exclude: defaults/exclude_sudv.txt
+
+# per-build masking (optional)
+mask:
+  sudv/all-outbreaks: &generic-masking
+    beginning: 50
+    end: 50
+  bdbv/all-outbreaks:
+    <<: *generic-masking
+  bdbv/drc-uganda-2026:
+    <<: *generic-masking
+
+# per-build tree re-rooting (before refine). Optional.
+reroot_tree:
+  ebov/all-outbreaks:
+    # See <https://virological.org/t/on-the-rooting-of-the-ebola-virus-phylogeny-and-its-consequences-for-understanding-the-diversity-in-the-reservoir/1005> for rooting approach
+    strains: ['PP_000LE61', 'PP_000NUJS']
+
+# per-build arguments to `augur refine`
+refine:
+  ebov/all-outbreaks: >-
+    --keep-root
+  ebov/west-africa-2014: >-
+    --timetree
+    --date-inference marginal
+    --coalescent skyline
+    --date-confidence
+  bdbv/all-outbreaks: >-
+    --root mid_point
+    --keep-polytomies
+  sudv/all-outbreaks: >-
+    --root mid_point
+    --keep-polytomies
+  # bdbv/drc-uganda-2026 is a WIP - starting with the same args as west-africa
+  bdbv/drc-uganda-2026: >-
+    --timetree
+    --date-inference marginal
+    --coalescent skyline
+    --date-confidence
+
+# Ancestral per-build blocks may define 'inference' & 'root-sequence'
+# Leave out (or falsify) a build to skip ancestral inference
+ancestral:
+  ebov/all-outbreaks: &ebov_ancestral
+    genes: NP VP35 VP40 GP sGP ssGP VP30 VP24 L
+    annotation: ../shared/zaire/reference.gb
+  ebov/west-africa-2014:
+    <<: *ebov_ancestral
+  sudv/all-outbreaks:
+    genes: NP VP35 VP40 GP sGP ssGP VP30 VP24 L
+    annotation: ../shared/sudan/reference.gb
+  bdbv/all-outbreaks: &bdbv_ancestral
+    genes: NP VP35 VP40 GP GP_003 VP30 VP24 L
+    annotation: ../shared/bdbv/reference.gb
+  bdbv/drc-uganda-2026:
+    <<: *bdbv_ancestral
+
+# Leave out (or falsify) a build to skip trait reconstruction
+traits:
+  ebov/west-africa-2014:
+    columns: [country, division]
+    confidence: true
+
+sampling_year_coloring:
+  bdbv/all-outbreaks: true
+  sudv/all-outbreaks: true
+  ebov/all-outbreaks: true
+  ebov/west-africa-2014: true
+
+
+label_outbreaks:
+  ebov/all-outbreaks: true
+
+# Export block:
+# warning (string) takes precedence over warning_file (filename)
+# per-build lat-longs can be provided which will be combined with the repo's hardcoded defaults/lat_longs.tsv
+export:
+  ebov/all-outbreaks:
+    # TODO XXX
+    auspice_config: "defaults/auspice-config-base.json"
+    auspice_config_overlay:
+      title: Evolutionary history of Zaire ebolavirus outbreaks
+      maintainers: 
+        - {name: Eddy Lusamaki,  Institut National de Recherche Biomédicale, url: 'https://inrb.net/'}
+        - {name: Nextstrain, url: "https://nextstrain.org"}
+      data_provenance:
+        - {name: INRB (DRC), url: "https://github.com/inrb-drc/ebola-nord-kivu"}
+      display_defaults:
+        color_by: year
+        geo_resolution: country
+        stream_label: outbreak
+        branch_label: outbreak
+    description: defaults/description_ebov_all-outbreaks.md
+    warning_file: defaults/warning_ebov_all-outbreaks.md
+
+  ebov/west-africa-2014:
+    auspice_config: defaults/auspice-config_ebov_west-africa-2014.json
+    colors: defaults/colors-ebov-west-africa-2014.txt
+    description: defaults/description_ebov_west-africa-2014.md
+    warning_file: defaults/description_ebov_west-africa-2014.md # same file is both description & warning
+
+  sudv/all-outbreaks:
+    auspice_config: "defaults/auspice-config-base.json"
+    auspice_config_overlay:
+      title: Sudan ebolavirus genomes
+      maintainers: 
+        - {"name": Eddy Lusamaki,  Institut National de Recherche Biomédicale, url: 'https://inrb.net/'}
+        - {"name": Nextstrain, url: 'https://nextstrain.org'}
+      geo_resolutions: [country, division]
+      display_defaults:
+        color_by: year
+        geo_resolution: country
+    description: ../nextclade/defaults/description.md
+
+  bdbv/all-outbreaks:
+    auspice_config: "defaults/auspice-config-base.json"
+    auspice_config_overlay:
+      title: Bundibugyo ebolavirus genomes
+      maintainers: 
+        - {"name": Eddy Lusamaki,  Institut National de Recherche Biomédicale, url: 'https://inrb.net/'}
+        - {"name": Nextstrain, url: 'https://nextstrain.org'}
+      geo_resolutions: [country, division]
+      display_defaults:
+        color_by: date
+        geo_resolution: country
+    description: ../nextclade/defaults/description.md
+    warning: &bdbv_warning >-
+      This dataset sources RESTRICTED sequences from [Pathoplexus](https://pathoplexus.org/).
+      Please see [virological](https://virological.org/t/initial-genomes-from-may-2026-bundibugyo-virus-disease-outbreak-in-the-democratic-republic-of-the-congo-and-uganda/1032) for more detail on the ongoing outbreak in DRC & Uganda.
+  
+  bdbv/drc-uganda-2026:
+    auspice_config: "defaults/auspice-config-base.json"
+    auspice_config_overlay:
+      title: Ongoing 2026 Bundibugyo ebolavirus outbreak in DRC & Uganda
+      maintainers: 
+        - {"name": Eddy Lusamaki,  Institut National de Recherche Biomédicale, url: 'https://inrb.net/'}
+        - {"name": Nextstrain, url: 'https://nextstrain.org'}
+      geo_resolutions: [country, division]
+      display_defaults:
+        color_by: num_date
+        geo_resolution: division
+    description: ../nextclade/defaults/description.md
+    warning: *bdbv_warning

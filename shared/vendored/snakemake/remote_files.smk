@@ -12,7 +12,7 @@ from urllib.parse import urlparse
 
 # Keep a list of known public buckets, which we'll allow uncredentialled (unsigned) access to
 # We could make this config-definable in the future
-PUBLIC_BUCKETS = set(['nextstrain-data'])
+PUBLIC_BUCKETS = set(['nextstrain-data', 'nextstrain-staging'])
 
 # Keep track of registered storage plugins to enable reuse
 _storage_registry = {}

@@ -23,13 +23,6 @@ After you've installed the Nextstrain CLI, you can set up ebola with
 
    nextstrain setup ebola
 
-## Quickstart
-
-Run the default phylogenetic workflow via:
-
-   nextstrain run ebola phylogenetic ebola-analysis
-   nextstrain view ebola-analysis
-
 ## Documentation
 
 - [Running a pathogen workflow](https://docs.nextstrain.org/en/latest/tutorials/running-a-workflow.html)
