@@ -70,6 +70,7 @@ subsample:
       outbreak:
         min_length: 5000
         exclude_where: outbreak!=Bdbv-2026
+        exclude: defaults/exclude_bdbv_drc-uganda-2026.txt
   sudv/all-outbreaks:
     samples:
       everything:
