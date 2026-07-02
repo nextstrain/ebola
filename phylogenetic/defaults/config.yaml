@@ -214,7 +214,7 @@ export:
         - {"name": Nextstrain, url: 'https://nextstrain.org'}
       geo_resolutions: [country, division]
       display_defaults:
-        color_by: num_date
-        geo_resolution: division
+        color_by: location
+        geo_resolution: location
     description: ../nextclade/defaults/description.md
     warning: *bdbv_warning
