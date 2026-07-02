@@ -44,19 +44,30 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 # There's >100 division='Kailahun' and a single division="Kailahun District"
 */Sierra Leone/Kailahun District/*	*/Sierra Leone/Kailahun/
 
-*/Democratic Republic of the Congo/Unknown/*	*/Democratic Republic of the Congo/Unknown//
+*/Democratic Republic of the Congo/Unknown/*	*/Democratic Republic of the Congo/Unknown/
 
 
 # DRC location aliases generated from `scripts/dev_collect-geographies.py` which interrogated
-# the 'INRB-UMIE/Ebola_DRC_2026' repo
+# the 'INRB-UMIE/Ebola_DRC_2026' repo, as well as remappings based on `check_lat_longs.py` output
+# (part of the curate chain which checks against our lat/longs TSV)
 */Democratic Republic of the Congo/*/Boma Mangbetu	Africa/Democratic Republic of the Congo/*/Boma-Mangbetu
 */Democratic Republic of the Congo/*/Gety	Africa/Democratic Republic of the Congo/*/Gethy
 */Democratic Republic of the Congo/*/Makiso Kisangani	Africa/Democratic Republic of the Congo/*/Makiso-Kisangani
 */Democratic Republic of the Congo/*/Manguripa	Africa/Democratic Republic of the Congo/*/Manguredjipa
 */Democratic Republic of the Congo/*/Mongbwalu	Africa/Democratic Republic of the Congo/*/Mongbalu
+*/Democratic Republic of the Congo/Ituri/Mungwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbalu
+*/Democratic Republic of the Congo/Ituri/Mongwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbalu
 */Democratic Republic of the Congo/*/Nia Nia	Africa/Democratic Republic of the Congo/*/Nia-Nia
 */Democratic Republic of the Congo/*/Nyankunde	Africa/Democratic Republic of the Congo/*/Nyakunde
 */Democratic Republic of the Congo/*/Rwmapara	Africa/Democratic Republic of the Congo/*/Rwampara
+
+# PP_006XCJJ
+*/Uganda/Uganda/Hoima	Africa/Uganda/Hoima/Hoima
+
+*/Sudan/Southern Sudan/	Africa/South Sudan/South Sudan/
+*/Sudan/Yambio/	Africa/South Sudan/Yambio/
+
+
 
 */Missing/*/*	*///
 

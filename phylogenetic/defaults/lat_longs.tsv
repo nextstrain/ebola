@@ -9,12 +9,14 @@ region	West Asia	34.604403366209084	43.32277708212641
 # country
 country	Belgium	50.707735	4.677726
 country	Cameroon	4.6125522	13.1535811
+country	Canada	61.0666922	-107.991707
 country	Central African Republic	6.207918975163378	20.72869278708794
 country	Côte d'Ivoire	7.9897371	-5.5679458
 country	Democratic Republic of the Congo	-4.0383	21.7587
 country	France	46.2276	2.2137
 country	Gabon	-0.8999695	11.6899699
 country	Germany	51.1657	10.4515
+country	Guinea	10.7226226	-10.7083587
 country	Israel	31.217736	34.903129
 country	Liberia	6.334995000938028	-9.323955308206793
 country	Netherlands	52.1326	5.2913
@@ -23,8 +25,10 @@ country	Portugal	39.54046	-8.174701
 country	Republic of the Congo	-1.14415261	15.77173186
 country	Sierra Leone	8.6400349	-11.8400269
 country	Singapore	1.344189	103.867546
+country	South Sudan	7.8699431	29.6667897
 country	Sudan	16.490528766519194	30.66033360090796
 country	Switzerland	46.8182	8.2275
+country	Uganda	1.861287	32.55149
 country	USA	38.916963	-98.891372
 country	United Kingdom	51.82930075394037	-2.129498250860435
 
@@ -59,6 +63,11 @@ division	Tshopo	0.481218	25.207211
 division	Tshuapa	-0.669667	21.763914
 # Uganda
 division	Bundibugyo	0.708	30.062
+division	Hoima	1.433	31.345
+division	Gulu	2.77	32.29
+# South Sudan
+division	South Sudan	7.8699431	29.6667897
+division	Yambio	4.58	28.39
 
 
 # locations (grouped by country / division)
@@ -189,6 +198,8 @@ location	Nyakunde	1.476095	29.944402
 location	Nyarambe	2.153119	31.154728
 location	Rimba	2.219520	30.755949
 location	Rwampara	1.571948	30.110212
+# NOTE: I couldn't find Sota - this is the Bunia lat/long - but found a WHO report saying "Sota health area (about 50 km from Bunia in Ituri Province)"
+location	Sota	1.595513	30.223442
 location	Tchomia	1.436	30.484
 # Democratic Republic of the Congo / Kasaï
 location	Banga Lubaka	-5.621778	20.528918
@@ -603,3 +614,6 @@ location	Mondombe	-0.641908	22.890953
 location	Monkoto	-1.644974	20.931447
 location	Wema	-0.734865	21.348851
 location	Yalifafo	-1.359883	22.433076
+#
+# Uganda / Hoima
+location	Hoima	1.433	31.345
