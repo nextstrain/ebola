@@ -10,8 +10,6 @@ region	West Asia	34.604403366209084	43.32277708212641
 country	Belgium	50.707735	4.677726
 country	Cameroon	4.6125522	13.1535811
 country	Central African Republic	6.207918975163378	20.72869278708794
-# TODO XXX similar place names in this group: "Cote d'Ivoire", "Côte d'Ivoire"
-country	Cote d'Ivoire	7.9897371	-5.5679458
 country	Côte d'Ivoire	7.9897371	-5.5679458
 country	Democratic Republic of the Congo	-4.0383	21.7587
 country	France	46.2276	2.2137
@@ -39,9 +37,7 @@ division	Haut-Lomami	-8.237208	25.430011
 division	Haut-Uele	3.346081	28.591660
 division	Isiro	2.468	27.293
 division	Ituri	1.752240	29.496886
-# TODO XXX similar place names in this group: 'Kasaï' (canonical), 'Kasai'
 division	Kasaï	-4.950165	21.104946
-division	Kasai	-4.947	21.106
 division	Kasaï-Central	-6.226429	22.489148
 division	Kasaï-Oriental	-6.151971	23.519423
 division	Kinshasa	-4.439756	15.911222
@@ -53,9 +49,7 @@ division	Lualaba	-9.839307	23.894251
 division	Maniema	-3.084844	26.422020
 division	Maï-Ndombe	-2.692791	18.529503
 division	Mongala	2.096608	21.513456
-# TODO XXX similar place names in this group: 'Nord-Kivu' (canonical), 'Nord Kivu'
 division	Nord-Kivu	-0.606722	28.706768
-division	Nord Kivu	-0.607	28.702
 division	Nord-Ubangi	3.867669	21.067521
 division	Sankuru	-3.482328	23.604992
 division	Sud-Kivu	-3.219552	28.258802
@@ -65,13 +59,7 @@ division	Tshopo	0.481218	25.207211
 division	Tshuapa	-0.669667	21.763914
 # Uganda
 division	Bundibugyo	0.708	30.062
-# (unknown)
-division	Kasai-Central	-6.226	22.489
-division	Kasai-Oriental	-6.151	23.519
-division	Maindombe	-2.696	18.529
-division	Nzerekore	7.7500	-8.8167
-division	Sud Kivu	-3.221	28.258
-division	Yandongi	2.838	22.334
+
 
 # locations (grouped by country / division)
 # Democratic Republic of the Congo / Bas-Uele
@@ -107,98 +95,59 @@ location	Ntondo	-1.075185	17.914710
 location	Wangata	0.054098	18.230667
 # Democratic Republic of the Congo / Haut-Katanga
 location	Kafubu	-11.442549	28.085977
-# TODO XXX 'Kamalondo' coordinate disagreement: canonical (-11.763783, 27.708255) vs lat-longs (-11.684, 27.486)
-location	Kamalondo	-11.763783	27.708255
 location	Kamalondo	-11.684	27.486
 location	Kambove	-10.773359	26.793970
-# TODO XXX 'Kampemba' coordinate disagreement: canonical (-11.754172, 27.863199) vs lat-longs (-11.674, 27.55)
-location	Kampemba	-11.754172	27.863199
 location	Kampemba	-11.674	27.55
 location	Kapolowe	-11.214282	27.088322
 location	Kasenga	-10.711585	28.283850
 location	Kashobwe	-9.968318	28.225800
-# TODO XXX 'Katuba' coordinate disagreement: canonical (-11.900368, 27.655972) vs lat-longs (-11.723, 27.455)
-location	Katuba	-11.900368	27.655972
 location	Katuba	-11.723	27.455
-# TODO XXX 'Kenya' coordinate disagreement: canonical (-11.890988, 27.775721) vs lat-longs (-11.74, 27.509)
-location	Kenya	-11.890988	27.775721
 location	Kenya	-11.74	27.509
 location	Kikula	-10.514814	27.285491
 location	Kilela Balanda	-11.598473	26.651227
 location	Kilwa	-8.966508	28.198438
 location	Kipushi	-11.748637	27.446772
-# TODO XXX 'Kisanga' coordinate disagreement: canonical (-11.916832, 27.552339) vs lat-longs (-11.73, 27.426)
-location	Kisanga	-11.916832	27.552339
-location	Kisanga	-11.73	27.426
+location	Kisanga	-11.69	27.422
 location	Kowe	-11.674316	27.493750
 location	Likasi	-10.975628	26.739187
-# TODO XXX 'Lubumbashi' coordinate disagreement: canonical (-11.701225, 27.500874) vs lat-longs (-11.576, 27.472)
-location	Lubumbashi	-11.701225	27.500874
-location	Lubumbashi	-11.576	27.472
+location	Lubumbashi	-11.670	27.475
 location	Lukafu	-10.673611	27.674223
-# TODO XXX 'Manika' coordinate disagreement: canonical (-11.486312, 26.071546) vs lat-longs (-11.001, 25.6)
 location	Manika	-11.486312	26.071546
-location	Manika	-11.001	25.6
 location	Mitwaba	-8.837158	27.296073
 location	Mufunga Sampwe	-9.685996	27.058832
-# TODO XXX 'Mumbunda' coordinate disagreement: canonical (-11.819209, 27.534142) vs lat-longs (-11.653, 27.401)
 location	Mumbunda	-11.819209	27.534142
-location	Mumbunda	-11.653	27.401
 location	Panda	-11.447622	26.689913
 location	Pweto	-8.138966	29.006691
-# TODO XXX 'Rwashi' coordinate disagreement: canonical (-11.599404, 27.925110) vs lat-longs (-11.673, 27.609)
 location	Rwashi	-11.599404	27.925110
-location	Rwashi	-11.673	27.609
 location	Sakania	-12.580933	28.940280
 location	Tshamilemba	-11.646884	27.613571
 location	Vangu	-11.654473	27.516481
 # Democratic Republic of the Congo / Haut-Lomami
-# TODO XXX 'Baka' coordinate disagreement: canonical (-8.714621, 24.500022) vs lat-longs (-8.655, 25.227)
 location	Baka	-8.714621	24.500022
-location	Baka	-8.655	25.227
 location	Bukama	-9.373017	25.959651
 location	Butumba	-8.886492	26.367934
 location	Kabondo Dianda	-8.527699	25.966601
-# TODO XXX 'Kabongo' coordinate disagreement: canonical (-7.350628, 25.811074) vs lat-longs (-7.384, 25.568)
 location	Kabongo	-7.350628	25.811074
-location	Kabongo	-7.384	25.568
-# TODO XXX 'Kamina' coordinate disagreement: canonical (-8.649403, 25.225040) vs lat-longs (-8.746, 24.801)
 location	Kamina	-8.649403	25.225040
-location	Kamina	-8.746	24.801
 location	Kaniama	-7.867298	24.156765
-# TODO XXX 'Kayamba' coordinate disagreement: canonical (-7.046591, 25.107444) vs lat-longs (-6.941, 24.946)
 location	Kayamba	-7.046591	25.107444
-location	Kayamba	-6.941	24.946
 location	Kinda	-9.480477	24.888466
-# TODO XXX 'Kinkondja' coordinate disagreement: canonical (-7.707100, 26.333969) vs lat-longs (-8.281, 26.273)
-location	Kinkondja	-7.707100	26.333969
-location	Kinkondja	-8.281	26.273
-# TODO XXX 'Kitenge' coordinate disagreement: canonical (-6.517998, 25.716675) vs lat-longs (-6.78, 25.861)
-location	Kitenge	-6.517998	25.716675
+location	Kinkondja	-8.198	26.428
 location	Kitenge	-6.78	25.861
-# TODO XXX 'Lwamba' coordinate disagreement: canonical (-7.923758, 26.685943) vs lat-longs (-7.711, 26.365)
 location	Lwamba	-7.923758	26.685943
-location	Lwamba	-7.711	26.365
 location	Malemba	-8.204298	26.508603
-# TODO XXX 'Mukanga' coordinate disagreement: canonical (-8.186824, 27.142365) vs lat-longs (-8.273, 26.993)
 location	Mukanga	-8.186824	27.142365
-location	Mukanga	-8.273	26.993
-# TODO XXX 'Mulongo' coordinate disagreement: canonical (-7.713251, 27.268394) vs lat-longs (-7.8, 27.371)
-location	Mulongo	-7.713251	27.268394
-location	Mulongo	-7.8	27.371
+location	Mulongo	-7.8	26.996
 location	Songa	-8.065819	25.136183
 # Democratic Republic of the Congo / Haut-Uele
 location	Aba	3.661183	30.306178
 location	Boma-Mangbetu	2.222741	27.758115
 location	Doruma	4.394798	27.668624
-# TODO XXX similar place names in this group: 'Dungu' (canonical), 'Rungu' (canonical)
 location	Dungu	3.824361	28.994870
 location	Rungu	2.844143	27.964169
 location	Faradje	3.756743	29.832084
 location	Gombari	2.747186	28.990587
 location	Isiro	2.470083	27.296590
-# TODO XXX 'Makoro' coordinate disagreement: canonical (3.063071, 30.006664) vs lat-longs (2.959, 30.006)
-location	Makoro	3.063071	30.006664
 location	Makoro	2.959	30.006
 location	Niangara	3.512466	27.901686
 location	Pawa	2.332920	27.587542
@@ -218,7 +167,6 @@ location	Bunia	1.595513	30.223442
 location	Damas	2.185212	30.177987
 location	Drodro	1.741731	30.548689
 location	Fataki	1.913907	30.555344
-# TODO XXX similar place names in this group: 'Gethy' (canonical), 'Rethy' (canonical)
 location	Gethy	1.265538	30.232497
 location	Rethy	2.075027	30.741104
 location	Jiba	1.758325	30.789773
@@ -229,25 +177,19 @@ location	Laybo	3.331452	30.506115
 location	Linga	1.910544	30.826684
 location	Lita	1.574765	30.374914
 location	Logo	2.171070	30.918678
-# TODO XXX 'Lolwa' coordinate disagreement: canonical (1.829815, 29.441859) vs lat-longs (1.531, 29.507)
-location	Lolwa	1.829815	29.441859
-location	Lolwa	1.531	29.507
+location	Lolwa	1.350	29.4968
 location	Mahagi	2.312499	30.941705
 location	Mambasa	1.449632	28.699744
 location	Mandima	0.911460	29.193836
 location	Mangala	1.966978	30.410238
-# TODO XXX 'Mongbalu' coordinate disagreement: canonical (1.983435, 29.915665) vs lat-longs (2.104, 29.5)
-location	Mongbalu	1.983435	29.915665
-location	Mongbalu	2.104	29.5
+location	Mongbalu	1.929	30.049
 location	Nia-Nia	1.312738	27.979860
 location	Nizi	1.749686	30.324743
 location	Nyakunde	1.476095	29.944402
 location	Nyarambe	2.153119	31.154728
 location	Rimba	2.219520	30.755949
 location	Rwampara	1.571948	30.110212
-# TODO XXX 'Tchomia' coordinate disagreement: canonical (1.527886, 30.595715) vs lat-longs (1.482, 30.458)
-location	Tchomia	1.527886	30.595715
-location	Tchomia	1.482	30.458
+location	Tchomia	1.436	30.484
 # Democratic Republic of the Congo / Kasaï
 location	Banga Lubaka	-5.621778	20.528918
 location	Bulape	-4.367528	21.754848
@@ -311,9 +253,7 @@ location	Mpokolo	-6.084122	23.543476
 location	Mukumbi	-5.872644	23.589561
 location	Muya	-6.100426	23.633014
 location	Nzaba	-6.136894	23.550350
-# TODO XXX similar place names in this group: 'Tshilenge' (canonical), 'Tshitenge' (canonical)
 location	Tshilenge	-6.301101	23.706286
-location	Tshitenge	-6.137696	23.738399
 location	Tshishimbi	-6.191022	23.485316
 # Democratic Republic of the Congo / Kinshasa
 location	Bandalungwa	-4.341289	15.284524
@@ -323,7 +263,6 @@ location	Binza Ozone	-4.343245	15.226525
 location	Biyela	-4.489706	15.402393
 location	Bumbu	-4.372130	15.293945
 location	Gombe	-4.310915	15.297996
-# TODO XXX similar place names in this group: 'Kalamu I' (canonical), 'Kalamu II' (canonical)
 location	Kalamu I	-4.358374	15.315631
 location	Kalamu II	-4.340710	15.319805
 location	Kasa-Vubu	-4.342588	15.304726
@@ -339,14 +278,11 @@ location	Lemba	-4.402392	15.320750
 location	Limete	-4.355688	15.336310
 location	Lingwala	-4.325367	15.300795
 location	Makala	-4.381757	15.308049
-# TODO XXX similar place names in this group: 'Maluku I' (canonical), 'Maluku II' (canonical)
 location	Maluku I	-4.451350	16.156429
 location	Maluku II	-4.415147	15.782212
-# TODO XXX similar place names in this group: 'Masina I' (canonical), 'Masina II' (canonical)
 location	Masina I	-4.373690	15.416150
 location	Masina II	-4.360241	15.388877
 location	Matete	-4.389514	15.350442
-# TODO XXX similar place names in this group: 'Mont Ngafula I' (canonical), 'Mont Ngafula II' (canonical)
 location	Mont Ngafula I	-4.536988	15.298458
 location	Mont Ngafula II	-4.431616	15.193682
 location	Ndjili	-4.406302	15.373587
@@ -368,18 +304,13 @@ location	Kimpese	-5.459336	14.308185
 location	Kimvula	-5.453725	16.038366
 location	Kinkonzi	-4.810977	13.174209
 location	Kisantu	-5.125875	15.282319
-# TODO XXX 'Kitona' coordinate disagreement: canonical (-5.969058, 12.442851) vs lat-longs (-5.993, 12.56)
-location	Kitona	-5.969058	12.442851
-location	Kitona	-5.993	12.56
+location	Kitona	-5.993	12.45
 location	Kizu	-4.939226	12.960747
 location	Kuimba	-5.039439	12.693821
 location	Kwilu-Ngongo	-5.480395	14.642593
 location	Lukula	-5.476520	12.829129
 location	Luozi	-4.796497	13.934461
 location	Mangembo	-4.609281	14.252569
-# TODO XXX 'Masa' coordinate disagreement: canonical (-4.602322, 15.144025) vs lat-longs (-4.661, 15.328)
-location	Masa	-4.602322	15.144025
-location	Masa	-4.661	15.328
 location	Matadi	-5.845919	13.469136
 location	Mbanza-Ngungu	-5.186620	14.808786
 location	Moanda	-5.850918	12.497373
@@ -388,36 +319,26 @@ location	Nselo	-5.283284	15.623652
 location	Nsona-Mpangu	-5.592728	13.883580
 location	Nzanza	-5.829390	13.408771
 location	Seke-Banza	-5.216680	13.285734
-# TODO XXX 'Sona-Bata' coordinate disagreement: canonical (-4.812687, 15.377574) vs lat-longs (-4.824, 15.262)
-location	Sona-Bata	-4.812687	15.377574
-location	Sona-Bata	-4.824	15.262
+location	Sona-Bata	-4.898	15.158
 location	Tshela	-4.837687	12.891150
 location	Vaku	-5.118551	13.011212
 # Democratic Republic of the Congo / Kwango
 location	Boko	-4.969005	16.734431
-# TODO XXX 'Feshi' coordinate disagreement: canonical (-6.337593, 18.383066) vs lat-longs (-6.247, 18.254)
-location	Feshi	-6.337593	18.383066
-location	Feshi	-6.247	18.254
+location	Feshi	-6.130	18.148
 location	Kahemba	-7.181196	19.259778
 location	Kajiji	-7.541995	18.509953
 location	Kasongo Lunda	-6.470268	16.909449
 location	Kenge	-4.725402	17.358021
 location	Kimbau	-5.506261	17.252227
 location	Kisanji	-6.490016	19.007789
-# TODO XXX 'Kitenda' coordinate disagreement: canonical (-7.235676, 17.358283) vs lat-longs (-7.025, 17.273)
-location	Kitenda	-7.235676	17.358283
-location	Kitenda	-7.025	17.273
+location	Kitenda	-6.906	17.336
 location	Mwela Lembwa	-6.125295	17.785767
 location	Panzi	-7.174673	18.064586
 location	Popokabaka	-5.647292	16.579294
-# TODO XXX 'Tembo' coordinate disagreement: canonical (-7.793073, 17.693120) vs lat-longs (-7.656, 17.592)
-location	Tembo	-7.793073	17.693120
-location	Tembo	-7.656	17.592
+location	Tembo	-7.681	17.337
 location	Wamba Lwadi	-6.476412	17.324295
 # Democratic Republic of the Congo / Kwilu
 location	Bagata	-3.737611	17.848019
-# TODO XXX 'Bandundu' coordinate disagreement: canonical (-3.316336, 17.445192) vs lat-longs (-3.498, 17.48)
-location	Bandundu	-3.316336	17.445192
 location	Bandundu	-3.498	17.48
 location	Bulungu	-4.573137	18.859614
 location	Djuma	-4.258081	18.615982
@@ -427,23 +348,13 @@ location	Ipamu	-4.308274	19.709547
 location	Kikongo	-4.170174	17.168072
 location	Kikwit-Nord	-5.021372	18.824129
 location	Kikwit-Sud	-5.079362	18.809469
-# TODO XXX 'Kimputu' coordinate disagreement: canonical (-4.316811, 19.341848) vs lat-longs (-4.458, 19.399)
-location	Kimputu	-4.316811	19.341848
 location	Kimputu	-4.458	19.399
-# TODO XXX 'Kingandu' coordinate disagreement: canonical (-5.649723, 18.633765) vs lat-longs (-5.786, 18.722)
-location	Kingandu	-5.649723	18.633765
-location	Kingandu	-5.786	18.722
+location	Kingandu	-5.499	18.414
 location	Koshibanda	-5.032854	19.890916
-# TODO XXX 'Lusanga' coordinate disagreement: canonical (-5.020560, 18.906610) vs lat-longs (-5.064, 18.761)
 location	Lusanga	-5.020560	18.906610
-location	Lusanga	-5.064	18.761
 location	Masi-Manimba	-5.005379	17.821124
-# TODO XXX 'Moanza' coordinate disagreement: canonical (-5.474824, 18.036672) vs lat-longs (-5.423, 17.733)
-location	Moanza	-5.474824	18.036672
 location	Moanza	-5.423	17.733
 location	Mokala	-3.957222	19.017445
-# TODO XXX 'Mosango' coordinate disagreement: canonical (-4.879909, 18.191483) vs lat-longs (-5.016, 18.142)
-location	Mosango	-4.879909	18.191483
 location	Mosango	-5.016	18.142
 location	Mukedi	-5.697804	19.899821
 location	Mungindu	-5.507825	19.074681
@@ -478,8 +389,6 @@ location	Kalamba	-8.486788	23.257300
 location	Kanzenze	-10.013247	25.439453
 location	Kapanga	-8.343738	22.365858
 location	Kasaji	-10.502698	23.599463
-# TODO XXX 'Lualaba' coordinate disagreement: canonical (-10.997353, 25.601116) vs lat-longs (-11.492, 26.069)
-location	Lualaba	-10.997353	25.601116
 location	Lualaba	-11.492	26.069
 location	Lubudi	-10.078818	26.106891
 location	Mutshatsha	-10.690513	24.690773
@@ -494,7 +403,6 @@ location	Kampene	-3.504819	26.481604
 location	Kasongo	-4.192150	26.759227
 location	Kibombo	-4.073815	25.659637
 location	Kindu	-2.933341	25.880746
-# TODO XXX similar place names in this group: 'Kunda' (canonical), 'Tunda' (canonical)
 location	Kunda	-3.915973	26.282596
 location	Tunda	-4.066493	25.135924
 location	Lubutu	-0.623244	26.916412
@@ -506,29 +414,17 @@ location	Samba	-4.724869	26.323015
 location	Saramabila	-4.150674	27.388932
 # Democratic Republic of the Congo / Maï-Ndombe
 location	Banjow Moke	-1.867356	17.795724
-# TODO XXX 'Bokoro' coordinate disagreement: canonical (-3.052190, 18.621061) vs lat-longs (-2.895, 18.458)
-location	Bokoro	-3.052190	18.621061
 location	Bokoro	-2.895	18.458
 location	Bolobo	-2.682585	16.380792
-# TODO XXX 'Bosobe' coordinate disagreement: canonical (-3.264031, 19.192333) vs lat-longs (-3.36, 18.655)
 location	Bosobe	-3.264031	19.192333
-location	Bosobe	-3.36	18.655
-# TODO XXX 'Inongo' coordinate disagreement: canonical (-1.927534, 18.550425) vs lat-longs (-1.918, 18.447)
 location	Inongo	-1.927534	18.550425
-location	Inongo	-1.918	18.447
 location	Kiri	-1.843086	19.277279
 location	Kwamouth	-3.579430	16.677958
 location	Mimia	-2.583288	20.161026
 location	Mushie	-2.518308	17.182438
-# TODO XXX 'Nioki' coordinate disagreement: canonical (-2.907994, 17.832453) vs lat-longs (-2.9, 17.677)
 location	Nioki	-2.907994	17.832453
-location	Nioki	-2.9	17.677
-# TODO XXX 'Ntandembelo' coordinate disagreement: canonical (-1.991165, 17.084222) vs lat-longs (-2.063, 16.971)
 location	Ntandembelo	-1.991165	17.084222
-location	Ntandembelo	-2.063	16.971
-# TODO XXX 'Oshwe' coordinate disagreement: canonical (-3.675665, 20.044599) vs lat-longs (-3.558, 19.785)
 location	Oshwe	-3.675665	20.044599
-location	Oshwe	-3.558	19.785
 location	Penjwa	-1.170108	19.082022
 location	Yumbi	-2.105590	16.520031
 # Democratic Republic of the Congo / Mongala
@@ -545,9 +441,7 @@ location	Yamaluka	2.425061	22.174471
 location	Yambuku	2.838845	22.336934
 location	Yamongili	2.550275	22.763113
 # Democratic Republic of the Congo / Nord-Kivu
-# TODO XXX 'Alimbongo' coordinate disagreement: canonical (-0.256252, 28.983548) vs lat-longs (-0.367, 28.917)
 location	Alimbongo	-0.256252	28.983548
-location	Alimbongo	-0.367	28.917
 location	Bambo	-1.153112	29.252790
 location	Beni	0.499516	29.469531
 location	Biena	0.226785	28.967876
@@ -556,28 +450,20 @@ location	Birambizo	-1.223589	29.112980
 location	Butembo	0.139963	29.259908
 location	Goma	-1.652603	29.180209
 location	Itebero	-1.755190	28.117313
-# TODO XXX 'Kalunguta' coordinate disagreement: canonical (0.436595, 29.513809) vs lat-longs (0.32, 29.327)
 location	Kalunguta	0.436595	29.513809
-location	Kalunguta	0.32	29.327
 location	Kamango	0.677836	29.829630
 location	Karisimbi	-1.634302	29.208925
 location	Katoyi	-1.639738	28.778370
 location	Katwa	0.120579	29.323708
-# TODO XXX 'Kayna' coordinate disagreement: canonical (-0.481705, 28.972677) vs lat-longs (-0.609, 29.088)
 location	Kayna	-0.481705	28.972677
-location	Kayna	-0.609	29.088
 location	Kibirizi	-0.871090	29.188519
 location	Kibua	-1.259294	28.412674
 location	Kirotshe	-1.547140	29.004627
 location	Kyondo	0.013187	29.485897
-# TODO XXX 'Lubero' coordinate disagreement: canonical (-0.294745, 29.360647) vs lat-longs (-0.185, 28.984)
 location	Lubero	-0.294745	29.360647
-location	Lubero	-0.185	28.984
 location	Mabalako	0.468120	29.211455
 location	Manguredjipa	0.392798	28.445053
-# TODO XXX 'Masereka' coordinate disagreement: canonical (-0.184050, 29.559462) vs lat-longs (-0.113, 29.346)
-location	Masereka	-0.184050	29.559462
-location	Masereka	-0.113	29.346
+location	Masereka	-0.139	29.316
 location	Masisi	-1.457220	28.729657
 location	Musienene	0.018579	28.658990
 location	Mutwanga	0.313849	29.742382
@@ -587,9 +473,6 @@ location	Oicha	0.755821	29.599416
 location	Pinga	-0.615621	28.454837
 location	Rutshuru	-1.296065	29.400716
 location	Rwanguba	-1.221834	29.539443
-# TODO XXX 'Vuhovi' coordinate disagreement: canonical (0.251182, 29.254110) vs lat-longs (0.19, 29.452)
-location	Vuhovi	0.251182	29.254110
-location	Vuhovi	0.19	29.452
 location	Walikale	-1.141224	27.763954
 # Democratic Republic of the Congo / Nord-Ubangi
 location	Abuzi	3.366083	22.146161
@@ -623,9 +506,7 @@ location	Wembo Nyama	-4.045934	24.673526
 # Democratic Republic of the Congo / Sud-Kivu
 location	Bagira	-2.488674	28.825951
 location	Bunyakiri	-2.038203	28.443294
-# TODO XXX 'Fizi' coordinate disagreement: canonical (-4.425575, 29.050571) vs lat-longs (-4.394, 28.942)
-location	Fizi	-4.425575	29.050571
-location	Fizi	-4.394	28.942
+location	Fizi	-4.300	28.9419
 location	Hauts-Plateaux	-3.257814	28.926837
 location	Ibanda	-2.513252	28.867672
 location	Idjwi	-2.011639	29.056543
@@ -675,39 +556,22 @@ location	Ndage	2.741007	20.707198
 location	Tandala	2.976594	19.533291
 location	Zongo	4.219692	18.698290
 # Democratic Republic of the Congo / Tanganyika
-# TODO XXX 'Ankoro' coordinate disagreement: canonical (-6.973480, 26.634077) vs lat-longs (-6.928, 26.737)
-location	Ankoro	-6.973480	26.634077
-location	Ankoro	-6.928	26.737
+location	Ankoro	-6.755	26.943
 location	Kabalo	-6.254078	26.891946
 location	Kalemie	-6.334393	28.868003
 location	Kansimba	-7.296974	29.109442
 location	Kiyambi	-7.375037	28.155028
-# TODO XXX 'Kongolo' coordinate disagreement: canonical (-5.310236, 27.290383) vs lat-longs (-5.383, 26.616)
-location	Kongolo	-5.310236	27.290383
-location	Kongolo	-5.383	26.616
+location	Kongolo	-5.383	26.997
 location	Manono	-7.144845	27.393694
-# TODO XXX 'Mbulula' coordinate disagreement: canonical (-5.405869, 26.558661) vs lat-longs (-5.323, 27.353)
-location	Mbulula	-5.405869	26.558661
-location	Mbulula	-5.323	27.353
-# TODO XXX 'Moba' coordinate disagreement: canonical (-7.603682, 29.988244) vs lat-longs (-7.81, 29.966)
-location	Moba	-7.603682	29.988244
-location	Moba	-7.81	29.966
-# TODO XXX 'Nyemba' coordinate disagreement: canonical (-5.481255, 29.027491) vs lat-longs (-5.499, 28.849)
-location	Nyemba	-5.481255	29.027491
+location	Mbulula	-5.439	27.425
+location	Moba	-7.03	29.765
 location	Nyemba	-5.499	28.849
 location	Nyunzu	-5.731309	27.934716
 # Democratic Republic of the Congo / Tshopo
-# TODO XXX 'Bafwagbogbo' coordinate disagreement: canonical (1.628919, 26.731262) vs lat-longs (1.456, 26.537)
-location	Bafwagbogbo	1.628919	26.731262
-location	Bafwagbogbo	1.456	26.537
-# TODO XXX 'Bafwasende' coordinate disagreement: canonical (0.988643, 26.690725) vs lat-longs (0.831, 26.885)
 location	Bafwasende	0.988643	26.690725
-location	Bafwasende	0.831	26.885
 location	Banalia	1.757088	25.615560
 location	Basali	1.753628	24.408862
-# TODO XXX 'Basoko' coordinate disagreement: canonical (1.223025, 23.747220) vs lat-longs (1.363, 23.637)
 location	Basoko	1.223025	23.747220
-location	Basoko	1.363	23.637
 location	Bengamisa	1.123572	25.040652
 location	Isangi	0.894738	24.399625
 location	Kabondo	0.638183	25.402589
@@ -716,24 +580,16 @@ location	Lubunga (Tshopo)	0.392464	25.117664
 location	Makiso-Kisangani	0.520134	25.229720
 location	Mangobo	0.603868	25.097513
 location	Opala	-1.048456	24.238615
-# TODO XXX 'Opienge' coordinate disagreement: canonical (0.191620, 27.333503) vs lat-longs (0.084, 27.457)
-location	Opienge	0.191620	27.333503
-location	Opienge	0.084	27.457
-# TODO XXX 'Tshopo' coordinate disagreement: canonical (0.729461, 25.292387) vs lat-longs (0.868, 25.545)
+location	Opienge	0.242	27.427
 location	Tshopo	0.729461	25.292387
-location	Tshopo	0.868	25.545
 location	Ubundu	-0.390558	25.087774
 location	Wanierukula	0.075601	25.956129
 location	Yabaondo	0.624465	23.975616
 location	Yahisuli	-0.007466	23.925673
 location	Yahuma	0.841035	23.143200
 location	Yakusu	0.676074	24.639893
-# TODO XXX 'Yaleko' coordinate disagreement: canonical (-0.156192, 24.635369) vs lat-longs (0.034, 24.58)
 location	Yaleko	-0.156192	24.635369
-location	Yaleko	0.034	24.58
-# TODO XXX 'Yalimbongo' coordinate disagreement: canonical (1.814292, 23.473214) vs lat-longs (1.925, 23.471)
 location	Yalimbongo	1.814292	23.473214
-location	Yalimbongo	1.925	23.471
 # Democratic Republic of the Congo / Tshuapa
 location	Befale	0.567864	20.887215
 location	Boende	-0.325739	20.784283
@@ -747,78 +603,3 @@ location	Mondombe	-0.641908	22.890953
 location	Monkoto	-1.644974	20.931447
 location	Wema	-0.734865	21.348851
 location	Yalifafo	-1.359883	22.433076
-# (unknown)
-location	Banga-Lubaka	-5.621	20.528
-location	Banjow-Moke	-1.841	17.642
-location	Bena-Dibele	-3.69	22.748
-location	Bena-Leka	-5.108	22.096
-location	Bena-Tshiadi	-4.551	22.807
-# TODO XXX similar place names in this group: 'Bili', 'Bili2'
-location	Bili	4.193	24.7
-location	Bili2	4.794	19.715
-location	Binza-Meteo	-4.396	15.252
-location	Binza-Ozone	-4.348	15.235
-location	Bogose-Nubea	3.793	19.726
-location	Bokenda	0.481	21.349
-location	Boma-Bungu	-5.748	12.979
-location	Boso-Mondanda	1.668	19.825
-location	Bosomanzi	2.807	21.188
-location	Busanga	-0.953	21.995
-location	Citenge	-6.138	23.738
-location	Djalo-Ndjeka	-3.203	24.12
-location	Kabeya-Kamwanga	-5.968	23.167
-location	Kabondo-Dianda	-8.723	25.833
-location	Kalambayi-Kabanga	-6.733	24.399
-# TODO XXX similar place names in this group: 'Kalamu-I', 'Kalamu-II'
-location	Kalamu-I	-4.352	15.313
-location	Kalamu-II	-4.35	15.32
-location	Kalonda-Est	-6.423	25.097
-location	Kalonda-Ouest	-6.105	20.844
-location	Kamuesha	-6.425	21.319
-location	Kanda-Kanda	-6.92	23.754
-location	Kasongolunda	-6.44	16.968
-location	Katako-Kombe	-3.03	24.733
-location	Kiambi	-7.35	28.125
-location	Kilela-Balanda	-11.596	26.649
-location	Kimbao	-5.473	17.237
-location	Kimbi-Lulenge	-4.278	28.39
-location	Kisangani	0.516	25.167
-location	Lilanga-Bobangi	0.18	17.977
-location	Lolanga-Mampoko	0.818	18.723
-# TODO XXX 'Lubunga' has multiple differing coordinates in lat-longs
-location	Lubunga	-5.522	23.405
-location	Lubunga	0.414	25.13
-location	Ludimbi-Lukula	-5.71	24.489
-location	Mai-Ndombe-I	-4.03	15.747
-location	Malemba-Nkulu	-7.953	26.71
-# TODO XXX similar place names in this group: 'Maluku-I', 'Maluku-II'
-location	Maluku-I	-4.436	15.784
-location	Maluku-II	-4.489	16.156
-# TODO XXX similar place names in this group: 'Masina-I', 'Masina-II'
-location	Masina-I	-4.381	15.379
-location	Masina-II	-4.392	15.406
-location	Mindembo	-2.444	21.966
-location	Mobayi-Mbongo	4.082	21.036
-# TODO XXX similar place names in this group: 'Mont-Ngafula-I', 'Mont-Ngafula-II'
-location	Mont-Ngafula-I	-4.549	15.281
-location	Mont-Ngafula-II	-4.433	15.194
-location	Mufunga-Sampwe	-9.687	27.058
-location	Mwela-Lembwa	-6.17	17.683
-location	Mwene-Ditu	-6.931	23.414
-location	Ndjoko-Punda	-5.694	21.072
-location	Nsona-Pangu	-5.584	13.882
-location	Nyirangongo	-1.539	29.244
-location	Pania-Mutombo	-5.224	23.833
-location	Pay-Kongila	-5.529	18.282
-location	Pendjua	-1.135	19.097
-location	Sud Kivu	-3.221	28.258
-location	Tshudi-Loto	-2.45	22.608
-location	Vanga-Kete	-3.847	23.453
-location	Wamba-Lwadi	-6.348	17.339
-location	Wanie-Rukula	0.111	25.98
-location	Wembo-Nyama	-4.047	24.673
-location	Yalifafu	-1.36	22.433
-location	Yalufi	0.725	24.425
-location	Yandongi	2.838	22.334
-location	Yangambi	0.802	24.459
-location	Yelenge	0.57026	25.03594
