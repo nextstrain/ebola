@@ -46,5 +46,17 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 
 */Democratic Republic of the Congo/Unknown/*	*/Democratic Republic of the Congo/Unknown//
 
+
+# DRC location aliases generated from `scripts/dev_collect-geographies.py` which interrogated
+# the 'INRB-UMIE/Ebola_DRC_2026' repo
+*/Democratic Republic of the Congo/*/Boma Mangbetu	Africa/Democratic Republic of the Congo/*/Boma-Mangbetu
+*/Democratic Republic of the Congo/*/Gety	Africa/Democratic Republic of the Congo/*/Gethy
+*/Democratic Republic of the Congo/*/Makiso Kisangani	Africa/Democratic Republic of the Congo/*/Makiso-Kisangani
+*/Democratic Republic of the Congo/*/Manguripa	Africa/Democratic Republic of the Congo/*/Manguredjipa
+*/Democratic Republic of the Congo/*/Mongbwalu	Africa/Democratic Republic of the Congo/*/Mongbalu
+*/Democratic Republic of the Congo/*/Nia Nia	Africa/Democratic Republic of the Congo/*/Nia-Nia
+*/Democratic Republic of the Congo/*/Nyankunde	Africa/Democratic Republic of the Congo/*/Nyakunde
+*/Democratic Republic of the Congo/*/Rwmapara	Africa/Democratic Republic of the Congo/*/Rwampara
+
 */Missing/*/*	*///
 
