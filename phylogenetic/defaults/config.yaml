@@ -146,6 +146,11 @@ sampling_year_coloring:
   ebov/all-outbreaks: true
   ebov/west-africa-2014: true
 
+count_mutations:
+  bdbv/drc-uganda-2026:
+    counts: 0,1,2,3,4,5,6,7+
+    cds: [GP]
+
 
 label_outbreaks:
   ebov/all-outbreaks: true
@@ -218,5 +223,23 @@ export:
       display_defaults:
         color_by: location
         geo_resolution: location
+      colorings:
+        - key: nuc_mut_count
+          title: Nuc mutations (from root)
+          type: "categorical"
+          scale: &mut_count_scale
+            - ['0', '#f03b20']
+            - ['1', '#7fcdbb']
+            - ['2', '#41b6c4']
+            - ['3', '#1d91c0']
+            - ['4', '#225ea8']
+            - ['5', '#253494']
+            - ['6', '#081d58']
+            - ['7+', '#88419d']
+        - key: GP_mut_count
+          title: GP AA mutations (from root)
+          type: "categorical"
+          scale: *mut_count_scale
+        
     description: ../nextclade/defaults/description.md
     warning: *bdbv_warning
