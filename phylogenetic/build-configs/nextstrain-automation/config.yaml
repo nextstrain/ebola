@@ -10,7 +10,7 @@ builds:
 
 rename_jsons_to_reflect_urls:
   bdbv/all-outbreaks: ebola_bdbv.json
-  bdbv/drc-uganda-2026: bdbv-drc-uganda-2026.json
+  bdbv/drc-uganda-2026: ebola_bdbv-drc-uganda-2026.json
   sudv/all-outbreaks: ebola_sudv.json
   ebov/all-outbreaks: ebola_all-outbreaks.json
 
