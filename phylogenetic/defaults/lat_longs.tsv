@@ -62,9 +62,10 @@ division	Tanganyika	-6.570096	28.202556
 division	Tshopo	0.481218	25.207211
 division	Tshuapa	-0.669667	21.763914
 # Uganda
-division	Bundibugyo	0.708	30.062
-division	Hoima	1.433	31.345
-division	Gulu	2.77	32.29
+division	Central Region	3.22	32.83
+division	Eastern Region	1.27	34.12
+division	Northern Region	3.00	33.0
+division	Western Region	-0.255	30.27
 # South Sudan
 division	South Sudan	7.8699431	29.6667897
 division	Yambio	4.58	28.39
@@ -615,5 +616,10 @@ location	Monkoto	-1.644974	20.931447
 location	Wema	-0.734865	21.348851
 location	Yalifafo	-1.359883	22.433076
 #
-# Uganda / Hoima
+# Uganda (any division)
+location	Arua	3.019	30.912
+location	Bundibugyo	0.705	30.06
 location	Hoima	1.433	31.345
+location	Kampala	0.307	32.578
+location	Ntoroko	1.05	30.53
+location	Wakiso	0.399	32.479

@@ -61,6 +61,156 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 */Democratic Republic of the Congo/*/Nyankunde	Africa/Democratic Republic of the Congo/*/Nyakunde
 */Democratic Republic of the Congo/*/Rwmapara	Africa/Democratic Republic of the Congo/*/Rwampara
 
+# Uganda
+# Use <https://en.wikipedia.org/wiki/Districts_of_Uganda> to categorise Uganda into
+# division = "4 geographic regions"
+# location = 135 districts + Kampala
+#
+# Central Region
+*/Uganda/*/Buikwe	Africa/Uganda/Central Region/Buikwe
+*/Uganda/*/Bukomansimbi	Africa/Uganda/Central Region/Bukomansimbi
+*/Uganda/*/Butambala	Africa/Uganda/Central Region/Butambala
+*/Uganda/*/Buvuma	Africa/Uganda/Central Region/Buvuma
+*/Uganda/*/Gomba	Africa/Uganda/Central Region/Gomba
+*/Uganda/*/Kalangala	Africa/Uganda/Central Region/Kalangala
+*/Uganda/*/Kalungu	Africa/Uganda/Central Region/Kalungu
+*/Uganda/*/Kampala	Africa/Uganda/Central Region/Kampala
+*/Uganda/*/Kasanda	Africa/Uganda/Central Region/Kasanda
+*/Uganda/*/Kayunga	Africa/Uganda/Central Region/Kayunga
+*/Uganda/*/Kiboga	Africa/Uganda/Central Region/Kiboga
+*/Uganda/*/Kyankwanzi	Africa/Uganda/Central Region/Kyankwanzi
+*/Uganda/*/Kyotera	Africa/Uganda/Central Region/Kyotera
+*/Uganda/*/Luweero	Africa/Uganda/Central Region/Luweero
+*/Uganda/*/Lwengo	Africa/Uganda/Central Region/Lwengo
+*/Uganda/*/Lyantonde	Africa/Uganda/Central Region/Lyantonde
+*/Uganda/*/Masaka	Africa/Uganda/Central Region/Masaka
+*/Uganda/*/Mityana	Africa/Uganda/Central Region/Mityana
+*/Uganda/*/Mpigi	Africa/Uganda/Central Region/Mpigi
+*/Uganda/*/Mukono	Africa/Uganda/Central Region/Mukono
+*/Uganda/*/Nakaseke	Africa/Uganda/Central Region/Nakaseke
+*/Uganda/*/Nakasongola	Africa/Uganda/Central Region/Nakasongola
+*/Uganda/*/Rakai	Africa/Uganda/Central Region/Rakai
+*/Uganda/*/Sembabule	Africa/Uganda/Central Region/Sembabule
+*/Uganda/*/Wakiso	Africa/Uganda/Central Region/Wakiso
+# Eastern Region
+*/Uganda/*/Amuria	Africa/Uganda/Eastern Region/Amuria
+*/Uganda/*/Budaka	Africa/Uganda/Eastern Region/Budaka
+*/Uganda/*/Bududa	Africa/Uganda/Eastern Region/Bududa
+*/Uganda/*/Bugiri	Africa/Uganda/Eastern Region/Bugiri
+*/Uganda/*/Bugweri	Africa/Uganda/Eastern Region/Bugweri
+*/Uganda/*/Bukedea	Africa/Uganda/Eastern Region/Bukedea
+*/Uganda/*/Bukwo	Africa/Uganda/Eastern Region/Bukwo
+*/Uganda/*/Bulambuli	Africa/Uganda/Eastern Region/Bulambuli
+*/Uganda/*/Busia	Africa/Uganda/Eastern Region/Busia
+*/Uganda/*/Butaleja	Africa/Uganda/Eastern Region/Butaleja
+*/Uganda/*/Butebo	Africa/Uganda/Eastern Region/Butebo
+*/Uganda/*/Buyende	Africa/Uganda/Eastern Region/Buyende
+*/Uganda/*/Iganga	Africa/Uganda/Eastern Region/Iganga
+*/Uganda/*/Jinja	Africa/Uganda/Eastern Region/Jinja
+*/Uganda/*/Kaberamaido	Africa/Uganda/Eastern Region/Kaberamaido
+*/Uganda/*/Kalaki	Africa/Uganda/Eastern Region/Kalaki
+*/Uganda/*/Kaliro	Africa/Uganda/Eastern Region/Kaliro
+*/Uganda/*/Kamuli	Africa/Uganda/Eastern Region/Kamuli
+*/Uganda/*/Kapchorwa	Africa/Uganda/Eastern Region/Kapchorwa
+*/Uganda/*/Kapelebyong	Africa/Uganda/Eastern Region/Kapelebyong
+*/Uganda/*/Katakwi	Africa/Uganda/Eastern Region/Katakwi
+*/Uganda/*/Kibuku	Africa/Uganda/Eastern Region/Kibuku
+*/Uganda/*/Kumi	Africa/Uganda/Eastern Region/Kumi
+*/Uganda/*/Kween	Africa/Uganda/Eastern Region/Kween
+*/Uganda/*/Luuka	Africa/Uganda/Eastern Region/Luuka
+*/Uganda/*/Manafwa	Africa/Uganda/Eastern Region/Manafwa
+*/Uganda/*/Mayuge	Africa/Uganda/Eastern Region/Mayuge
+*/Uganda/*/Mbale	Africa/Uganda/Eastern Region/Mbale
+*/Uganda/*/Namayingo	Africa/Uganda/Eastern Region/Namayingo
+*/Uganda/*/Namisindwa	Africa/Uganda/Eastern Region/Namisindwa
+*/Uganda/*/Namutumba	Africa/Uganda/Eastern Region/Namutumba
+*/Uganda/*/Ngora	Africa/Uganda/Eastern Region/Ngora
+*/Uganda/*/Pallisa	Africa/Uganda/Eastern Region/Pallisa
+*/Uganda/*/Serere	Africa/Uganda/Eastern Region/Serere
+*/Uganda/*/Sironko	Africa/Uganda/Eastern Region/Sironko
+*/Uganda/*/Soroti	Africa/Uganda/Eastern Region/Soroti
+*/Uganda/*/Tororo	Africa/Uganda/Eastern Region/Tororo
+# Northern Region
+*/Uganda/*/Abim	Africa/Uganda/Northern Region/Abim
+*/Uganda/*/Adjumani	Africa/Uganda/Northern Region/Adjumani
+*/Uganda/*/Agago	Africa/Uganda/Northern Region/Agago
+*/Uganda/*/Alebtong	Africa/Uganda/Northern Region/Alebtong
+*/Uganda/*/Amolatar	Africa/Uganda/Northern Region/Amolatar
+*/Uganda/*/Amudat	Africa/Uganda/Northern Region/Amudat
+*/Uganda/*/Amuru	Africa/Uganda/Northern Region/Amuru
+*/Uganda/*/Apac	Africa/Uganda/Northern Region/Apac
+*/Uganda/*/Arua	Africa/Uganda/Northern Region/Arua
+*/Uganda/*/Dokolo	Africa/Uganda/Northern Region/Dokolo
+*/Uganda/*/Gulu	Africa/Uganda/Northern Region/Gulu
+*/Uganda/*/Kaabong	Africa/Uganda/Northern Region/Kaabong
+*/Uganda/*/Karenga	Africa/Uganda/Northern Region/Karenga
+*/Uganda/*/Kitgum	Africa/Uganda/Northern Region/Kitgum
+*/Uganda/*/Koboko	Africa/Uganda/Northern Region/Koboko
+*/Uganda/*/Kole	Africa/Uganda/Northern Region/Kole
+*/Uganda/*/Kotido	Africa/Uganda/Northern Region/Kotido
+*/Uganda/*/Kwania	Africa/Uganda/Northern Region/Kwania
+*/Uganda/*/Lamwo	Africa/Uganda/Northern Region/Lamwo
+*/Uganda/*/Lira	Africa/Uganda/Northern Region/Lira
+*/Uganda/*/Madi-Okollo	Africa/Uganda/Northern Region/Madi-Okollo
+*/Uganda/*/Maracha	Africa/Uganda/Northern Region/Maracha
+*/Uganda/*/Moroto	Africa/Uganda/Northern Region/Moroto
+*/Uganda/*/Moyo	Africa/Uganda/Northern Region/Moyo
+*/Uganda/*/Nabilatuk	Africa/Uganda/Northern Region/Nabilatuk
+*/Uganda/*/Nakapiripirit	Africa/Uganda/Northern Region/Nakapiripirit
+*/Uganda/*/Napak	Africa/Uganda/Northern Region/Napak
+*/Uganda/*/Nebbi	Africa/Uganda/Northern Region/Nebbi
+*/Uganda/*/Nwoya	Africa/Uganda/Northern Region/Nwoya
+*/Uganda/*/Obongi	Africa/Uganda/Northern Region/Obongi
+*/Uganda/*/Omoro	Africa/Uganda/Northern Region/Omoro
+*/Uganda/*/Otuke	Africa/Uganda/Northern Region/Otuke
+*/Uganda/*/Oyam	Africa/Uganda/Northern Region/Oyam
+*/Uganda/*/Pader	Africa/Uganda/Northern Region/Pader
+*/Uganda/*/Pakwach	Africa/Uganda/Northern Region/Pakwach
+*/Uganda/*/Terego	Africa/Uganda/Northern Region/Terego
+*/Uganda/*/Yumbe	Africa/Uganda/Northern Region/Yumbe
+*/Uganda/*/Zombo	Africa/Uganda/Northern Region/Zombo
+# Western Region
+*/Uganda/*/Buhweju	Africa/Uganda/Western Region/Buhweju
+*/Uganda/*/Buliisa	Africa/Uganda/Western Region/Buliisa
+*/Uganda/*/Bundibugyo	Africa/Uganda/Western Region/Bundibugyo
+*/Uganda/Bundibugyo/*	Africa/Uganda/Western Region/Bundibugyo
+*/Uganda/*/Bunyangabu	Africa/Uganda/Western Region/Bunyangabu
+*/Uganda/*/Bushenyi	Africa/Uganda/Western Region/Bushenyi
+*/Uganda/*/Hoima	Africa/Uganda/Western Region/Hoima
+*/Uganda/*/Ibanda	Africa/Uganda/Western Region/Ibanda
+*/Uganda/*/Isingiro	Africa/Uganda/Western Region/Isingiro
+*/Uganda/*/Kabale	Africa/Uganda/Western Region/Kabale
+*/Uganda/*/Kabarole	Africa/Uganda/Western Region/Kabarole
+*/Uganda/*/Kagadi	Africa/Uganda/Western Region/Kagadi
+*/Uganda/*/Kakumiro	Africa/Uganda/Western Region/Kakumiro
+*/Uganda/*/Kamwenge	Africa/Uganda/Western Region/Kamwenge
+*/Uganda/*/Kanungu	Africa/Uganda/Western Region/Kanungu
+*/Uganda/*/Kasese	Africa/Uganda/Western Region/Kasese
+*/Uganda/*/Kazo	Africa/Uganda/Western Region/Kazo
+*/Uganda/*/Kibaale	Africa/Uganda/Western Region/Kibaale
+*/Uganda/*/Kikuube	Africa/Uganda/Western Region/Kikuube
+*/Uganda/*/Kiruhura	Africa/Uganda/Western Region/Kiruhura
+*/Uganda/*/Kiryandongo	Africa/Uganda/Western Region/Kiryandongo
+*/Uganda/*/Kisoro	Africa/Uganda/Western Region/Kisoro
+*/Uganda/*/Kitagwenda	Africa/Uganda/Western Region/Kitagwenda
+*/Uganda/*/Kyegegwa	Africa/Uganda/Western Region/Kyegegwa
+*/Uganda/*/Kyenjojo	Africa/Uganda/Western Region/Kyenjojo
+*/Uganda/*/Masindi	Africa/Uganda/Western Region/Masindi
+*/Uganda/*/Mbarara	Africa/Uganda/Western Region/Mbarara
+*/Uganda/*/Mitooma	Africa/Uganda/Western Region/Mitooma
+*/Uganda/*/Ntoroko	Africa/Uganda/Western Region/Ntoroko
+*/Uganda/*/Ntungamo	Africa/Uganda/Western Region/Ntungamo
+*/Uganda/*/Rubanda	Africa/Uganda/Western Region/Rubanda
+*/Uganda/*/Rubirizi	Africa/Uganda/Western Region/Rubirizi
+*/Uganda/*/Rukiga	Africa/Uganda/Western Region/Rukiga
+*/Uganda/*/Rukungiri	Africa/Uganda/Western Region/Rukungiri
+*/Uganda/*/Rwampara	Africa/Uganda/Western Region/Rwampara
+*/Uganda/*/Sheema	Africa/Uganda/Western Region/Sheema
+# Missing division & locations
+*/Uganda/*/Unknown	Africa/Uganda//
+*/Uganda/*/Not Provided	Africa/Uganda//
+
+
 # PP_006XCJJ
 */Uganda/Uganda/Hoima	Africa/Uganda/Hoima/Hoima
 
