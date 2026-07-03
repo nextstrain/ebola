@@ -42,6 +42,25 @@ rule ancestral:
             --output-node-data {output.node_data:q}
         """
 
+rule count_mutations:
+    """Count the nucleotide and amino-acid mutations per node"""
+    input:
+        node_data = "results/{species}/{build}/muts.json"
+    output:
+        node_data = "results/{species}/{build}/muts-counts.json"
+    params:
+        script = os.path.join(workflow.basedir, "scripts", "collect-mutations.py"),
+        cds = lambda w: config['count_mutations'][f"{w.species}/{w.build}"].get('cds', []),
+        counts = lambda w: config['count_mutations'][f"{w.species}/{w.build}"].get('counts', ''),
+    shell:
+        r"""
+        python {params.script} \
+            --muts {input.node_data:q} \
+            --cds {params.cds} \
+            --counts {params.counts} \
+            --output {output.node_data:q}
+        """
+
 rule traits:
     input:
         tree = "results/{species}/{build}/tree.nwk",

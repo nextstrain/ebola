@@ -70,6 +70,7 @@ subsample:
       outbreak:
         min_length: 5000
         exclude_where: outbreak!=Bdbv-2026
+        exclude: defaults/exclude_bdbv_drc-uganda-2026.txt
   sudv/all-outbreaks:
     samples:
       everything:
@@ -110,6 +111,8 @@ refine:
   # bdbv/drc-uganda-2026 is a WIP - starting with the same args as west-africa
   bdbv/drc-uganda-2026: >-
     --timetree
+    --root PP_00711S5 PP_00711VZ
+    --clock-rate 1.2E-3
     --date-inference marginal
     --coalescent skyline
     --date-confidence
@@ -142,6 +145,11 @@ sampling_year_coloring:
   sudv/all-outbreaks: true
   ebov/all-outbreaks: true
   ebov/west-africa-2014: true
+
+count_mutations:
+  bdbv/drc-uganda-2026:
+    counts: 0,1,2,3,4,5,6,7+
+    cds: [GP]
 
 
 label_outbreaks:
@@ -213,7 +221,25 @@ export:
         - {"name": Nextstrain, url: 'https://nextstrain.org'}
       geo_resolutions: [country, division]
       display_defaults:
-        color_by: num_date
-        geo_resolution: division
+        color_by: location
+        geo_resolution: location
+      colorings:
+        - key: nuc_mut_count
+          title: Nuc mutations (from root)
+          type: "categorical"
+          scale: &mut_count_scale
+            - ['0', '#f03b20']
+            - ['1', '#7fcdbb']
+            - ['2', '#41b6c4']
+            - ['3', '#1d91c0']
+            - ['4', '#225ea8']
+            - ['5', '#253494']
+            - ['6', '#081d58']
+            - ['7+', '#88419d']
+        - key: GP_mut_count
+          title: GP AA mutations (from root)
+          type: "categorical"
+          scale: *mut_count_scale
+        
     description: ../nextclade/defaults/description.md
     warning: *bdbv_warning

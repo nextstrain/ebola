@@ -177,3 +177,22 @@ PP_000LE29	country	Liberia
 # NML/BALB/c-lab/GIN/2014/Makona-Gueckedou-C07-rgMA
 PP_000NU8D	region	Africa
 PP_000NU8D	country	Guinea
+
+# TEMPORARY - BDBV 2026 outbreak
+# Remove all geo information about these samples which are annotated as from Uganda,
+# but the geographic information seems to place them in DRC
+# See <https://github.com/pathoplexus/curation_reports/issues/27>
+# (Uganda, Uganda, Drc)
+PP_0076RKK	country	
+PP_0076RKK	division	
+PP_0076RKK	location	
+PP_0076RLH	country	
+PP_0076RLH	division	
+PP_0076RLH	location	
+# (Uganda, Uganda, Bunya Congo) 
+PP_0076RR7	country	
+PP_0076RR7	division	
+PP_0076RR7	location	
+PP_0076RS5	country	
+PP_0076RS5	division	
+PP_0076RS5	location	

@@ -216,8 +216,10 @@ rule curate_geography:
         metadata="data/{species}/metadata_lab-host-improvements.tsv",
         geolocation_rules=config["curate_geography"]["local_geolocation_rules"],
         annotations=config["curate_geography"]["annotations"],
+        lat_longs="../phylogenetic/defaults/lat_longs.tsv",
     output:
         metadata="data/{species}/metadata_geo-improvements.tsv",
+        lat_longs_report="data/{species}/lat-longs-coverage.txt",
     params:
         id_column=config["curate_geography"]["id_column"],
         annotations_id=config["curate_geography"]["annotations_id"],
@@ -237,6 +239,13 @@ rule curate_geography:
                 --annotations {input.annotations:q} \
                 --id-field {params.annotations_id:q} \
                 --output-metadata {output.metadata:q}
+
+        # Report any geographic values that lack coordinates in the lat-longs table.
+        scripts/check_lat_longs.py \
+            --metadata {output.metadata:q} \
+            --lat-longs {input.lat_longs:q} \
+            --id-column {params.id_column:q} \
+            --output {output.lat_longs_report:q}
         """
 
 

@@ -51,7 +51,12 @@
     },
     {
       "key": "division",
-      "title": "Division",
+      "title": "Province",
+      "type": "categorical"
+    },
+    {
+      "key": "location",
+      "title": "Health Zone",
       "type": "categorical"
     },
     {
@@ -95,7 +100,9 @@
     }
   ],
   "geo_resolutions": [
-    "country"
+    "country",
+    "division",
+    "location"
   ],
   "display_defaults": {
     "tip_label": "strain"

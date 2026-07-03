@@ -13,7 +13,8 @@ def node_data_files(wildcards):
         files.append(f"results/{wildcards.species}/{wildcards.build}/traits.json")
     if _uses_sampling_year(wildcards):
         files.append(f"results/{wildcards.species}/{wildcards.build}/sampling-year.json")
-
+    if config['count_mutations'].get(build_pair, False):
+        files.append(f"results/{wildcards.species}/{wildcards.build}/muts-counts.json")
     if config['label_outbreaks'].get(build_pair, False):
         files.append(f"results/{wildcards.species}/{wildcards.build}/outbreaks.json")
 
