@@ -4,11 +4,13 @@
 # Only a subset of builds are run via our automation
 builds:
    - bdbv/all-outbreaks
+   - bdbv/drc-uganda-2026
    - sudv/all-outbreaks
    - ebov/all-outbreaks
 
 rename_jsons_to_reflect_urls:
   bdbv/all-outbreaks: ebola_bdbv.json
+  bdbv/drc-uganda-2026: bdbv-drc-uganda-2026.json
   sudv/all-outbreaks: ebola_sudv.json
   ebov/all-outbreaks: ebola_all-outbreaks.json
 
