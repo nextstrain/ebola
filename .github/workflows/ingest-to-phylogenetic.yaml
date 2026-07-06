@@ -70,6 +70,11 @@ jobs:
       # Empty ("[]") means no Ebola species have new data and thus all phylogenetic builds are skipped.
       builds: ${{ steps.determine-builds.outputs.builds }}
     steps:
+      # Needed so `determine-builds` can read the `builds` list out of the
+      # phylogenetic automation config rather than hardcoding it here.
+      - name: Checkout
+        uses: actions/checkout@v7
+
       - name: Get sha256sum per species
         id: get-sha256sum
         env:
@@ -122,30 +127,41 @@ jobs:
           key: ingest-output-sha256sum-ebov-${{ hashFiles('ingest-output-sha256sum-ebov') }}
           lookup-only: true
 
-      # Map the updated species onto the phylogenetic builds that should run and emit
-      # them as a JSON list for the phylogenetic job's `--config builds=[...]`.
-      # NOTE: this species -> builds mapping must be kept in sync with the `builds`
-      # in phylogenetic/build-configs/nextstrain-automation/config.yaml
+      # Emit the builds to run as a JSON list for the phylogenetic job's
+      # `--config builds=[...]`. Rather than hardcode a species -> builds mapping,
+      # read the `builds` list from the automation config (the single source of
+      # truth for which builds exist) and keep those belonging to a changed
+      # species. New builds added to the config are picked up automatically.
       - name: Determine builds
         id: determine-builds
         env:
+          CONFIG: phylogenetic/build-configs/nextstrain-automation/config.yaml
           IS_DISPATCH: ${{ github.event_name == 'workflow_dispatch' }}
           BDBV_HIT: ${{ steps.cache-bdbv.outputs.cache-hit }}
           SUDV_HIT: ${{ steps.cache-sudv.outputs.cache-hit }}
           EBOV_HIT: ${{ steps.cache-ebov.outputs.cache-hit }}
         run: |
-          builds=()
+          # Species with new data (cache miss); a workflow_dispatch forces all of them.
+          changed_species=()
+          if [[ "$IS_DISPATCH" == "true" || "$BDBV_HIT" != "true" ]]; then changed_species+=(bdbv); fi
+          if [[ "$IS_DISPATCH" == "true" || "$SUDV_HIT" != "true" ]]; then changed_species+=(sudv); fi
+          if [[ "$IS_DISPATCH" == "true" || "$EBOV_HIT" != "true" ]]; then changed_species+=(ebov); fi
 
-          # A workflow_dispatch forces every build to run; otherwise only run the
-          # builds for species whose metadata hash changed (i.e. a cache miss).
-          if [[ "$IS_DISPATCH" == "true" || "$BDBV_HIT" != "true" ]]; then
-            builds+=(bdbv/all-outbreaks bdbv/drc-uganda-2026)
-          fi
-          if [[ "$IS_DISPATCH" == "true" || "$SUDV_HIT" != "true" ]]; then
-            builds+=(sudv/all-outbreaks)
-          fi
-          if [[ "$IS_DISPATCH" == "true" || "$EBOV_HIT" != "true" ]]; then
-            builds+=(ebov/all-outbreaks)
+          # Keep the configured builds (e.g. "bdbv/all-outbreaks") whose species
+          # prefix is among the changed species. yq is preinstalled on the
+          # GitHub-hosted ubuntu runners.
+          builds=()
+          if [[ ${#changed_species[@]} -gt 0 ]]; then
+            mapfile -t all_builds < <(yq '.builds[]' "$CONFIG")
+            for build in "${all_builds[@]}"; do
+              species="${build%%/*}"
+              for changed in "${changed_species[@]}"; do
+                if [[ "$species" == "$changed" ]]; then
+                  builds+=("$build")
+                  break
+                fi
+              done
+            done
           fi
 
           if [[ ${#builds[@]} -eq 0 ]]; then
