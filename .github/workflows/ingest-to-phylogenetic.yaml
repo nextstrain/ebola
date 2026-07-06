@@ -66,43 +66,101 @@ jobs:
     needs: [ingest]
     runs-on: ubuntu-latest
     outputs:
-      cache-hit: ${{ steps.check-cache.outputs.cache-hit }}
+      # JSON list of builds to run, e.g. ["ebov/all-outbreaks","sudv/all-outbreaks"].
+      # Empty ("[]") means no Ebola species have new data and thus all phylogenetic builds are skipped.
+      builds: ${{ steps.determine-builds.outputs.builds }}
     steps:
-      - name: Get sha256sum
+      - name: Get sha256sum per species
         id: get-sha256sum
         env:
           AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
         run: |
-          s3_urls=(
-            "s3://nextstrain-data/files/workflows/ebola/ebov/metadata.tsv.zst"
-          )
-
           # Code below is modified from ingest/upload-to-s3
           # https://github.com/nextstrain/ingest/blob/c0b4c6bb5e6ccbba86374d2c09b42077768aac23/upload-to-s3#L23-L29
 
           no_hash=0000000000000000000000000000000000000000000000000000000000000000
 
-          for s3_url in "${s3_urls[@]}"; do
-            s3path="${s3_url#s3://}"
-            bucket="${s3path%%/*}"
-            key="${s3path#*/}"
-
-            s3_hash="$(aws s3api head-object --no-sign-request --bucket "$bucket" --key "$key" --query Metadata.sha256sum --output text 2>/dev/null || echo "$no_hash")"
-            echo "${s3_hash}" | tee -a ingest-output-sha256sum
+          # Each species has both open and restricted metadata; concatenate the
+          # hashes of both into the species' file so that a change to *either*
+          # results in a new cache key (and thus triggers that species' builds).
+          for species in bdbv sudv ebov; do
+            : > "ingest-output-sha256sum-${species}"
+            for access in open restricted; do
+              key="files/workflows/ebola/${species}/metadata_${access}.tsv.zst"
+              s3_hash="$(aws s3api head-object --no-sign-request --bucket nextstrain-data --key "$key" --query Metadata.sha256sum --output text 2>/dev/null || echo "$no_hash")"
+              echo "${s3_hash}" | tee -a "ingest-output-sha256sum-${species}"
+            done
           done
 
-      - name: Check cache
-        id: check-cache
+      # The shasum for each species is stored using GitHub Actions cache, with the shasum
+      # in the filename; see <https://github.com/nextstrain/ebola/actions/caches>
+      # A cache miss (cache-hit != 'true') means the species' metadata hash is new since
+      # the last run, so its builds should run. A cache miss also results in a new cache
+      # file generated so that a subsequent run with the same hash is a hit (and is
+      # therefore skipped); this cache save is automatic by 'actions/cache'.
+      - name: Check cache (bdbv)
+        id: cache-bdbv
         uses: actions/cache@v6
         with:
-          path: ingest-output-sha256sum
-          key: ingest-output-sha256sum-${{ hashFiles('ingest-output-sha256sum') }}
+          path: ingest-output-sha256sum-bdbv
+          key: ingest-output-sha256sum-bdbv-${{ hashFiles('ingest-output-sha256sum-bdbv') }}
           lookup-only: true
+
+      - name: Check cache (sudv)
+        id: cache-sudv
+        uses: actions/cache@v6
+        with:
+          path: ingest-output-sha256sum-sudv
+          key: ingest-output-sha256sum-sudv-${{ hashFiles('ingest-output-sha256sum-sudv') }}
+          lookup-only: true
+
+      - name: Check cache (ebov)
+        id: cache-ebov
+        uses: actions/cache@v6
+        with:
+          path: ingest-output-sha256sum-ebov
+          key: ingest-output-sha256sum-ebov-${{ hashFiles('ingest-output-sha256sum-ebov') }}
+          lookup-only: true
+
+      # Map the updated species onto the phylogenetic builds that should run and emit
+      # them as a JSON list for the phylogenetic job's `--config builds=[...]`.
+      # NOTE: this species -> builds mapping must be kept in sync with the `builds`
+      # in phylogenetic/build-configs/nextstrain-automation/config.yaml
+      - name: Determine builds
+        id: determine-builds
+        env:
+          IS_DISPATCH: ${{ github.event_name == 'workflow_dispatch' }}
+          BDBV_HIT: ${{ steps.cache-bdbv.outputs.cache-hit }}
+          SUDV_HIT: ${{ steps.cache-sudv.outputs.cache-hit }}
+          EBOV_HIT: ${{ steps.cache-ebov.outputs.cache-hit }}
+        run: |
+          builds=()
+
+          # A workflow_dispatch forces every build to run; otherwise only run the
+          # builds for species whose metadata hash changed (i.e. a cache miss).
+          if [[ "$IS_DISPATCH" == "true" || "$BDBV_HIT" != "true" ]]; then
+            builds+=(bdbv/all-outbreaks bdbv/drc-uganda-2026)
+          fi
+          if [[ "$IS_DISPATCH" == "true" || "$SUDV_HIT" != "true" ]]; then
+            builds+=(sudv/all-outbreaks)
+          fi
+          if [[ "$IS_DISPATCH" == "true" || "$EBOV_HIT" != "true" ]]; then
+            builds+=(ebov/all-outbreaks)
+          fi
+
+          if [[ ${#builds[@]} -eq 0 ]]; then
+            builds_json='[]'
+          else
+            builds_json="$(printf '%s\n' "${builds[@]}" | jq -R . | jq -sc .)"
+          fi
+
+          echo "Builds to run: ${builds_json}"
+          echo "builds=${builds_json}" >> "$GITHUB_OUTPUT"
 
 
   phylogenetic:
     needs: [check-new-data]
-    if: ${{ github.event_name == 'workflow_dispatch' || needs.check-new-data.outputs.cache-hit != 'true' }}
+    if: ${{ needs.check-new-data.outputs.builds != '[]' }}
     permissions:
       id-token: write
     uses: nextstrain/.github/.github/workflows/pathogen-repo-build.yaml@master
@@ -114,7 +172,8 @@ jobs:
       run: |
         nextstrain build phylogenetic \
           deploy_all \
-          --configfile build-configs/nextstrain-automation/config.yaml
+          --configfile build-configs/nextstrain-automation/config.yaml \
+          --config 'builds=${{ needs.check-new-data.outputs.builds }}'
       artifact-name: phylo-all-outbreaks-output
       artifact-paths: |
         phylogenetic/benchmarks/

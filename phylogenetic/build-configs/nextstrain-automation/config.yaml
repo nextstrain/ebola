@@ -1,7 +1,10 @@
 # This configuration file should contain all required configuration parameters
 # for the ingest workflow to run with additional Nextstrain automation rules.
 
-# Only a subset of builds are run via our automation
+# Only a subset of builds are intended to be run via our automation
+# NOTE: `ingest-to-phylogenetic.yaml` overrides this via --config, but we keep
+# this copy here for (a) clarity and (b) in case we manually want to run the
+# `deploy_all` rule
 builds:
    - bdbv/all-outbreaks
    - bdbv/drc-uganda-2026
