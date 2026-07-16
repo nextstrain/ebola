@@ -111,6 +111,8 @@ refine:
   # bdbv/drc-uganda-2026 is a WIP - starting with the same args as west-africa
   bdbv/drc-uganda-2026: >-
     --timetree
+    --root PP_006Y8ME PP_00765RT
+    --clock-rate 1.1E-3
     --date-inference marginal
     --coalescent skyline
     --date-confidence
