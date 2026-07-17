@@ -25,12 +25,16 @@ def alignment_for_tree(wildcards):
     return f"results/{wildcards.species}/{wildcards.build}/subsampled.fasta",
 
 
+
+
 rule tree:
     """Building tree"""
     input:
         alignment = alignment_for_tree,
     output:
         tree = "results/{species}/{build}/tree_raw.nwk"
+    params:
+       args = lambda w: config['tree'][f"{w.species}/{w.build}"],
     benchmark:
         "benchmarks/{species}/{build}/tree.txt"
     log:
@@ -43,7 +47,7 @@ rule tree:
         augur tree \
             --alignment {input.alignment:q} \
             --output {output.tree:q} \
-            --nthreads {threads:q}
+            --nthreads {threads:q} {params.args}
         """
 
 rule reroot_tree:

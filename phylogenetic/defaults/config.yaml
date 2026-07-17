@@ -87,13 +87,27 @@ mask:
   bdbv/drc-uganda-2026:
     <<: *generic-masking
 
+tree:
+  ebov/all-outbreaks: >-
+    
+  ebov/west-africa-2014: >-
+
+  bdbv/all-outbreaks: >-
+
+  sudv/all-outbreaks: >-
+
+  # bdbv/drc-uganda-2026 is a WIP - starting with the same args as west-africa
+  bdbv/drc-uganda-2026: >-
+    --override-default-args
+    --tree-builder-args="--polytomy"
+
+
 # per-build tree re-rooting (before refine). Optional.
 reroot_tree:
   ebov/all-outbreaks:
     # See <https://virological.org/t/on-the-rooting-of-the-ebola-virus-phylogeny-and-its-consequences-for-understanding-the-diversity-in-the-reservoir/1005> for rooting approach
     strains: ['PP_000LE61', 'PP_000NUJS']
 
-# per-build arguments to `augur refine`
 refine:
   ebov/all-outbreaks: >-
     --keep-root
@@ -111,10 +125,11 @@ refine:
   # bdbv/drc-uganda-2026 is a WIP - starting with the same args as west-africa
   bdbv/drc-uganda-2026: >-
     --timetree
-    --root PP_0076SXU
+    --root  PP_0076T2J PP_00764RU PP_0076550
     --date-inference marginal
     --coalescent skyline
     --date-confidence
+    --keep-polytomies
 
 # Ancestral per-build blocks may define 'inference' & 'root-sequence'
 # Leave out (or falsify) a build to skip ancestral inference
