@@ -29,7 +29,7 @@ def validate_config():
     
     # BUILDS
     if not isinstance(config.get('builds', False), list) or len(config['builds'])==0 or not all([isinstance(b, str) for b in config['builds']]):
-        raise InvalidConfigError("onfig.builds must be a list with at least one value; values must be strings")
+        raise InvalidConfigError("config.builds must be a list with at least one value; values must be strings")
     if not all([len(b.split('/'))==2 for b in config['builds']]):
         raise InvalidConfigError("Each value in config.builds must have the format {species}/{build}, e.g. 'ebov/all-outbreaks'")
 

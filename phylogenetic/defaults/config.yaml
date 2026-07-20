@@ -241,7 +241,7 @@ export:
         geo_resolution: location
       colorings:
         - key: nuc_mut_count
-          title: Nuc mutations (from root)
+          title: Nuc mutations (on branch)
           type: "categorical"
           scale: &mut_count_scale
             - ['0', '#f03b20']
