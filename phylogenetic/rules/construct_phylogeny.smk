@@ -1,4 +1,11 @@
 
+def sites_to_mask(wildcards):
+    build_options = config['mask'][f"{wildcards.species}/{wildcards.build}"]
+    sites = build_options.get('sites')
+    if sites:
+        return f'--mask-sites {sites}'
+    return ""
+
 rule mask:
     input:
         alignment="results/{species}/{build}/subsampled.fasta",
@@ -7,11 +14,13 @@ rule mask:
     params:
         mask_beginning=lambda w: config['mask'][f"{w.species}/{w.build}"]['beginning'],
         mask_end=lambda w: config['mask'][f"{w.species}/{w.build}"]['end'],
+        mask_sites =sites_to_mask
     shell:
         r"""
         augur mask --sequences {input.alignment} \
                     --mask-from-beginning {params.mask_beginning} \
                     --mask-from-end {params.mask_end} \
+                    {params.mask_sites} \
                     --output {output.alignment}
         """
 
@@ -25,7 +34,11 @@ def alignment_for_tree(wildcards):
     return f"results/{wildcards.species}/{wildcards.build}/subsampled.fasta",
 
 
-
+def args_for_tree(wildcards):
+    build_options = config['tree'].get(f"{wildcards.species}/{wildcards.build}",False)
+    if build_options:
+        return build_options
+    return ""
 
 rule tree:
     """Building tree"""

@@ -82,10 +82,12 @@ mask:
   sudv/all-outbreaks: &generic-masking
     beginning: 50
     end: 50
-  bdbv/all-outbreaks:
-    <<: *generic-masking
+  bdbv/all-outbreaks: &bdbv-masking
+     beginning: 50
+     end: 50
+     sites: 7461 # a polymorphic site in a variable region in GP that conflicts with outgroup rooting. 
   bdbv/drc-uganda-2026:
-    <<: *generic-masking
+    <<: *bdbv-masking
 
 tree:
   ebov/all-outbreaks: >-
