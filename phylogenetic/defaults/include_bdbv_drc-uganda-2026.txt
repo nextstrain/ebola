@@ -1,0 +1,4 @@
+# Uganda 2007 outgroup
+PP_006X63M
+# DRC 2012 outgroup
+PP_006X6EZ

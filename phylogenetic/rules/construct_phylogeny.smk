@@ -47,7 +47,7 @@ rule tree:
     output:
         tree = "results/{species}/{build}/tree_raw.nwk"
     params:
-       args = lambda w: config['tree'][f"{w.species}/{w.build}"],
+       args =args_for_tree,
     benchmark:
         "benchmarks/{species}/{build}/tree.txt"
     log:
@@ -60,7 +60,8 @@ rule tree:
         augur tree \
             --alignment {input.alignment:q} \
             --output {output.tree:q} \
-            --nthreads {threads:q} {params.args}
+            {params.args} \
+            --nthreads {threads:q} 
         """
 
 rule reroot_tree:
@@ -70,6 +71,7 @@ rule reroot_tree:
         tree = "results/{species}/{build}/tree_raw_rooted.nwk"
     params:
         strains = lambda w: config['reroot_tree'][f"{w.species}/{w.build}"]['strains'],
+        remove_outgroup = lambda w: config['reroot_tree'][f"{w.species}/{w.build}"].get('remove_outgroup',False)
     run:
         from Bio import Phylo
         T = Phylo.read(input.tree, "newick")
@@ -78,6 +80,9 @@ rule reroot_tree:
         print("Rooting tree using the common ancestor of these strains as the outgroup:", strains)
         ca = T.common_ancestor(strains)
         T.root_with_outgroup(ca)
+        if params.remove_outgroup:
+            for strain in strains:
+                T.prune(strain)
         Phylo.write(T, output.tree, "newick")
 
 
