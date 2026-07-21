@@ -5,13 +5,13 @@ workflow configs.
 import os
 import sys
 import yaml
+from augur.config import resolve_filepath
 from collections.abc import Callable
 from typing import Optional
 from textwrap import dedent, indent
 
-from augur.subsample import _resolve_filepath as augur_resolve_filepath
 
-# Set search paths for Augur
+# Set search paths
 if "AUGUR_SEARCH_PATHS" in os.environ:
     print(dedent(f"""\
         Using existing search paths in AUGUR_SEARCH_PATHS:
@@ -19,10 +19,6 @@ if "AUGUR_SEARCH_PATHS" in os.environ:
             {os.environ["AUGUR_SEARCH_PATHS"]!r}
         """), file=sys.stderr)
 else:
-    # Note that this differs from the search paths used in
-    # resolve_config_path().
-    # This is the preferred default moving forwards, and the plan is to
-    # eventually update resolve_config_path() to use AUGUR_SEARCH_PATHS.
     search_paths = [
         # User analysis directory
         Path.cwd(),
@@ -45,12 +41,24 @@ else:
             repo_root,
         ])
 
-    search_paths = [path.resolve() for path in search_paths if path.is_dir()]
+    seen = set()
+    normalized_search_paths = []
+    for path in search_paths:
+        # Skip paths that are not directories
+        if not path.is_dir():
+            continue
 
-    # For simplicity, ensure search paths are unique (e.g. often the CWD == workflow.basedir)
-    search_paths = [p for idx,p in enumerate(search_paths) if search_paths.index(p)==idx]
+        # Resolve to absolute paths
+        resolved = path.resolve()
 
-    os.environ["AUGUR_SEARCH_PATHS"] = ":".join(map(str, search_paths))
+        # Skip duplicate paths (e.g. often the CWD == workflow.basedir)
+        if resolved in seen:
+            continue
+
+        seen.add(resolved)
+        normalized_search_paths.append(resolved)
+
+    os.environ["AUGUR_SEARCH_PATHS"] = ":".join(map(str, normalized_search_paths))
 
 
 class InvalidConfigError(Exception):
@@ -84,20 +92,27 @@ def resolve_config_path(path: str) -> Callable:
                 Hint: Check that the config path value does not misspell the wildcard name
                 and that the rule actually uses the wildcard name.
                 """.lstrip("\n").rstrip()).format(path=repr(path), available_wildcards=available_wildcards), " " * 4))
-            
+
         search_paths = [Path(p) for p in os.environ["AUGUR_SEARCH_PATHS"].split(":")]
         try:
-            return str(augur_resolve_filepath(Path(expanded_path), search_paths))
-        except AugurError as error:
-            # FIXME: check indentation of nested error message
-            raise InvalidConfigError(indent(dedent(f"""\
-                Unable to resolve the config-provided path {path!r},
-                expanded to {expanded_path!r} after filling in wildcards.
-                {error}
+            return str(resolve_filepath(Path(expanded_path), search_paths))
+        except Exception as error:
+            raise InvalidConfigError(
+                indent(
+                    dedent(f"""
+                        Unable to resolve the config-provided path {path!r},
+                        expanded to {expanded_path!r} after filling in wildcards.
 
-                Hint: Check that the file {expanded_path!r} exists in your analysis
-                directory or remove the config param to use the workflow defaults.
-                """), " " * 4))
+                        """)
+                    + str(error)
+                    + dedent(f"""
+
+                        Hint: Check that the file {expanded_path!r} exists in your analysis
+                        directory or remove the config param to use the workflow defaults.
+                        """),
+                    " " * 4,
+                )
+            )
 
     return _resolve_config_path
 
