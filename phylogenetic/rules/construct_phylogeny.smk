@@ -1,4 +1,22 @@
 
+# Outgroup sequences don't need corresponding metadata as they are intended to be removed by
+# either `augur refine` or the `reroot_tree` rule
+rule add_outgroup_sequence:
+    input:
+        sequences = "results/{species}/{build}/subsampled.fasta",
+        outgroup = lambda w: config['outgroup'][f"{w.species}/{w.build}"],
+    output:
+        sequences = "results/{species}/{build}/subsampled-plus-outgroup.fasta",
+    run:
+        from Bio import SeqIO
+        records = [record for path in [input.sequences, input.outgroup] for record in SeqIO.parse(path, "fasta")]
+        lengths = {len(record.seq) for record in records}
+        assert len(lengths) == 1, f"Sequences (incl. outgroup) must all be the same length, but found lengths {sorted(lengths)}"
+        names = [record.name for record in records]
+        duplicates = sorted({name for name in names if names.count(name) > 1})
+        assert not duplicates, f"Sequence names (incl. outgroup) must be unique, but these are duplicated: {duplicates}"
+        SeqIO.write(records, output.sequences, "fasta")
+
 def sites_to_mask(wildcards):
     build_options = config['mask'][f"{wildcards.species}/{wildcards.build}"]
     sites = build_options.get('sites')
@@ -8,7 +26,9 @@ def sites_to_mask(wildcards):
 
 rule mask:
     input:
-        alignment="results/{species}/{build}/subsampled.fasta",
+        alignment=lambda w: f"results/{w.species}/{w.build}/subsampled-plus-outgroup.fasta" \
+            if config.get('outgroup', {}).get(f"{w.species}/{w.build}", False) \
+            else f"results/{w.species}/{w.build}/subsampled.fasta",
     output:
         alignment="results/{species}/{build}/masked.fasta",
     params:

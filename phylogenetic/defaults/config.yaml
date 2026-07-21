@@ -79,6 +79,10 @@ subsample:
         min_length: 5000
         exclude: defaults/exclude_sudv.txt
 
+outgroup:
+  bdbv/drc-uganda-2026:
+    defaults/outgroup_bdbv_drc-uganda-2026.fasta
+
 # per-build masking (optional)
 mask:
   sudv/all-outbreaks: &generic-masking
@@ -89,7 +93,9 @@ mask:
      end: 50
      sites: 7461 # a polymorphic site in a variable region in GP that conflicts with outgroup rooting. 
   bdbv/drc-uganda-2026:
-    <<: *bdbv-masking
+     beginning: 50
+     end: 50
+     # site 7461 masked in outgroup seqs, but not in outbreak seqs
 
 tree:
   bdbv/all-outbreaks: >-
@@ -105,7 +111,7 @@ reroot_tree:
     # See <https://virological.org/t/on-the-rooting-of-the-ebola-virus-phylogeny-and-its-consequences-for-understanding-the-diversity-in-the-reservoir/1005> for rooting approach
     strains: ['PP_000LE61', 'PP_000NUJS']
   bdbv/drc-uganda-2026:
-    strains: ['PP_006X63M','PP_006X6EZ']
+    strains: ['PP_006X63M_2007_outbreak_pos_7461_masked', 'PP_006X6EZ_2012_outbreak_pos_7461_masked']
     remove_outgroup: true
 
 refine:
