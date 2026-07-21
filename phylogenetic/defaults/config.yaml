@@ -94,10 +94,10 @@ mask:
 tree:
   bdbv/all-outbreaks: >-
     --override-default-args
-    --tree-builder-args="--polytomy"
+    --tree-builder-args="--polytomy --ninit 1000 --epsilon 0.01 -T AUTO --redo"
   bdbv/drc-uganda-2026: >-
     --override-default-args
-    --tree-builder-args="--polytomy"
+    --tree-builder-args="--polytomy --ninit 1000 --epsilon 0.01 -T AUTO --redo"
 
 # per-build tree re-rooting (before refine). Optional.
 reroot_tree:
