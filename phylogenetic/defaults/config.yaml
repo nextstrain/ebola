@@ -65,11 +65,13 @@ subsample:
     samples:
       everything:
          min_length: 5000
+         exclude: defaults/exclude_bdbv_drc-uganda-2026.txt
   bdbv/drc-uganda-2026:
     samples:
       outbreak:
         min_length: 5000
         exclude_where: outbreak!=Bdbv-2026
+        include: defaults/include_bdbv_drc-uganda-2026.txt
         exclude: defaults/exclude_bdbv_drc-uganda-2026.txt
   sudv/all-outbreaks:
     samples:
@@ -77,23 +79,40 @@ subsample:
         min_length: 5000
         exclude: defaults/exclude_sudv.txt
 
+outgroup:
+  bdbv/drc-uganda-2026:
+    defaults/outgroup_bdbv_drc-uganda-2026.fasta
+
 # per-build masking (optional)
 mask:
   sudv/all-outbreaks: &generic-masking
     beginning: 50
     end: 50
-  bdbv/all-outbreaks:
-    <<: *generic-masking
+  bdbv/all-outbreaks: &bdbv-masking
+     beginning: 50
+     end: 50
+     sites: 7461 # a polymorphic site in a variable region in GP that conflicts with outgroup rooting. 
   bdbv/drc-uganda-2026:
-    <<: *generic-masking
+     beginning: 50
+     end: 50
+
+tree:
+  bdbv/all-outbreaks: >-
+    --override-default-args
+    --tree-builder-args="--polytomy --ninit 1000 --epsilon 0.01 -T AUTO --redo"
+  bdbv/drc-uganda-2026: >-
+    --override-default-args
+    --tree-builder-args="--polytomy --ninit 1000 --epsilon 0.01 -T AUTO --redo"
 
 # per-build tree re-rooting (before refine). Optional.
 reroot_tree:
   ebov/all-outbreaks:
     # See <https://virological.org/t/on-the-rooting-of-the-ebola-virus-phylogeny-and-its-consequences-for-understanding-the-diversity-in-the-reservoir/1005> for rooting approach
     strains: ['PP_000LE61', 'PP_000NUJS']
+  bdbv/drc-uganda-2026:
+    strains: ['all_outbreaks_inferred_root_no_masking']
+    remove_outgroup: true
 
-# per-build arguments to `augur refine`
 refine:
   ebov/all-outbreaks: >-
     --keep-root
@@ -111,11 +130,10 @@ refine:
   # bdbv/drc-uganda-2026 is a WIP - starting with the same args as west-africa
   bdbv/drc-uganda-2026: >-
     --timetree
-    --root PP_00711S5 PP_00711VZ
-    --clock-rate 1.2E-3
-    --date-inference marginal
-    --coalescent skyline
+    --keep-root
+    --date-inference joint
     --date-confidence
+    --keep-polytomies
 
 # Ancestral per-build blocks may define 'inference' & 'root-sequence'
 # Leave out (or falsify) a build to skip ancestral inference
@@ -225,7 +243,7 @@ export:
         geo_resolution: location
       colorings:
         - key: nuc_mut_count
-          title: Nuc mutations (from root)
+          title: Nuc mutations (on branch)
           type: "categorical"
           scale: &mut_count_scale
             - ['0', '#f03b20']
