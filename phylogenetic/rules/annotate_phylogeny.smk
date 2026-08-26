@@ -21,6 +21,7 @@ rule ancestral:
     params:
         genes = lambda w: config['ancestral'][f"{w.species}/{w.build}"]['genes'],
         inference = lambda w: conditional('--inference', config['ancestral'][f"{w.species}/{w.build}"].get('inference', False)),
+        keep_ambiguous = lambda w: conditional('--keep-ambiguous', config['ancestral'][f"{w.species}/{w.build}"].get('keep_ambiguous', False)),
         root_seq = _root_seq,
     benchmark:
         "benchmarks/{species}/{build}/ancestral.txt"
@@ -37,6 +38,7 @@ rule ancestral:
             --translations results/{wildcards.species}/translations/%GENE.fasta \
             --genes {params.genes} \
             {params.inference} \
+            {params.keep_ambiguous} \
             {params.root_seq} \
             --report-inconsistent-translation \
             --output-node-data {output.node_data:q}
