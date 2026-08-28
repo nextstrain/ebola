@@ -24,6 +24,13 @@ on:
       image:
         description: 'Specific container image to use (will override the default of "nextstrain build")'
         required: false
+      trial_name:
+        description: |
+          Trial name for deploying builds.
+          If not set, builds will overwrite existing builds at s3://nextstrain-data/ebola*
+          If set, builds will be deployed to s3://nextstrain-staging/ebola_trials_<trial_name>_*
+        required: false
+        type: string
 
 jobs:
   # Check if ingest results include new data by checking for the cache
@@ -155,11 +162,18 @@ jobs:
       runtime: docker
       env: |
         NEXTSTRAIN_DOCKER_IMAGE: ${{ inputs.image }}
+        TRIAL_NAME: ${{ inputs.trial_name }}
       run: |
+        declare -a config
+
+        if [[ "$TRIAL_NAME" ]]; then
+          config+=("deploy_url=s3://nextstrain-staging/ebola_trials_${TRIAL_NAME}_")
+        fi
+
         nextstrain build phylogenetic \
           deploy_all \
           --configfile build-configs/nextstrain-automation/config.yaml \
-          --config 'builds=${{ needs.check-new-data.outputs.builds }}'
+          --config 'builds=${{ needs.check-new-data.outputs.builds }}' "${config[@]}"
       artifact-name: phylo-all-outbreaks-output
       artifact-paths: |
         phylogenetic/benchmarks/
