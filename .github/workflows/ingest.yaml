@@ -1,0 +1,55 @@
+name: Ingest
+
+defaults:
+  run:
+    # This is the same as GitHub Action's `bash` keyword as of 20 June 2023:
+    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsshell
+    #
+    # Completely spelling it out here so that GitHub can't change it out from under us
+    # and we don't have to refer to the docs to know the expected behavior.
+    shell: bash --noprofile --norc -eo pipefail {0}
+
+on:
+  schedule:
+    # Note the actual runs might be late.
+    # Numerous people were confused, about that, including me:
+    #  - https://github.community/t/scheduled-action-running-consistently-late/138025/11
+    #  - https://github.com/github/docs/issues/3059
+    #
+    # Note, '*' is a special character in YAML, so you have to quote this string.
+    #
+    # Docs:
+    #  - https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#schedule
+    #
+    # Tool that deciphers this particular format of crontab string:
+    #  - https://crontab.guru/
+    #
+    # Runs around 16h00 UTC (morning Seattle & NZ)
+    - cron: '0 16 * * *'
+
+  workflow_dispatch:
+    inputs:
+      image:
+        description: 'Specific container image to use (will override the default of "nextstrain build")'
+        required: false
+
+jobs:
+  ingest:
+    permissions:
+      id-token: write
+    uses: nextstrain/.github/.github/workflows/pathogen-repo-build.yaml@master
+    secrets: inherit
+    with:
+      runtime: docker
+      env: |
+        NEXTSTRAIN_DOCKER_IMAGE: ${{ inputs.image }}
+      run: |
+        nextstrain build ingest \
+          upload_all \
+          --configfile build-configs/nextstrain-automation/config.yaml
+      # Specifying artifact name to differentiate ingest build outputs from the phylogenetic build outputs
+      artifact-name: ingest-output
+      artifact-paths: |
+        ingest/benchmarks/
+        ingest/logs/
+        ingest/.snakemake/log/

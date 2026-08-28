@@ -1,7 +1,4 @@
-name: Ingest to phylogenetic
-
-# NOTE: Currently this just runs the all-outbreaks workflow
-# As we add more workflows we should revisit this action
+name: Phylogenetic
 
 defaults:
   run:
@@ -13,22 +10,14 @@ defaults:
     shell: bash --noprofile --norc -eo pipefail {0}
 
 on:
-  schedule:
-    # Note the actual runs might be late.
-    # Numerous people were confused, about that, including me:
-    #  - https://github.community/t/scheduled-action-running-consistently-late/138025/11
-    #  - https://github.com/github/docs/issues/3059
-    #
-    # Note, '*' is a special character in YAML, so you have to quote this string.
-    #
-    # Docs:
-    #  - https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#schedule
-    #
-    # Tool that deciphers this particular format of crontab string:
-    #  - https://crontab.guru/
-    #
-    # Runs around 16h00 UTC (morning Seattle & NZ)
-    - cron: '0 16 * * *'
+  # This workflow will be triggered after the "Ingest" workflow has completed on the "main" branch.
+  workflow_run:
+    workflows:
+      - Ingest
+    types:
+      - completed
+    branches:
+      - main
 
   workflow_dispatch:
     inputs:
@@ -37,33 +26,14 @@ on:
         required: false
 
 jobs:
-  ingest:
-    permissions:
-      id-token: write
-    uses: nextstrain/.github/.github/workflows/pathogen-repo-build.yaml@master
-    secrets: inherit
-    with:
-      runtime: docker
-      env: |
-        NEXTSTRAIN_DOCKER_IMAGE: ${{ inputs.image }}
-      run: |
-        nextstrain build ingest \
-          upload_all \
-          --configfile build-configs/nextstrain-automation/config.yaml
-      # Specifying artifact name to differentiate ingest build outputs from the phylogenetic build outputs
-      artifact-name: ingest-output
-      artifact-paths: |
-        ingest/benchmarks/
-        ingest/logs/
-        ingest/.snakemake/log/
-
-
   # Check if ingest results include new data by checking for the cache
   # of the file with the results' Metadata.sh256sum (which should have been added within upload-to-s3)
   # GitHub will remove any cache entries that have not been accessed in over 7 days,
   # so if the workflow has not been run over 7 days then it will trigger phylogenetic.
   check-new-data:
-    needs: [ingest]
+    if: |
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+      github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     outputs:
       # JSON list of builds to run, e.g. ["ebov/all-outbreaks","sudv/all-outbreaks"].
