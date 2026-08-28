@@ -87,7 +87,6 @@ rule traits:
             --columns {params.columns:q} \
             {params.confidence} \
             {params.bias} \
-            {params.branch_confidence} \
             --output {output.node_data:q}
         """
 
