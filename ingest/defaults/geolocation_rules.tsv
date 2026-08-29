@@ -53,9 +53,13 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 */Democratic Republic of the Congo/*/Manguripa	Africa/Democratic Republic of the Congo/*/Manguredjipa
 */Democratic Republic of the Congo/Ituri/Nia	Africa/Democratic Republic of the Congo/Ituri/Nia Nia
 */Democratic Republic of the Congo/*/Nyakunde	Africa/Democratic Republic of the Congo/*/Nyankunde
-*/Democratic Republic of the Congo/Ituri/Mungwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbwalu
-*/Democratic Republic of the Congo/Ituri/Mongwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbwalu
-*/Democratic Republic of the Congo/*/Rwmapara	Africa/Democratic Republic of the Congo/*/Rwampara
+# epicenter combinations
+*/Democratic Republic of the Congo/Ituri/Mungwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbwalu|Bunia|Rwampara
+*/Democratic Republic of the Congo/Ituri/Mongwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbwalu|Bunia|Rwampara
+*/Democratic Republic of the Congo/*/Rwmapara	Africa/Democratic Republic of the Congo/*/Mongbwalu|Bunia|Rwampara
+*/Democratic Republic of the Congo/*/Rwampara	Africa/Democratic Republic of the Congo/*/Mongbwalu|Bunia|Rwampara
+*/Democratic Republic of the Congo/*/Mongbwalu	Africa/Democratic Republic of the Congo/*/Mongbwalu|Bunia|Rwampara
+*/Democratic Republic of the Congo/*/Bunia	Africa/Democratic Republic of the Congo/*/Mongbwalu|Bunia|Rwampara
 
 # Uganda
 # Use <https://en.wikipedia.org/wiki/Districts_of_Uganda> to categorise Uganda into
