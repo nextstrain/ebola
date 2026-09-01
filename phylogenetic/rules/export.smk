@@ -97,31 +97,6 @@ def _auspice_configs(wildcards):
     return jsons
 
 
-
-rule colors:
-    """Generate colors from ordering"""
-    input:
-        ordering = resolve_config_path("defaults/color_ordering.tsv"),
-        color_schemes = resolve_config_path("defaults/color_schemes.tsv"),
-        metadata = "results/{species}/{build}/metadata.tsv"
-    output:
-        colors = "results/{species}/{build}/colors.tsv"
-    log:
-        "logs/{species}/{build}/colors.txt",
-    benchmark:
-        "benchmarks/{species}/{build}/colors.txt",
-    shell:
-        r"""
-        exec &> >(tee {log:q})
-
-        python3 {workflow.basedir}/scripts/assign-colors.py \
-            --ordering {input.ordering} \
-            --color-schemes {input.color_schemes} \
-            --metadata {input.metadata} \
-            --output {output.colors}
-        """
-
-
 rule export:
     """Exporting data files for for auspice"""
     input:
@@ -130,7 +105,6 @@ rule export:
         node_data_jsons = node_data_files,
         lat_longs = lambda w: "results/{species}/{build}/lat_longs.tsv" if config['export'][f"{w.species}/{w.build}"].get('lat_longs') else BASE_LAT_LONGS,
         auspice_config = _auspice_configs,
-        colors = "results/{species}/{build}/colors.tsv"
     output:
         auspice_json = "auspice/ebola_{species}_{build}.json" # TODO XXX remap name to match URLs?
     params:
@@ -151,7 +125,6 @@ rule export:
             --tree {input.tree:q} \
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.id_field:q} \
-            --colors {input.colors:q}\
             --node-data {input.node_data_jsons:q} \
             --lat-longs {input.lat_longs:q} \
             --include-root-sequence-inline \
