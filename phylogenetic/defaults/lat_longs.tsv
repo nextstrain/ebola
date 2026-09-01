@@ -199,8 +199,6 @@ location	Nyankunde	1.476095	29.944402
 location	Nyarambe	2.153119	31.154728
 location	Rimba	2.219520	30.755949
 location	Rwampara	1.571948	30.110212
-# epicenter cominbed and placed a Rwampara
-location	Mongbwalu|Bunia|Rwampara	1.595513	30.223442
 # NOTE: I couldn't find Sota - this is the Bunia lat/long - but found a WHO report saying "Sota health area (about 50 km from Bunia in Ituri Province)"
 location	Sota	1.595513	30.223442
 location	Tchomia	1.436	30.484
