@@ -155,7 +155,7 @@ traits:
     columns: [country, division]
     confidence: true
   bdbv/drc-uganda-2026:
-    columns: ['location', 'country']
+    columns: ['location_reconstructed', 'location_epicenter', 'country']
     bias: 2.5
     confidence: true
 
@@ -238,7 +238,7 @@ export:
       maintainers: 
         - {"name": Eddy Lusamaki,  Institut National de Recherche Biomédicale, url: 'https://inrb.net/'}
         - {"name": Nextstrain, url: 'https://nextstrain.org'}
-      geo_resolutions: [country, division]
+      geo_resolutions: [country, division, location_epicenter,location_reconstructed]
       display_defaults:
         color_by: location
         geo_resolution: location

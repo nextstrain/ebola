@@ -624,3 +624,1117 @@ location	Hoima	1.433	31.345
 location	Kampala	0.307	32.578
 location	Ntoroko	1.05	30.53
 location	Wakiso	0.399	32.479
+
+
+# locations (grouped by country / division)
+# reproduced from above for inferred key
+# Democratic Republic of the Congo / Bas-Uele
+location_reconstructed	Aketi	2.666893	23.755399
+location_reconstructed	Ango	4.471874	26.072600
+location_reconstructed	Bili (Bas-Uele)	4.196516	24.642286
+location_reconstructed	Bondo	4.090662	23.734252
+location_reconstructed	Buta	2.727806	24.979733
+location_reconstructed	Ganga	3.092994	25.972854
+location_reconstructed	Likati	3.320214	23.753775
+location_reconstructed	Monga	4.308162	23.028030
+location_reconstructed	Poko	2.966939	26.700384
+location_reconstructed	Titule	2.963981	25.484702
+location_reconstructed	Viadana	3.230968	27.345897
+# Democratic Republic of the Congo / Equateur
+location_reconstructed	Basankusu	0.927929	19.872388
+location_reconstructed	Bikoro	-0.465798	18.231522
+location_reconstructed	Bolenge	-0.195563	18.058895
+location_reconstructed	Bolomba	0.304560	19.086764
+location_reconstructed	Bomongo	1.526198	18.449477
+location_reconstructed	Djombo	1.443506	20.287984
+location_reconstructed	Iboko	-0.981430	18.545926
+location_reconstructed	Ingende	-0.490226	18.817025
+location_reconstructed	Irebu	-0.789806	17.657889
+location_reconstructed	Lilanga Bobangi	0.216960	18.004145
+location_reconstructed	Lolanga Mampoko	0.887337	18.825648
+location_reconstructed	Lotumbe	-0.705857	19.645920
+location_reconstructed	Lukolela	-1.446670	17.102548
+location_reconstructed	Makanza	1.401485	18.932524
+location_reconstructed	Mbandaka	0.219767	18.391554
+location_reconstructed	Monieka	0.052951	20.013055
+location_reconstructed	Ntondo	-1.075185	17.914710
+location_reconstructed	Wangata	0.054098	18.230667
+# Democratic Republic of the Congo / Haut-Katanga
+location_reconstructed	Kafubu	-11.442549	28.085977
+location_reconstructed	Kamalondo	-11.684	27.486
+location_reconstructed	Kambove	-10.773359	26.793970
+location_reconstructed	Kampemba	-11.674	27.55
+location_reconstructed	Kapolowe	-11.214282	27.088322
+location_reconstructed	Kasenga	-10.711585	28.283850
+location_reconstructed	Kashobwe	-9.968318	28.225800
+location_reconstructed	Katuba	-11.723	27.455
+location_reconstructed	Kenya	-11.74	27.509
+location_reconstructed	Kikula	-10.514814	27.285491
+location_reconstructed	Kilela Balanda	-11.598473	26.651227
+location_reconstructed	Kilwa	-8.966508	28.198438
+location_reconstructed	Kipushi	-11.748637	27.446772
+location_reconstructed	Kisanga	-11.69	27.422
+location_reconstructed	Kowe	-11.674316	27.493750
+location_reconstructed	Likasi	-10.975628	26.739187
+location_reconstructed	Lubumbashi	-11.670	27.475
+location_reconstructed	Lukafu	-10.673611	27.674223
+location_reconstructed	Manika	-11.486312	26.071546
+location_reconstructed	Mitwaba	-8.837158	27.296073
+location_reconstructed	Mufunga Sampwe	-9.685996	27.058832
+location_reconstructed	Mumbunda	-11.819209	27.534142
+location_reconstructed	Panda	-11.447622	26.689913
+location_reconstructed	Pweto	-8.138966	29.006691
+location_reconstructed	Rwashi	-11.599404	27.925110
+location_reconstructed	Sakania	-12.580933	28.940280
+location_reconstructed	Tshamilemba	-11.646884	27.613571
+location_reconstructed	Vangu	-11.654473	27.516481
+# Democratic Republic of the Congo / Haut-Lomami
+location_reconstructed	Baka	-8.714621	24.500022
+location_reconstructed	Bukama	-9.373017	25.959651
+location_reconstructed	Butumba	-8.886492	26.367934
+location_reconstructed	Kabondo Dianda	-8.527699	25.966601
+location_reconstructed	Kabongo	-7.350628	25.811074
+location_reconstructed	Kamina	-8.649403	25.225040
+location_reconstructed	Kaniama	-7.867298	24.156765
+location_reconstructed	Kayamba	-7.046591	25.107444
+location_reconstructed	Kinda	-9.480477	24.888466
+location_reconstructed	Kinkondja	-8.198	26.428
+location_reconstructed	Kitenge	-6.78	25.861
+location_reconstructed	Lwamba	-7.923758	26.685943
+location_reconstructed	Malemba	-8.204298	26.508603
+location_reconstructed	Mukanga	-8.186824	27.142365
+location_reconstructed	Mulongo	-7.8	26.996
+location_reconstructed	Songa	-8.065819	25.136183
+# Democratic Republic of the Congo / Haut-Uele
+location_reconstructed	Aba	3.661183	30.306178
+location_reconstructed	Boma Mangbetu	2.222741	27.758115
+location_reconstructed	Doruma	4.394798	27.668624
+location_reconstructed	Dungu	3.824361	28.994870
+location_reconstructed	Rungu	2.844143	27.964169
+location_reconstructed	Faradje	3.756743	29.832084
+location_reconstructed	Gombari	2.747186	28.990587
+location_reconstructed	Isiro	2.470083	27.296590
+location_reconstructed	Makoro	2.959	30.006
+location_reconstructed	Niangara	3.512466	27.901686
+location_reconstructed	Pawa	2.332920	27.587542
+location_reconstructed	Wamba	2.032952	27.911670
+location_reconstructed	Watsa	2.722034	29.720894
+# Democratic Republic of the Congo / Ituri
+location_reconstructed	Adi	3.467326	30.733002
+location_reconstructed	Adja	3.042692	30.413161
+location_reconstructed	Angumu	1.959283	31.061257
+location_reconstructed	Ariwara	3.177047	30.736492
+location_reconstructed	Aru	2.852610	30.734852
+location_reconstructed	Aungba	2.597049	30.596641
+location_reconstructed	Bambu	1.871761	30.220459
+location_reconstructed	Biringi	2.719041	30.343668
+location_reconstructed	Boga	0.984456	30.002985
+location_reconstructed	Bunia	1.595513	30.223442
+location_reconstructed	Damas	2.185212	30.177987
+location_reconstructed	Drodro	1.741731	30.548689
+location_reconstructed	Fataki	1.913907	30.555344
+location_reconstructed	Gety	1.265538	30.232497
+location_reconstructed	Rethy	2.075027	30.741104
+location_reconstructed	Jiba	1.758325	30.789773
+location_reconstructed	Kambala	2.335173	30.481007
+location_reconstructed	Kilo	1.762121	30.084941
+location_reconstructed	Komanda	1.134139	29.643008
+location_reconstructed	Laybo	3.331452	30.506115
+location_reconstructed	Linga	1.910544	30.826684
+location_reconstructed	Lita	1.574765	30.374914
+location_reconstructed	Logo	2.171070	30.918678
+location_reconstructed	Lolwa	1.350	29.4968
+location_reconstructed	Mahagi	2.312499	30.941705
+location_reconstructed	Mambasa	1.449632	28.699744
+location_reconstructed	Mandima	0.911460	29.193836
+location_reconstructed	Mangala	1.966978	30.410238
+location_reconstructed	Mongbwalu	1.929	30.049
+location_reconstructed	Nia Nia	1.312738	27.979860
+location_reconstructed	Nizi	1.749686	30.324743
+location_reconstructed	Nyankunde	1.476095	29.944402
+location_reconstructed	Nyarambe	2.153119	31.154728
+location_reconstructed	Rimba	2.219520	30.755949
+location_reconstructed	Rwampara	1.571948	30.110212
+# NOTE: I couldn't find Sota - this is the Bunia lat/long - but found a WHO report saying "Sota health area (about 50 km from Bunia in Ituri Province)"
+location_reconstructed	Sota	1.595513	30.223442
+location_reconstructed	Tchomia	1.436	30.484
+# Democratic Republic of the Congo / Kasaï
+location_reconstructed	Banga Lubaka	-5.621778	20.528918
+location_reconstructed	Bulape	-4.367528	21.754848
+location_reconstructed	Dekese	-3.288236	21.373140
+location_reconstructed	Ilebo	-4.307363	20.740523
+location_reconstructed	Kakenge	-4.467980	22.151037
+location_reconstructed	Kalonda Ouest	-6.103104	20.844927
+location_reconstructed	Kamonia	-6.988788	20.899173
+location_reconstructed	Kamwesha	-6.424245	21.317013
+location_reconstructed	Kanzala	-6.518235	20.814642
+location_reconstructed	Kitangwa	-6.477535	20.084860
+location_reconstructed	Luebo	-5.595247	21.489491
+location_reconstructed	Mikope	-4.912562	20.548836
+location_reconstructed	Mushenge	-4.417032	21.227856
+location_reconstructed	Mutena	-7.021228	21.384131
+location_reconstructed	Mweka	-5.006484	21.605729
+location_reconstructed	Ndjoko-Mpunda	-5.693111	21.073640
+location_reconstructed	Nyanga	-6.043445	20.382563
+location_reconstructed	Tshikapa	-6.651555	20.548084
+# Democratic Republic of the Congo / Kasaï-Central
+location_reconstructed	Bena Leka	-5.109102	22.095508
+location_reconstructed	Bena Tshiadi	-4.553908	22.808085
+location_reconstructed	Bilomba	-6.545423	22.266147
+location_reconstructed	Bobozo	-5.964530	22.390795
+location_reconstructed	Bunkonde	-6.363924	22.582680
+location_reconstructed	Demba	-5.499790	22.299687
+location_reconstructed	Dibaya	-6.478945	22.970613
+location_reconstructed	Kalomba	-6.787026	21.674359
+location_reconstructed	Kananga	-5.928021	22.432332
+location_reconstructed	Katende	-5.462098	22.920219
+location_reconstructed	Katoka	-5.876357	22.330866
+location_reconstructed	Luambo	-7.424257	22.061623
+location_reconstructed	Lubondaie	-6.710637	22.798336
+location_reconstructed	Lubunga (Kasaï-Central)	-5.515870	23.400092
+location_reconstructed	Luiza	-7.028613	22.493826
+location_reconstructed	Lukonga	-5.868439	22.466597
+location_reconstructed	Masuika	-7.578364	22.513107
+location_reconstructed	Mikalayi	-6.029890	22.113587
+location_reconstructed	Muetshi	-4.910184	22.692723
+location_reconstructed	Mutoto	-5.624277	22.641183
+location_reconstructed	Ndekesha	-6.329711	21.866213
+location_reconstructed	Ndesha	-5.827816	22.404764
+location_reconstructed	Tshibala	-6.890854	21.999188
+location_reconstructed	Tshikaji	-5.992910	22.466820
+location_reconstructed	Tshikula	-6.038122	22.757806
+location_reconstructed	Yangala	-7.387340	22.974143
+# Democratic Republic of the Congo / Kasaï-Oriental
+location_reconstructed	Bibanga	-6.090070	23.910935
+location_reconstructed	Bipemba	-6.090642	23.573470
+location_reconstructed	Bonzola	-6.150326	23.612172
+location_reconstructed	Cilundu	-6.388652	23.293699
+location_reconstructed	Dibindi	-6.129806	23.619222
+location_reconstructed	Diulu	-6.101285	23.598032
+location_reconstructed	Kabeya Kamuanga	-5.963028	23.167723
+location_reconstructed	Kansele	-6.116041	23.609278
+location_reconstructed	Kasansa	-6.561513	23.615872
+location_reconstructed	Lubilanji	-6.137169	23.610477
+location_reconstructed	Lukelenge	-6.117991	23.651351
+location_reconstructed	Miabi	-6.165256	23.337241
+location_reconstructed	Mpokolo	-6.084122	23.543476
+location_reconstructed	Mukumbi	-5.872644	23.589561
+location_reconstructed	Muya	-6.100426	23.633014
+location_reconstructed	Nzaba	-6.136894	23.550350
+location_reconstructed	Tshilenge	-6.301101	23.706286
+location_reconstructed	Tshishimbi	-6.191022	23.485316
+# Democratic Republic of the Congo / Kinshasa
+location_reconstructed	Bandalungwa	-4.341289	15.284524
+location_reconstructed	Barumbu	-4.320261	15.325361
+location_reconstructed	Binza Meteo	-4.383315	15.249752
+location_reconstructed	Binza Ozone	-4.343245	15.226525
+location_reconstructed	Biyela	-4.489706	15.402393
+location_reconstructed	Bumbu	-4.372130	15.293945
+location_reconstructed	Gombe	-4.310915	15.297996
+location_reconstructed	Kalamu I	-4.358374	15.315631
+location_reconstructed	Kalamu II	-4.340710	15.319805
+location_reconstructed	Kasa-Vubu	-4.342588	15.304726
+location_reconstructed	Kikimi	-4.522611	15.474419
+location_reconstructed	Kimbanseke	-4.445968	15.369573
+location_reconstructed	Kingabwa	-4.346057	15.357908
+location_reconstructed	Kingasani	-4.413264	15.406593
+location_reconstructed	Kinshasa	-4.322471	15.311905
+location_reconstructed	Kintambo	-4.345808	15.268658
+location_reconstructed	Kisenso	-4.415663	15.344765
+location_reconstructed	Kokolo	-4.334887	15.287395
+location_reconstructed	Lemba	-4.402392	15.320750
+location_reconstructed	Limete	-4.355688	15.336310
+location_reconstructed	Lingwala	-4.325367	15.300795
+location_reconstructed	Makala	-4.381757	15.308049
+location_reconstructed	Maluku I	-4.451350	16.156429
+location_reconstructed	Maluku II	-4.415147	15.782212
+location_reconstructed	Masina I	-4.373690	15.416150
+location_reconstructed	Masina II	-4.360241	15.388877
+location_reconstructed	Matete	-4.389514	15.350442
+location_reconstructed	Mont Ngafula I	-4.536988	15.298458
+location_reconstructed	Mont Ngafula II	-4.431616	15.193682
+location_reconstructed	Ndjili	-4.406302	15.373587
+location_reconstructed	Ngaba	-4.380111	15.322621
+location_reconstructed	Ngiri-Ngiri	-4.356840	15.298688
+location_reconstructed	Nsele	-4.420656	15.582529
+location_reconstructed	Police	-4.315640	15.300864
+location_reconstructed	Selembao	-4.406803	15.277608
+# Democratic Republic of the Congo / Kongo-Central
+location_reconstructed	Boko-Kivulu	-5.356937	15.016526
+location_reconstructed	Boma	-5.813407	13.053489
+location_reconstructed	Boma Bungu	-5.740853	12.974745
+location_reconstructed	Gombe-Matadi	-5.020042	14.654842
+location_reconstructed	Inga	-5.453954	13.476964
+location_reconstructed	Kangu	-5.254736	12.828992
+location_reconstructed	Kibunzi	-5.052999	13.671573
+location_reconstructed	Kimpangu	-5.746927	14.920047
+location_reconstructed	Kimpese	-5.459336	14.308185
+location_reconstructed	Kimvula	-5.453725	16.038366
+location_reconstructed	Kinkonzi	-4.810977	13.174209
+location_reconstructed	Kisantu	-5.125875	15.282319
+location_reconstructed	Kitona	-5.993	12.45
+location_reconstructed	Kizu	-4.939226	12.960747
+location_reconstructed	Kuimba	-5.039439	12.693821
+location_reconstructed	Kwilu-Ngongo	-5.480395	14.642593
+location_reconstructed	Lukula	-5.476520	12.829129
+location_reconstructed	Luozi	-4.796497	13.934461
+location_reconstructed	Mangembo	-4.609281	14.252569
+location_reconstructed	Matadi	-5.845919	13.469136
+location_reconstructed	Mbanza-Ngungu	-5.186620	14.808786
+location_reconstructed	Moanda	-5.850918	12.497373
+location_reconstructed	Ngidinga	-5.684621	15.505285
+location_reconstructed	Nselo	-5.283284	15.623652
+location_reconstructed	Nsona-Mpangu	-5.592728	13.883580
+location_reconstructed	Nzanza	-5.829390	13.408771
+location_reconstructed	Seke-Banza	-5.216680	13.285734
+location_reconstructed	Sona-Bata	-4.898	15.158
+location_reconstructed	Tshela	-4.837687	12.891150
+location_reconstructed	Vaku	-5.118551	13.011212
+# Democratic Republic of the Congo / Kwango
+location_reconstructed	Boko	-4.969005	16.734431
+location_reconstructed	Feshi	-6.130	18.148
+location_reconstructed	Kahemba	-7.181196	19.259778
+location_reconstructed	Kajiji	-7.541995	18.509953
+location_reconstructed	Kasongo Lunda	-6.470268	16.909449
+location_reconstructed	Kenge	-4.725402	17.358021
+location_reconstructed	Kimbau	-5.506261	17.252227
+location_reconstructed	Kisanji	-6.490016	19.007789
+location_reconstructed	Kitenda	-6.906	17.336
+location_reconstructed	Mwela Lembwa	-6.125295	17.785767
+location_reconstructed	Panzi	-7.174673	18.064586
+location_reconstructed	Popokabaka	-5.647292	16.579294
+location_reconstructed	Tembo	-7.681	17.337
+location_reconstructed	Wamba Lwadi	-6.476412	17.324295
+# Democratic Republic of the Congo / Kwilu
+location_reconstructed	Bagata	-3.737611	17.848019
+location_reconstructed	Bandundu	-3.498	17.48
+location_reconstructed	Bulungu	-4.573137	18.859614
+location_reconstructed	Djuma	-4.258081	18.615982
+location_reconstructed	Gungu	-5.988105	19.257792
+location_reconstructed	Idiofa	-5.026227	19.454104
+location_reconstructed	Ipamu	-4.308274	19.709547
+location_reconstructed	Kikongo	-4.170174	17.168072
+location_reconstructed	Kikwit-Nord	-5.021372	18.824129
+location_reconstructed	Kikwit-Sud	-5.079362	18.809469
+location_reconstructed	Kimputu	-4.458	19.399
+location_reconstructed	Kingandu	-5.499	18.414
+location_reconstructed	Koshibanda	-5.032854	19.890916
+location_reconstructed	Lusanga	-5.020560	18.906610
+location_reconstructed	Masi-Manimba	-5.005379	17.821124
+location_reconstructed	Moanza	-5.423	17.733
+location_reconstructed	Mokala	-3.957222	19.017445
+location_reconstructed	Mosango	-5.016	18.142
+location_reconstructed	Mukedi	-5.697804	19.899821
+location_reconstructed	Mungindu	-5.507825	19.074681
+location_reconstructed	Pay Kongila	-5.017791	18.499047
+location_reconstructed	Sia	-3.811882	18.542584
+location_reconstructed	Vanga	-4.464728	18.318668
+location_reconstructed	Yasa-Bonga	-4.499921	17.909069
+# Democratic Republic of the Congo / Lomami
+location_reconstructed	Kabinda	-6.251637	24.440722
+location_reconstructed	Kalambayi Kabanga	-6.741810	24.409599
+location_reconstructed	Kalenda	-7.434979	23.447658
+location_reconstructed	Kalonda Est	-6.425397	25.096385
+location_reconstructed	Kamana	-5.819133	25.397675
+location_reconstructed	Kamiji	-6.717740	23.223270
+location_reconstructed	Kanda Kanda	-6.919403	23.751760
+location_reconstructed	Lubao	-5.518846	25.878419
+location_reconstructed	Ludimbi Lukula	-5.712725	24.493482
+location_reconstructed	Luputa	-7.495026	23.784983
+location_reconstructed	Makota	-7.020871	23.417094
+location_reconstructed	Mulumba	-6.598903	23.866089
+location_reconstructed	Mwene Ditu	-6.930883	23.413498
+location_reconstructed	Ngandajika	-6.760814	24.047591
+location_reconstructed	Tshofa	-5.239767	24.993487
+location_reconstructed	Wikong	-7.859446	23.313230
+# Democratic Republic of the Congo / Lualaba
+location_reconstructed	Bunkeya	-10.274733	26.822485
+location_reconstructed	Dilala	-10.575340	25.234624
+location_reconstructed	Dilolo	-10.609477	22.628663
+location_reconstructed	Fungurume	-10.716107	26.272840
+location_reconstructed	Kafakumba	-9.394480	23.796535
+location_reconstructed	Kalamba	-8.486788	23.257300
+location_reconstructed	Kanzenze	-10.013247	25.439453
+location_reconstructed	Kapanga	-8.343738	22.365858
+location_reconstructed	Kasaji	-10.502698	23.599463
+location_reconstructed	Lualaba	-11.492	26.069
+location_reconstructed	Lubudi	-10.078818	26.106891
+location_reconstructed	Mutshatsha	-10.690513	24.690773
+location_reconstructed	Sandoa	-9.473092	22.597135
+# Democratic Republic of the Congo / Maniema
+location_reconstructed	Alunguli	-2.944937	25.960610
+location_reconstructed	Ferekeni	-1.760426	26.174780
+location_reconstructed	Kabambare	-4.662882	28.073527
+location_reconstructed	Kailo	-2.507069	25.687697
+location_reconstructed	Kalima	-2.746470	26.649803
+location_reconstructed	Kampene	-3.504819	26.481604
+location_reconstructed	Kasongo	-4.192150	26.759227
+location_reconstructed	Kibombo	-4.073815	25.659637
+location_reconstructed	Kindu	-2.933341	25.880746
+location_reconstructed	Kunda	-3.915973	26.282596
+location_reconstructed	Tunda	-4.066493	25.135924
+location_reconstructed	Lubutu	-0.623244	26.916412
+location_reconstructed	Lusangi	-4.675424	27.231990
+location_reconstructed	Obokote	-1.100098	26.596247
+location_reconstructed	Pangi	-3.156161	26.603978
+location_reconstructed	Punia	-1.693579	26.996705
+location_reconstructed	Samba	-4.724869	26.323015
+location_reconstructed	Saramabila	-4.150674	27.388932
+# Democratic Republic of the Congo / Maï-Ndombe
+location_reconstructed	Banjow Moke	-1.867356	17.795724
+location_reconstructed	Bokoro	-2.895	18.458
+location_reconstructed	Bolobo	-2.682585	16.380792
+location_reconstructed	Bosobe	-3.264031	19.192333
+location_reconstructed	Inongo	-1.927534	18.550425
+location_reconstructed	Kiri	-1.843086	19.277279
+location_reconstructed	Kwamouth	-3.579430	16.677958
+location_reconstructed	Mimia	-2.583288	20.161026
+location_reconstructed	Mushie	-2.518308	17.182438
+location_reconstructed	Nioki	-2.907994	17.832453
+location_reconstructed	Ntandembelo	-1.991165	17.084222
+location_reconstructed	Oshwe	-3.675665	20.044599
+location_reconstructed	Penjwa	-1.170108	19.082022
+location_reconstructed	Yumbi	-2.105590	16.520031
+# Democratic Republic of the Congo / Mongala
+location_reconstructed	Binga	2.149653	20.412779
+location_reconstructed	Bongandanga	1.263361	21.371788
+location_reconstructed	Boso Manzi	2.807847	21.195846
+location_reconstructed	Boso Mondanda	1.712158	19.767295
+location_reconstructed	Bosondjo	1.981565	22.038608
+location_reconstructed	Bumba	2.240561	22.703247
+location_reconstructed	Lisala	2.283726	21.238507
+location_reconstructed	Lolo	2.319370	23.211101
+location_reconstructed	Pimu	1.817159	21.139191
+location_reconstructed	Yamaluka	2.425061	22.174471
+location_reconstructed	Yambuku	2.838845	22.336934
+location_reconstructed	Yamongili	2.550275	22.763113
+# Democratic Republic of the Congo / Nord-Kivu
+location_reconstructed	Alimbongo	-0.256252	28.983548
+location_reconstructed	Bambo	-1.153112	29.252790
+location_reconstructed	Beni	0.499516	29.469531
+location_reconstructed	Biena	0.226785	28.967876
+location_reconstructed	Binza	-0.814653	29.521794
+location_reconstructed	Birambizo	-1.223589	29.112980
+location_reconstructed	Butembo	0.139963	29.259908
+location_reconstructed	Goma	-1.652603	29.180209
+location_reconstructed	Itebero	-1.755190	28.117313
+location_reconstructed	Kalunguta	0.436595	29.513809
+location_reconstructed	Kamango	0.677836	29.829630
+location_reconstructed	Karisimbi	-1.634302	29.208925
+location_reconstructed	Katoyi	-1.639738	28.778370
+location_reconstructed	Katwa	0.120579	29.323708
+location_reconstructed	Kayna	-0.481705	28.972677
+location_reconstructed	Kibirizi	-0.871090	29.188519
+location_reconstructed	Kibua	-1.259294	28.412674
+location_reconstructed	Kirotshe	-1.547140	29.004627
+location_reconstructed	Kyondo	0.013187	29.485897
+location_reconstructed	Lubero	-0.294745	29.360647
+location_reconstructed	Mabalako	0.468120	29.211455
+location_reconstructed	Manguredjipa	0.392798	28.445053
+location_reconstructed	Masereka	-0.139	29.316
+location_reconstructed	Masisi	-1.457220	28.729657
+location_reconstructed	Musienene	0.018579	28.658990
+location_reconstructed	Mutwanga	0.313849	29.742382
+location_reconstructed	Mweso	-1.189329	28.902911
+location_reconstructed	Nyiragongo	-1.530857	29.250630
+location_reconstructed	Oicha	0.755821	29.599416
+location_reconstructed	Pinga	-0.615621	28.454837
+location_reconstructed	Rutshuru	-1.296065	29.400716
+location_reconstructed	Rwanguba	-1.221834	29.539443
+location_reconstructed	Vuhovi	0.251182	29.254110
+location_reconstructed	Walikale	-1.141224	27.763954
+# Democratic Republic of the Congo / Nord-Ubangi
+location_reconstructed	Abuzi	3.366083	22.146161
+location_reconstructed	Bili (Nord-Ubangi)	4.791554	19.718104
+location_reconstructed	Bosobolo	4.351752	19.849837
+location_reconstructed	Businga	3.194651	21.401590
+location_reconstructed	Gbadolite	4.282872	20.876549
+location_reconstructed	Karawa	3.294556	20.405644
+location_reconstructed	Loko	3.724828	20.743967
+location_reconstructed	Mobayi Mbongo	4.079004	21.031384
+location_reconstructed	Wapinda	3.716238	23.015732
+location_reconstructed	Wasolo	3.767538	22.092763
+location_reconstructed	Yakoma	4.031884	22.204702
+# Democratic Republic of the Congo / Sankuru
+location_reconstructed	Bena Dibele	-3.690769	22.749431
+location_reconstructed	Dikungu	-4.310781	24.238741
+location_reconstructed	Djalo Djeka	-3.202964	24.119463
+location_reconstructed	Katako Kombe	-3.033912	24.735687
+location_reconstructed	Kole	-3.674485	22.263098
+location_reconstructed	Lodja	-3.420399	23.515818
+location_reconstructed	Lomela	-2.233296	23.835443
+location_reconstructed	Lusambo	-5.030664	23.322224
+location_reconstructed	Minga	-4.871720	24.123572
+location_reconstructed	Omendjadi	-3.075501	23.388491
+location_reconstructed	Ototo	-4.574743	23.449682
+location_reconstructed	Pania Mutombo	-5.227630	23.836046
+location_reconstructed	Tshudi Loto	-2.449688	22.607631
+location_reconstructed	Tshumbe	-4.688135	24.651417
+location_reconstructed	Vanga Kete	-3.847280	23.453407
+location_reconstructed	Wembo Nyama	-4.045934	24.673526
+# Democratic Republic of the Congo / Sud-Kivu
+location_reconstructed	Bagira	-2.488674	28.825951
+location_reconstructed	Bunyakiri	-2.038203	28.443294
+location_reconstructed	Fizi	-4.300	28.9419
+location_reconstructed	Hauts-Plateaux	-3.257814	28.926837
+location_reconstructed	Ibanda	-2.513252	28.867672
+location_reconstructed	Idjwi	-2.011639	29.056543
+location_reconstructed	Itombwe	-3.547915	28.598294
+location_reconstructed	Kabare	-2.437649	28.713671
+location_reconstructed	Kadutu	-2.502010	28.848143
+location_reconstructed	Kalehe	-2.052281	28.744327
+location_reconstructed	Kalole	-3.613226	27.567865
+location_reconstructed	Kalonge	-2.329049	28.484756
+location_reconstructed	Kamituga	-3.151954	28.159572
+location_reconstructed	Kaniola	-2.541491	28.408641
+location_reconstructed	Katana	-2.217529	28.785361
+location_reconstructed	Kaziba	-2.860194	28.823506
+location_reconstructed	Kimbi Lulenge	-4.278351	28.392520
+location_reconstructed	Kitutu	-3.488095	28.069370
+location_reconstructed	Lemera	-3.003945	29.029692
+location_reconstructed	Lulingu	-2.318077	27.344406
+location_reconstructed	Minembwe	-4.025139	28.563524
+location_reconstructed	Minova	-1.798175	28.930896
+location_reconstructed	Miti Murhesa	-2.337526	28.861617
+location_reconstructed	Mubumbano	-2.753503	28.561151
+location_reconstructed	Mulungu	-2.587804	27.945168
+location_reconstructed	Mwana	-2.913017	28.702238
+location_reconstructed	Mwenga	-3.086129	28.525405
+location_reconstructed	Nundu	-3.730221	29.004578
+location_reconstructed	Nyangezi	-2.726496	28.904640
+location_reconstructed	Nyantende	-2.592054	28.867088
+location_reconstructed	Ruzizi	-3.119457	29.166023
+location_reconstructed	Shabunda	-2.874974	27.298830
+location_reconstructed	Uvira	-3.426391	29.123306
+location_reconstructed	Walungu	-2.634165	28.696450
+# Democratic Republic of the Congo / Sud-Ubangi
+location_reconstructed	Bangabola	2.303449	19.401163
+location_reconstructed	Bogosenubia	3.791530	19.727393
+location_reconstructed	Bokonzi	2.255380	18.569640
+location_reconstructed	Bominenge	3.296210	20.084716
+location_reconstructed	Boto	2.990094	18.954283
+location_reconstructed	Budjala	2.467473	19.703949
+location_reconstructed	Bulu	2.587051	20.032193
+location_reconstructed	Bwamanda	3.351895	19.397923
+location_reconstructed	Gemena	3.208522	19.843438
+location_reconstructed	Kungu	2.642692	18.951002
+location_reconstructed	Libenge	4.113161	19.044231
+location_reconstructed	Mawuya	3.272163	18.830517
+location_reconstructed	Mbaya	2.682759	20.369494
+location_reconstructed	Ndage	2.741007	20.707198
+location_reconstructed	Tandala	2.976594	19.533291
+location_reconstructed	Zongo	4.219692	18.698290
+# Democratic Republic of the Congo / Tanganyika
+location_reconstructed	Ankoro	-6.755	26.943
+location_reconstructed	Kabalo	-6.254078	26.891946
+location_reconstructed	Kalemie	-6.334393	28.868003
+location_reconstructed	Kansimba	-7.296974	29.109442
+location_reconstructed	Kiyambi	-7.375037	28.155028
+location_reconstructed	Kongolo	-5.383	26.997
+location_reconstructed	Manono	-7.144845	27.393694
+location_reconstructed	Mbulula	-5.439	27.425
+location_reconstructed	Moba	-7.03	29.765
+location_reconstructed	Nyemba	-5.499	28.849
+location_reconstructed	Nyunzu	-5.731309	27.934716
+# Democratic Republic of the Congo / Tshopo
+location_reconstructed	Bafwasende	0.988643	26.690725
+location_reconstructed	Banalia	1.757088	25.615560
+location_reconstructed	Basali	1.753628	24.408862
+location_reconstructed	Basoko	1.223025	23.747220
+location_reconstructed	Bengamisa	1.123572	25.040652
+location_reconstructed	Isangi	0.894738	24.399625
+location_reconstructed	Kabondo	0.638183	25.402589
+location_reconstructed	Lowa	-1.269683	25.592646
+location_reconstructed	Lubunga (Tshopo)	0.392464	25.117664
+location_reconstructed	Makiso Kisangani	0.520134	25.229720
+location_reconstructed	Mangobo	0.603868	25.097513
+location_reconstructed	Opala	-1.048456	24.238615
+location_reconstructed	Opienge	0.242	27.427
+location_reconstructed	Tshopo	0.729461	25.292387
+location_reconstructed	Ubundu	-0.390558	25.087774
+location_reconstructed	Wanierukula	0.075601	25.956129
+location_reconstructed	Yabaondo	0.624465	23.975616
+location_reconstructed	Yahisuli	-0.007466	23.925673
+location_reconstructed	Yahuma	0.841035	23.143200
+location_reconstructed	Yakusu	0.676074	24.639893
+location_reconstructed	Yaleko	-0.156192	24.635369
+location_reconstructed	Yalimbongo	1.814292	23.473214
+# Democratic Republic of the Congo / Tshuapa
+location_reconstructed	Befale	0.567864	20.887215
+location_reconstructed	Boende	-0.325739	20.784283
+location_reconstructed	Bokungu	-0.304522	22.087581
+location_reconstructed	Bosanga	-0.953243	21.995219
+location_reconstructed	Djolu	0.353463	22.676745
+location_reconstructed	Ikela	-1.491338	23.466027
+location_reconstructed	Lingomo	1.152665	22.161564
+location_reconstructed	Mompono	0.321910	21.829130
+location_reconstructed	Mondombe	-0.641908	22.890953
+location_reconstructed	Monkoto	-1.644974	20.931447
+location_reconstructed	Wema	-0.734865	21.348851
+location_reconstructed	Yalifafo	-1.359883	22.433076
+#
+# Uganda (any division)
+location_reconstructed	Arua	3.019	30.912
+location_reconstructed	Bundibugyo	0.705	30.06
+location_reconstructed	Hoima	1.433	31.345
+location_reconstructed	Kampala	0.307	32.578
+location_reconstructed	Ntoroko	1.05	30.53
+location_reconstructed	Wakiso	0.399	32.479
+
+
+# locations (grouped by country / division)
+# reproduced from above for epicenter key
+# Democratic Republic of the Congo / Bas-Uele
+location_epicenter	Aketi	2.666893	23.755399
+location_epicenter	Ango	4.471874	26.072600
+location_epicenter	Bili (Bas-Uele)	4.196516	24.642286
+location_epicenter	Bondo	4.090662	23.734252
+location_epicenter	Buta	2.727806	24.979733
+location_epicenter	Ganga	3.092994	25.972854
+location_epicenter	Likati	3.320214	23.753775
+location_epicenter	Monga	4.308162	23.028030
+location_epicenter	Poko	2.966939	26.700384
+location_epicenter	Titule	2.963981	25.484702
+location_epicenter	Viadana	3.230968	27.345897
+# Democratic Republic of the Congo / Equateur
+location_epicenter	Basankusu	0.927929	19.872388
+location_epicenter	Bikoro	-0.465798	18.231522
+location_epicenter	Bolenge	-0.195563	18.058895
+location_epicenter	Bolomba	0.304560	19.086764
+location_epicenter	Bomongo	1.526198	18.449477
+location_epicenter	Djombo	1.443506	20.287984
+location_epicenter	Iboko	-0.981430	18.545926
+location_epicenter	Ingende	-0.490226	18.817025
+location_epicenter	Irebu	-0.789806	17.657889
+location_epicenter	Lilanga Bobangi	0.216960	18.004145
+location_epicenter	Lolanga Mampoko	0.887337	18.825648
+location_epicenter	Lotumbe	-0.705857	19.645920
+location_epicenter	Lukolela	-1.446670	17.102548
+location_epicenter	Makanza	1.401485	18.932524
+location_epicenter	Mbandaka	0.219767	18.391554
+location_epicenter	Monieka	0.052951	20.013055
+location_epicenter	Ntondo	-1.075185	17.914710
+location_epicenter	Wangata	0.054098	18.230667
+# Democratic Republic of the Congo / Haut-Katanga
+location_epicenter	Kafubu	-11.442549	28.085977
+location_epicenter	Kamalondo	-11.684	27.486
+location_epicenter	Kambove	-10.773359	26.793970
+location_epicenter	Kampemba	-11.674	27.55
+location_epicenter	Kapolowe	-11.214282	27.088322
+location_epicenter	Kasenga	-10.711585	28.283850
+location_epicenter	Kashobwe	-9.968318	28.225800
+location_epicenter	Katuba	-11.723	27.455
+location_epicenter	Kenya	-11.74	27.509
+location_epicenter	Kikula	-10.514814	27.285491
+location_epicenter	Kilela Balanda	-11.598473	26.651227
+location_epicenter	Kilwa	-8.966508	28.198438
+location_epicenter	Kipushi	-11.748637	27.446772
+location_epicenter	Kisanga	-11.69	27.422
+location_epicenter	Kowe	-11.674316	27.493750
+location_epicenter	Likasi	-10.975628	26.739187
+location_epicenter	Lubumbashi	-11.670	27.475
+location_epicenter	Lukafu	-10.673611	27.674223
+location_epicenter	Manika	-11.486312	26.071546
+location_epicenter	Mitwaba	-8.837158	27.296073
+location_epicenter	Mufunga Sampwe	-9.685996	27.058832
+location_epicenter	Mumbunda	-11.819209	27.534142
+location_epicenter	Panda	-11.447622	26.689913
+location_epicenter	Pweto	-8.138966	29.006691
+location_epicenter	Rwashi	-11.599404	27.925110
+location_epicenter	Sakania	-12.580933	28.940280
+location_epicenter	Tshamilemba	-11.646884	27.613571
+location_epicenter	Vangu	-11.654473	27.516481
+# Democratic Republic of the Congo / Haut-Lomami
+location_epicenter	Baka	-8.714621	24.500022
+location_epicenter	Bukama	-9.373017	25.959651
+location_epicenter	Butumba	-8.886492	26.367934
+location_epicenter	Kabondo Dianda	-8.527699	25.966601
+location_epicenter	Kabongo	-7.350628	25.811074
+location_epicenter	Kamina	-8.649403	25.225040
+location_epicenter	Kaniama	-7.867298	24.156765
+location_epicenter	Kayamba	-7.046591	25.107444
+location_epicenter	Kinda	-9.480477	24.888466
+location_epicenter	Kinkondja	-8.198	26.428
+location_epicenter	Kitenge	-6.78	25.861
+location_epicenter	Lwamba	-7.923758	26.685943
+location_epicenter	Malemba	-8.204298	26.508603
+location_epicenter	Mukanga	-8.186824	27.142365
+location_epicenter	Mulongo	-7.8	26.996
+location_epicenter	Songa	-8.065819	25.136183
+# Democratic Republic of the Congo / Haut-Uele
+location_epicenter	Aba	3.661183	30.306178
+location_epicenter	Boma Mangbetu	2.222741	27.758115
+location_epicenter	Doruma	4.394798	27.668624
+location_epicenter	Dungu	3.824361	28.994870
+location_epicenter	Rungu	2.844143	27.964169
+location_epicenter	Faradje	3.756743	29.832084
+location_epicenter	Gombari	2.747186	28.990587
+location_epicenter	Isiro	2.470083	27.296590
+location_epicenter	Makoro	2.959	30.006
+location_epicenter	Niangara	3.512466	27.901686
+location_epicenter	Pawa	2.332920	27.587542
+location_epicenter	Wamba	2.032952	27.911670
+location_epicenter	Watsa	2.722034	29.720894
+# Democratic Republic of the Congo / Ituri
+location_epicenter	Adi	3.467326	30.733002
+location_epicenter	Adja	3.042692	30.413161
+location_epicenter	Angumu	1.959283	31.061257
+location_epicenter	Ariwara	3.177047	30.736492
+location_epicenter	Aru	2.852610	30.734852
+location_epicenter	Aungba	2.597049	30.596641
+location_epicenter	Bambu	1.871761	30.220459
+location_epicenter	Biringi	2.719041	30.343668
+location_epicenter	Boga	0.984456	30.002985
+location_epicenter	Bunia	1.595513	30.223442
+# A combined location to house the epicenter of the outbreak 1.595513	30.223442 | 1.929	30.049 | 1.571948	30.110212
+location_epicenter	Bunia|Mongbwalu|Rwampara	1.6988203333	30.1275513333 
+location_epicenter	Damas	2.185212	30.177987
+location_epicenter	Drodro	1.741731	30.548689
+location_epicenter	Fataki	1.913907	30.555344
+location_epicenter	Gety	1.265538	30.232497
+location_epicenter	Rethy	2.075027	30.741104
+location_epicenter	Jiba	1.758325	30.789773
+location_epicenter	Kambala	2.335173	30.481007
+location_epicenter	Kilo	1.762121	30.084941
+location_epicenter	Komanda	1.134139	29.643008
+location_epicenter	Laybo	3.331452	30.506115
+location_epicenter	Linga	1.910544	30.826684
+location_epicenter	Lita	1.574765	30.374914
+location_epicenter	Logo	2.171070	30.918678
+location_epicenter	Lolwa	1.350	29.4968
+location_epicenter	Mahagi	2.312499	30.941705
+location_epicenter	Mambasa	1.449632	28.699744
+location_epicenter	Mandima	0.911460	29.193836
+location_epicenter	Mangala	1.966978	30.410238
+location_epicenter	Mongbwalu	1.929	30.049
+location_epicenter	Nia Nia	1.312738	27.979860
+location_epicenter	Nizi	1.749686	30.324743
+location_epicenter	Nyankunde	1.476095	29.944402
+location_epicenter	Nyarambe	2.153119	31.154728
+location_epicenter	Rimba	2.219520	30.755949
+location_epicenter	Rwampara	1.571948	30.110212
+# NOTE: I couldn't find Sota - this is the Bunia lat/long - but found a WHO report saying "Sota health area (about 50 km from Bunia in Ituri Province)"
+location_epicenter	Sota	1.595513	30.223442
+location_epicenter	Tchomia	1.436	30.484
+# Democratic Republic of the Congo / Kasaï
+location_epicenter	Banga Lubaka	-5.621778	20.528918
+location_epicenter	Bulape	-4.367528	21.754848
+location_epicenter	Dekese	-3.288236	21.373140
+location_epicenter	Ilebo	-4.307363	20.740523
+location_epicenter	Kakenge	-4.467980	22.151037
+location_epicenter	Kalonda Ouest	-6.103104	20.844927
+location_epicenter	Kamonia	-6.988788	20.899173
+location_epicenter	Kamwesha	-6.424245	21.317013
+location_epicenter	Kanzala	-6.518235	20.814642
+location_epicenter	Kitangwa	-6.477535	20.084860
+location_epicenter	Luebo	-5.595247	21.489491
+location_epicenter	Mikope	-4.912562	20.548836
+location_epicenter	Mushenge	-4.417032	21.227856
+location_epicenter	Mutena	-7.021228	21.384131
+location_epicenter	Mweka	-5.006484	21.605729
+location_epicenter	Ndjoko-Mpunda	-5.693111	21.073640
+location_epicenter	Nyanga	-6.043445	20.382563
+location_epicenter	Tshikapa	-6.651555	20.548084
+# Democratic Republic of the Congo / Kasaï-Central
+location_epicenter	Bena Leka	-5.109102	22.095508
+location_epicenter	Bena Tshiadi	-4.553908	22.808085
+location_epicenter	Bilomba	-6.545423	22.266147
+location_epicenter	Bobozo	-5.964530	22.390795
+location_epicenter	Bunkonde	-6.363924	22.582680
+location_epicenter	Demba	-5.499790	22.299687
+location_epicenter	Dibaya	-6.478945	22.970613
+location_epicenter	Kalomba	-6.787026	21.674359
+location_epicenter	Kananga	-5.928021	22.432332
+location_epicenter	Katende	-5.462098	22.920219
+location_epicenter	Katoka	-5.876357	22.330866
+location_epicenter	Luambo	-7.424257	22.061623
+location_epicenter	Lubondaie	-6.710637	22.798336
+location_epicenter	Lubunga (Kasaï-Central)	-5.515870	23.400092
+location_epicenter	Luiza	-7.028613	22.493826
+location_epicenter	Lukonga	-5.868439	22.466597
+location_epicenter	Masuika	-7.578364	22.513107
+location_epicenter	Mikalayi	-6.029890	22.113587
+location_epicenter	Muetshi	-4.910184	22.692723
+location_epicenter	Mutoto	-5.624277	22.641183
+location_epicenter	Ndekesha	-6.329711	21.866213
+location_epicenter	Ndesha	-5.827816	22.404764
+location_epicenter	Tshibala	-6.890854	21.999188
+location_epicenter	Tshikaji	-5.992910	22.466820
+location_epicenter	Tshikula	-6.038122	22.757806
+location_epicenter	Yangala	-7.387340	22.974143
+# Democratic Republic of the Congo / Kasaï-Oriental
+location_epicenter	Bibanga	-6.090070	23.910935
+location_epicenter	Bipemba	-6.090642	23.573470
+location_epicenter	Bonzola	-6.150326	23.612172
+location_epicenter	Cilundu	-6.388652	23.293699
+location_epicenter	Dibindi	-6.129806	23.619222
+location_epicenter	Diulu	-6.101285	23.598032
+location_epicenter	Kabeya Kamuanga	-5.963028	23.167723
+location_epicenter	Kansele	-6.116041	23.609278
+location_epicenter	Kasansa	-6.561513	23.615872
+location_epicenter	Lubilanji	-6.137169	23.610477
+location_epicenter	Lukelenge	-6.117991	23.651351
+location_epicenter	Miabi	-6.165256	23.337241
+location_epicenter	Mpokolo	-6.084122	23.543476
+location_epicenter	Mukumbi	-5.872644	23.589561
+location_epicenter	Muya	-6.100426	23.633014
+location_epicenter	Nzaba	-6.136894	23.550350
+location_epicenter	Tshilenge	-6.301101	23.706286
+location_epicenter	Tshishimbi	-6.191022	23.485316
+# Democratic Republic of the Congo / Kinshasa
+location_epicenter	Bandalungwa	-4.341289	15.284524
+location_epicenter	Barumbu	-4.320261	15.325361
+location_epicenter	Binza Meteo	-4.383315	15.249752
+location_epicenter	Binza Ozone	-4.343245	15.226525
+location_epicenter	Biyela	-4.489706	15.402393
+location_epicenter	Bumbu	-4.372130	15.293945
+location_epicenter	Gombe	-4.310915	15.297996
+location_epicenter	Kalamu I	-4.358374	15.315631
+location_epicenter	Kalamu II	-4.340710	15.319805
+location_epicenter	Kasa-Vubu	-4.342588	15.304726
+location_epicenter	Kikimi	-4.522611	15.474419
+location_epicenter	Kimbanseke	-4.445968	15.369573
+location_epicenter	Kingabwa	-4.346057	15.357908
+location_epicenter	Kingasani	-4.413264	15.406593
+location_epicenter	Kinshasa	-4.322471	15.311905
+location_epicenter	Kintambo	-4.345808	15.268658
+location_epicenter	Kisenso	-4.415663	15.344765
+location_epicenter	Kokolo	-4.334887	15.287395
+location_epicenter	Lemba	-4.402392	15.320750
+location_epicenter	Limete	-4.355688	15.336310
+location_epicenter	Lingwala	-4.325367	15.300795
+location_epicenter	Makala	-4.381757	15.308049
+location_epicenter	Maluku I	-4.451350	16.156429
+location_epicenter	Maluku II	-4.415147	15.782212
+location_epicenter	Masina I	-4.373690	15.416150
+location_epicenter	Masina II	-4.360241	15.388877
+location_epicenter	Matete	-4.389514	15.350442
+location_epicenter	Mont Ngafula I	-4.536988	15.298458
+location_epicenter	Mont Ngafula II	-4.431616	15.193682
+location_epicenter	Ndjili	-4.406302	15.373587
+location_epicenter	Ngaba	-4.380111	15.322621
+location_epicenter	Ngiri-Ngiri	-4.356840	15.298688
+location_epicenter	Nsele	-4.420656	15.582529
+location_epicenter	Police	-4.315640	15.300864
+location_epicenter	Selembao	-4.406803	15.277608
+# Democratic Republic of the Congo / Kongo-Central
+location_epicenter	Boko-Kivulu	-5.356937	15.016526
+location_epicenter	Boma	-5.813407	13.053489
+location_epicenter	Boma Bungu	-5.740853	12.974745
+location_epicenter	Gombe-Matadi	-5.020042	14.654842
+location_epicenter	Inga	-5.453954	13.476964
+location_epicenter	Kangu	-5.254736	12.828992
+location_epicenter	Kibunzi	-5.052999	13.671573
+location_epicenter	Kimpangu	-5.746927	14.920047
+location_epicenter	Kimpese	-5.459336	14.308185
+location_epicenter	Kimvula	-5.453725	16.038366
+location_epicenter	Kinkonzi	-4.810977	13.174209
+location_epicenter	Kisantu	-5.125875	15.282319
+location_epicenter	Kitona	-5.993	12.45
+location_epicenter	Kizu	-4.939226	12.960747
+location_epicenter	Kuimba	-5.039439	12.693821
+location_epicenter	Kwilu-Ngongo	-5.480395	14.642593
+location_epicenter	Lukula	-5.476520	12.829129
+location_epicenter	Luozi	-4.796497	13.934461
+location_epicenter	Mangembo	-4.609281	14.252569
+location_epicenter	Matadi	-5.845919	13.469136
+location_epicenter	Mbanza-Ngungu	-5.186620	14.808786
+location_epicenter	Moanda	-5.850918	12.497373
+location_epicenter	Ngidinga	-5.684621	15.505285
+location_epicenter	Nselo	-5.283284	15.623652
+location_epicenter	Nsona-Mpangu	-5.592728	13.883580
+location_epicenter	Nzanza	-5.829390	13.408771
+location_epicenter	Seke-Banza	-5.216680	13.285734
+location_epicenter	Sona-Bata	-4.898	15.158
+location_epicenter	Tshela	-4.837687	12.891150
+location_epicenter	Vaku	-5.118551	13.011212
+# Democratic Republic of the Congo / Kwango
+location_epicenter	Boko	-4.969005	16.734431
+location_epicenter	Feshi	-6.130	18.148
+location_epicenter	Kahemba	-7.181196	19.259778
+location_epicenter	Kajiji	-7.541995	18.509953
+location_epicenter	Kasongo Lunda	-6.470268	16.909449
+location_epicenter	Kenge	-4.725402	17.358021
+location_epicenter	Kimbau	-5.506261	17.252227
+location_epicenter	Kisanji	-6.490016	19.007789
+location_epicenter	Kitenda	-6.906	17.336
+location_epicenter	Mwela Lembwa	-6.125295	17.785767
+location_epicenter	Panzi	-7.174673	18.064586
+location_epicenter	Popokabaka	-5.647292	16.579294
+location_epicenter	Tembo	-7.681	17.337
+location_epicenter	Wamba Lwadi	-6.476412	17.324295
+# Democratic Republic of the Congo / Kwilu
+location_epicenter	Bagata	-3.737611	17.848019
+location_epicenter	Bandundu	-3.498	17.48
+location_epicenter	Bulungu	-4.573137	18.859614
+location_epicenter	Djuma	-4.258081	18.615982
+location_epicenter	Gungu	-5.988105	19.257792
+location_epicenter	Idiofa	-5.026227	19.454104
+location_epicenter	Ipamu	-4.308274	19.709547
+location_epicenter	Kikongo	-4.170174	17.168072
+location_epicenter	Kikwit-Nord	-5.021372	18.824129
+location_epicenter	Kikwit-Sud	-5.079362	18.809469
+location_epicenter	Kimputu	-4.458	19.399
+location_epicenter	Kingandu	-5.499	18.414
+location_epicenter	Koshibanda	-5.032854	19.890916
+location_epicenter	Lusanga	-5.020560	18.906610
+location_epicenter	Masi-Manimba	-5.005379	17.821124
+location_epicenter	Moanza	-5.423	17.733
+location_epicenter	Mokala	-3.957222	19.017445
+location_epicenter	Mosango	-5.016	18.142
+location_epicenter	Mukedi	-5.697804	19.899821
+location_epicenter	Mungindu	-5.507825	19.074681
+location_epicenter	Pay Kongila	-5.017791	18.499047
+location_epicenter	Sia	-3.811882	18.542584
+location_epicenter	Vanga	-4.464728	18.318668
+location_epicenter	Yasa-Bonga	-4.499921	17.909069
+# Democratic Republic of the Congo / Lomami
+location_epicenter	Kabinda	-6.251637	24.440722
+location_epicenter	Kalambayi Kabanga	-6.741810	24.409599
+location_epicenter	Kalenda	-7.434979	23.447658
+location_epicenter	Kalonda Est	-6.425397	25.096385
+location_epicenter	Kamana	-5.819133	25.397675
+location_epicenter	Kamiji	-6.717740	23.223270
+location_epicenter	Kanda Kanda	-6.919403	23.751760
+location_epicenter	Lubao	-5.518846	25.878419
+location_epicenter	Ludimbi Lukula	-5.712725	24.493482
+location_epicenter	Luputa	-7.495026	23.784983
+location_epicenter	Makota	-7.020871	23.417094
+location_epicenter	Mulumba	-6.598903	23.866089
+location_epicenter	Mwene Ditu	-6.930883	23.413498
+location_epicenter	Ngandajika	-6.760814	24.047591
+location_epicenter	Tshofa	-5.239767	24.993487
+location_epicenter	Wikong	-7.859446	23.313230
+# Democratic Republic of the Congo / Lualaba
+location_epicenter	Bunkeya	-10.274733	26.822485
+location_epicenter	Dilala	-10.575340	25.234624
+location_epicenter	Dilolo	-10.609477	22.628663
+location_epicenter	Fungurume	-10.716107	26.272840
+location_epicenter	Kafakumba	-9.394480	23.796535
+location_epicenter	Kalamba	-8.486788	23.257300
+location_epicenter	Kanzenze	-10.013247	25.439453
+location_epicenter	Kapanga	-8.343738	22.365858
+location_epicenter	Kasaji	-10.502698	23.599463
+location_epicenter	Lualaba	-11.492	26.069
+location_epicenter	Lubudi	-10.078818	26.106891
+location_epicenter	Mutshatsha	-10.690513	24.690773
+location_epicenter	Sandoa	-9.473092	22.597135
+# Democratic Republic of the Congo / Maniema
+location_epicenter	Alunguli	-2.944937	25.960610
+location_epicenter	Ferekeni	-1.760426	26.174780
+location_epicenter	Kabambare	-4.662882	28.073527
+location_epicenter	Kailo	-2.507069	25.687697
+location_epicenter	Kalima	-2.746470	26.649803
+location_epicenter	Kampene	-3.504819	26.481604
+location_epicenter	Kasongo	-4.192150	26.759227
+location_epicenter	Kibombo	-4.073815	25.659637
+location_epicenter	Kindu	-2.933341	25.880746
+location_epicenter	Kunda	-3.915973	26.282596
+location_epicenter	Tunda	-4.066493	25.135924
+location_epicenter	Lubutu	-0.623244	26.916412
+location_epicenter	Lusangi	-4.675424	27.231990
+location_epicenter	Obokote	-1.100098	26.596247
+location_epicenter	Pangi	-3.156161	26.603978
+location_epicenter	Punia	-1.693579	26.996705
+location_epicenter	Samba	-4.724869	26.323015
+location_epicenter	Saramabila	-4.150674	27.388932
+# Democratic Republic of the Congo / Maï-Ndombe
+location_epicenter	Banjow Moke	-1.867356	17.795724
+location_epicenter	Bokoro	-2.895	18.458
+location_epicenter	Bolobo	-2.682585	16.380792
+location_epicenter	Bosobe	-3.264031	19.192333
+location_epicenter	Inongo	-1.927534	18.550425
+location_epicenter	Kiri	-1.843086	19.277279
+location_epicenter	Kwamouth	-3.579430	16.677958
+location_epicenter	Mimia	-2.583288	20.161026
+location_epicenter	Mushie	-2.518308	17.182438
+location_epicenter	Nioki	-2.907994	17.832453
+location_epicenter	Ntandembelo	-1.991165	17.084222
+location_epicenter	Oshwe	-3.675665	20.044599
+location_epicenter	Penjwa	-1.170108	19.082022
+location_epicenter	Yumbi	-2.105590	16.520031
+# Democratic Republic of the Congo / Mongala
+location_epicenter	Binga	2.149653	20.412779
+location_epicenter	Bongandanga	1.263361	21.371788
+location_epicenter	Boso Manzi	2.807847	21.195846
+location_epicenter	Boso Mondanda	1.712158	19.767295
+location_epicenter	Bosondjo	1.981565	22.038608
+location_epicenter	Bumba	2.240561	22.703247
+location_epicenter	Lisala	2.283726	21.238507
+location_epicenter	Lolo	2.319370	23.211101
+location_epicenter	Pimu	1.817159	21.139191
+location_epicenter	Yamaluka	2.425061	22.174471
+location_epicenter	Yambuku	2.838845	22.336934
+location_epicenter	Yamongili	2.550275	22.763113
+# Democratic Republic of the Congo / Nord-Kivu
+location_epicenter	Alimbongo	-0.256252	28.983548
+location_epicenter	Bambo	-1.153112	29.252790
+location_epicenter	Beni	0.499516	29.469531
+location_epicenter	Biena	0.226785	28.967876
+location_epicenter	Binza	-0.814653	29.521794
+location_epicenter	Birambizo	-1.223589	29.112980
+location_epicenter	Butembo	0.139963	29.259908
+location_epicenter	Goma	-1.652603	29.180209
+location_epicenter	Itebero	-1.755190	28.117313
+location_epicenter	Kalunguta	0.436595	29.513809
+location_epicenter	Kamango	0.677836	29.829630
+location_epicenter	Karisimbi	-1.634302	29.208925
+location_epicenter	Katoyi	-1.639738	28.778370
+location_epicenter	Katwa	0.120579	29.323708
+location_epicenter	Kayna	-0.481705	28.972677
+location_epicenter	Kibirizi	-0.871090	29.188519
+location_epicenter	Kibua	-1.259294	28.412674
+location_epicenter	Kirotshe	-1.547140	29.004627
+location_epicenter	Kyondo	0.013187	29.485897
+location_epicenter	Lubero	-0.294745	29.360647
+location_epicenter	Mabalako	0.468120	29.211455
+location_epicenter	Manguredjipa	0.392798	28.445053
+location_epicenter	Masereka	-0.139	29.316
+location_epicenter	Masisi	-1.457220	28.729657
+location_epicenter	Musienene	0.018579	28.658990
+location_epicenter	Mutwanga	0.313849	29.742382
+location_epicenter	Mweso	-1.189329	28.902911
+location_epicenter	Nyiragongo	-1.530857	29.250630
+location_epicenter	Oicha	0.755821	29.599416
+location_epicenter	Pinga	-0.615621	28.454837
+location_epicenter	Rutshuru	-1.296065	29.400716
+location_epicenter	Rwanguba	-1.221834	29.539443
+location_epicenter	Vuhovi	0.251182	29.254110
+location_epicenter	Walikale	-1.141224	27.763954
+# Democratic Republic of the Congo / Nord-Ubangi
+location_epicenter	Abuzi	3.366083	22.146161
+location_epicenter	Bili (Nord-Ubangi)	4.791554	19.718104
+location_epicenter	Bosobolo	4.351752	19.849837
+location_epicenter	Businga	3.194651	21.401590
+location_epicenter	Gbadolite	4.282872	20.876549
+location_epicenter	Karawa	3.294556	20.405644
+location_epicenter	Loko	3.724828	20.743967
+location_epicenter	Mobayi Mbongo	4.079004	21.031384
+location_epicenter	Wapinda	3.716238	23.015732
+location_epicenter	Wasolo	3.767538	22.092763
+location_epicenter	Yakoma	4.031884	22.204702
+# Democratic Republic of the Congo / Sankuru
+location_epicenter	Bena Dibele	-3.690769	22.749431
+location_epicenter	Dikungu	-4.310781	24.238741
+location_epicenter	Djalo Djeka	-3.202964	24.119463
+location_epicenter	Katako Kombe	-3.033912	24.735687
+location_epicenter	Kole	-3.674485	22.263098
+location_epicenter	Lodja	-3.420399	23.515818
+location_epicenter	Lomela	-2.233296	23.835443
+location_epicenter	Lusambo	-5.030664	23.322224
+location_epicenter	Minga	-4.871720	24.123572
+location_epicenter	Omendjadi	-3.075501	23.388491
+location_epicenter	Ototo	-4.574743	23.449682
+location_epicenter	Pania Mutombo	-5.227630	23.836046
+location_epicenter	Tshudi Loto	-2.449688	22.607631
+location_epicenter	Tshumbe	-4.688135	24.651417
+location_epicenter	Vanga Kete	-3.847280	23.453407
+location_epicenter	Wembo Nyama	-4.045934	24.673526
+# Democratic Republic of the Congo / Sud-Kivu
+location_epicenter	Bagira	-2.488674	28.825951
+location_epicenter	Bunyakiri	-2.038203	28.443294
+location_epicenter	Fizi	-4.300	28.9419
+location_epicenter	Hauts-Plateaux	-3.257814	28.926837
+location_epicenter	Ibanda	-2.513252	28.867672
+location_epicenter	Idjwi	-2.011639	29.056543
+location_epicenter	Itombwe	-3.547915	28.598294
+location_epicenter	Kabare	-2.437649	28.713671
+location_epicenter	Kadutu	-2.502010	28.848143
+location_epicenter	Kalehe	-2.052281	28.744327
+location_epicenter	Kalole	-3.613226	27.567865
+location_epicenter	Kalonge	-2.329049	28.484756
+location_epicenter	Kamituga	-3.151954	28.159572
+location_epicenter	Kaniola	-2.541491	28.408641
+location_epicenter	Katana	-2.217529	28.785361
+location_epicenter	Kaziba	-2.860194	28.823506
+location_epicenter	Kimbi Lulenge	-4.278351	28.392520
+location_epicenter	Kitutu	-3.488095	28.069370
+location_epicenter	Lemera	-3.003945	29.029692
+location_epicenter	Lulingu	-2.318077	27.344406
+location_epicenter	Minembwe	-4.025139	28.563524
+location_epicenter	Minova	-1.798175	28.930896
+location_epicenter	Miti Murhesa	-2.337526	28.861617
+location_epicenter	Mubumbano	-2.753503	28.561151
+location_epicenter	Mulungu	-2.587804	27.945168
+location_epicenter	Mwana	-2.913017	28.702238
+location_epicenter	Mwenga	-3.086129	28.525405
+location_epicenter	Nundu	-3.730221	29.004578
+location_epicenter	Nyangezi	-2.726496	28.904640
+location_epicenter	Nyantende	-2.592054	28.867088
+location_epicenter	Ruzizi	-3.119457	29.166023
+location_epicenter	Shabunda	-2.874974	27.298830
+location_epicenter	Uvira	-3.426391	29.123306
+location_epicenter	Walungu	-2.634165	28.696450
+# Democratic Republic of the Congo / Sud-Ubangi
+location_epicenter	Bangabola	2.303449	19.401163
+location_epicenter	Bogosenubia	3.791530	19.727393
+location_epicenter	Bokonzi	2.255380	18.569640
+location_epicenter	Bominenge	3.296210	20.084716
+location_epicenter	Boto	2.990094	18.954283
+location_epicenter	Budjala	2.467473	19.703949
+location_epicenter	Bulu	2.587051	20.032193
+location_epicenter	Bwamanda	3.351895	19.397923
+location_epicenter	Gemena	3.208522	19.843438
+location_epicenter	Kungu	2.642692	18.951002
+location_epicenter	Libenge	4.113161	19.044231
+location_epicenter	Mawuya	3.272163	18.830517
+location_epicenter	Mbaya	2.682759	20.369494
+location_epicenter	Ndage	2.741007	20.707198
+location_epicenter	Tandala	2.976594	19.533291
+location_epicenter	Zongo	4.219692	18.698290
+# Democratic Republic of the Congo / Tanganyika
+location_epicenter	Ankoro	-6.755	26.943
+location_epicenter	Kabalo	-6.254078	26.891946
+location_epicenter	Kalemie	-6.334393	28.868003
+location_epicenter	Kansimba	-7.296974	29.109442
+location_epicenter	Kiyambi	-7.375037	28.155028
+location_epicenter	Kongolo	-5.383	26.997
+location_epicenter	Manono	-7.144845	27.393694
+location_epicenter	Mbulula	-5.439	27.425
+location_epicenter	Moba	-7.03	29.765
+location_epicenter	Nyemba	-5.499	28.849
+location_epicenter	Nyunzu	-5.731309	27.934716
+# Democratic Republic of the Congo / Tshopo
+location_epicenter	Bafwasende	0.988643	26.690725
+location_epicenter	Banalia	1.757088	25.615560
+location_epicenter	Basali	1.753628	24.408862
+location_epicenter	Basoko	1.223025	23.747220
+location_epicenter	Bengamisa	1.123572	25.040652
+location_epicenter	Isangi	0.894738	24.399625
+location_epicenter	Kabondo	0.638183	25.402589
+location_epicenter	Lowa	-1.269683	25.592646
+location_epicenter	Lubunga (Tshopo)	0.392464	25.117664
+location_epicenter	Makiso Kisangani	0.520134	25.229720
+location_epicenter	Mangobo	0.603868	25.097513
+location_epicenter	Opala	-1.048456	24.238615
+location_epicenter	Opienge	0.242	27.427
+location_epicenter	Tshopo	0.729461	25.292387
+location_epicenter	Ubundu	-0.390558	25.087774
+location_epicenter	Wanierukula	0.075601	25.956129
+location_epicenter	Yabaondo	0.624465	23.975616
+location_epicenter	Yahisuli	-0.007466	23.925673
+location_epicenter	Yahuma	0.841035	23.143200
+location_epicenter	Yakusu	0.676074	24.639893
+location_epicenter	Yaleko	-0.156192	24.635369
+location_epicenter	Yalimbongo	1.814292	23.473214
+# Democratic Republic of the Congo / Tshuapa
+location_epicenter	Befale	0.567864	20.887215
+location_epicenter	Boende	-0.325739	20.784283
+location_epicenter	Bokungu	-0.304522	22.087581
+location_epicenter	Bosanga	-0.953243	21.995219
+location_epicenter	Djolu	0.353463	22.676745
+location_epicenter	Ikela	-1.491338	23.466027
+location_epicenter	Lingomo	1.152665	22.161564
+location_epicenter	Mompono	0.321910	21.829130
+location_epicenter	Mondombe	-0.641908	22.890953
+location_epicenter	Monkoto	-1.644974	20.931447
+location_epicenter	Wema	-0.734865	21.348851
+location_epicenter	Yalifafo	-1.359883	22.433076
+
+# Uganda (any division)
+location_epicenter	Arua	3.019	30.912
+location_epicenter	Bundibugyo	0.705	30.06
+location_epicenter	Hoima	1.433	31.345
+location_epicenter	Kampala	0.307	32.578
+location_epicenter	Ntoroko	1.05	30.53
+location_epicenter	Wakiso	0.399	32.479
