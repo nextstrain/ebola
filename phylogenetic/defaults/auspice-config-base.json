@@ -60,6 +60,16 @@
       "type": "categorical"
     },
     {
+      "key": "location_reconstructed",
+      "title": "Health Zone (Reconstructed)",
+      "type": "categorical"
+    },
+    {
+      "key": "location_epicenter",
+      "title": "Health Zone (Combined Epicenter)",
+      "type": "categorical"
+    },
+    {
       "key": "dataUseTerms",
       "title": "Data use terms",
       "type": "categorical",
@@ -102,7 +112,9 @@
   "geo_resolutions": [
     "country",
     "division",
-    "location"
+    "location",
+    "location_reconstructed",
+    "location_epicenter"
   ],
   "display_defaults": {
     "tip_label": "strain"

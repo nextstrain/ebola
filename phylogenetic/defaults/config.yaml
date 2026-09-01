@@ -79,10 +79,6 @@ subsample:
         min_length: 5000
         exclude: defaults/exclude_sudv.txt
 
-outgroup:
-  bdbv/drc-uganda-2026:
-    defaults/outgroup_bdbv_drc-uganda-2026.fasta
-
 # per-build masking (optional)
 mask:
   sudv/all-outbreaks: &generic-masking
@@ -109,9 +105,6 @@ reroot_tree:
   ebov/all-outbreaks:
     # See <https://virological.org/t/on-the-rooting-of-the-ebola-virus-phylogeny-and-its-consequences-for-understanding-the-diversity-in-the-reservoir/1005> for rooting approach
     strains: ['PP_000LE61', 'PP_000NUJS']
-  bdbv/drc-uganda-2026:
-    strains: ['all_outbreaks_inferred_root_no_masking']
-    remove_outgroup: true
 
 refine:
   ebov/all-outbreaks: >-
@@ -130,10 +123,14 @@ refine:
   # bdbv/drc-uganda-2026 is a WIP - starting with the same args as west-africa
   bdbv/drc-uganda-2026: >-
     --timetree
-    --keep-root
     --date-inference joint
     --date-confidence
     --keep-polytomies
+    --clock-filter-iqd 2
+    --coalescent 0.0
+
+
+
 
 # Ancestral per-build blocks may define 'inference' & 'root-sequence'
 # Leave out (or falsify) a build to skip ancestral inference
@@ -156,6 +153,10 @@ ancestral:
 traits:
   ebov/west-africa-2014:
     columns: [country, division]
+    confidence: true
+  bdbv/drc-uganda-2026:
+    columns: ['location_reconstructed', 'location_epicenter', 'country']
+    bias: 2.5
     confidence: true
 
 sampling_year_coloring:
@@ -237,7 +238,7 @@ export:
       maintainers: 
         - {"name": Eddy Lusamaki,  Institut National de Recherche Biomédicale, url: 'https://inrb.net/'}
         - {"name": Nextstrain, url: 'https://nextstrain.org'}
-      geo_resolutions: [country, division]
+      geo_resolutions: [country, division, location_epicenter,location_reconstructed]
       display_defaults:
         color_by: location
         geo_resolution: location

@@ -70,6 +70,7 @@ rule traits:
     params:
         columns = lambda w: config['traits'][f"{w.species}/{w.build}"]['columns'],
         confidence = lambda w: conditional('--confidence', config['traits'][f"{w.species}/{w.build}"].get('confidence', False)),
+        bias = lambda w: conditional('--sampling-bias-correction', config['traits'][f"{w.species}/{w.build}"].get('bias', False)),
         id_field = config['strain_id_field'],
     benchmark:
         "benchmarks/{species}/{build}/traits.txt"
@@ -85,6 +86,7 @@ rule traits:
             --metadata-id-columns {params.id_field:q} \
             --columns {params.columns:q} \
             {params.confidence} \
+            {params.bias} \
             --output {output.node_data:q}
         """
 
