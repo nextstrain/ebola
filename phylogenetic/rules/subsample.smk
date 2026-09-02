@@ -31,6 +31,7 @@ rule process_bdbv_locations:
                 for row in metadata_reader:
                     location = row.get('location')
                     if not location: # some samples do not have locations in the metadata
+                        writer.writerow(row)
                         continue
                     else:
                         if row['location'] == "Sota":

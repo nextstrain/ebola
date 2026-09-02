@@ -126,7 +126,7 @@ refine:
     --date-inference joint
     --date-confidence
     --keep-polytomies
-    --clock-filter-iqd 2
+    --clock-filter-iqd 3
     --coalescent 0.0
 
 
