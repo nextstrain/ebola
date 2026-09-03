@@ -40,7 +40,6 @@ rule gather_metadata:
     input:
         lambda w: [meta for _name, meta in _named_metadata_files(w)],
     params:
-        n = lambda w, input: len(input),
         pairs = lambda w: [f"{name}={meta}" for name, meta in _named_metadata_files(w)],
         id_field = config['strain_id_field'],
     output:
@@ -53,13 +52,9 @@ rule gather_metadata:
         r"""
         exec &> >(tee {log:q})
 
-        if [[ {params.n} -eq 1 ]]; then
-            augur read-file {input:q} > {output.metadata:q}
-        else
-            augur merge --metadata {params.pairs:q} \
-                --metadata-id-columns {params.id_field:q} \
-                --output-metadata {output.metadata:q}
-        fi
+        augur merge --metadata {params.pairs:q} \
+            --metadata-id-columns {params.id_field:q} \
+            --output-metadata {output.metadata:q}
         """
 
 rule gather_sequences:
@@ -67,7 +62,6 @@ rule gather_sequences:
     input:
         lambda w: [seqs for _name, seqs in _named_sequence_files(w)],
     params:
-        n = lambda w, input: len(input),
         id_field = config['strain_id_field'],
     output:
         sequences = "results/{species}/sequences.fasta"
@@ -79,10 +73,6 @@ rule gather_sequences:
         r"""
         exec &> >(tee {log:q})
 
-        if [[ {params.n} -eq 1 ]]; then
-            augur read-file {input:q} > {output.sequences:q}
-        else
-            augur merge --sequences {input:q} \
-                --output-sequences {output.sequences:q}
-        fi
+        augur merge --sequences {input:q} \
+            --output-sequences {output.sequences:q}
         """

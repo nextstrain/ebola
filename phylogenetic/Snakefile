@@ -8,6 +8,8 @@ min_version("8.0.0")
 include: "../shared/vendored/snakemake/config.smk"
 include: "rules/config.smk"
 
+set_min_augur_version("34.0.0")
+
 print("Relative filepaths will be searched for using the `AUGUR_SEARCH_PATHS`"
    " env variable, which has the following directories:"
     "\n\t" + "\n\t".join(os.environ["AUGUR_SEARCH_PATHS"].split(':')) + "\n",
