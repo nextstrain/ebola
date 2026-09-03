@@ -29,12 +29,15 @@ additional_inputs:
   - name: ppx_restricted
     species: ebov
     metadata: "s3://nextstrain-data/files/workflows/ebola/ebov/metadata_restricted.tsv.zst"
+    id_field: accession
     sequences: "s3://nextstrain-data/files/workflows/ebola/ebov/sequences_restricted.fasta.zst"
   - name: ppx_restricted
     species: bdbv
     metadata: "s3://nextstrain-data/files/workflows/ebola/bdbv/metadata_restricted.tsv.zst"
+    id_field: accession
     sequences: "s3://nextstrain-data/files/workflows/ebola/bdbv/sequences_restricted.fasta.zst"
   - name: ppx_restricted
     species: sudv
     metadata: "s3://nextstrain-data/files/workflows/ebola/sudv/metadata_restricted.tsv.zst"
+    id_field: accession
     sequences: "s3://nextstrain-data/files/workflows/ebola/sudv/sequences_restricted.fasta.zst"

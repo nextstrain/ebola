@@ -71,7 +71,6 @@ rule traits:
         columns = lambda w: config['traits'][f"{w.species}/{w.build}"]['columns'],
         confidence = lambda w: conditional('--confidence', config['traits'][f"{w.species}/{w.build}"].get('confidence', False)),
         bias = lambda w: conditional('--sampling-bias-correction', config['traits'][f"{w.species}/{w.build}"].get('bias', False)),
-        id_field = config['strain_id_field'],
     benchmark:
         "benchmarks/{species}/{build}/traits.txt"
     log:
@@ -83,7 +82,6 @@ rule traits:
         augur traits \
             --tree {input.tree:q} \
             --metadata {input.metadata:q} \
-            --metadata-id-columns {params.id_field:q} \
             --columns {params.columns:q} \
             {params.confidence} \
             {params.bias} \
@@ -99,14 +97,12 @@ rule sampling_year:
         node_data = "results/{species}/{build}/sampling-year.json",
         config_block = "results/{species}/{build}/sampling-year.config.json",
     params:
-        id_field = config['strain_id_field'],
         script = os.path.join(workflow.basedir, "scripts", "get_year.py"),
     shell:
         r"""
         exec &> >(tee {log:q})
 
         python {params.script} \
-            --id-columns {params.id_field:q} \
             --metadata {input.metadata:q} \
             --output {output.node_data:q} \
             --output-config {output.config_block:q}

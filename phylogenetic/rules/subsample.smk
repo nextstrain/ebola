@@ -63,8 +63,6 @@ rule subsample:
     output:
         sequences = "results/{species}/{build}/subsampled.fasta",
         metadata = "results/{species}/{build}/metadata.tsv",
-    params:
-        id_field = config['strain_id_field'],
     log:
         "logs/{species}/{build}/subsample.txt",
     benchmark:
@@ -77,7 +75,6 @@ rule subsample:
             --config {input.config} \
             --sequences {input.sequences} \
             --metadata {input.metadata} \
-            --metadata-id-columns {params.id_field} \
             --output-sequences {output.sequences} \
             --output-metadata {output.metadata}
         """

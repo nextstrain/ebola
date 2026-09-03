@@ -58,8 +58,7 @@ rule add_nextclade_columns:
         metadata="results/{species}/metadata_extended.tsv",
     params:
         source_cols=lambda w: ",".join(['seqName', *[el[0] for el in config['nextclade'][w.species]['columns']]]),
-        dest_cols=lambda w: ",".join([config['strain_id_field'], *[el[1] for el in config['nextclade'][w.species]['columns']]]),
-        id_field = config['strain_id_field'],
+        dest_cols  =lambda w: ",".join(['id',      *[el[1] for el in config['nextclade'][w.species]['columns']]]),
     benchmark:
         "benchmarks/{species}/add_nextclade_columns.txt"
     log:
@@ -75,8 +74,8 @@ rule add_nextclade_columns:
     
         augur merge \
             --metadata nextclade={output.nextclade_subset:q}  metadata={input.metadata:q} \
-            --metadata-id-columns {params.id_field} \
             --output-metadata {output.metadata:q} \
+            --output-metadata-id-column id \
             --no-source-columns
         """
 

@@ -108,7 +108,6 @@ rule export:
     output:
         auspice_json = "auspice/ebola_{species}_{build}.json" # TODO XXX remap name to match URLs?
     params:
-        id_field = config['strain_id_field'],
         warning = _warning,
         description = _description,
         colors = _colors,
@@ -124,7 +123,6 @@ rule export:
             --auspice-config {input.auspice_config:q} \
             --tree {input.tree:q} \
             --metadata {input.metadata:q} \
-            --metadata-id-columns {params.id_field:q} \
             --node-data {input.node_data_jsons:q} \
             --lat-longs {input.lat_longs:q} \
             --include-root-sequence-inline \
