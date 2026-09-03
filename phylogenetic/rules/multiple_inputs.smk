@@ -23,7 +23,7 @@ def _gather_inputs(species):
     if any([len(set(el.keys())-available_keys)>0 for el in all_inputs]):
         raise InvalidConfigError(f"Each input (config.inputs and config.additional_inputs) can only include keys of {', '.join(available_keys)}")
 
-    return {el['name']: {k:(v if k in ['name', 'species'] else path_or_url(v)) for k,v in el.items()} for el in all_inputs}
+    return {el['name']: {k:(path_or_url(v) if k in ['metadata', 'sequences'] else v) for k,v in el.items()} for el in all_inputs}
 
 
 def _named_metadata_files(wildcards):
