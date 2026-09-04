@@ -56,7 +56,7 @@ For external analysis directories, you can create a `config.yaml` config overlay
 
 The following steps assume you are running from your own analysis directory (see "How to run", above).
 
-1. Provision your own sequences and metadata files. The 'accession' column of the metadata TSV is used as the unique ID and must match the headers in your FASTA file. You should also ensure the 'date' column (in YYYY-MM-DD format) is present, as well as other useful columns such as 'country', 'division' as needed by the build.
+1. Provision your own sequences and metadata files. The column specified by `id_field` in the metadata TSV is used as the unique ID and must match the headers in your FASTA file. You should also ensure the 'date' column (in YYYY-MM-DD format) is present, as well as other useful columns such as 'country', 'division' as needed by the build.
 2. Create a custom config overlay `config.yaml` which describes the additional inputs:
 
 ```yaml
@@ -64,6 +64,7 @@ additional_inputs:
   - name: private_data
     species: ebov               # options: "ebov", "bdbv", "sudv"
     metadata: metadata.tsv      # your metadata filename
+    id_field: accession         # id field in your metadata
     sequences: sequences.fasta  # your sequences filename
 ```
  You may also wish to copy in the `additional_inputs` from the "Using Pathoplexus restricted data" section (above), as the default workflow will not source restricted data.

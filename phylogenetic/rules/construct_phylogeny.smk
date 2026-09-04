@@ -132,7 +132,6 @@ rule refine:
         node_data = "results/{species}/{build}/branch_lengths.json"
     params:
         args = lambda w: config['refine'][f"{w.species}/{w.build}"],
-        id_field = config['strain_id_field'],
     benchmark:
         "benchmarks/{species}/{build}/refine.txt"
     log:
@@ -145,7 +144,6 @@ rule refine:
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
             --metadata {input.metadata:q} \
-            --metadata-id-columns {params.id_field:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
             {params.args}

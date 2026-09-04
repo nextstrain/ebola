@@ -70,13 +70,12 @@ def suggest_colors(years, fname):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--metadata", required=True, help="Metadata TSV")
-    parser.add_argument("--id-columns", nargs="+", help="ID columns in Metadata TSV", default=['accession'])
     parser.add_argument("--output", required=True, help="Node Data JSON output")
     parser.add_argument("--output-config", required=False, help="JSON coloring entry for an auspice-config JSON")
 
     args = parser.parse_args()
 
-    m = read_metadata(args.metadata, id_columns=args.id_columns)
+    m = read_metadata(args.metadata)
     nodes = {name: {'year': date.split('-')[0]} for name,date in zip(m.index, m['date']) if date and not date.startswith('X')}
     with open(args.output, 'w') as fh:
         json.dump({"nodes": nodes}, fh)

@@ -68,11 +68,10 @@ if __name__ == "__main__":
     parser.add_argument("--tree", required=True, help="Newick")
     parser.add_argument("--metadata", required=True, help="Metadata TSV")
     parser.add_argument("--output", required=True, help="Node Data JSON")
-    parser.add_argument("--id-columns", nargs="+", help="ID columns in Metadata TSV", default=['accession'])
     args = parser.parse_args()
 
     T = Phylo.read(args.tree, "newick")
-    m = read_metadata(args.metadata, id_columns=args.id_columns)
+    m = read_metadata(args.metadata)
     outbreaks = m.groupby('outbreak').apply(lambda g: g.index.tolist()).to_dict()
     nodes = {}
     branches = {}

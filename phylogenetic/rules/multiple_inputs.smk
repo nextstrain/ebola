@@ -18,17 +18,23 @@ def _gather_inputs(species):
         raise InvalidConfigError(f"At least one input must have 'metadata' for species {species!r}")
     if not any (['sequences' in i for i in all_inputs]):
         raise InvalidConfigError(f"At least one input must have 'sequences' for species {species!r}")
+    if not all(['id_field' in i for i in all_inputs if 'metadata' in i]):
+        raise InvalidConfigError("Each input with 'metadata' must also have an 'id_field'")
 
-    available_keys = set(['name', 'species', 'metadata', 'sequences'])
+    available_keys = set(['name', 'species', 'metadata', 'id_field', 'sequences'])
     if any([len(set(el.keys())-available_keys)>0 for el in all_inputs]):
         raise InvalidConfigError(f"Each input (config.inputs and config.additional_inputs) can only include keys of {', '.join(available_keys)}")
 
-    return {el['name']: {k:(v if k in ['name', 'species'] else path_or_url(v)) for k,v in el.items()} for el in all_inputs}
+    return {el['name']: {k:(path_or_url(v) if k in ['metadata', 'sequences'] else v) for k,v in el.items()} for el in all_inputs}
 
 
 def _named_metadata_files(wildcards):
     inputs = _gather_inputs(wildcards.species)
     return [(name, info['metadata']) for name, info in inputs.items() if info.get('metadata')]
+
+def _metadata_id_fields(wildcards):
+    inputs = _gather_inputs(wildcards.species)
+    return [(name, info['id_field']) for name, info in inputs.items() if info.get('metadata')]
 
 def _named_sequence_files(wildcards):
     inputs = _gather_inputs(wildcards.species)
@@ -40,9 +46,8 @@ rule gather_metadata:
     input:
         lambda w: [meta for _name, meta in _named_metadata_files(w)],
     params:
-        n = lambda w, input: len(input),
         pairs = lambda w: [f"{name}={meta}" for name, meta in _named_metadata_files(w)],
-        id_field = config['strain_id_field'],
+        id_field = lambda w: [f"{name}={id_field}" for name, id_field in _metadata_id_fields(w)],
     output:
         metadata = "results/{species}/metadata.tsv"
     benchmark:
@@ -53,22 +58,16 @@ rule gather_metadata:
         r"""
         exec &> >(tee {log:q})
 
-        if [[ {params.n} -eq 1 ]]; then
-            augur read-file {input:q} > {output.metadata:q}
-        else
-            augur merge --metadata {params.pairs:q} \
-                --metadata-id-columns {params.id_field:q} \
-                --output-metadata {output.metadata:q}
-        fi
+        augur merge --metadata {params.pairs:q} \
+            --metadata-id-columns {params.id_field:q} \
+            --output-metadata {output.metadata:q} \
+            --output-metadata-id-column id
         """
 
 rule gather_sequences:
     """Produce a canonical (per-species) set of sequences from a single input or multiple inputs"""
     input:
         lambda w: [seqs for _name, seqs in _named_sequence_files(w)],
-    params:
-        n = lambda w, input: len(input),
-        id_field = config['strain_id_field'],
     output:
         sequences = "results/{species}/sequences.fasta"
     benchmark:
@@ -79,10 +78,6 @@ rule gather_sequences:
         r"""
         exec &> >(tee {log:q})
 
-        if [[ {params.n} -eq 1 ]]; then
-            augur read-file {input:q} > {output.sequences:q}
-        else
-            augur merge --sequences {input:q} \
-                --output-sequences {output.sequences:q}
-        fi
+        augur merge --sequences {input:q} \
+            --output-sequences {output.sequences:q}
         """
