@@ -1,0 +1,10 @@
+inputs:
+  - name: example_data
+    species: bdbv
+    metadata: example_data/bdbv/metadata.tsv
+    id_field: id
+    sequences: example_data/bdbv/sequences.fasta
+
+# Test single build to keep CI runtime short
+builds:
+   - bdbv/drc-uganda-2026
