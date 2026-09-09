@@ -1,0 +1,7 @@
+custom_rules:
+  - build-configs/chores/chores.smk
+
+# Using builds to define which species to use for example data
+# Only uses bdbv since we are only testing bdbv in CI to reduce runtime
+builds:
+   - bdbv/drc-uganda-2026

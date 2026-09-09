@@ -43,7 +43,7 @@ nextstrain run path/to/ebola phylogenetic .
 
 If you are running within this repo and have run the ingest workflow you can add `--configfile defaults/config-local-inputs.yaml` to source all input data from `../ingest`. This is the best approach for development or local runs.
 
-For external analysis directories, you can create a `config.yaml` config overlay which defines inputs: 
+For external analysis directories, you can create a `config.yaml` config overlay which defines inputs:
 - To use locally ingested data, use [these inputs](defaults/config-local-inputs.yaml) with paths adjusted to be relative to your analysis directory
 - To use S3 inputs, use the `additional_inputs` from [this config](build-configs/nextstrain-automation/config.yaml)
 
@@ -52,7 +52,7 @@ For external analysis directories, you can create a `config.yaml` config overlay
 
 ## Using additional inputs (private data)
 
-> This is a work in progress and needs further testing 
+> This is a work in progress and needs further testing
 
 The following steps assume you are running from your own analysis directory (see "How to run", above).
 
@@ -78,7 +78,23 @@ additional_inputs:
 The build-configs directory contains custom configs and rules that override and/or
 extend the default workflows.
 
+- [chores](build-configs/chores/) - Update example data
 - [ci](build-configs/ci/) - CI build that runs with example data
 - [nextstrain-automation](build-configs/nextstrain-automation/) - Rebuilds and uploads certain datasets
+
+## Update example data
+
+[Example data](./example_data/) is used by [CI](https://github.com/nextstrain/ebola/actions/workflows/ci.yaml).
+
+It can also be used as a small subset of real-world data.
+
+Example data should be updated every time metadata schema is changed.
+To update, run:
+
+```bash
+nextstrain build . update_example_data -F \
+    --configfiles build-configs/chores/config.yaml
+```
+
 
 [Nextstrain datasets]: https://docs.nextstrain.org/en/latest/reference/glossary.html#term-dataset
