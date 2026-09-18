@@ -10,16 +10,29 @@ def _root_seq(wildcards):
     return []
 
 
+def _aa_reconstruction_via_ancestral(wildcards):
+    genes = config['ancestral'][f"{wildcards.species}/{wildcards.build}"].get('genes', False)
+    if genes is False:
+        return ""
+    if not isinstance(genes, str):
+        raise Exception(f"ancestral's 'genes' config option must be a string ({wildcards.species}/{wildcards.build})")
+    # Note: translations produced by run_nextclade
+    translations_pattern = f"results/{wildcards.species}/translations/%GENE.fasta"
+    annotation_file = resolve_config_path(config['ancestral'][f"{wildcards.species}/{wildcards.build}"]['annotation'])({})
+    return f"--genes {genes} --translations {translations_pattern} --annotation {annotation_file} --report-inconsistent-translation"
+
+
 rule ancestral:
-    """Reconstructing ancestral sequences and mutations"""
+    """Reconstructing mutations and (optionally) AA translations too"""
     input:
         tree = "results/{species}/{build}/tree.nwk",
         alignment = "results/{species}/{build}/subsampled.fasta", # unmasked
-        annotation = lambda w: resolve_config_path(config['ancestral'][f"{w.species}/{w.build}"]['annotation'])({}),
+        # Note: input.annotation_file not directly used by the shell block, necessary for snakemake input checking. File is referenced by params.aa_reconstruction
+        annotation_file = lambda w: resolve_config_path(config['ancestral'][f"{w.species}/{w.build}"]['annotation'])({}) if _aa_reconstruction_via_ancestral(w) else [],
     output:
         node_data = "results/{species}/{build}/muts.json"
     params:
-        genes = lambda w: config['ancestral'][f"{w.species}/{w.build}"]['genes'],
+        aa_reconstruction = _aa_reconstruction_via_ancestral,
         inference = lambda w: conditional('--inference', config['ancestral'][f"{w.species}/{w.build}"].get('inference', False)),
         extra_args = lambda w: config['ancestral'][f"{w.species}/{w.build}"].get('extra_args', ''), # will be replaced with config-in-YAML in the short/medium term
         root_seq = _root_seq,
@@ -34,13 +47,10 @@ rule ancestral:
         augur ancestral \
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
-            --annotation {input.annotation} \
-            --translations results/{wildcards.species}/translations/%GENE.fasta \
-            --genes {params.genes} \
+            {params.aa_reconstruction} \
             {params.inference} \
             {params.root_seq} \
             {params.extra_args} \
-            --report-inconsistent-translation \
             --output-node-data {output.node_data:q}
         """
 

@@ -144,12 +144,11 @@ ancestral:
   sudv/all-outbreaks:
     genes: NP VP35 VP40 GP sGP ssGP VP30 VP24 L
     annotation: ../shared/sudan/reference.gb
-  bdbv/all-outbreaks: &bdbv_ancestral
+  bdbv/all-outbreaks:
     genes: NP VP35 VP40 GP GP_003 VP30 VP24 L
     annotation: ../shared/bdbv/reference.gb
-    extra_args: "--keep-ambiguous"
   bdbv/drc-uganda-2026:
-    <<: *bdbv_ancestral
+    extra_args: "--keep-ambiguous"
 
 # Leave out (or falsify) a build to skip trait reconstruction
 traits:
