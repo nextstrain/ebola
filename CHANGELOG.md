@@ -8,6 +8,9 @@ for an example of formatting.
 
 ## 2026
 
+* 21 September 2026: `config.ancestral.{build}.extra_args` is now available to pass
+  through parameters to `augur ancestral`, such as `"--keep-ambiguous"`
+
 * 03 September 2026: The config param `strain_id_field` has been replaced by
   input-specific `id_field` params. Restore previous default behavior by setting
   `id_field: accession` on each of your inputs. This change requires a minimum

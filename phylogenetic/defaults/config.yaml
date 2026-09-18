@@ -147,6 +147,7 @@ ancestral:
   bdbv/all-outbreaks: &bdbv_ancestral
     genes: NP VP35 VP40 GP GP_003 VP30 VP24 L
     annotation: ../shared/bdbv/reference.gb
+    extra_args: "--keep-ambiguous"
   bdbv/drc-uganda-2026:
     <<: *bdbv_ancestral
 

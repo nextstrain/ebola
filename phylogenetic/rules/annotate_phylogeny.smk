@@ -21,6 +21,7 @@ rule ancestral:
     params:
         genes = lambda w: config['ancestral'][f"{w.species}/{w.build}"]['genes'],
         inference = lambda w: conditional('--inference', config['ancestral'][f"{w.species}/{w.build}"].get('inference', False)),
+        extra_args = lambda w: config['ancestral'][f"{w.species}/{w.build}"].get('extra_args', ''), # will be replaced with config-in-YAML in the short/medium term
         root_seq = _root_seq,
     benchmark:
         "benchmarks/{species}/{build}/ancestral.txt"
@@ -38,6 +39,7 @@ rule ancestral:
             --genes {params.genes} \
             {params.inference} \
             {params.root_seq} \
+            {params.extra_args} \
             --report-inconsistent-translation \
             --output-node-data {output.node_data:q}
         """
