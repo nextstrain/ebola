@@ -8,6 +8,14 @@ for an example of formatting.
 
 ## 2026
 
+* 30 September 2026: Both BDBV builds now keep ambiguous nucleotides & Ns rather
+  than inferring them. Amino acid sequences are now direct translations of these
+  nucleotide sequences and thus we report more X AAs.
+
+* 30 September 2026: AA reconstruction can now be performed with `augur translate`
+  by (i) removing the 'genes' entry from the ancestral config block and (ii) setting
+  setting an `config.translate.{build}.reference` GenBank file.
+
 * 30 September 2026: `config.ancestral.{build}.extra_args` is now available to pass
   through parameters to `augur ancestral`, such as `"--keep-ambiguous"`
 
