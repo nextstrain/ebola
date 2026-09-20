@@ -54,6 +54,31 @@ rule ancestral:
             --output-node-data {output.node_data:q}
         """
 
+rule translate:
+    input:
+        tree = "results/{species}/{build}/tree.nwk",
+        muts = "results/{species}/{build}/muts.json",
+        reference = lambda w: resolve_config_path(config['translate'][f"{w.species}/{w.build}"]["reference"]),
+    output:
+        node_data = "results/{species}/{build}/aa_muts.json"
+    params:
+        genes = lambda w: conditional('--genes', config['translate'][f"{w.species}/{w.build}"].get('genes', False)),
+    benchmark:
+        "benchmarks/{species}/{build}/translate.txt"
+    log:
+        "logs/{species}/{build}/translate.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur translate \
+            --tree {input.tree:q} \
+            --ancestral-sequences {input.muts:q} \
+            {params.genes} \
+            --reference-sequence {input.reference:q} \
+            --output-node-data {output.node_data:q}
+        """
+
 rule count_mutations:
     """Count the nucleotide and amino-acid mutations per node"""
     input:

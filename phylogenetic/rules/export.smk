@@ -17,6 +17,8 @@ def node_data_files(wildcards):
         files.append(f"results/{wildcards.species}/{wildcards.build}/muts-counts.json")
     if config['label_outbreaks'].get(build_pair, False):
         files.append(f"results/{wildcards.species}/{wildcards.build}/outbreaks.json")
+    if config.get('translate', {}).get(build_pair, False):
+        files.append(f"results/{wildcards.species}/{wildcards.build}/aa_muts.json")
 
     # TODO: allow a way for configs to define custom rules which produce node-data JSONs
     # and have this function return the JSONs so the custom rule becomes part of the DAG
