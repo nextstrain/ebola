@@ -144,11 +144,19 @@ ancestral:
   sudv/all-outbreaks:
     genes: NP VP35 VP40 GP sGP ssGP VP30 VP24 L
     annotation: ../shared/sudan/reference.gb
-  bdbv/all-outbreaks: &bdbv_ancestral
+  bdbv/all-outbreaks:
     genes: NP VP35 VP40 GP GP_003 VP30 VP24 L
     annotation: ../shared/bdbv/reference.gb
   bdbv/drc-uganda-2026:
-    <<: *bdbv_ancestral
+    # no 'genes' key as we will reconstruct AA seqs via `augur translate`
+    extra_args: "--keep-ambiguous"
+
+translate:
+  # All other builds have translations via `augur ancestral` (above)
+  bdbv/drc-uganda-2026:
+    reference: ../shared/bdbv/reference.gb
+    genes: NP VP35 VP40 GP GP_003 VP30 VP24 L
+      
 
 # Leave out (or falsify) a build to skip trait reconstruction
 traits:
