@@ -44,11 +44,13 @@ rule filter:
         filtered_data="results/{species}/sequences.fasta",
         filtered_metadata="results/{species}/metadata_raw.tsv",
     params:
-        min_length=5000,
+        min_length=18000,
     shell:
         """
         augur filter --metadata-id-columns accession --sequences {input.data} --metadata {input.metadata} \
                      --min-length {params.min_length} \
+                     --subsample-max-sequences 500 \
+                     --group-by year month \
                      --exclude {input.exclude} \
                      --output-sequences {output.filtered_data} \
                      --output-metadata {output.filtered_metadata}
@@ -64,8 +66,12 @@ rule add_strain_name:
         import pandas as pd
 
         metadata = pd.read_csv(input.metadata, sep="\t")
+        def get_country_code(country):
+            return {"Uganda": "UGA", "Democratic Republic of the Congo": "COD", "Congo": "COG"}.get(country, country)
+        def get_admindiv(row):
+            return row["location"] if not pd.isna(row["location"]) else row["division"]
         metadata["strain"] = metadata.apply(
-            lambda row: f"{row['accession']}|{row['strain']}|{row['country']}/{row['date']}",
+            lambda row: f"{row['accession']}|{get_admindiv(row)}|{get_country_code(row['country'])}/{row['date']}",
             axis=1,
         )
         metadata.to_csv(output.metadata_with_strain, sep="\t", index=False)
@@ -116,7 +122,7 @@ rule tree:
         """
         augur tree \
             --alignment {input.aligned} \
-            --tree-builder-args "--seqtype DNA" \
+            --tree-builder-args "--seqtype DNA --polytomy " \
             --output {output.tree}
         """
 
@@ -275,7 +281,7 @@ rule example_sequences:
     shell:
         """
         augur filter --metadata-id-columns accession strain --metadata {input.metadata} --sequences {input.sequences} \
-                     --subsample-max-sequences 10 --min-length 500 \
+                     --subsample-max-sequences 10 --min-length 500 --group-by year --exclude-where "dataUseTerms=RESTRICTED" \
                      --output-sequences {output.example_sequences}
         """
 
