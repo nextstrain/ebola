@@ -82,7 +82,8 @@ rule translate:
 rule count_mutations:
     """Count the nucleotide and amino-acid mutations per node"""
     input:
-        node_data = "results/{species}/{build}/muts.json"
+        muts = "results/{species}/{build}/muts.json",
+        aa_muts = lambda w: [] if _aa_reconstruction_via_ancestral(w) else f"results/{w.species}/{w.build}/aa_muts.json"
     output:
         node_data = "results/{species}/{build}/muts-counts.json"
     params:
@@ -92,7 +93,8 @@ rule count_mutations:
     shell:
         r"""
         python {params.script} \
-            --muts {input.node_data:q} \
+            --muts {input.muts:q} \
+            --aa-muts {input.aa_muts:q} \
             --cds {params.cds} \
             --counts {params.counts} \
             --output {output.node_data:q}
