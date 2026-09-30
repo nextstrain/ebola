@@ -15,6 +15,10 @@ inputs:
     metadata: "s3://nextstrain-data/files/workflows/ebola/sudv/metadata_open.tsv.zst"
     id_field: accession
     sequences: "s3://nextstrain-data/files/workflows/ebola/sudv/sequences_open.fasta.zst"
+  - name: additional
+    species: bdbv
+    metadata: defaults/bdbv-additional-metadata.tsv
+    id_field: accession
 
 builds:
    - bdbv/all-outbreaks
@@ -279,6 +283,8 @@ export:
           title: GP AA mutations (from root)
           type: "categorical"
           scale: *mut_count_scale
+      metadata_columns: 
+        - adar_excluded
         
     description: ../nextclade/defaults/description.md
     warning: *bdbv_warning

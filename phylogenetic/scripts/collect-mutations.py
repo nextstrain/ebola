@@ -70,6 +70,20 @@ def count_mutations(nodes, cds, ranges):
     return counts
 
 
+def adar_counts(nodes):
+    fmt = str
+    counts = {}
+    for name, node in nodes.items():
+        nuc_muts = [mut for mut in node.get('muts', []) if valid_nuc_mutation(mut)]
+        t_to_c = [mut for mut in nuc_muts if mut[0].upper()=='T' and mut[-1].upper()=='C']
+        a_to_g = [mut for mut in nuc_muts if mut[0].upper()=='A' and mut[-1].upper()=='G']
+        node_counts = {
+            't_to_c': fmt(len(t_to_c)),
+            'a_to_g': fmt(len(a_to_g)),
+        }
+        counts[name] = node_counts
+    return counts
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--muts", required=True, help="Node Data JSON from `augur ancestral`")
@@ -99,6 +113,10 @@ if __name__ == "__main__":
         for node_name, node_data in nodes.items():
             if 'aa_muts' in node_data:
                 raise Exception(f"'--muts' cannot contain AA mutations when used with '--aa-muts'. (First) invalid node: {node_name}")
+
+    counts = count_mutations(nodes, args.cds, ranges)
+    for name, data in adar_counts(nodes).items():
+        counts[name] |= data    
     
     with open(args.output, 'w') as fh:
-        json.dump({"nodes": count_mutations(nodes, args.cds, ranges)}, fh, indent=2)
+        json.dump({"nodes": counts}, fh, indent=2)
