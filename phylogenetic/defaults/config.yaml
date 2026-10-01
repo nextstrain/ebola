@@ -40,6 +40,10 @@ nextclade:
       - [outbreak, outbreak]
       - [qc.overallStatus, nextclade_qc]
       - [coverage, genome_coverage]
+      - ["mutationPatterns['adar'].counts.matches", "adar-counts-matches"]
+      - ["mutationPatterns['adar'].counts.clustered", "adar-counts-clustered"]
+      - ["mutationPatterns['adar'].counts.clusters", "adar-counts-clusters"]
+      - ["mutationPatterns['adar'].eventTypeCounts", "adar-eventTypeCounts"]
   sudv:
     dataset-name: nextstrain/orthoebolavirus/sudv
     columns:
@@ -283,6 +287,14 @@ export:
           title: GP AA mutations (from root)
           type: "categorical"
           scale: *mut_count_scale
+        - key: adar-counts-matches
+          type: "categorical"
+        - key: adar-counts-clustered
+          type: "categorical"
+        - key: adar-counts-clusters
+          type: "categorical"
+        - key: adar-eventTypeCounts
+          type: "categorical"
       metadata_columns: 
         - adar_excluded
         
