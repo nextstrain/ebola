@@ -1,22 +1,22 @@
 
-rule get_nextclade_dataset:
-    """Download Nextclade dataset"""
-    output:
-        dataset="results/{species}/nextclade-dataset.zip",
-    params:
-        name=lambda w: config['nextclade'][w.species]['dataset-name']
-    benchmark:
-        "benchmarks/{species}/get_nextclade_dataset.txt"
-    log:
-        "logs/{species}/get_nextclade_dataset.txt"
-    shell:
-        r"""
-        exec &> >(tee {log:q})
+# rule get_nextclade_dataset:
+#     """Download Nextclade dataset"""
+#     output:
+#         dataset="results/{species}/nextclade-dataset.zip",
+#     params:
+#         name=lambda w: config['nextclade'][w.species]['dataset-name']
+#     benchmark:
+#         "benchmarks/{species}/get_nextclade_dataset.txt"
+#     log:
+#         "logs/{species}/get_nextclade_dataset.txt"
+#     shell:
+#         r"""
+#         exec &> >(tee {log:q})
 
-        nextclade3 dataset get \
-            --name {params.name} \
-            --output-zip {output.dataset:q}
-        """
+#         nextclade3 dataset get \
+#             --name {params.name} \
+#             --output-zip {output.dataset:q}
+#         """
 
 rule run_nextclade:
     input:
@@ -68,8 +68,8 @@ rule add_nextclade_columns:
         exec &> >(tee {log:q})
     
         cat {input.nextclade} \
-            | csvtk -t cut -f {params.source_cols} \
-            | csvtk -t rename -f {params.source_cols} -n {params.dest_cols} \
+            | csvtk -t cut -f {params.source_cols:q} \
+            | csvtk -t rename -f {params.source_cols:q} -n {params.dest_cols:q} \
             > {output.nextclade_subset:q}
     
         augur merge \

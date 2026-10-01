@@ -50,22 +50,49 @@ def bin_count(n, ranges):
     raise ValueError(f"Count {n} does not fall within any --counts range")
 
 
+def valid_nuc_mutation(mut: str) -> bool:
+    return mut[-1].upper() != 'N'
+
+def valid_aa_mutation(mut: str) -> bool:
+    return mut[-1].upper() != 'X'
+
 def count_mutations(nodes, cds, ranges):
     fmt = (lambda n: bin_count(n, ranges)) if ranges else str
     counts = {}
     for name, node in nodes.items():
         aa_muts = node.get('aa_muts', {})
-        node_counts = {'nuc_mut_count': fmt(len(node.get('muts', [])))}
+        nuc_muts = [mut for mut in node.get('muts', []) if valid_nuc_mutation(mut)]
+        node_counts = {'nuc_mut_count': fmt(len(nuc_muts))}
         for gene in cds or []:
-            node_counts[f'{gene}_mut_count'] = fmt(len(aa_muts.get(gene, [])))
+            cds_muts = [mut for mut in aa_muts.get(gene, []) if valid_aa_mutation(mut)]
+            node_counts[f'{gene}_mut_count'] = fmt(len(cds_muts))
         counts[name] = node_counts
     return counts
 
 
+def adar_counts(nodes):
+    fmt = str
+    counts = {}
+    for name, node in nodes.items():
+        nuc_muts = [mut for mut in node.get('muts', []) if valid_nuc_mutation(mut)]
+        t_to_c = [mut for mut in nuc_muts if mut[0].upper()=='T' and mut[-1].upper()=='C']
+        a_to_g = [mut for mut in nuc_muts if mut[0].upper()=='A' and mut[-1].upper()=='G']
+        node_counts = {
+            't_to_c': fmt(len(t_to_c)),
+            'a_to_g': fmt(len(a_to_g)),
+        }
+        counts[name] = node_counts
+    return counts
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--muts", required=True, help="Node Data JSON from `augur ancestral`")
-    parser.add_argument("--cds", required=False, nargs="+", help="CDS/genes to count amino-acid mutations for")
+    parser.add_argument("--aa-muts", required=False, nargs="?", const=None, default=None,
+                        help="Node Data JSON from `augur translate`")
+    parser.add_argument("--cds", required=False, nargs="+",
+                        help="CDS/genes to count amino-acid mutations for. If `--aa-muts` is provided we " +
+                        "search that JSON, otherwise we assume translations were done by augur ancestral " +
+                        "(i.e. are in the --muts JSON) ")
     parser.add_argument("--counts", required=False,
                         help="Comma-separated inclusive ranges to bin counts into, e.g. '0,1-5,6+'")
     parser.add_argument("--output", required=True, help="Node Data JSON output")
@@ -77,5 +104,19 @@ if __name__ == "__main__":
     with open(args.muts) as fh:
         nodes = json.load(fh)['nodes']
 
+    if args.aa_muts:
+        with open(args.aa_muts) as fh:
+            for node_name, node_data in json.load(fh)['nodes'].items():
+                if 'aa_muts' in node_data:
+                    nodes[node_name]['aa_muts'] = node_data['aa_muts']
+    else:
+        for node_name, node_data in nodes.items():
+            if 'aa_muts' in node_data:
+                raise Exception(f"'--muts' cannot contain AA mutations when used with '--aa-muts'. (First) invalid node: {node_name}")
+
+    counts = count_mutations(nodes, args.cds, ranges)
+    for name, data in adar_counts(nodes).items():
+        counts[name] |= data    
+    
     with open(args.output, 'w') as fh:
-        json.dump({"nodes": count_mutations(nodes, args.cds, ranges)}, fh, indent=2)
+        json.dump({"nodes": counts}, fh, indent=2)

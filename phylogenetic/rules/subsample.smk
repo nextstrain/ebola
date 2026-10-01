@@ -63,6 +63,7 @@ rule subsample:
     output:
         sequences = "results/{species}/{build}/subsampled.fasta",
         metadata = "results/{species}/{build}/metadata.tsv",
+        full_log = "logs/{species}/{build}/subsample-per-strain.tsv"
     log:
         "logs/{species}/{build}/subsample.txt",
     benchmark:
@@ -76,5 +77,6 @@ rule subsample:
             --sequences {input.sequences} \
             --metadata {input.metadata} \
             --output-sequences {output.sequences} \
-            --output-metadata {output.metadata}
+            --output-metadata {output.metadata} \
+            --output-log {output.full_log}
         """
