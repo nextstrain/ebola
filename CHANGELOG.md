@@ -8,6 +8,9 @@ for an example of formatting.
 
 ## 2026
 
+* 13 October 2026: phylogenetic - support use of cached remote inputs.
+  See https://github.com/nextstrain/shared/pull/87 for more details.
+
 * 30 September 2026: Both BDBV builds now keep ambiguous nucleotides & Ns rather
   than inferring them. Amino acid sequences are now direct translations of these
   nucleotide sequences and thus we report more X AAs.
