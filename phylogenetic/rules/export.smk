@@ -1,12 +1,18 @@
 
+STRIP_ADAR = True
+
 def _uses_sampling_year(wildcards):
     return bool(config['sampling_year_coloring'].get(f"{wildcards.species}/{wildcards.build}"))
 
 def node_data_files(wildcards):
     build_pair = f"{wildcards.species}/{wildcards.build}"
-    files = [
-        f"results/{wildcards.species}/{wildcards.build}/branch_lengths.json",
-    ]
+    files = []
+
+    if STRIP_ADAR and wildcards.species == 'bdbv' and wildcards.build == 'drc-uganda-2026':
+        files.append(f"results/{wildcards.species}/{wildcards.build}/branch_lengths_after_adar_stripped.json")
+    else:
+        files.append(f"results/{wildcards.species}/{wildcards.build}/branch_lengths.json")
+    
     if config['ancestral'].get(build_pair, False):
         files.append(f"results/{wildcards.species}/{wildcards.build}/muts.json")
     if config['traits'].get(build_pair, False):
@@ -19,6 +25,10 @@ def node_data_files(wildcards):
         files.append(f"results/{wildcards.species}/{wildcards.build}/outbreaks.json")
     if config.get('translate', {}).get(build_pair, False):
         files.append(f"results/{wildcards.species}/{wildcards.build}/aa_muts.json")
+
+    # TODO XXX
+    if wildcards.species == 'bdbv' and wildcards.build == 'drc-uganda-2026':
+        files.append(f"results/{wildcards.species}/{wildcards.build}/adar_edits.json")
 
     # TODO: allow a way for configs to define custom rules which produce node-data JSONs
     # and have this function return the JSONs so the custom rule becomes part of the DAG
@@ -99,10 +109,16 @@ def _auspice_configs(wildcards):
     return jsons
 
 
+def which_refined_tree(wildcards):
+    if STRIP_ADAR and wildcards.species == 'bdbv' and wildcards.build == 'drc-uganda-2026':
+        return f"results/{wildcards.species}/{wildcards.build}/tree-adar-stripped.nwk"
+    return f"results/{wildcards.species}/{wildcards.build}/tree.nwk"
+
+
 rule export:
     """Exporting data files for for auspice"""
     input:
-        tree = "results/{species}/{build}/tree.nwk",
+        tree = which_refined_tree,
         metadata = "results/{species}/{build}/metadata.tsv",
         node_data_jsons = node_data_files,
         lat_longs = lambda w: "results/{species}/{build}/lat_longs.tsv" if config['export'][f"{w.species}/{w.build}"].get('lat_longs') else BASE_LAT_LONGS,

@@ -1,36 +1,3 @@
-# Signatures of ADAR editing - https://virological.org/t/phylodynamics-and-evolution-of-the-2026-bundibugyo-virus-circulating-in-the-democratic-republic-of-the-congo-insights-from-a-100-day-window-of-genomic-sequencing/1046/4
-PP_00764QW
-PP_007AFQB
-PP_007A56Q
-PP_007AF2N
-PP_007AED1
-PP_007AEKN
-PP_007AENG
-PP_007C78E
-PP_007ESCH
-PP_007ESDF
-PP_007ESAM
-PP_007ESBK
-PP_007ESED
-PP_007ES9P
-PP_007ESFB
-PP_007BZQR
-PP_007ES4Z
-PP_007ES5X
-PP_007ES6V
-PP_007ES7T
-PP_007ES8R
-PP_007ESG9
-PP_007ERNX
-PP_007C6F1
-PP_007C4RG
-PP_007C4TC
-PP_007BXK3
-PP_007EXUD
-PP_007EWH2
-PP_007EYF5
-PP_007C74N
-PP_007C6X2
 
 # Rate outliers https://virological.org/t/phylodynamics-and-evolution-of-the-2026-bundibugyo-virus-circulating-in-the-democratic-republic-of-the-congo-insights-from-a-100-day-window-of-genomic-sequencing/1046/4
 PP_0075Z66

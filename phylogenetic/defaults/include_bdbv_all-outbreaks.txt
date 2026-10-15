@@ -1,0 +1,18 @@
+# These are ambiguous dates (either XXXX-XX-XX or 2007-XX-XX)
+# all part of the Uganda 2007 BDBV outbreak
+# Because we subsample using year/month grouping they would be filtered out
+# if we didn't force their inclusion via this file
+PP_006X70S
+PP_006X699
+PP_006X6B5
+PP_006X5YX
+PP_006X6D1
+PP_006X6C3
+PP_006X68B
+PP_006X6A7
+
+# Similarly, these strains are all 2012-XX-XX from the 2012 DRC outbreak
+PP_006X62P
+PP_006X60T
+PP_006X61R
+PP_006X5ZV

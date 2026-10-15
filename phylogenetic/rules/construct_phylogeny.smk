@@ -54,6 +54,14 @@ def alignment_for_tree(wildcards):
     return f"results/{wildcards.species}/{wildcards.build}/subsampled.fasta",
 
 
+# def alignment_for_refine(wildcards):
+#     """If masking is defined (for this build) this returns the masked alignment,
+#     else returns the unmasked (but subsampled) alignment
+#     """
+#     if config.get('mask', {}).get(f"{wildcards.species}/{wildcards.build}", False):
+#         return f"results/{wildcards.species}/{wildcards.build}/masked.fasta",
+#     return f"results/{wildcards.species}/{wildcards.build}/subsampled.fasta",
+
 def args_for_tree(wildcards):
     build_options = config['tree'].get(f"{wildcards.species}/{wildcards.build}",False)
     if build_options:
@@ -111,6 +119,11 @@ def tree_for_refine(wildcards):
     but some builds may us a different / additional rule to (e.g.)
     reroot the tree.
     """
+
+    # TODO XXX
+    # if wildcards.species == 'bdbv' and wildcards.build == 'drc-uganda-2026':
+    #     return f"results/{wildcards.species}/{wildcards.build}/tree_raw_internal_nodes_labelled.nwk"
+    
     if config.get('reroot_tree', {}).get(f"{wildcards.species}/{wildcards.build}", False):
         return f"results/{wildcards.species}/{wildcards.build}/tree_raw_rooted.nwk",
     return f"results/{wildcards.species}/{wildcards.build}/tree_raw.nwk",
@@ -146,5 +159,33 @@ rule refine:
             --metadata {input.metadata:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
+            {params.args}
+        """
+
+rule refine_again_after_adar:
+    input:
+        tree = "results/{species}/{build}/tree.nwk", # initial refine tree
+        alignment = "results/{species}/{build}/alignment-adar-stripped.fasta",
+        metadata = "results/{species}/{build}/metadata.tsv"
+    output:
+        tree = "results/{species}/{build}/tree-adar-stripped.nwk",
+        node_data = "results/{species}/{build}/branch_lengths_after_adar_stripped.json"
+    params:
+        args = lambda w: config['refine'][f"{w.species}/{w.build}"],
+    benchmark:
+        "benchmarks/{species}/{build}/refine.txt"
+    log:
+        "logs/{species}/{build}/refine.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur refine \
+            --tree {input.tree:q} \
+            --alignment {input.alignment:q} \
+            --metadata {input.metadata:q} \
+            --output-tree {output.tree:q} \
+            --output-node-data {output.node_data:q} \
+            --keep-polytomies --keep-root \
             {params.args}
         """
