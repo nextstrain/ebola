@@ -33,6 +33,7 @@ include: "rules/multiple_inputs.smk"
 include: "rules/nextclade.smk"
 include: "rules/subsample.smk"
 include: "rules/construct_phylogeny.smk"
+include: "rules/adar.smk"
 include: "rules/annotate_phylogeny.smk"
 include: "rules/export.smk"
 

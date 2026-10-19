@@ -1,0 +1,168 @@
+{
+  "title": "Ongoing 2026 Bundibugyo ebolavirus outbreak in DRC & Uganda",
+  "maintainers": [
+    {"name": "Eddy Lusamaki, Institut National de Recherche Biomédicale", "url": "https://inrb.net/"},
+    {"name": "Nextstrain", "url": "https://nextstrain.org"}
+  ],
+  "data_provenance": [
+    {
+      "name": "GenBank",
+      "url": "https://www.ncbi.nlm.nih.gov/genbank/"
+    },
+    {
+      "name": "Pathoplexus",
+      "url": "https://pathoplexus.org"
+    }
+  ],
+  "build_url": "https://github.com/nextstrain/ebola",
+  "colorings": [
+    {
+      "key": "gt",
+      "title": "Genotype",
+      "type": "categorical"
+    },
+    {
+      "key": "date",
+      "title": "Sampling Date",
+      "type": "temporal"
+    },
+    {
+      "key": "adar_clusters",
+      "title": "ADAR clusters identified",
+      "type": "categorical"
+    },
+    {
+      "key": "adar_status",
+      "title": "ADAR mutations detected",
+      "type": "categorical",
+      "scale": [
+        ["detected","#DC2F24"]
+      ]
+    },
+    {
+      "key": "country",
+      "title": "Country",
+      "type": "categorical",
+      "scale": [
+        ["France","#3F4DCB"],
+        ["Germany","#4681C9"],
+        ["Democratic Republic of the Congo","#E67231"],
+        ["Uganda","#DC2F24"]
+      ]
+    },
+    {
+      "key": "division",
+      "title": "Province",
+      "type": "categorical"
+    },
+    {
+      "key": "location",
+      "title": "Health Zone",
+      "type": "categorical"
+    },
+    {
+      "key": "location_reconstructed",
+      "title": "Health Zone (Reconstructed)",
+      "type": "categorical"
+    },
+    {
+      "key": "location_epicenter",
+      "title": "Health Zone (Combined Epicenter)",
+      "type": "categorical"
+    },
+    {
+      "key": "dataUseTerms",
+      "title": "Data use terms",
+      "type": "categorical",
+      "scale": [
+        ["RESTRICTED","#fc8d59"],
+        ["OPEN","#1d91c0"]
+      ]
+    },
+    {
+      "key": "author",
+      "title": "Author",
+      "type": "categorical"
+    },
+    {
+      "key": "host",
+      "title": "Host",
+      "type": "categorical"
+    },
+    {
+      "key": "date_submitted",
+      "title": "Date Submitted (PPX)",
+      "type": "temporal"
+    },
+    {
+      "key": "nextclade_qc",
+      "title": "sequence QC (Nextclade)",
+      "type": "categorical",
+      "scale": [
+        ["good","#225ea8"],
+        ["mediocre","#fe9929"],
+        ["bad","#d53e4f"]
+      ]
+    },
+    {
+      "key": "genome_coverage",
+      "title": "Genome coverage",
+      "type": "continuous"
+    },
+    {
+      "key": "nuc_mut_count",
+      "title": "Nuc mutations (on branch)",
+      "type": "categorical",
+      "scale": [
+        ["0", "#f03b20"],
+        ["1", "#7fcdbb"],
+        ["2", "#41b6c4"],
+        ["3", "#1d91c0"],
+        ["4", "#225ea8"],
+        ["5", "#253494"],
+        ["6", "#081d58"],
+        ["7+", "#88419d"]
+      ]
+    },
+    {
+      "key": "GP_mut_count",
+      "title": "GP AA mutations (from root)",
+      "type": "categorical",
+      "scale": [
+        ["0", "#f03b20"],
+        ["1", "#7fcdbb"],
+        ["2", "#41b6c4"],
+        ["3", "#1d91c0"],
+        ["4", "#225ea8"],
+        ["5", "#253494"],
+        ["6", "#081d58"],
+        ["7+", "#88419d"]
+      ]
+    }
+  ],
+  "geo_resolutions": [
+    "country",
+    "division",
+    "location",
+    "location_reconstructed",
+    "location_epicenter"
+  ],
+  "display_defaults": {
+    "tip_label": "strain",
+    "color_by": "location",
+    "geo_resolution": "location"
+  },
+  "filters": [
+    "country",
+    "division",
+    "author"
+  ],
+  "metadata_columns": [
+    "strain",
+    "date",
+    "division",
+    "PPX_accession",
+    "INSDC_accession",
+    "restrictedUntil"
+  ]
+}

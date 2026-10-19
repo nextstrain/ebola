@@ -1,0 +1,111 @@
+{
+  "title": "Sudan ebolavirus genomes",
+  "maintainers": [
+    {"name": "Eddy Lusamaki, Institut National de Recherche Biomédicale", "url": "https://inrb.net/"},
+    {"name": "Nextstrain", "url": "https://nextstrain.org"}
+  ],
+  "data_provenance": [
+    {
+      "name": "GenBank",
+      "url": "https://www.ncbi.nlm.nih.gov/genbank/"
+    },
+    {
+      "name": "Pathoplexus",
+      "url": "https://pathoplexus.org"
+    }
+  ],
+  "build_url": "https://github.com/nextstrain/ebola",
+  "colorings": [
+    {
+      "key": "gt",
+      "title": "Genotype",
+      "type": "categorical"
+    },
+    {
+      "key": "year",
+      "title": "Sampling Year",
+      "type": "categorical"
+    },
+    {
+      "key": "date",
+      "title": "Sampling Date",
+      "type": "temporal"
+    },
+    {
+      "key": "country",
+      "title": "Country",
+      "type": "categorical",
+      "scale": [
+        ["Uganda","#416DCE"],
+        ["South Sudan","#84BA6F"],
+        ["Sudan","#E1502A"]
+      ]
+    },
+    {
+      "key": "division",
+      "title": "Province",
+      "type": "categorical"
+    },
+    {
+      "key": "dataUseTerms",
+      "title": "Data use terms",
+      "type": "categorical",
+      "scale": [
+        ["RESTRICTED","#fc8d59"],
+        ["OPEN","#1d91c0"]
+      ]
+    },
+    {
+      "key": "author",
+      "title": "Author",
+      "type": "categorical"
+    },
+    {
+      "key": "host",
+      "title": "Host",
+      "type": "categorical"
+    },
+    {
+      "key": "date_submitted",
+      "title": "Date Submitted (PPX)",
+      "type": "temporal"
+    },
+    {
+      "key": "nextclade_qc",
+      "title": "sequence QC (Nextclade)",
+      "type": "categorical",
+      "scale": [
+        ["good","#225ea8"],
+        ["mediocre","#fe9929"],
+        ["bad","#d53e4f"]
+      ]
+    },
+    {
+      "key": "genome_coverage",
+      "title": "Genome coverage",
+      "type": "continuous"
+    }
+  ],
+  "geo_resolutions": [
+    "country",
+    "division"
+  ],
+  "display_defaults": {
+    "tip_label": "strain",
+    "color_by": "year",
+    "geo_resolution": "country"
+  },
+  "filters": [
+    "country",
+    "division",
+    "author"
+  ],
+  "metadata_columns": [
+    "strain",
+    "date",
+    "division",
+    "PPX_accession",
+    "INSDC_accession",
+    "restrictedUntil"
+  ]
+}
