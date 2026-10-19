@@ -154,7 +154,7 @@ refine_adar_mutations_removed:
 # Omit a build (or falsify it) to skip ADAR detection.
 adar_mutations:
   bdbv/drc-uganda-2026:
-    max_gap: 50   # max distance (nt) between consecutive edits within a cluster
+    max_gap: 200   # max distance (nt) between consecutive edits within a cluster
     min_count: 3  # minimum number of edits required to call a cluster
   
 
