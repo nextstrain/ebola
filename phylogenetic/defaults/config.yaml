@@ -133,7 +133,14 @@ refine:
   sudv/all-outbreaks: >-
     --root mid_point
     --keep-polytomies
-  # bdbv/drc-uganda-2026 is a WIP - starting with the same args as west-africa
+  # The ongoing BDBV outbreak tree has an initial refine step (detailed here)
+  # and a second post-ADAR refine step (see below)
+  bdbv/drc-uganda-2026: >-
+    --timetree
+    --date-inference joint
+    --keep-polytomies
+
+refine_adar_mutations_removed:
   bdbv/drc-uganda-2026: >-
     --timetree
     --date-inference joint
@@ -142,8 +149,14 @@ refine:
     --clock-filter-iqd 3
     --coalescent 0.0
 
-
-
+# Enable ADAR-edit detection per build by providing the detection parameters.
+# Both max_gap and min_count are required (there are no workflow-level defaults).
+# Omit a build (or falsify it) to skip ADAR detection.
+adar_mutations:
+  bdbv/drc-uganda-2026:
+    max_gap: 50   # max distance (nt) between consecutive edits within a cluster
+    min_count: 3  # minimum number of edits required to call a cluster
+  
 
 # Ancestral per-build blocks may define 'inference' & 'root-sequence'
 # Leave out (or falsify) a build to skip ancestral inference
@@ -267,6 +280,12 @@ export:
         color_by: location
         geo_resolution: location
       colorings:
+        - key: adar_clusters
+          type: categorical
+          title: ADAR clusters identified
+        - key: adar_status
+          type: categorical
+          title: ADAR mutations detected
         - key: nuc_mut_count
           title: Nuc mutations (on branch)
           type: "categorical"
