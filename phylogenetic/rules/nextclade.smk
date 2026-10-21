@@ -2,7 +2,9 @@
 rule get_nextclade_dataset:
     """Download Nextclade dataset"""
     output:
-        dataset="results/{species}/nextclade-dataset.zip",
+        # Protect the Nextclade dataset to prevent accidental deletion
+        # since this requires network connection to download
+        dataset=protected("results/{species}/nextclade-dataset.zip"),
     params:
         name=lambda w: config['nextclade'][w.species]['dataset-name']
     benchmark:
@@ -66,16 +68,15 @@ rule add_nextclade_columns:
     shell:
         r"""
         exec &> >(tee {log:q})
-    
+
         cat {input.nextclade} \
             | csvtk -t cut -f {params.source_cols} \
             | csvtk -t rename -f {params.source_cols} -n {params.dest_cols} \
             > {output.nextclade_subset:q}
-    
+
         augur merge \
             --metadata nextclade={output.nextclade_subset:q}  metadata={input.metadata:q} \
             --output-metadata {output.metadata:q} \
             --output-metadata-id-column id \
             --no-source-columns
         """
-
