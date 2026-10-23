@@ -2,13 +2,17 @@
 rule get_nextclade_dataset:
     """Download Nextclade dataset"""
     output:
-        # Protect the Nextclade dataset to prevent accidental deletion
-        # since this requires network connection to download
-        dataset=protected("results/{species}/nextclade-dataset.zip"),
+        dataset="results/{species}/nextclade-dataset.zip",
+    # cache directive tells Snakemake to use the cached outputs from the
+    # cache location defined by SNAKEMAKE_OUTPUT_CACHE if `--cache` is provided
+    # Setting here so that we do not have to provide the rule names at invocation,
+    # e.g. `--cache get_nextclade_dataset`
+    # <https://snakemake.readthedocs.io/en/stable/executing/caching.html>
+    cache: True
     params:
         name=lambda w: config['nextclade'][w.species]['dataset-name']
-    benchmark:
-        "benchmarks/{species}/get_nextclade_dataset.txt"
+    # Removed benchmark because it does not work with cache
+    # <https://github.com/snakemake/snakemake/issues/2238>
     log:
         "logs/{species}/get_nextclade_dataset.txt"
     shell:

@@ -1,5 +1,5 @@
 from snakemake.utils import min_version
-import os 
+import os
 
 # Minimum Snakemake version needed for the storage plugins used in remote_files.smk
 min_version("8.0.0")
@@ -23,6 +23,25 @@ write_subsample_configs()
 
 # certain commands (but not all) use SEARCH_PATHS
 SEARCH_PATHS = [workflow.basedir, os.getcwd()]
+
+# TODO: figure out if we want to support setting arbitrary cache locations via
+# SNAKEMAKE_OUTPUT_CACHE. This currently does not work well with Docker and
+# the underyling symlink Snakemake creates
+# <https://github.com/snakemake/snakemake/blob/1c67a66cbe14bbb91fa54c960c4e26d8de2b171f/src/snakemake/caching/local.py#L81-L86>
+if os.environ.get("SNAKEMAKE_OUTPUT_CACHE", None) is None:
+    # Define default cache directory - must create directory here since Snakemake
+    # will error if the cache location does not exist
+    default_cache = os.path.join(workflow.basedir, 'data', 'snakemake-cache')
+    os.makedirs(default_cache, exist_ok=True)
+
+    # TODO: figure out if there's a better way to set cache?
+    os.environ["SNAKEMAKE_OUTPUT_CACHE"] = default_cache
+
+    # Setting to empty list to simulate providing the `--cache` option without
+    # args to activate all rules marked with `cache` directive
+    # This is currently required for `nextstrain run` to work since it does
+    # not take arbitrary Snakemake args
+    workflow.workflow_settings.cache = []
 
 wildcard_constraints:
     species=r"[^/_]+",
