@@ -34,11 +34,23 @@ rule all:
         nextclade_changelog=expand("datasets/{species}/CHANGELOG.md", species=species),
         #test_dataset="test_out",
 
+rule merge_data:
+    input:
+        data=expand("../ingest/results/{species}/sequences_{dut}.fasta", species=species, dut=['open', 'restricted']),
+        metadata=expand("../ingest/results/{species}/metadata_{dut}.tsv", species=species, dut=['open', 'restricted']),
+    output:
+        merged_data="results/{species}/sequences_merged.fasta",
+        merged_metadata="results/{species}/metadata_merged.tsv",
+    shell:
+        """
+        cat {input.data} > {output.merged_data}
+        cat {input.metadata} > {output.merged_metadata}
+        """
 
 rule filter:
     input:
-        data=lambda w: f"../ingest/results/{w.species}/sequences.fasta",
-        metadata=lambda w: f"../ingest/results/{w.species}/metadata.tsv",
+        data="results/{species}/sequences_merged.fasta",
+        metadata="results/{species}/metadata_merged.tsv",
         exclude="defaults/exclude_{species}.txt",
     output:
         filtered_data="results/{species}/sequences.fasta",
