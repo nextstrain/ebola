@@ -31,7 +31,7 @@ nextclade:
       - [qc.overallStatus, nextclade_qc]
       - [coverage, genome_coverage]
   bdbv:
-    dataset-name: nextstrain/orthoebolavirus/bdbv 
+    dataset-name: nextstrain/orthoebolavirus/bdbv
     columns:
       - [outbreak, outbreak]
       - [qc.overallStatus, nextclade_qc]
@@ -69,7 +69,7 @@ subsample:
         exclude_where:
           - nextclade_qc=bad
           - nextclade_qc=mediocre
-        include: defaults/include_bdbv_all-outbreaks.txt 
+        include: defaults/include_bdbv_all-outbreaks.txt
         exclude: defaults/exclude_bdbv_drc-uganda-2026.txt
         group_by: ['year', 'month']
         sequences_per_group: 25
@@ -96,7 +96,7 @@ mask:
   bdbv/all-outbreaks: &bdbv-masking
      beginning: 50
      end: 50
-     sites: 7461 # a polymorphic site in a variable region in GP that conflicts with outgroup rooting. 
+     sites: 7461 # a polymorphic site in a variable region in GP that conflicts with outgroup rooting.
   bdbv/drc-uganda-2026:
      beginning: 50
      end: 50
@@ -152,7 +152,7 @@ adar_mutations:
   bdbv/drc-uganda-2026:
     max_gap: 200   # max distance (nt) between consecutive edits within a cluster
     min_count: 3  # minimum number of edits required to call a cluster
-  
+
 
 # Ancestral per-build blocks may define 'inference' & 'root-sequence'
 # Leave out (or falsify) a build to skip ancestral inference
@@ -180,7 +180,7 @@ translate:
   bdbv/drc-uganda-2026:
     reference: ../shared/bdbv/reference.gb
     genes: NP VP35 VP40 GP GP_003 VP30 VP24 L
-      
+
 
 # Leave out (or falsify) a build to skip trait reconstruction
 traits:
@@ -188,7 +188,7 @@ traits:
     columns: [country, division]
     confidence: true
   bdbv/drc-uganda-2026:
-    columns: ['location_reconstructed', 'location_epicenter', 'country']
+    columns: ['location_reconstructed', 'location_epicenter']
     bias: 2.5
     confidence: true
 
@@ -232,7 +232,7 @@ export:
     warning: &bdbv_warning >-
       This dataset sources RESTRICTED sequences from [Pathoplexus](https://pathoplexus.org/).
       Please see [virological](https://virological.org/t/initial-genomes-from-may-2026-bundibugyo-virus-disease-outbreak-in-the-democratic-republic-of-the-congo-and-uganda/1032) for more detail on the ongoing outbreak in DRC & Uganda.
-  
+
   bdbv/drc-uganda-2026:
     auspice_config: "defaults/auspice-config_bdbv_drc-uganda-2026.json"
     description: ../nextclade/defaults/description.md
