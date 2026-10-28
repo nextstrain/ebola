@@ -199,6 +199,7 @@ rule augment_auspice_config:
     input:
         config="defaults/auspice_config.json",
         extra_config="dataset_files/{species}/auspice_extension.json",
+        pathogen_json="dataset_files/{species}/pathogen.json",
     output:
         config="results/{species}/auspice_config.json",
     run:
@@ -214,7 +215,9 @@ rule augment_auspice_config:
             config["extensions"]["nextclade"] = {}
 
         config["extensions"]["nextclade"].update(extra_config)
-        config["title"] = f"Andes Virus {wildcards.species.upper()} species (ANDV)"
+        with open(input.pathogen_json) as f:
+            name = json.load(f)["attributes"]["name"]
+        config["title"] = f"Nextclade dataset for analysis of {name} ({wildcards.species.upper()}) genomes"
 
         with open(output.config, "w") as f:
             json.dump(config, f, indent=2)
