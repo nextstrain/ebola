@@ -173,6 +173,7 @@ location	Angumu	1.959283	31.061257
 location	Ariwara	3.177047	30.736492
 location	Aru	2.852610	30.734852
 location	Aungba	2.597049	30.596641
+location	Bahwere	1.658411	30.316791
 location	Bambu	1.871761	30.220459
 location	Biringi	2.719041	30.343668
 location	Boga	0.984456	30.002985
@@ -729,6 +730,7 @@ location_reconstructed	Angumu	1.959283	31.061257
 location_reconstructed	Ariwara	3.177047	30.736492
 location_reconstructed	Aru	2.852610	30.734852
 location_reconstructed	Aungba	2.597049	30.596641
+location_reconstructed	Bahwere	1.658411	30.316791
 location_reconstructed	Bambu	1.871761	30.220459
 location_reconstructed	Biringi	2.719041	30.343668
 location_reconstructed	Boga	0.984456	30.002985
@@ -1285,6 +1287,7 @@ location_epicenter	Angumu	1.959283	31.061257
 location_epicenter	Ariwara	3.177047	30.736492
 location_epicenter	Aru	2.852610	30.734852
 location_epicenter	Aungba	2.597049	30.596641
+location_epicenter	Bahwere	1.658411	30.316791
 location_epicenter	Bambu	1.871761	30.220459
 location_epicenter	Biringi	2.719041	30.343668
 location_epicenter	Boga	0.984456	30.002985
