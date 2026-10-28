@@ -197,8 +197,7 @@ PP_0076RS5	country
 PP_0076RS5	division	
 PP_0076RS5	location	
 
-# Pre-2011 SUDV outbreaks (Nzara/Maridi 1976, Nzara 1979, Yambio 2004) reported as "Sudan"
-# are within modern South Sudan
+# Pre-2011 SUDV outbreaks (Nzara/Maridi 1976, Nzara 1979, Yambio 2004) reported as "Sudan" are within modern South Sudan
 PP_000006N	country	South Sudan
 PP_000007L	country	South Sudan
 PP_000009G	country	South Sudan
