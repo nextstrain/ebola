@@ -111,9 +111,21 @@ mask:
   # ambiguous instead of reappearing as mutations on branches of a tree that was
   # built without them. The outbreak's terminal 50 nt carried 12 such mutations
   # on a basal 3-tip branch whose only real substitution is T16608C.
+  # Coverage falls off a cliff at both ends: 537 positions (1-65 and 18469-18940)
+  # are gap in the majority of sequences, and 1066 of 1104 sequences stop short of
+  # 18891. Those unsequenced ends are written as '-', which TreeTime reads as a
+  # deletion rather than as missing data, so a 50/50 mask left 437 of them to be
+  # reconstructed as deleted at the root. Masking to the cliff turns all 537 into
+  # N instead.
   bdbv/drc-uganda-2026:
-     beginning: 50
-     end: 50
+     beginning: 65
+     end: 472
+     # 5246 takes 63 independent events spread over the whole tree, the largest
+     # covering only 37 of the 256 tips that carry it, and it reverts (A5246G 55,
+     # G5246A 8). Masked as noise. Sites that merely look recurrent are not: 268
+     # takes 6 events but 130 of its 138 tips sit in one clade, so it is a real
+     # marker the tree search left slightly ragged, and stays in.
+     sites: [5246]
      hard: true
 
 tree:
