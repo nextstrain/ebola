@@ -59,7 +59,7 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 # Mayinga is the 1976 strain name (after a nurse), not a place; country only, as for the other
 # 1976 records in annotations_geo.tsv
 */Democratic Republic of the Congo/Mayinga/	Africa/Democratic Republic of the Congo//
-# Katwa is a Nord-Kivu health zone
+# Katwa is a Nord-Kivu health zone, see <https://github.com/pathoplexus/curation_reports/issues/29>
 */Democratic Republic of the Congo/Ituri/Katwa	Africa/Democratic Republic of the Congo/Nord-Kivu/Katwa
 
 
