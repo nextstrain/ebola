@@ -50,6 +50,7 @@ subsample:
       everything:
          min_length: 18000
          include: defaults/include_ebov_all-outbreaks.txt
+         exclude: defaults/exclude_patents.txt
          group_by: [outbreak, country, year]
          sequences_per_group: 25
          exclude_where: is_lab_host=true
@@ -58,6 +59,7 @@ subsample:
       outbreak:
         min_length: 18000
         include: defaults/include_ebov_west-africa-2014.txt
+        exclude: defaults/exclude_patents.txt
         group_by: [division, year, month]
         sequences_per_group: 30
         exclude_where: is_lab_host=true
@@ -73,6 +75,7 @@ subsample:
         exclude:
           - defaults/exclude_bdbv_drc-uganda-2026.txt
           - defaults/exclude_bdbv.txt
+          - defaults/exclude_patents.txt
         group_by: ['year', 'month']
         sequences_per_group: 25
   bdbv/drc-uganda-2026:
@@ -86,11 +89,14 @@ subsample:
         exclude:
           - defaults/exclude_bdbv_drc-uganda-2026.txt
           - defaults/exclude_bdbv.txt
+          - defaults/exclude_patents.txt
   sudv/all-outbreaks:
     samples:
       everything:
         min_length: 5000
-        exclude: defaults/exclude_sudv.txt
+        exclude:
+          - defaults/exclude_sudv.txt
+          - defaults/exclude_patents.txt
 
 # per-build masking (optional)
 mask:
