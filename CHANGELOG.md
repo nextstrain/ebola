@@ -8,11 +8,6 @@ for an example of formatting.
 
 ## 2026
 
-* 28 October 2026: phylogenetic & nextclade - random seeds fixed to 0 for
-  `augur subsample`, `augur filter` subsampling, IQ-TREE (`-seed 0`) and
-  `augur refine` (`--seed 0`). Custom `config.tree` entries need their own
-  `-seed` in `--tree-builder-args`.
-
 * 13 October 2026: phylogenetic - support use of cached remote inputs.
   See https://github.com/nextstrain/shared/pull/87 for more details.
 
