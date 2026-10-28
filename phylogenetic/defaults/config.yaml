@@ -120,9 +120,11 @@ tree:
   bdbv/all-outbreaks: >-
     --override-default-args
     --tree-builder-args="--polytomy --ninit 100 --epsilon 0.01 -T AUTO --redo"
+  # augur's default iqtree args plus --polytomy, which keeps zero-length branches
+  # unresolved rather than picking an arbitrary resolution. The outbreak's base is
+  # close to a star, so that distinction is the point of this build.
   bdbv/drc-uganda-2026: >-
-    --override-default-args
-    --tree-builder-args="--polytomy --ninit 100 --epsilon 0.01 -T AUTO --redo"
+    --tree-builder-args="--polytomy"
 
 # per-build tree re-rooting (before refine). Optional.
 reroot_tree:
