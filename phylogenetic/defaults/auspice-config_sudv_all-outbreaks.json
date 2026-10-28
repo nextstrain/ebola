@@ -37,8 +37,7 @@
       "type": "categorical",
       "scale": [
         ["Uganda","#416DCE"],
-        ["South Sudan","#84BA6F"],
-        ["Sudan","#E1502A"]
+        ["South Sudan","#84BA6F"]
       ]
     },
     {
