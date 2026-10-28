@@ -206,3 +206,15 @@ PP_00000JX	country	South Sudan
 PP_00000Y3	country	South Sudan
 PP_000015P	country	South Sudan
 PP_000016M	country	South Sudan
+
+
+# SUDV Boniface (1976, Nzara/Maridi) and Maleo (1979, Nzara) carry no geography in GenBank.
+# Both outbreaks were in Western Equatoria, in present-day South Sudan, as treated by
+# <https://doi.org/10.1016/j.ympev.2014.01.025> and by GenBank for KC242783
+# (SUDV/H.sapiens-tc/SSD/1979/Maleo).
+# KT750754 Boniface: 24 substitutions from the Boniface genome FJ968794 over the 18.9 kb they share
+PP_00000SF	region	Africa
+PP_00000SF	country	South Sudan
+# U23458 Maleo: 7 substitutions from the Maleo genome KC242783, against 18 from FJ968794
+PP_00004U7	region	Africa
+PP_00004U7	country	South Sudan
