@@ -78,5 +78,6 @@ rule refine_adar_mutations_removed:
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
             --keep-ids {input.keep_ids:q} \
+            --seed 0 \
             {params.args}
         """

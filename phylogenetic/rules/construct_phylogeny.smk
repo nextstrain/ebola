@@ -58,7 +58,7 @@ def args_for_tree(wildcards):
     build_options = config['tree'].get(f"{wildcards.species}/{wildcards.build}",False)
     if build_options:
         return build_options
-    return ""
+    return '--tree-builder-args="-seed 0"'
 
 rule tree:
     """Building tree"""
@@ -148,5 +148,6 @@ rule refine:
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
             --keep-ids {input.keep_ids:q} \
+            --seed 0 \
             {params.args}
         """

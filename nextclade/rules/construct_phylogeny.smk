@@ -30,6 +30,7 @@ rule tree:
         augur tree --alignment {input.sequences} \
         --output {output.tree} \
         --method iqtree \
+        --tree-builder-args "-seed 0" \
         --nthreads 8
         """
 
@@ -49,5 +50,6 @@ rule refine:
         --metadata-id-columns accession \
         --output-tree {output.refined_tree} \
         --output-node-data {output.branch_lengths} \
-        --root mid_point
+        --root mid_point \
+        --seed 0
         """
