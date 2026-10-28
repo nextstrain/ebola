@@ -164,7 +164,7 @@ ancestral:
     <<: *ebov_ancestral
   sudv/all-outbreaks:
     genes: NP VP35 VP40 GP sGP ssGP VP30 VP24 L
-    annotation: ../shared/sudan/reference.gb
+    annotation: ../shared/sudv/reference.gb
   bdbv/all-outbreaks:
     # no 'genes' key as we will reconstruct AA seqs via `augur translate`
     extra_args: "--keep-ambiguous"
