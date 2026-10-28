@@ -78,11 +78,18 @@ the sequences match the tree's tips once the outgroup is pruned).
 `--keep-ambiguous`, already set for this build, stops ancestral inferring the
 masked positions back a second way.
 
-| | soft mask, clock root | hard mask, outgroup root |
+| | 50/50 mask, clock root | cliff mask, hard, outgroup root |
 |---|---|---|
-| total nuc mutations | 1,087,954 | 681,997 |
-| ambiguity-involving | 1,086,295 | 585,931 |
-| gaps in root sequence | 0 | 437 → 0 after the cliff mask |
+| tips | 1100 | 1093 |
+| total nuc mutations | 1,087,954 | 608,489 |
+| gap-involving mutations | 51 | 21,720 |
+| gaps in root sequence | 0 | 0 |
+| basal children | 11 | 27 |
+| root date | 2026.189 | 2026.229 |
+
+The remaining 21,720 gap-involving mutations are tip-level: the root is clean, so
+they are deletions and internal missing data on individual branches rather than
+a gap state inherited from the root.
 
 ### Recurrent sites
 
