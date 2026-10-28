@@ -80,3 +80,33 @@ rule subsample:
             --output-metadata {output.metadata} \
             --output-log {output.full_log}
         """
+
+
+def subsample_include_files(wildcards):
+    """
+    All `include` files referenced in the build's subsample config
+    (under `defaults` and every entry in `samples`), resolved via AUGUR_SEARCH_PATHS
+    """
+    subsample_config = config["subsample"][f"{wildcards.species}/{wildcards.build}"]
+    sections = [subsample_config.get("defaults", {}), *subsample_config.get("samples", {}).values()]
+    paths = []
+    for section in sections:
+        files = section.get("include", [])
+        paths.extend([files] if isinstance(files, str) else files)
+    return [resolve_config_path(p)(wildcards) for p in dict.fromkeys(paths)]
+
+
+rule keep_ids:
+    """
+    Combine the subsample include files so the force-included strains can be
+    protected from clock filtering in `augur refine` via `--keep-ids`
+    """
+    input:
+        include_files = subsample_include_files,
+    output:
+        keep_ids = "results/{species}/{build}/keep_ids.txt",
+    shell:
+        r"""
+        # awk (unlike cat) adds a missing trailing newline to each file
+        awk 1 /dev/null {input.include_files:q} > {output.keep_ids:q}
+        """
