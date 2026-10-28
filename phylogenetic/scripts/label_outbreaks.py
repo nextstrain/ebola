@@ -104,8 +104,8 @@ if __name__ == "__main__":
             # label CA branch with a branch label
             if outbreak_nextclade != 'unassigned':
                 branches[start_node.name] = {'labels': {'outbreak': outbreak_nextclade}}
-                if geo and geo['label']:
-                    branches[start_node.name]['labels']['outbreak_geo'] = geo['name']
+            if geo and geo['label']:
+                branches[start_node.name]['labels']['outbreak_geo'] = geo['name']
 
     with open(args.output, 'w') as fh:
         json.dump({"nodes": nodes, "branches": branches}, fh)
