@@ -20,6 +20,7 @@
     "web": "3.0.0-alpha.0"
   },
   "files": {
+    "treeJson": "tree.json",
     "changelog": "CHANGELOG.md",
     "examples": "examples.fasta",
     "genomeAnnotation": "genome_annotation.gff3",
