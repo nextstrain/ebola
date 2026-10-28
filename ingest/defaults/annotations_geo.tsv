@@ -226,38 +226,6 @@ PP_000PKUD	country	Democratic Republic of the Congo
 PP_000PMNP	region	Africa
 PP_000PMNP	country	Democratic Republic of the Congo
 
-# EBOV: FDA-ARGOS / USAMRIID IRF laboratory stocks, no geographic information in GenBank.
-# Same RA####/RQ#### isolate series as OK572977/OK572978/OK572986/OK572988/OK572990/OK572991
-# above, and like those they fall in the 1976/1977 northern-Zaire clade.
-# IRF0176_MAEBOV is mouse-adapted EBOV, derived from the 1976 Mayinga isolate.
-# RA0067_SD7_FT (OK572979)
-PP_004MW3K	region	Africa
-PP_004MW3K	country	Democratic Republic of the Congo
-# RQ9155_SD7_FT (OK572980)
-PP_004MW4H	region	Africa
-PP_004MW4H	country	Democratic Republic of the Congo
-# RQ9621_SD7_FT (OK572981)
-PP_004MW5F	region	Africa
-PP_004MW5F	country	Democratic Republic of the Congo
-# RA01125_SD7_FT (OK572982, OK572983, OK572984, OK572985)
-PP_004MW6D	region	Africa
-PP_004MW6D	country	Democratic Republic of the Congo
-PP_004MW7B	region	Africa
-PP_004MW7B	country	Democratic Republic of the Congo
-PP_004MW89	region	Africa
-PP_004MW89	country	Democratic Republic of the Congo
-PP_004MW97	region	Africa
-PP_004MW97	country	Democratic Republic of the Congo
-# RA0886_SD7_FT (OK572987)
-PP_004MWA5	region	Africa
-PP_004MWA5	country	Democratic Republic of the Congo
-# RA0212_SD7_FT (OK572992)
-PP_004MWB3	region	Africa
-PP_004MWB3	country	Democratic Republic of the Congo
-# IRF0176_MAEBOV (OK572993)
-PP_004MWC1	region	Africa
-PP_004MWC1	country	Democratic Republic of the Congo
-
 # EBOV: 1995 Kikwit outbreak (Bandundu Province, DRC), named in the strain field,
 # confirmed by identity to EBOV/Kikwit AY354458.
 # AF054908 strain "Zaire 1995"
@@ -278,17 +246,6 @@ PP_000PKDA	region	Africa
 PP_000PKDA	country	Gabon
 PP_000PKZ3	region	Africa
 PP_000PKZ3	country	Gabon
-
-# EBOV: recombinant clones carrying the geography of the virus they were derived from,
-# handled the same way as Makona-L2014 (PP_000LE29) above.
-# KR781609 Ebola virus/H.sapiens-rec/LBR/2014/Makona-L2014_ZsG
-PP_000M485	region	Africa
-PP_000M485	country	Liberia
-# MK672824 recEBOV-DRC2018, MK672825 recEBOV-DRC2018-ZsG; derived from the 2018 Ituri/Kivu outbreak
-PP_000NTSB	region	Africa
-PP_000NTSB	country	Democratic Republic of the Congo
-PP_000NTT9	region	Africa
-PP_000NTT9	country	Democratic Republic of the Congo
 
 # SUDV: the 1976 Nzara/Maridi and 1979 Nzara outbreaks and the 2004 Yambio outbreak
 # all took place in Western Equatoria, in present-day South Sudan.
@@ -326,16 +283,7 @@ PP_00000Y3	country	South Sudan
 PP_000015P	country	South Sudan
 PP_000016M	country	South Sudan
 
-# SUDV: 2000-2001 Gulu outbreak, Uganda. Both records name Gulu but carry no country.
+# SUDV: 2000-2001 Gulu outbreak, Uganda.
 # AY344234 strain Gulu
 PP_000003U	region	Africa
 PP_000003U	country	Uganda
-# OK572968 IRF0207_SUDV_GULU (FDA-ARGOS laboratory stock)
-PP_000018H	region	Africa
-PP_000018H	country	Uganda
-
-# BDBV: 2007 Bundibugyo outbreak, Uganda. OK573002 IRF0358_BDBV_BUTALYA is an FDA-ARGOS
-# laboratory stock named for Butalya, in Bundibugyo District; it is >=99.9% identical to
-# the 2007 Bundibugyo reference FJ217161.
-PP_006X70S	region	Africa
-PP_006X70S	country	Uganda
