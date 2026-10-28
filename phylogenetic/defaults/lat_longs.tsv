@@ -18,6 +18,7 @@ country	Gabon	-0.8999695	11.6899699
 country	Germany	51.1657	10.4515
 country	Guinea	10.7226226	-10.7083587
 country	Israel	31.217736	34.903129
+country	Kenya	0.0236	37.9062
 country	Liberia	6.334995000938028	-9.323955308206793
 country	Netherlands	52.1326	5.2913
 country	Nigeria	10.0	8.0
@@ -66,6 +67,8 @@ division	Central Region	3.22	32.83
 division	Eastern Region	1.27	34.12
 division	Northern Region	3.00	33.0
 division	Western Region	-0.255	30.27
+# Nigeria
+division	Abuja	9.0579	7.4951
 # South Sudan
 division	South Sudan	7.8699431	29.6667897
 division	Yambio	4.58	28.39
