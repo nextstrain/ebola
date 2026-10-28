@@ -175,28 +175,11 @@ jobs:
           --configfile build-configs/nextstrain-automation/config.yaml \
           --config 'builds=${{ needs.check-new-data.outputs.builds }}' "${config[@]}"
 
-        # Show the bdbv/drc-uganda-2026 subsampling logs in the job summary
-        # (markdown). The log files only exist if that build ran, so the
-        # presence of subsample.txt gates this to the bdbv/drc-uganda-2026 build.
-        subsample_log="phylogenetic/logs/bdbv/drc-uganda-2026/subsample.txt"
-        per_strain_log="phylogenetic/logs/bdbv/drc-uganda-2026/subsample-per-strain.tsv"
-        if [[ -f "$subsample_log" ]]; then
-          {
-            echo "## bdbv/drc-uganda-2026 subsampling"
-            echo
-            echo '```'
-            cat "$subsample_log"
-            echo '```'
-            echo
-            echo '<details>'
-            echo '<summary>subsample-per-strain.tsv</summary>'
-            echo
-            echo '```'
-            cat "$per_strain_log"
-            echo '```'
-            echo
-            echo '</details>'
-          } >> "$GITHUB_STEP_SUMMARY"
+        # Report the samples excluded from the bdbv/drc-uganda-2026 build in
+        # the job summary (markdown). The log files only exist if that build
+        # ran, so the presence of subsample.txt gates this to that build.
+        if [[ -f phylogenetic/logs/bdbv/drc-uganda-2026/subsample.txt ]]; then
+          ./.github/scripts/drc-uganda-2026-excluded-samples.sh >> "$GITHUB_STEP_SUMMARY"
         fi
       artifact-name: phylo-all-outbreaks-output
       artifact-paths: |
