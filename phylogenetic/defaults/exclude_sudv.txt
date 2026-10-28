@@ -1,6 +1,7 @@
 # Redundant sequences of isolates already represented in the build
 
-# Boniface 1976 -- kept: MH121162/PP_00000Y3, FJ968794/PP_00000CA
+# Boniface 1976 -- kept: MH121162/PP_00000Y3
+PP_00000CA # FJ968794, re-sequencing
 PP_00000SF # KT750754, re-sequencing, "7 days after stock infection"
 PP_00000TD # KT878488, C.porcellus-lab, guinea-pig adapted
 PP_000001Y # AF173836, 2926 bp fragment
