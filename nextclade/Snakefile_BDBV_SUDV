@@ -53,9 +53,6 @@ rule merge_data:
         cat {input.metadata} > {output.merged_metadata}
         """
 
-# SUDV reuses the phylogenetic workflow's curated include/exclude lists. BDBV
-# keeps its own exclude, which drops far more of the 2026 outbreak than the
-# phylogenetic build does, and has no include list.
 exclude_files = {
     "bdbv": ["defaults/exclude_bdbv.txt"],
     "sudv": [
@@ -69,12 +66,8 @@ include_files = {
     "sudv": ["../phylogenetic/defaults/include_sudv_all-outbreaks.txt"],
 }
 
-# BDBV sits at the cap because of the 2026 outbreak, so it needs subsampling.
-# SUDV has ~160 genomes in total, where grouping only serves to drop the many
-# records whose collection month is unknown -- including every Yambio 2004 and
-# 2012 Uganda genome, which would leave those outbreaks with nothing to match.
 subsample_args = {
-    "bdbv": "--subsample-max-sequences 500 --group-by year month",
+    "bdbv": "--subsample-max-sequences 500 --subsample-seed 0 --group-by year month",
     "sudv": "",
 }
 
@@ -169,7 +162,8 @@ rule tree:
         """
         augur tree \
             --alignment {input.aligned} \
-            --tree-builder-args "--seqtype DNA --polytomy " \
+            --override-default-args \
+            --tree-builder-args "--seqtype DNA --polytomy --ninit 2 -n 2 --epsilon 0.05 -T 1 --redo -seed 0" \
             --output {output.tree}
         """
 
@@ -186,6 +180,7 @@ rule refine:
                      --metadata {input.metadata} \
                      --root mid_point \
                      --keep-polytomies \
+                     --seed 0 \
                      --output-tree {output.refined_tree}
         """
 
@@ -329,7 +324,7 @@ rule example_sequences:
     shell:
         """
         augur filter --metadata-id-columns accession strain --metadata {input.metadata} --sequences {input.sequences} \
-                     --subsample-max-sequences 10 --min-length 500 --group-by year --exclude-where "dataUseTerms=RESTRICTED" \
+                     --subsample-max-sequences 10 --subsample-seed 0 --min-length 500 --group-by year --exclude-where "dataUseTerms=RESTRICTED" \
                      --output-sequences {output.example_sequences}
         """
 
