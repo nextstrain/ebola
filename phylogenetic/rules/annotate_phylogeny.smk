@@ -161,8 +161,6 @@ rule label_outbreaks:
     log:
         "logs/{species}/{build}/label_outbreaks.txt"
     wildcard_constraints:
-        # these could be relaxed if we generalised the script
-        species="ebov",
         build="all-outbreaks",
     shell:
         r"""
