@@ -2,14 +2,13 @@
 # all part of the Uganda 2007 BDBV outbreak
 # Because we subsample using year/month grouping they would be filtered out
 # if we didn't force their inclusion via this file
-# Note: PP_006X6B5, PP_006X5YX and PP_006X70S were dropped from this list;
-# force-includes bypass every exclude filter, and they are patent copies of the
-# prototype genome and an FDA-ARGOS culture stock of it
 PP_006X699
 PP_006X6D1
 PP_006X6C3
 PP_006X68B
 PP_006X6A7
+
+PP_006X5RB # FJ217161, Butalya 2007
 
 # Note: there are 4 2012-XX-XX strains from the 2012 DRC outbreak
 # (listed below) however we don't force-include them as they are all

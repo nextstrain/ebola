@@ -94,6 +94,7 @@ subsample:
     samples:
       everything:
         min_length: 5000
+        include: defaults/include_sudv_all-outbreaks.txt
         exclude:
           - defaults/exclude_sudv.txt
           - defaults/exclude_patents.txt

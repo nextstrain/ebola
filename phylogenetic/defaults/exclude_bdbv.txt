@@ -1,6 +1,4 @@
-# Redundant cultured strains: the best sequence for each isolate is kept, and
-# shorter ones or those carrying extra passage mutations are excluded. Passage
-# history alone is not a reason to exclude: nearly every pre-2000 genome is "-tc".
+# Redundant sequences of isolates already represented in the build
 
-# Butalya 2007, kept as FJ217161
-PP_006X70S # OK573002, FDA-ARGOS culture stock, IRF0358_BDBV_BUTALYA
+# Butalya 2007 -- kept: FJ217161
+PP_006X70S # OK573002, FDA-ARGOS culture stock

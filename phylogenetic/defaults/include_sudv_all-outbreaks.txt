@@ -1,0 +1,6 @@
+# Kept representative of each early isolate
+PP_00000Y3 # MH121162, Boniface 1976
+PP_00000CA # FJ968794, Boniface 1976, independent sequencing
+PP_000011X # MK952150, Maridi 1976
+PP_00000JX # KC242783, Maleo 1979
+PP_000004S # AY729654, Gulu 2000
