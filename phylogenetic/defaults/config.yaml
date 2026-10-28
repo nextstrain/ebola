@@ -131,8 +131,18 @@ refine:
     --keep-polytomies
   # The ongoing BDBV outbreak tree has an initial refine step (detailed here)
   # and a second post-ADAR refine step (see below)
+  #
+  # Rooted on PP_007L9XG rather than by clock fit. The outbreak's basal splits are
+  # 1-2 substitutions deep at sites that recur across the tree, so --root best is
+  # not robust: it returns a different basal clade on every resampling, and the
+  # clade it currently picks sits 8-18 nodes deep under outgroup rooting.
+  # PP_007L9XG belongs to the modal haplotype (71 identical sequences, spanning
+  # 2026-05-03 to 2026-09-30, the frequency peak closest to the old-BDBV
+  # outgroup); all 71 are identical over the informative sites, so any member
+  # gives the same root. This one is force-included for both BDBV builds.
   bdbv/drc-uganda-2026: >-
     --timetree
+    --root PP_007L9XG
     --date-inference joint
     --keep-polytomies
 
