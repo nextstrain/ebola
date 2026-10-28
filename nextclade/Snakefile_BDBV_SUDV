@@ -14,7 +14,7 @@ configfile: "defaults/config.yaml"
 
 default_update_message = {
     "bdbv": "Include 2026 Outbreak sequences; add outbreak annotation; data source is now pathoplexus",
-    "sudv": "Add outbreak annotation",
+    "sudv": "Add reference tree with outbreak annotation; private mutation QC relative to tree; enable SNP cluster QC and ADAR pattern",
 }
 
 dataset_title = {
