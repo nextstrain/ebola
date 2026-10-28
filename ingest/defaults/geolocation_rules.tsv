@@ -46,6 +46,21 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 
 */Democratic Republic of the Congo/Unknown/*	*/Democratic Republic of the Congo/Unknown/
 
+# DRC division fixes. Divisions are provinces; health zones or villages recorded as
+# division are moved to location (villages to the health zone containing them).
+*/Democratic Republic of the Congo/Kasai/*	Africa/Democratic Republic of the Congo/Kasaï/*
+*/Democratic Republic of the Congo/Bulape_Kasai/	Africa/Democratic Republic of the Congo/Kasaï/Bulape
+*/Democratic Republic of the Congo/Likati/	Africa/Democratic Republic of the Congo/Bas-Uele/Likati
+*/Democratic Republic of the Congo/Isiro/	Africa/Democratic Republic of the Congo/Haut-Uele/Isiro
+*/Democratic Republic of the Congo/Lokolia/	Africa/Democratic Republic of the Congo/Tshuapa/Boende
+*/Democratic Republic of the Congo/Watsi/	Africa/Democratic Republic of the Congo/Tshuapa/Boende
+# Kikwit is split into the Kikwit-Nord and Kikwit-Sud health zones
+*/Democratic Republic of the Congo/Kikwit/	Africa/Democratic Republic of the Congo/Kwilu/
+# Mayinga is the name of the nurse sampled in Kinshasa in 1976, not a place
+*/Democratic Republic of the Congo/Mayinga/	Africa/Democratic Republic of the Congo/Kinshasa/
+# Katwa is a Nord-Kivu health zone
+*/Democratic Republic of the Congo/Ituri/Katwa	Africa/Democratic Republic of the Congo/Nord-Kivu/Katwa
+
 
 # DRC location fixes. A mixture of
 # - manual fixes
