@@ -142,6 +142,7 @@ refine_adar_mutations_removed:
     --date-inference joint
     --date-confidence
     --keep-polytomies
+    --keep-root
     --clock-filter-iqd 3
     --coalescent 0.0
 
