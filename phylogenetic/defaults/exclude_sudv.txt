@@ -1,14 +1,14 @@
 # Redundant sequences of isolates already represented in the build
 
-# Boniface 1976 -- kept: MH121162, FJ968794
+# Boniface 1976 -- kept: MH121162/PP_00000Y3, FJ968794/PP_00000CA
 PP_00000SF # KT750754, re-sequencing, "7 days after stock infection"
 PP_00000TD # KT878488, C.porcellus-lab, guinea-pig adapted
 PP_000001Y # AF173836, 2926 bp fragment
 PP_00004V5 # U28134, 2362 bp fragment
 
-# Maleo 1979 -- kept: KC242783
+# Maleo 1979 -- kept: KC242783/PP_00000JX
 PP_00004U7 # U23458, 7038 bp L fragment
 PP_00004T9 # U23069, 2362 bp fragment
 
-# Gulu 2000 -- kept: AY729654
+# Gulu 2000 -- kept: AY729654/PP_000004S
 PP_000018H # OK572968, FDA-ARGOS culture stock

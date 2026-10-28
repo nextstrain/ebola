@@ -1,4 +1,4 @@
 # Redundant sequences of isolates already represented in the build
 
-# Butalya 2007 -- kept: FJ217161
+# Butalya 2007 -- kept: FJ217161/PP_006X5RB
 PP_006X70S # OK573002, FDA-ARGOS culture stock
