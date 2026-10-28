@@ -209,8 +209,9 @@ PP_000016M	country	South Sudan
 
 
 # Both outbreaks were in Western Equatoria, in present-day South Sudan
+# SUDV Boniface (1976, Nzara/Maridi) 
 PP_00000SF	region	Africa
 PP_00000SF	country	South Sudan
-# U23458 Maleo: 7 substitutions from the Maleo genome KC242783, against 18 from FJ968794
+# SUDV Maleo (1979, Nzara) U23458
 PP_00004U7	region	Africa
 PP_00004U7	country	South Sudan
