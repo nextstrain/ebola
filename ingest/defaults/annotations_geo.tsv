@@ -197,76 +197,19 @@ PP_0076RS5	country
 PP_0076RS5	division	
 PP_0076RS5	location	
 
-# EBOV: further strains with no geographic information that fall in the 1976/1977
-# northern-Zaire clade (>=99.8% identity to EBOV/Mayinga AF086833 and
-# EBOV/H.sapiens-tc/COD/1977/Bonduni KC242791 over their aligned length).
-# Strain names, where present, name the 1976 isolates Mayinga ("May") and Eckron.
-# J04337 Mayinga NP, Sanchez & Kiley 1989 <https://doi.org/10.1016/0042-6822(89)90354-1>
-PP_000LDSV	region	Africa
-PP_000LDSV	country	Democratic Republic of the Congo
-# M33062 (GenBank locus EBOMAY) Mayinga 3' terminus, Sanchez et al. 1986 <https://doi.org/10.1016/0042-6822(86)90125-X>
-PP_000NGYA	region	Africa
-PP_000NGYA	country	Democratic Republic of the Congo
-# L11365 strain "Zaire", Sanchez et al. 1993 <https://doi.org/10.1016/0168-1702(93)90063-S>
-PP_000N42F	region	Africa
-PP_000N42F	country	Democratic Republic of the Congo
-# U31033 strain "Zaire", Volchkov et al. 1995 <https://doi.org/10.1006/viro.1995.0052>
-PP_000PK3W	region	Africa
-PP_000PK3W	country	Democratic Republic of the Congo
-# U81161 strain Eckron-76
-PP_000PKJZ	region	Africa
-PP_000PKJZ	country	Democratic Republic of the Congo
-# X61274 strain May (= Mayinga)
-PP_000PKPP	region	Africa
-PP_000PKPP	country	Democratic Republic of the Congo
-# X67110 strain Mayinga
-PP_000PKUD	region	Africa
-PP_000PKUD	country	Democratic Republic of the Congo
-# U23187 strain Mayinga 1976
-PP_000PMNP	region	Africa
-PP_000PMNP	country	Democratic Republic of the Congo
-
-# EBOV: 1995 Kikwit outbreak (Bandundu Province, DRC), named in the strain field,
-# confirmed by identity to EBOV/Kikwit AY354458.
-# AF054908 strain "Zaire 1995"
-PP_000LAWQ	region	Africa
-PP_000LAWQ	country	Democratic Republic of the Congo
-# U28077 strain "Zaire95"
-PP_000PJY6	region	Africa
-PP_000PJY6	country	Democratic Republic of the Congo
-
-# EBOV: 1994-1997 Gabon outbreaks (Mekouka/Makokou and Booue, Ogooue-Ivindo).
-# All four name strain "Gabon-94"; AJ001707 and Y09358 are both from patient 95/71.
-# Closest reference is EBOV/H.sapiens-tc/GAB/1994/Gabon KC242792.
-PP_000LB0G	region	Africa
-PP_000LB0G	country	Gabon
-PP_000PK8L	region	Africa
-PP_000PK8L	country	Gabon
-PP_000PKDA	region	Africa
-PP_000PKDA	country	Gabon
-PP_000PKZ3	region	Africa
-PP_000PKZ3	country	Gabon
-
 # SUDV: the 1976 Nzara/Maridi and 1979 Nzara outbreaks and the 2004 Yambio outbreak
 # all took place in Western Equatoria, in present-day South Sudan.
 # <https://doi.org/10.1016/j.ympev.2014.01.025> treats these as SSD, as does GenBank
 # for KC242783 (SUDV/H.sapiens-tc/SSD/1979/Maleo).
+#
 # Strains Boniface (1976) and Maleo (1979) carry no geographic information in GenBank.
-# AF173836 Boniface
-PP_000001Y	region	Africa
-PP_000001Y	country	South Sudan
-# KT750754 Boniface
+# KT750754 Boniface; 2 substitutions from the Boniface genome FJ968794 over the 2.9 kb they share
 PP_00000SF	region	Africa
 PP_00000SF	country	South Sudan
-# U28134 Boniface
-PP_00004V5	region	Africa
-PP_00004V5	country	South Sudan
-# U23069 Maleo
-PP_00004T9	region	Africa
-PP_00004T9	country	South Sudan
-# U23458 Maleo 1979
+# U23458 Maleo 1979; 7 substitutions from the Maleo genome KC242783 against 18 from FJ968794
 PP_00004U7	region	Africa
 PP_00004U7	country	South Sudan
+#
 # The remaining records from these outbreaks are annotated "Sudan" upstream; set them to
 # South Sudan so that one outbreak is not split across two countries.
 # EF183506/EF183507/EF183508 Yambio0401-0403 (2004)
@@ -282,8 +225,3 @@ PP_00000Y3	country	South Sudan
 # MT583347/MT583348 (2004)
 PP_000015P	country	South Sudan
 PP_000016M	country	South Sudan
-
-# SUDV: 2000-2001 Gulu outbreak, Uganda.
-# AY344234 strain Gulu
-PP_000003U	region	Africa
-PP_000003U	country	Uganda
