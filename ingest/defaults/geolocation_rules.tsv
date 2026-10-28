@@ -217,9 +217,7 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 # PP_006XCJJ
 */Uganda/Uganda/Hoima	Africa/Uganda/Hoima/Hoima
 
-# Use modern country names. All Ebola outbreaks reported as "Sudan" (Nzara/Maridi 1976,
-# Nzara 1979, Yambio 2004) predate the 2011 independence of South Sudan and lie within it.
-*/Sudan/*/*	Africa/South Sudan/*/*
+# Sudan records without division are mapped to South Sudan per accession in annotations_geo.tsv
 */South Sudan/*/*	Africa/South Sudan/*/*
 */Sudan/Southern Sudan/	Africa/South Sudan/South Sudan/
 */Sudan/Yambio/	Africa/South Sudan/Yambio/
