@@ -19,9 +19,6 @@ PP_006X6A7
 # PP_006X5ZV
 # PP_006X60T
 
-# 2026 BDBV cases outside DRC/Uganda. Force-included so that they aren't lost
-# to random year/month subsampling. Note the Kenya genomes are flagged by
-# Nextclade as QC=mediocre/bad but we include them for their geographic signal
 PP_0081WXZ # Kenya
 PP_0081WYX # Kenya
 PP_0081WZV # Kenya
