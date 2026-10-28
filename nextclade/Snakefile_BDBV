@@ -62,7 +62,8 @@ rule filter:
         """
         augur filter --metadata-id-columns accession --sequences {input.data} --metadata {input.metadata} \
                      --min-length {params.min_length} \
-                     --subsample-max-sequences 500 --subsample-seed 0 \
+                     --subsample-max-sequences 500 \
+                     --subsample-seed 0 \
                      --group-by year month \
                      --exclude {input.exclude} \
                      --output-sequences {output.filtered_data} \

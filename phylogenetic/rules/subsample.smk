@@ -78,8 +78,8 @@ rule subsample:
             --metadata {input.metadata} \
             --output-sequences {output.sequences} \
             --output-metadata {output.metadata} \
-            --output-log {output.full_log} \
-            --seed 0
+            --seed 0 \
+            --output-log {output.full_log}
         """
 
 

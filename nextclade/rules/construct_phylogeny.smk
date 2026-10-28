@@ -50,6 +50,6 @@ rule refine:
         --metadata-id-columns accession \
         --output-tree {output.refined_tree} \
         --output-node-data {output.branch_lengths} \
-        --root mid_point \
-        --seed 0
+        --seed 0 \
+        --root mid_point
         """
