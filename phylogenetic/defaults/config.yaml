@@ -100,6 +100,14 @@ mask:
   bdbv/drc-uganda-2026:
      beginning: 50
      end: 50
+     # Sites mutating >=4 times independently across the outbreak tree. Most carry
+     # the ADAR signature (A->G, or T->C on the complementary strand); 5246-5252 is
+     # a single hotspot. At the base of this outbreak real splits are 1-2
+     # substitutions deep, so recurrent sites there outweigh the phylogenetic
+     # signal and produce spurious basal structure.
+     sites: [268, 1803, 1871, 2805, 3258, 3287, 3708, 4351, 5246, 5249, 5251,
+             5252, 5727, 7285, 7423, 8372, 8915, 9068, 9561, 10227, 10319,
+             11289, 12628, 18894]
 
 tree:
   bdbv/all-outbreaks: >-
