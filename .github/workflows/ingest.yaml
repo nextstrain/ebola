@@ -47,6 +47,19 @@ jobs:
         nextstrain build ingest \
           upload_all \
           --configfile build-configs/nextstrain-automation/config.yaml
+
+        # Show the geolocation curation logs in the job summary (markdown)
+        for species in ebov bdbv sudv; do
+          log="ingest/logs/${species}/curate_geography.txt"
+          echo "## \`${log}\`" >> "$GITHUB_STEP_SUMMARY"
+          if [[ -s "$log" ]]; then
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            cat "$log" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo '_No log file was produced._' >> "$GITHUB_STEP_SUMMARY"
+          fi
+        done
       # Specifying artifact name to differentiate ingest build outputs from the phylogenetic build outputs
       artifact-name: ingest-output
       artifact-paths: |
