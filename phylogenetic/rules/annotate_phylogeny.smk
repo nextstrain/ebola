@@ -26,7 +26,7 @@ rule ancestral:
     """Reconstructing mutations and (optionally) AA translations too"""
     input:
         tree = "results/{species}/{build}/tree.nwk",
-        alignment = "results/{species}/{build}/subsampled.fasta", # unmasked
+        alignment = alignment_for_ancestral,
         # Note: input.annotation_file not directly used by the shell block, necessary for snakemake input checking. File is referenced by params.aa_reconstruction
         annotation_file = lambda w: resolve_config_path(config['ancestral'][f"{w.species}/{w.build}"]['annotation'])({}) if _aa_reconstruction_via_ancestral(w) else [],
     output:

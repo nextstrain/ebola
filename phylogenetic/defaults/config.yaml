@@ -76,7 +76,10 @@ subsample:
   bdbv/drc-uganda-2026:
     samples:
       outbreak:
-        min_length: 5000
+        # 80% of the 18940 nt genome. The nextclade_qc=bad exclusion already
+        # floors coverage near this, so it drops few sequences; it is here to
+        # make the floor explicit rather than incidental.
+        min_length: 15152
         exclude_where:
           - outbreak!=Bdbv-2026
           - nextclade_qc=bad
@@ -88,6 +91,12 @@ subsample:
         min_length: 5000
         exclude: defaults/exclude_sudv.txt
 
+# Outgroup sequence to root the tree on, added before masking and pruned again by
+# `reroot_tree`. Optional.
+outgroup:
+  bdbv/drc-uganda-2026:
+    defaults/outgroup_bdbv_drc-uganda-2026.fasta
+
 # per-build masking (optional)
 mask:
   sudv/all-outbreaks: &generic-masking
@@ -97,9 +106,15 @@ mask:
      beginning: 50
      end: 50
      sites: 7461 # a polymorphic site in a variable region in GP that conflicts with outgroup rooting.
+  # `hard: true` keeps the masked sites masked downstream: `augur ancestral` reads
+  # the masked alignment rather than the unmasked one, so masked positions stay
+  # ambiguous instead of reappearing as mutations on branches of a tree that was
+  # built without them. The outbreak's terminal 50 nt carried 12 such mutations
+  # on a basal 3-tip branch whose only real substitution is T16608C.
   bdbv/drc-uganda-2026:
      beginning: 50
      end: 50
+     hard: true
 
 tree:
   bdbv/all-outbreaks: >-
@@ -114,6 +129,9 @@ reroot_tree:
   ebov/all-outbreaks:
     # See <https://virological.org/t/on-the-rooting-of-the-ebola-virus-phylogeny-and-its-consequences-for-understanding-the-diversity-in-the-reservoir/1005> for rooting approach
     strains: ['PP_000LE61', 'PP_000NUJS']
+  bdbv/drc-uganda-2026:
+    strains: ['all_outbreaks_inferred_root_no_masking']
+    remove_outgroup: true
 
 refine:
   ebov/all-outbreaks: >-
@@ -132,17 +150,13 @@ refine:
   # The ongoing BDBV outbreak tree has an initial refine step (detailed here)
   # and a second post-ADAR refine step (see below)
   #
-  # Rooted on PP_007L9XG rather than by clock fit. The outbreak's basal splits are
-  # 1-2 substitutions deep at sites that recur across the tree, so --root best is
-  # not robust: it returns a different basal clade on every resampling, and the
-  # clade it currently picks sits 8-18 nodes deep under outgroup rooting.
-  # PP_007L9XG belongs to the modal haplotype (71 identical sequences, spanning
-  # 2026-05-03 to 2026-09-30, the frequency peak closest to the old-BDBV
-  # outgroup); all 71 are identical over the informative sites, so any member
-  # gives the same root. This one is force-included for both BDBV builds.
+  # Rooted on the old-BDBV outgroup by `reroot_tree` (above), which `--keep-root`
+  # then preserves. Clock rooting is not robust here: the outbreak's basal splits
+  # are 1-2 substitutions deep at sites that recur across the tree, so `--root
+  # best` returns a different basal lineage on every resampling.
   bdbv/drc-uganda-2026: >-
     --timetree
-    --root PP_007L9XG
+    --keep-root
     --date-inference joint
     --keep-polytomies
 

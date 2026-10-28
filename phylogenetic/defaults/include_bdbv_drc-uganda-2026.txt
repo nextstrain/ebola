@@ -3,4 +3,4 @@ PP_0081WXZ # Kenya
 PP_0082CCL # Nigeria
 PP_0081WZV # Kenya
 PP_0079G2P # Germany
-PP_007L9XG # France; also the rooting strain (refine --root in config.yaml)
+PP_007L9XG # France

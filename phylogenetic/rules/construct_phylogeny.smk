@@ -54,6 +54,48 @@ def alignment_for_tree(wildcards):
     return f"results/{wildcards.species}/{wildcards.build}/subsampled.fasta",
 
 
+rule mask_without_outgroup:
+    """The masked alignment `rule mask` produces carries the outgroup, which
+    `reroot_tree` then prunes from the tree. `augur ancestral` needs an alignment
+    whose sequences match the tree's tips, so under hard masking it reads this
+    one instead.
+    """
+    input:
+        alignment="results/{species}/{build}/subsampled.fasta",
+    output:
+        alignment="results/{species}/{build}/masked-without-outgroup.fasta",
+    params:
+        mask_beginning=lambda w: config['mask'][f"{w.species}/{w.build}"]['beginning'],
+        mask_end=lambda w: config['mask'][f"{w.species}/{w.build}"]['end'],
+        mask_sites=sites_to_mask,
+    shell:
+        r"""
+        augur mask --sequences {input.alignment} \
+                    --mask-from-beginning {params.mask_beginning} \
+                    --mask-from-end {params.mask_end} \
+                    {params.mask_sites} \
+                    --output {output.alignment}
+        """
+
+
+def alignment_for_ancestral(wildcards):
+    """Under hard masking (mask block sets `hard: true`) ancestral reconstruction
+    reads a masked alignment, so masked sites stay ambiguous. Otherwise it reads
+    the unmasked alignment, which reintroduces the masked sites as mutations even
+    though they played no part in building the tree.
+
+    Hard masking requires `--keep-ambiguous`, else `augur ancestral` infers a base
+    for every masked position and the mask is undone a second way.
+    """
+    build_pair = f"{wildcards.species}/{wildcards.build}"
+    build_options = config.get('mask', {}).get(build_pair, {})
+    if build_options and build_options.get('hard', False):
+        if config.get('outgroup', {}).get(build_pair, False):
+            return f"results/{wildcards.species}/{wildcards.build}/masked-without-outgroup.fasta",
+        return alignment_for_tree(wildcards)
+    return f"results/{wildcards.species}/{wildcards.build}/subsampled.fasta",
+
+
 def args_for_tree(wildcards):
     build_options = config['tree'].get(f"{wildcards.species}/{wildcards.build}",False)
     if build_options:
