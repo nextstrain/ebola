@@ -162,8 +162,7 @@ rule tree:
         """
         augur tree \
             --alignment {input.aligned} \
-            --override-default-args \
-            --tree-builder-args "--seqtype DNA --polytomy --ninit 2 -n 2 --epsilon 0.05 -T 1 --redo -seed 0" \
+            --tree-builder-args "--seqtype DNA --polytomy -seed 0" \
             --output {output.tree}
         """
 
