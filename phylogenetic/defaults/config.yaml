@@ -73,7 +73,6 @@ subsample:
           - nextclade_qc=mediocre
         include: defaults/include_bdbv_all-outbreaks.txt
         exclude:
-          - defaults/exclude_bdbv_drc-uganda-2026.txt
           - defaults/exclude_bdbv.txt
           - defaults/exclude_patents.txt
         group_by: ['year', 'month']
@@ -87,7 +86,6 @@ subsample:
           - nextclade_qc=bad
         include: defaults/include_bdbv_drc-uganda-2026.txt
         exclude:
-          - defaults/exclude_bdbv_drc-uganda-2026.txt
           - defaults/exclude_bdbv.txt
           - defaults/exclude_patents.txt
   sudv/all-outbreaks:
