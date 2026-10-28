@@ -22,7 +22,5 @@ PP_000N0GR	is_lab_host	True
 # host 'Homo sapiens; F; 65Y' in the INSDC record (KR867676)
 PP_000M5Q5	host	Homo sapiens
 
-# Sudan virus "Maleo 1979" from the 1979 Nzara/Yambio outbreak, sequenced by
-# CDC in 1995. GenBank U23458 carries /strain="Maleo 1979" but no date; the
-# genome is 99.9% identical to KC242783 (SUDV/H.sapiens-tc/SSD/1979/Maleo).
+# Sudan virus "Maleo 1979" from the 1979 Nzara/Yambio outbreak, sequenced by CDC in 1995, GenBank U23458
 PP_00004U7	date	1979-XX-XX

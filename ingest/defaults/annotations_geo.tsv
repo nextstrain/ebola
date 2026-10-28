@@ -197,9 +197,7 @@ PP_0076RS5	country
 PP_0076RS5	division	
 PP_0076RS5	location	
 
-# Sudan virus "Maleo 1979", GenBank U23458 (/strain="Maleo 1979", no country).
-# The 1979 outbreak was in Nzara/Yambio, Western Equatoria, then Sudan and now
-# South Sudan, matching the existing */Sudan/Yambio/ rule for modern borders.
+# Sudan virus "Maleo 1979", GenBank U23458
 PP_00004U7	region	Africa
 PP_00004U7	country	South Sudan
 PP_00004U7	division	Yambio
