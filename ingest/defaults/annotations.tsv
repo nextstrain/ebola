@@ -22,8 +22,5 @@ PP_000N0GR	is_lab_host	True
 # host 'Homo sapiens; F; 65Y' in the INSDC record (KR867676)
 PP_000M5Q5	host	Homo sapiens
 
-# NC_006432 is the RefSeq derived from AY729654; its INSDC record carries no
-# collection_date, but the isolate name is
-# "Sudan virus/H.sapiens-tc/UGA/2000/Gulu-808892" and the source note reads
-# "isolated in 2000"
+# NC_006432 has no collection_date; isolate is ".../UGA/2000/Gulu-808892", note "isolated in 2000"
 PP_000017K	date	2000-XX-XX

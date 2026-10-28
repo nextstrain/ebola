@@ -197,9 +197,6 @@ PP_0076RS5	country
 PP_0076RS5	division	
 PP_0076RS5	location	
 
-# NC_006432 (Gulu 2000 RefSeq): geo_loc_name is only "Uganda", the district is
-# in the isolate name "Sudan virus/H.sapiens-tc/UGA/2000/Gulu-808892".
-# Annotations are applied after the geolocation rules, so this has to be written
-# in the normalised form those rules produce for Gulu rather than as a division.
+# NC_006432 geo_loc_name is only "Uganda"; district from isolate ".../UGA/2000/Gulu-808892"
 PP_000017K	division	Northern Region
 PP_000017K	location	Gulu

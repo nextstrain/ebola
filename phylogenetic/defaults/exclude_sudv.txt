@@ -13,4 +13,4 @@ PP_00004T9 # U23069, 2362 bp fragment
 
 # Gulu 2000 -- kept: NC_006432/PP_000017K
 PP_000018H # OK572968, FDA-ARGOS culture stock
-PP_000004S # AY729654, the record NC_006432 was derived from (0 nt apart)
+PP_000004S # AY729654, NC_006432 derived from it
