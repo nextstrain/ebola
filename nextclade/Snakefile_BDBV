@@ -36,15 +36,16 @@ rule all:
 
 rule merge_data:
     input:
-        data=expand("../ingest/results/{species}/sequences_{dut}.fasta", species=species, dut=['open', 'restricted']),
-        metadata=expand("../ingest/results/{species}/metadata_{dut}.tsv", species=species, dut=['open', 'restricted']),
+        data=expand("../ingest/results/{{species}}/sequences_{dut}.fasta", dut=['open', 'restricted']),
+        metadata=expand("../ingest/results/{{species}}/metadata_{dut}.tsv", dut=['open', 'restricted']),
     output:
         merged_data="results/{species}/sequences_merged.fasta",
         merged_metadata="results/{species}/metadata_merged.tsv",
     shell:
         """
         cat {input.data} > {output.merged_data}
-        cat {input.metadata} > {output.merged_metadata}
+        # keep only the first file's header row
+        awk 'NR == 1 || FNR > 1' {input.metadata} > {output.merged_metadata}
         """
 
 rule filter:
