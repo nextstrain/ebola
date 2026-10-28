@@ -71,6 +71,7 @@ subsample:
         exclude_where:
           - nextclade_qc=bad
           - nextclade_qc=mediocre
+          - is_lab_host=true
         include: defaults/include_bdbv_all-outbreaks.txt
         exclude:
           - defaults/exclude_bdbv_drc-uganda-2026.txt
@@ -84,6 +85,7 @@ subsample:
         exclude_where:
           - outbreak!=Bdbv-2026
           - nextclade_qc=bad
+          - is_lab_host=true
         include: defaults/include_bdbv_drc-uganda-2026.txt
         exclude:
           - defaults/exclude_bdbv_drc-uganda-2026.txt
@@ -92,6 +94,7 @@ subsample:
     samples:
       everything:
         min_length: 5000
+        exclude_where: is_lab_host=true
         exclude:
           - defaults/exclude_sudv.txt
           - defaults/exclude_patents.txt
