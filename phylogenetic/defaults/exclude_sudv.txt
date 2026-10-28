@@ -1,25 +1,17 @@
-# Sequences are excluded here when they are a redundant representation of an
-# isolate that is already in the build: a re-sequencing of it, a lab-animal
-# adapted derivative, or a partial fragment.
-#
-# Note that passage history on its own is not a reason to exclude. Nearly every
-# pre-2000 filovirus genome is cell-culture derived (ICTV "-tc"), so filtering
-# on that would remove the entire early history of the tree. Where an isolate
-# has several sequences we keep the most complete one, preferring wild-type
-# ("-wt") material where it exists.
+# Redundant cultured strains: the best sequence for each isolate is kept, and
+# shorter ones or those carrying extra passage mutations are excluded. Passage
+# history alone is not a reason to exclude: nearly every pre-2000 genome is "-tc".
 
-# Patent-division sequence, also listed in exclude_patents.txt; very diverged (>0.3)
-PP_000005Q # CS402439
-
-# Boniface, the 1976 Nzara isolate, is kept as MH121162
-# (Ebola virus/H.sapiens-tc/Sudan/1976/Boniface-R4142L)
-PP_00000CA # FJ968794, re-sequencing of the same isolate
-PP_00000SF # KT750754, re-sequencing; "passage details: 7 days after stock infection"
-PP_00000TD # KT878488, Sudan virus/C.porcellus-lab/SSD/1976/Nzara-Boneface, guinea-pig adapted
+# Boniface 1976, kept as MH121162
+PP_00000CA # FJ968794, re-sequencing
+PP_00000SF # KT750754, re-sequencing, "passage details: 7 days after stock infection"
+PP_00000TD # KT878488, C.porcellus-lab, guinea-pig adapted
 PP_000001Y # AF173836, 2926 bp fragment
-PP_00004V5 # U28134, 2362 bp GP fragment
+PP_00004V5 # U28134, 2362 bp fragment
 
-# Maleo, the 1979 Nzara isolate, is kept as KC242783
-# (SUDV/H.sapiens-tc/SSD/1979/Maleo)
-PP_00004U7 # U23458, 7038 bp L fragment; 5 of its 7 differences from KC242783 are non-synonymous
-PP_00004T9 # U23069, 2362 bp GP fragment
+# Maleo 1979, kept as KC242783
+PP_00004U7 # U23458, 7038 bp L fragment, 5 of 7 diffs non-synonymous
+PP_00004T9 # U23069, 2362 bp fragment
+
+# Gulu 2000, kept as AY729654
+PP_000018H # OK572968, FDA-ARGOS culture stock, IRF0207_SUDV_GULU
