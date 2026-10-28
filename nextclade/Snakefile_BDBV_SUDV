@@ -53,8 +53,9 @@ rule merge_data:
         cat {input.metadata} > {output.merged_metadata}
         """
 
-# SUDV reuses the phylogenetic workflow's curated exclude lists. BDBV keeps its
-# own, which drops far more of the 2026 outbreak than the phylogenetic build does.
+# SUDV reuses the phylogenetic workflow's curated include/exclude lists. BDBV
+# keeps its own exclude, which drops far more of the 2026 outbreak than the
+# phylogenetic build does, and has no include list.
 exclude_files = {
     "bdbv": ["defaults/exclude_bdbv.txt"],
     "sudv": [
@@ -63,24 +64,41 @@ exclude_files = {
     ],
 }
 
+include_files = {
+    "bdbv": [],
+    "sudv": ["../phylogenetic/defaults/include_sudv_all-outbreaks.txt"],
+}
+
+# BDBV sits at the cap because of the 2026 outbreak, so it needs subsampling.
+# SUDV has ~160 genomes in total, where grouping only serves to drop the many
+# records whose collection month is unknown -- including every Yambio 2004 and
+# 2012 Uganda genome, which would leave those outbreaks with nothing to match.
+subsample_args = {
+    "bdbv": "--subsample-max-sequences 500 --group-by year month",
+    "sudv": "",
+}
+
 
 rule filter:
     input:
         data="results/{species}/sequences_merged.fasta",
         metadata="results/{species}/metadata_merged.tsv",
         exclude=lambda w: exclude_files[w.species],
+        include=lambda w: include_files[w.species],
     output:
         filtered_data="results/{species}/sequences.fasta",
         filtered_metadata="results/{species}/metadata_raw.tsv",
     params:
         min_length=18000,
+        include=lambda w, input: f"--include {' '.join(input.include)}" if input.include else "",
+        subsample=lambda w: subsample_args[w.species],
     shell:
         """
         augur filter --metadata-id-columns accession --sequences {input.data} --metadata {input.metadata} \
                      --min-length {params.min_length} \
-                     --subsample-max-sequences 500 \
-                     --group-by year month \
+                     {params.subsample} \
                      --exclude {input.exclude} \
+                     {params.include} \
                      --output-sequences {output.filtered_data} \
                      --output-metadata {output.filtered_metadata}
         """
