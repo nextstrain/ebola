@@ -624,6 +624,7 @@ location	Yalifafo	-1.359883	22.433076
 # Uganda (any division)
 location	Arua	3.019	30.912
 location	Bundibugyo	0.705	30.06
+location	Gulu	2.770239	32.304427
 location	Hoima	1.433	31.345
 location	Kampala	0.307	32.578
 location	Ntoroko	1.05	30.53
@@ -1181,6 +1182,7 @@ location_reconstructed	Yalifafo	-1.359883	22.433076
 # Uganda (any division)
 location_reconstructed	Arua	3.019	30.912
 location_reconstructed	Bundibugyo	0.705	30.06
+location_reconstructed	Gulu	2.770239	32.304427
 location_reconstructed	Hoima	1.433	31.345
 location_reconstructed	Kampala	0.307	32.578
 location_reconstructed	Ntoroko	1.05	30.53
@@ -1740,6 +1742,7 @@ location_epicenter	Yalifafo	-1.359883	22.433076
 # Uganda (any division)
 location_epicenter	Arua	3.019	30.912
 location_epicenter	Bundibugyo	0.705	30.06
+location_epicenter	Gulu	2.770239	32.304427
 location_epicenter	Hoima	1.433	31.345
 location_epicenter	Kampala	0.307	32.578
 location_epicenter	Ntoroko	1.05	30.53

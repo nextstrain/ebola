@@ -59,6 +59,9 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 */Democratic Republic of the Congo/Ituri/Mungwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbwalu
 */Democratic Republic of the Congo/Ituri/Mongwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbwalu
 */Democratic Republic of the Congo/*/Rwmapara	Africa/Democratic Republic of the Congo/*/Rwampara
+# Health areas recorded as location, mapped to their health zone (OSM health boundaries)
+*/Democratic Republic of the Congo/Ituri/Mandje	Africa/Democratic Republic of the Congo/Ituri/Mangala
+*/Democratic Republic of the Congo/Ituri/Sukisa	Africa/Democratic Republic of the Congo/Ituri/Bunia
 */Democratic Republic of the Congo/Tshopo/Lubunga	Africa/Democratic Republic of the Congo/Tshopo/Lubunga (Tshopo)
 */Democratic Republic of the Congo/Tshopo/Makiso-Kisangani	Africa/Democratic Republic of the Congo/Tshopo/Makiso Kisangani
 # KOM is a sample-name prefix / sequencing center which sometimes ends up as the location value
@@ -145,6 +148,8 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 */Uganda/*/Arua	Africa/Uganda/Northern Region/Arua
 */Uganda/*/Dokolo	Africa/Uganda/Northern Region/Dokolo
 */Uganda/*/Gulu	Africa/Uganda/Northern Region/Gulu
+# Samples from the 2000 Gulu outbreak have Gulu as division (and no location)
+*/Uganda/Gulu/	Africa/Uganda/Northern Region/Gulu
 */Uganda/*/Kaabong	Africa/Uganda/Northern Region/Kaabong
 */Uganda/*/Karenga	Africa/Uganda/Northern Region/Karenga
 */Uganda/*/Kitgum	Africa/Uganda/Northern Region/Kitgum
