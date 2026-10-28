@@ -56,8 +56,9 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 */Democratic Republic of the Congo/Watsi/	Africa/Democratic Republic of the Congo/Tshuapa/Boende
 # Kikwit is split into the Kikwit-Nord and Kikwit-Sud health zones
 */Democratic Republic of the Congo/Kikwit/	Africa/Democratic Republic of the Congo/Kwilu/
-# Mayinga is the name of the nurse sampled in Kinshasa in 1976, not a place
-*/Democratic Republic of the Congo/Mayinga/	Africa/Democratic Republic of the Congo/Kinshasa/
+# Mayinga is the 1976 strain name (after a nurse), not a place; country only, as for the other
+# 1976 records in annotations_geo.tsv
+*/Democratic Republic of the Congo/Mayinga/	Africa/Democratic Republic of the Congo//
 # Katwa is a Nord-Kivu health zone
 */Democratic Republic of the Congo/Ituri/Katwa	Africa/Democratic Republic of the Congo/Nord-Kivu/Katwa
 
