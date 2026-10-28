@@ -22,10 +22,6 @@ PP_000N0GR	is_lab_host	True
 # host 'Homo sapiens; F; 65Y' in the INSDC record (KR867676)
 PP_000M5Q5	host	Homo sapiens
 
-# FDA-ARGOS culture-collection stocks of the SUDV Gulu (2000) and BDBV Butalya
-# (2007) prototypes, deposited by the NIAID IRF. BioSamples SAMN16357612 and
-# SAMN16357616 give host="IRF strain", culture collection="FDA:FDAARGOS_1167"
-# and "FDA:FDAARGOS_1171", isolation source="IRF Isolate", and record both the
-# collection date and the geographic location as withheld.
+# FDA-ARGOS culture-collection stocks
 PP_000018H	is_lab_host	True # OK572968, IRF0207_SUDV_GULU
 PP_006X70S	is_lab_host	True # OK573002, IRF0358_BDBV_BUTALYA
