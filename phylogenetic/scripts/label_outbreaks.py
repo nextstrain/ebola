@@ -12,9 +12,6 @@ def geographic(nextclade_outbreak: str):
     <https://virological.org/t/the-16th-ebola-virus-disease-outbreak-in-bulape-health-zone-kasai-democratic-republic-of-the-congo-a-new-spillover-event-from-an-unknown-reservoir-host/1003>
     as well as other names used by INRB, e.g. "Nord-Kivu".
 
-    Returns None for outbreaks which have no geographic name defined (e.g. non-EBOV
-    species), in which case only the nextclade outbreak name is used.
-
     NOTE: relapse outbreaks (e.g. `Ebov-2013/r2021`) are not given new geo names
     """
     relapse = '/r' in nextclade_outbreak
@@ -45,7 +42,8 @@ def geographic(nextclade_outbreak: str):
         if relapse:
             base_info['label'] = False
         return base_info
-    return None
+    print(f"\n[ERROR]Nextclade outbreak label {nextclade_outbreak} doesn't have a geographic name set in the `geo_names` dict\n\n")
+    return {'name': nextclade_outbreak, 'label': False}
 
 
 def suggest_colours(key: str, title: str, outbreaks: set[str]):
@@ -70,6 +68,7 @@ if __name__ == "__main__":
     parser.add_argument("--tree", required=True, help="Newick")
     parser.add_argument("--metadata", required=True, help="Metadata TSV")
     parser.add_argument("--output", required=True, help="Node Data JSON")
+    parser.add_argument("--geographic-names", action="store_true", help="Also label outbreaks with geographic names (EBOV only)")
     args = parser.parse_args()
 
     T = Phylo.read(args.tree, "newick")
@@ -88,7 +87,7 @@ if __name__ == "__main__":
 
     for start_node in T.find_clades():
         if outbreak_nextclade:=outbreak_mrcas.get(start_node, False):
-            geo = geographic(outbreak_nextclade)
+            geo = geographic(outbreak_nextclade) if args.geographic_names else None
             outbreaks_nextclade.add(outbreak_nextclade)
             if geo:
                 outbreaks_geo.add(geo['name'])

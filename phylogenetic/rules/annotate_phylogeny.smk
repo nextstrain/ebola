@@ -156,6 +156,8 @@ rule label_outbreaks:
         node_data = "results/{species}/{build}/outbreaks.json"
     params:
         script = os.path.join(workflow.basedir, "scripts", "label_outbreaks.py"),
+        # geographic outbreak names are only defined for EBOV
+        geographic_names = lambda w: "--geographic-names" if w.species == "ebov" else "",
     benchmark:
         "benchmarks/{species}/{build}/label_outbreaks.txt"
     log:
@@ -169,5 +171,5 @@ rule label_outbreaks:
         python {params.script} \
             --metadata {input.metadata:q} \
             --tree {input.tree:q} \
-            --output {output.node_data:q}
+            --output {output.node_data:q} {params.geographic_names}
         """
