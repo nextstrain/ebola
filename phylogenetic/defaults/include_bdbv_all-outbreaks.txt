@@ -2,10 +2,10 @@
 # all part of the Uganda 2007 BDBV outbreak
 # Because we subsample using year/month grouping they would be filtered out
 # if we didn't force their inclusion via this file
+# Note: PP_006X6B5 and PP_006X5YX were dropped from this list; they are patent
+# copies of the prototype genome and force-includes bypass exclude_patents.txt
 PP_006X70S
 PP_006X699
-PP_006X6B5
-PP_006X5YX
 PP_006X6D1
 PP_006X6C3
 PP_006X68B
