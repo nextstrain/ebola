@@ -32,6 +32,22 @@
       "type": "temporal"
     },
     {
+      "key": "outbreak",
+      "title": "Outbreak (Nextclade name)",
+      "type": "categorical",
+      "scale": [
+        ["Sudv-1976", "#3F4DCB"],
+        ["Sudv-1979", "#4681C9"],
+        ["Sudv-2000", "#5AA4A8"],
+        ["Sudv-2004", "#78B67E"],
+        ["Sudv-2011", "#9EBE5A"],
+        ["Sudv-2012a", "#C5B945"],
+        ["Sudv-2012b", "#E0A23A"],
+        ["Sudv-2022", "#E67231"],
+        ["Sudv-2025", "#DC2F24"]
+      ]
+    },
+    {
       "key": "country",
       "title": "Country",
       "type": "categorical",
@@ -93,7 +109,8 @@
   "display_defaults": {
     "tip_label": "strain",
     "color_by": "year",
-    "geo_resolution": "country"
+    "geo_resolution": "country",
+    "branch_label": "outbreak"
   },
   "filters": [
     "country",

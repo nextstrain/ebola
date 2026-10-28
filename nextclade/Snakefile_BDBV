@@ -12,11 +12,17 @@ workdir: workflow.current_basedir
 configfile: "defaults/config.yaml"
 
 
-default_update_message = (
-    "Include 2026 Outbreak sequences; add outbreak annotation; data source is now pathoplexus"
-)
+default_update_message = {
+    "bdbv": "Include 2026 Outbreak sequences; add outbreak annotation; data source is now pathoplexus",
+    "sudv": "Add outbreak annotation",
+}
 
-species = ["bdbv"]
+dataset_title = {
+    "bdbv": "Bundibugyo virus (BDBV)",
+    "sudv": "Sudan virus (SUDV)",
+}
+
+species = ["bdbv", "sudv"]
 
 
 wildcard_constraints:
@@ -36,8 +42,8 @@ rule all:
 
 rule merge_data:
     input:
-        data=expand("../ingest/results/{species}/sequences_{dut}.fasta", species=species, dut=['open', 'restricted']),
-        metadata=expand("../ingest/results/{species}/metadata_{dut}.tsv", species=species, dut=['open', 'restricted']),
+        data=lambda w: expand("../ingest/results/{species}/sequences_{dut}.fasta", species=w.species, dut=['open', 'restricted']),
+        metadata=lambda w: expand("../ingest/results/{species}/metadata_{dut}.tsv", species=w.species, dut=['open', 'restricted']),
     output:
         merged_data="results/{species}/sequences_merged.fasta",
         merged_metadata="results/{species}/metadata_merged.tsv",
@@ -79,7 +85,7 @@ rule add_strain_name:
 
         metadata = pd.read_csv(input.metadata, sep="\t")
         def get_country_code(country):
-            return {"Uganda": "UGA", "Democratic Republic of the Congo": "COD", "Congo": "COG"}.get(country, country)
+            return {"Uganda": "UGA", "Democratic Republic of the Congo": "COD", "Congo": "COG", "South Sudan": "SSD", "Sudan": "SDN"}.get(country, country)
         def get_admindiv(row):
             return row["location"] if not pd.isna(row["location"]) else row["division"]
         metadata["strain"] = metadata.apply(
@@ -155,7 +161,7 @@ rule refine:
         """
 
 
-cds = {"bdbv": ["NP", "VP35", "VP40", "GP", "GP_003", "VP30", "VP24", "L"], "l": ["RdRp"], "s": ["N", "NSs"]}
+cds = {"bdbv": ["NP", "VP35", "VP40", "GP", "GP_003", "VP30", "VP24", "L"], "sudv": ["NP", "VP35", "VP40", "GP", "sGP", "ssGP", "VP30", "VP24", "L"], "l": ["RdRp"], "s": ["N", "NSs"]}
 
 
 rule ancestral:
@@ -214,7 +220,7 @@ rule augment_auspice_config:
             config["extensions"]["nextclade"] = {}
 
         config["extensions"]["nextclade"].update(extra_config)
-        config["title"] = f"Andes Virus {wildcards.species.upper()} species (ANDV)"
+        config["title"] = dataset_title[wildcards.species]
 
         with open(output.config, "w") as f:
             json.dump(config, f, indent=2)
@@ -226,9 +232,10 @@ rule generate_changelog:
         changelog="results/{species}/CHANGELOG.md",
     params:
         changelog_url=lambda w: config["changelog_url"].format(species=w.species),
+        update_message=lambda w: default_update_message[w.species],
     shell:
         """
-        curl -s {params.changelog_url} | cat <(printf "## Unreleased\n\n{default_update_message}\n\n") - > {output.changelog}
+        curl -s {params.changelog_url} | cat <(printf "## Unreleased\n\n{params.update_message}\n\n") - > {output.changelog}
         """
 
 
