@@ -39,6 +39,7 @@ nextclade:
   sudv:
     dataset-name: nextstrain/orthoebolavirus/sudv
     columns:
+      - [outbreak, outbreak]
       - [qc.overallStatus, nextclade_qc]
       - [coverage, genome_coverage]
 
@@ -216,6 +217,7 @@ count_mutations:
 label_outbreaks:
   ebov/all-outbreaks: true
   bdbv/all-outbreaks: true
+  sudv/all-outbreaks: true
 
 # Export block:
 # warning (string) takes precedence over warning_file (filename)
