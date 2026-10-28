@@ -47,15 +47,22 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 */Democratic Republic of the Congo/Unknown/*	*/Democratic Republic of the Congo/Unknown/
 
 
-# DRC location aliases generated from `scripts/dev_collect-geographies.py` which interrogated
-# the 'INRB-UMIE/Ebola_DRC_2026' repo, as well as remappings based on `check_lat_longs.py` output
-# (part of the curate chain which checks against our lat/longs TSV)
+# DRC location fixes. A mixture of
+# - manual fixes
+# - aliases generated from `scripts/dev_collect-geographies.py` (uses 'INRB-UMIE/Ebola_DRC_2026' repo_
+# - remappings based on `check_lat_longs.py` output (part of the curate chain which checks against our lat/longs TSV)
+#
 */Democratic Republic of the Congo/*/Manguripa	Africa/Democratic Republic of the Congo/*/Manguredjipa
 */Democratic Republic of the Congo/Ituri/Nia	Africa/Democratic Republic of the Congo/Ituri/Nia Nia
+*/Democratic Republic of the Congo/Ituri/Niania	Africa/Democratic Republic of the Congo/Ituri/Nia Nia
 */Democratic Republic of the Congo/*/Nyakunde	Africa/Democratic Republic of the Congo/*/Nyankunde
 */Democratic Republic of the Congo/Ituri/Mungwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbwalu
 */Democratic Republic of the Congo/Ituri/Mongwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbwalu
 */Democratic Republic of the Congo/*/Rwmapara	Africa/Democratic Republic of the Congo/*/Rwampara
+*/Democratic Republic of the Congo/Tshopo/Lubunga	Africa/Democratic Republic of the Congo/Tshopo/Lubunga (Tshopo)
+*/Democratic Republic of the Congo/Tshopo/Makiso-Kisangani	Africa/Democratic Republic of the Congo/Tshopo/Makiso Kisangani
+# KOM is a sample-name prefix / sequencing center which sometimes ends up as the location value
+*/Democratic Republic of the Congo/Ituri/Kom	Africa/Democratic Republic of the Congo/Ituri/
 
 # Uganda
 # Use <https://en.wikipedia.org/wiki/Districts_of_Uganda> to categorise Uganda into
@@ -213,7 +220,10 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 */Sudan/Southern Sudan/	Africa/South Sudan/South Sudan/
 */Sudan/Yambio/	Africa/South Sudan/Yambio/
 
-
+# 2026 BDBV outbreak Kenya samples annotated as "Sampling location = Kenya (NGMSL)"
+# which we interpret as having "Division = Ngmsl"
+# (NGMSL is National Genomic and Molecular Surveillance Laboratory)
+*/Kenya/Ngmsl/*	Africa/Kenya//
 
 */Missing/*/*	*///
 
