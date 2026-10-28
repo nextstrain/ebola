@@ -30,7 +30,8 @@ rule tree:
         augur tree --alignment {input.sequences} \
         --output {output.tree} \
         --method iqtree \
-        --tree-builder-args "-seed 0" \
+        --override-default-args \
+        --tree-builder-args "--ninit 2 -n 2 --epsilon 0.05 -T 8 --redo -seed 0" \
         --nthreads 8
         """
 

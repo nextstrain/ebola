@@ -58,7 +58,7 @@ def args_for_tree(wildcards):
     build_options = config['tree'].get(f"{wildcards.species}/{wildcards.build}",False)
     if build_options:
         return build_options
-    return '--tree-builder-args="-seed 0"'
+    return '--override-default-args --tree-builder-args="--ninit 2 -n 2 --epsilon 0.05 -T 4 --redo -seed 0"'
 
 rule tree:
     """Building tree"""
