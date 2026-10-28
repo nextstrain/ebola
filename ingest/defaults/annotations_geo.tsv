@@ -197,6 +197,6 @@ PP_0076RS5	country
 PP_0076RS5	division	
 PP_0076RS5	location	
 
-# NC_006432 geo_loc_name is only "Uganda"; district from isolate ".../UGA/2000/Gulu-808892"
+# NC_006432 which is isolate ".../UGA/2000/Gulu-808892"
 PP_000017K	division	Northern Region
 PP_000017K	location	Gulu
