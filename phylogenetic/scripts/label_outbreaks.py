@@ -68,7 +68,7 @@ if __name__ == "__main__":
     parser.add_argument("--tree", required=True, help="Newick")
     parser.add_argument("--metadata", required=True, help="Metadata TSV")
     parser.add_argument("--output", required=True, help="Node Data JSON")
-    parser.add_argument("--geographic-names", action="store_true", help="Also label outbreaks with geographic names (EBOV only)")
+    parser.add_argument("--geographic-names", action="store_true", help="Also label outbreaks with geographic names")
     args = parser.parse_args()
 
     T = Phylo.read(args.tree, "newick")

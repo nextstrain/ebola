@@ -156,7 +156,6 @@ rule label_outbreaks:
         node_data = "results/{species}/{build}/outbreaks.json"
     params:
         script = os.path.join(workflow.basedir, "scripts", "label_outbreaks.py"),
-        # geographic outbreak names are only defined for EBOV
         geographic_names = lambda w: "--geographic-names" if w.species == "ebov" else "",
     benchmark:
         "benchmarks/{species}/{build}/label_outbreaks.txt"
