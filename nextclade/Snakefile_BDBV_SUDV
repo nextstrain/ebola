@@ -245,6 +245,8 @@ rule augment_auspice_config:
 
         config["extensions"]["nextclade"].update(extra_config)
         config["title"] = dataset_title[wildcards.species]
+        config["colorings"].append({"key": "outbreak", "title": "Outbreak", "type": "categorical"})
+        config["display_defaults"]["branch_label"] = "outbreak"
 
         with open(output.config, "w") as f:
             json.dump(config, f, indent=2)
@@ -270,15 +272,17 @@ rule export:
         ancestral_seqs="results/{species}/muts.json",
         auspice_config="results/{species}/auspice_config.json",
         outbreaks="results/{species}/outbreaks.json",
-        description="dataset_files/{species}/description.md",
+        description=lambda w: [f for f in [f"dataset_files/{w.species}/description.md"] if os.path.exists(f)],
     output:
         auspice_tree="results/{species}/tree.json",
+    params:
+        description=lambda w, input: f"--description {input.description}" if input.description else "",
     shell:
         """
         augur export v2 --tree {input.tree} \
                     --metadata {input.metadata} \
                     --metadata-id-columns accession \
-                    --description {input.description} \
+                    {params.description} \
                     --auspice-config {input.auspice_config}  \
                     --node-data {input.ancestral_seqs} {input.outbreaks}\
                     --include-root-sequence-inline \

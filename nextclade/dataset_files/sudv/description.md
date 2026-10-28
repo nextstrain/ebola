@@ -1,1 +1,0 @@
-Sequences are assigned to one of the nine recognised Sudan virus disease outbreaks via the `outbreak` annotation. Names follow a `Sudv-<year>` convention; the `a`/`b` suffixes distinguish the two separate 2012 Ugandan outbreaks (Kibaale, July–October 2012, and Luwero, November 2012 – January 2013), which are independent spillovers roughly 195 nt apart.
