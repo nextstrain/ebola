@@ -273,6 +273,7 @@ rule export:
         ancestral_seqs="results/{species}/muts.json",
         auspice_config="results/{species}/auspice_config.json",
         outbreaks="results/{species}/outbreaks.json",
+        colors="dataset_files/{species}/outbreak_colors.tsv",
         description=lambda w: [f for f in [f"dataset_files/{w.species}/description.md"] if os.path.exists(f)],
     output:
         auspice_tree="results/{species}/tree.json",
@@ -285,6 +286,7 @@ rule export:
                     --metadata-id-columns accession \
                     {params.description} \
                     --auspice-config {input.auspice_config}  \
+                    --colors {input.colors} \
                     --node-data {input.ancestral_seqs} {input.outbreaks}\
                     --include-root-sequence-inline \
                     --output {output.auspice_tree} \
