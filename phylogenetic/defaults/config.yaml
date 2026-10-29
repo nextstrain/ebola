@@ -110,6 +110,8 @@ mask:
      beginning: 50
      end: 50
 
+# per-build `augur tree` args. For CMAPLE instead of IQ-TREE:
+#   --override-default-args --tree-builder-args="--pathogen-force --redo"
 tree:
   bdbv/all-outbreaks: >-
     --override-default-args

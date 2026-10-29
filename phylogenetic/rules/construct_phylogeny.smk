@@ -84,9 +84,37 @@ rule tree:
             --nthreads {threads:q} 
         """
 
-rule reroot_tree:
+rule collapse_zero_length_branches:
+    """Collapse zero-length internal branches into polytomies.
+
+    IQ-TREE does this itself given --polytomy, but that flag has no effect under
+    CMAPLE (--tree-builder-args="--pathogen-force"), which always returns a fully
+    resolved tree.
+    """
     input:
         tree = "results/{species}/{build}/tree_raw.nwk"
+    output:
+        tree = "results/{species}/{build}/tree_raw_collapsed.nwk"
+    params:
+        threshold = 1e-8,
+    run:
+        from Bio import Phylo
+        T = Phylo.read(input.tree, "newick")
+        targets = [
+            c for c in T.get_nonterminals(order="level")
+            if c is not T.root
+            and c.branch_length is not None
+            and c.branch_length <= params.threshold
+        ]
+        for clade in reversed(targets):
+            T.collapse(clade)
+        print(f"Collapsed {len(targets)} zero-length internal branches into polytomies")
+        Phylo.write(T, output.tree, "newick")
+
+
+rule reroot_tree:
+    input:
+        tree = "results/{species}/{build}/tree_raw_collapsed.nwk"
     output:
         tree = "results/{species}/{build}/tree_raw_rooted.nwk"
     params:
@@ -113,7 +141,7 @@ def tree_for_refine(wildcards):
     """
     if config.get('reroot_tree', {}).get(f"{wildcards.species}/{wildcards.build}", False):
         return f"results/{wildcards.species}/{wildcards.build}/tree_raw_rooted.nwk",
-    return f"results/{wildcards.species}/{wildcards.build}/tree_raw.nwk",
+    return f"results/{wildcards.species}/{wildcards.build}/tree_raw_collapsed.nwk",
 
 
 rule refine:
