@@ -20,9 +20,11 @@ rule add_outgroup_sequence:
 def sites_to_mask(wildcards):
     build_options = config['mask'][f"{wildcards.species}/{wildcards.build}"]
     sites = build_options.get('sites')
-    if sites:
-        return f'--mask-sites {sites}'
-    return ""
+    if not sites:
+        return ""
+    if not isinstance(sites, list):
+        sites = [sites]
+    return '--mask-sites ' + ' '.join(str(s) for s in sites)
 
 rule mask:
     input:
