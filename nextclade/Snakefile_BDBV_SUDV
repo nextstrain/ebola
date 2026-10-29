@@ -50,7 +50,10 @@ rule merge_data:
         """
 
 exclude_files = {
-    "bdbv": ["defaults/exclude_bdbv.txt"],
+    "bdbv": [
+        "defaults/exclude_bdbv.txt",
+        "../phylogenetic/defaults/exclude_patents.txt",
+    ],
     "sudv": [
         "../phylogenetic/defaults/exclude_sudv.txt",
         "../phylogenetic/defaults/exclude_patents.txt",
