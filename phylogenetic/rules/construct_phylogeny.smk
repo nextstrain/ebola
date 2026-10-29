@@ -126,7 +126,8 @@ rule refine:
     input:
         tree = tree_for_refine,
         alignment = alignment_for_tree,
-        metadata = "results/{species}/{build}/metadata.tsv"
+        metadata = "results/{species}/{build}/metadata.tsv",
+        keep_ids = "results/{species}/{build}/keep_ids.txt",
     output:
         tree = "results/{species}/{build}/tree.nwk",
         node_data = "results/{species}/{build}/branch_lengths.json"
@@ -146,5 +147,6 @@ rule refine:
             --metadata {input.metadata:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
+            --keep-ids {input.keep_ids:q} \
             {params.args}
         """

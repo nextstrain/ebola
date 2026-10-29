@@ -200,3 +200,22 @@ PP_0076RS5	location
 # NC_006432 which is isolate ".../UGA/2000/Gulu-808892"
 PP_000017K	division	Northern Region
 PP_000017K	location	Gulu
+
+# Pre-2011 SUDV outbreaks (Nzara/Maridi 1976, Nzara 1979, Yambio 2004) reported as "Sudan" are within modern South Sudan
+PP_000006N	country	South Sudan
+PP_000007L	country	South Sudan
+PP_000009G	country	South Sudan
+PP_00000CA	country	South Sudan
+PP_00000JX	country	South Sudan
+PP_00000Y3	country	South Sudan
+PP_000015P	country	South Sudan
+PP_000016M	country	South Sudan
+
+
+# Both outbreaks were in Western Equatoria, in present-day South Sudan
+# SUDV Boniface (1976, Nzara/Maridi) 
+PP_00000SF	region	Africa
+PP_00000SF	country	South Sudan
+# SUDV Maleo (1979, Nzara) U23458
+PP_00004U7	region	Africa
+PP_00004U7	country	South Sudan
