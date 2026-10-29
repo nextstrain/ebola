@@ -112,7 +112,8 @@
   "display_defaults": {
     "tip_label": "strain",
     "color_by": "date",
-    "geo_resolution": "country"
+    "geo_resolution": "country",
+    "branch_label": "outbreak"
   },
   "filters": [
     "country",
