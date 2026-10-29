@@ -42,7 +42,7 @@ def geographic(nextclade_outbreak: str):
         if relapse:
             base_info['label'] = False
         return base_info
-    print(f"\n[ERROR]Nextclade outbreak label {outbreak_nextclade} doesn't have a geographic name set in the `geo_names` dict\n\n")
+    print(f"\n[ERROR]Nextclade outbreak label {nextclade_outbreak} doesn't have a geographic name set in the `geo_names` dict\n\n")
     return {'name': nextclade_outbreak, 'label': False}
 
 
@@ -68,6 +68,7 @@ if __name__ == "__main__":
     parser.add_argument("--tree", required=True, help="Newick")
     parser.add_argument("--metadata", required=True, help="Metadata TSV")
     parser.add_argument("--output", required=True, help="Node Data JSON")
+    parser.add_argument("--geographic-names", action="store_true", help="Also label outbreaks with geographic names")
     args = parser.parse_args()
 
     T = Phylo.read(args.tree, "newick")
@@ -86,23 +87,23 @@ if __name__ == "__main__":
 
     for start_node in T.find_clades():
         if outbreak_nextclade:=outbreak_mrcas.get(start_node, False):
-            geo = geographic(outbreak_nextclade)
+            geo = geographic(outbreak_nextclade) if args.geographic_names else None
             outbreaks_nextclade.add(outbreak_nextclade)
-            outbreaks_geo.add(geo['name'])
+            if geo:
+                outbreaks_geo.add(geo['name'])
 
             # label all downstream nodes, as we're preorder so we'll overwrite
             for node in start_node.find_clades():
                 if node.name in nodes:
                     print("...overwriting", nodes[node.name]['outbreak'], 'with', outbreak_nextclade)
-                nodes[node.name] = {
-                    'outbreak': outbreak_nextclade,
-                    'outbreak_geo': geo['name']
-                }
+                nodes[node.name] = {'outbreak': outbreak_nextclade}
+                if geo:
+                    nodes[node.name]['outbreak_geo'] = geo['name']
 
             # label CA branch with a branch label
             if outbreak_nextclade != 'unassigned':
                 branches[start_node.name] = {'labels': {'outbreak': outbreak_nextclade}}
-            if geo['label']:
+            if geo and geo['label']:
                 branches[start_node.name]['labels']['outbreak_geo'] = geo['name']
 
     with open(args.output, 'w') as fh:
@@ -112,6 +113,7 @@ if __name__ == "__main__":
     print("\n---- Suggested Auspice config colourings -----\n\n")
     try:
         suggest_colours("outbreak", "Outbreak (Nextclade name)", outbreaks_nextclade)
-        suggest_colours("outbreak_geo", "Outbreak (Geographic name)", outbreaks_geo)
+        if outbreaks_geo:
+            suggest_colours("outbreak_geo", "Outbreak (Geographic name)", outbreaks_geo)
     except Exception as e:
         print("Unexpected error", e)

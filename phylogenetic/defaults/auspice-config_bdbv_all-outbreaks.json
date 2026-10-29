@@ -50,11 +50,14 @@
         ["Sierra Leone","#4681C9"],
         ["Liberia","#5AA4A8"],
         ["Mali","#78B67E"],
-        ["Nigeria","#9EBE5A"],
+        ["Nigeria","#339933"],
         ["Gabon","#C5B945"],
         ["Republic of the Congo","#E0A23A"],
         ["Democratic Republic of the Congo","#E67231"],
-        ["Uganda","#DC2F24"]
+        ["Uganda","#DC2F24"],
+        ["Kenya","#3333CC"],
+        ["France","#3F4DCB"],
+        ["Germany","#4681C9"]
       ]
     },
     {
@@ -109,7 +112,8 @@
   "display_defaults": {
     "tip_label": "strain",
     "color_by": "date",
-    "geo_resolution": "country"
+    "geo_resolution": "country",
+    "branch_label": "outbreak"
   },
   "filters": [
     "country",

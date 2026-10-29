@@ -17,11 +17,6 @@ default_update_message = {
     "sudv": "Add reference tree with outbreak annotation; private mutation QC relative to tree; enable SNP cluster QC and ADAR pattern",
 }
 
-dataset_title = {
-    "bdbv": "Bundibugyo virus (BDBV)",
-    "sudv": "Sudan virus (SUDV)",
-}
-
 species = ["bdbv", "sudv"]
 
 
@@ -42,15 +37,16 @@ rule all:
 
 rule merge_data:
     input:
-        data=lambda w: expand("../ingest/results/{species}/sequences_{dut}.fasta", species=w.species, dut=['open', 'restricted']),
-        metadata=lambda w: expand("../ingest/results/{species}/metadata_{dut}.tsv", species=w.species, dut=['open', 'restricted']),
+        data=expand("../ingest/results/{{species}}/sequences_{dut}.fasta", dut=['open', 'restricted']),
+        metadata=expand("../ingest/results/{{species}}/metadata_{dut}.tsv", dut=['open', 'restricted']),
     output:
         merged_data="results/{species}/sequences_merged.fasta",
         merged_metadata="results/{species}/metadata_merged.tsv",
     shell:
         """
         cat {input.data} > {output.merged_data}
-        cat {input.metadata} > {output.merged_metadata}
+        # keep only the first file's header row
+        awk 'NR == 1 || FNR > 1' {input.metadata} > {output.merged_metadata}
         """
 
 exclude_files = {
@@ -229,6 +225,7 @@ rule augment_auspice_config:
     input:
         config="defaults/auspice_config.json",
         extra_config="dataset_files/{species}/auspice_extension.json",
+        pathogen_json="dataset_files/{species}/pathogen.json",
     output:
         config="results/{species}/auspice_config.json",
     run:
@@ -244,7 +241,9 @@ rule augment_auspice_config:
             config["extensions"]["nextclade"] = {}
 
         config["extensions"]["nextclade"].update(extra_config)
-        config["title"] = dataset_title[wildcards.species]
+        with open(input.pathogen_json) as f:
+            name = json.load(f)["attributes"]["name"]
+        config["title"] = f"Nextclade dataset for analysis of {name} ({wildcards.species.upper()}) genomes"
         config["colorings"].append({"key": "outbreak", "title": "Outbreak", "type": "categorical"})
         config["display_defaults"]["branch_label"] = "outbreak"
 

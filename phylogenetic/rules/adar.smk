@@ -56,7 +56,8 @@ rule refine_adar_mutations_removed:
     input:
         tree = "results/{species}/{build}/tree.nwk", # initial refine tree
         alignment = "results/{species}/{build}/alignment-adar-stripped.fasta",
-        metadata = "results/{species}/{build}/metadata.tsv"
+        metadata = "results/{species}/{build}/metadata.tsv",
+        keep_ids = "results/{species}/{build}/keep_ids.txt",
     output:
         tree = "results/{species}/{build}/tree-adar-stripped.nwk",
         node_data = "results/{species}/{build}/branch_lengths_after_adar_stripped.json"
@@ -76,5 +77,6 @@ rule refine_adar_mutations_removed:
             --metadata {input.metadata:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
+            --keep-ids {input.keep_ids:q} \
             {params.args}
         """
