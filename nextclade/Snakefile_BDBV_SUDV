@@ -67,7 +67,7 @@ include_files = {
 
 subsample_args = {
     "bdbv": "--subsample-max-sequences 500 --subsample-seed 0 --group-by year month",
-    "sudv": "",
+    "sudv": "--subsample-seed 0",
 }
 
 
