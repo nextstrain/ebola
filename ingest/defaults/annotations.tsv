@@ -21,3 +21,6 @@ PP_000N0GR	is_lab_host	True
 
 # host 'Homo sapiens; F; 65Y' in the INSDC record (KR867676)
 PP_000M5Q5	host	Homo sapiens
+
+# Isolate is ".../UGA/2000/Gulu-808892" with note "isolated in 2000"
+PP_000017K	date	2000-XX-XX
