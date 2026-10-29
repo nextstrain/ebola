@@ -74,6 +74,7 @@ rule subsample:
             --metadata {input.metadata} \
             --output-sequences {output.sequences} \
             --output-metadata {output.metadata} \
+            --seed 0 \
             --output-log {output.full_log}
         """
 

@@ -65,6 +65,7 @@ rule filter:
         --exclude-where 'region!=Africa' \
         --metadata-id accession \
         --sequences-per-group 20 \
+        --subsample-seed 0 \
         --output-sequences {output.filtered_sequences} \
         --output-metadata {output.filtered_metadata}
         """
@@ -83,6 +84,7 @@ rule example_sequences:
         --exclude-where 'dataUseTerms=RESTRICTED' \
         --metadata-id accession \
         --sequences-per-group 1 \
+        --subsample-seed 0 \
         --output-sequences {output.filtered_sequences}
         """
 
