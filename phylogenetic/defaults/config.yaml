@@ -118,7 +118,7 @@ tree:
     --tree-builder-args="--polytomy --ninit 100 --epsilon 0.01 -T AUTO --redo -seed 0"
   bdbv/drc-uganda-2026: >-
     --override-default-args
-    --tree-builder-args="--polytomy --ninit 100 --epsilon 0.01 -T AUTO --redo -seed 0"
+    --tree-builder-args="--pathogen-force --redo"
 
 # per-build tree re-rooting (before refine). Optional.
 reroot_tree:
