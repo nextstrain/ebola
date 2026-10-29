@@ -1,9 +1,5 @@
 from augur.subsample import get_referenced_files
 
-# # Merge Sota into Bunia in reconstructed_location 
-# # Then merge So
-# rule process_locations:
-#     input:
 rule process_bdbv_locations:
     input:
         metadata = "results/{species}/metadata_extended.tsv"
@@ -13,11 +9,14 @@ rule process_bdbv_locations:
         log_file = "logs/{species}/process_locations.txt"
     run:
         import csv
-        sota_samples = 0
         inferred_key = 'location_reconstructed'
         augmented_key = 'location_epicenter'
 
         epicenter_zones = ["Bunia", "Mongbwalu", "Rwampara"]
+        epicenter_joint_name = "Bunia|Mongbwalu|Rwampara"
+        epicenter_count = 0
+
+        log_fh = open(log.log_file, 'w')
 
         with open(output.metadata, 'w') as output:
             with open(input.metadata,'r') as metadata:
@@ -34,19 +33,16 @@ rule process_bdbv_locations:
                         writer.writerow(row)
                         continue
                     else:
-                        if row['location'] == "Sota":
-                            row[inferred_key] = "Bunia"
-                            sota_samples+=1
-                        else:
-                            row[inferred_key] = row['location']
+                        row[inferred_key] = row['location']
                         if row[inferred_key] in epicenter_zones:
-                            row[augmented_key] = "Bunia|Mongbwalu|Rwampara"
+                            row[augmented_key] = epicenter_joint_name
+                            epicenter_count+=1
                         else:
                             row[augmented_key] = row[inferred_key]
                     writer.writerow(row)
 
         with open(log.log_file,'w') as l:
-            l.write(f"{sota_samples} Samples from Sota recoded as Bunia in {inferred_key}")
+            l.write(f"{epicenter_count} Samples recorded as {augmented_key} = {epicenter_joint_name}")
 
 
 

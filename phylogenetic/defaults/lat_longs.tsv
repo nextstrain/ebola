@@ -203,8 +203,6 @@ location	Nyankunde	1.476095	29.944402
 location	Nyarambe	2.153119	31.154728
 location	Rimba	2.219520	30.755949
 location	Rwampara	1.571948	30.110212
-# NOTE: I couldn't find Sota - this is the Bunia lat/long - but found a WHO report saying "Sota health area (about 50 km from Bunia in Ituri Province)"
-location	Sota	1.595513	30.223442
 location	Tchomia	1.436	30.484
 # Democratic Republic of the Congo / Kasaï
 location	Banga Lubaka	-5.621778	20.528918
@@ -624,6 +622,7 @@ location	Yalifafo	-1.359883	22.433076
 # Uganda (any division)
 location	Arua	3.019	30.912
 location	Bundibugyo	0.705	30.06
+location	Gulu	2.770239	32.304427
 location	Hoima	1.433	31.345
 location	Kampala	0.307	32.578
 location	Ntoroko	1.05	30.53
@@ -760,8 +759,6 @@ location_reconstructed	Nyankunde	1.476095	29.944402
 location_reconstructed	Nyarambe	2.153119	31.154728
 location_reconstructed	Rimba	2.219520	30.755949
 location_reconstructed	Rwampara	1.571948	30.110212
-# NOTE: I couldn't find Sota - this is the Bunia lat/long - but found a WHO report saying "Sota health area (about 50 km from Bunia in Ituri Province)"
-location_reconstructed	Sota	1.595513	30.223442
 location_reconstructed	Tchomia	1.436	30.484
 # Democratic Republic of the Congo / Kasaï
 location_reconstructed	Banga Lubaka	-5.621778	20.528918
@@ -1181,6 +1178,7 @@ location_reconstructed	Yalifafo	-1.359883	22.433076
 # Uganda (any division)
 location_reconstructed	Arua	3.019	30.912
 location_reconstructed	Bundibugyo	0.705	30.06
+location_reconstructed	Gulu	2.770239	32.304427
 location_reconstructed	Hoima	1.433	31.345
 location_reconstructed	Kampala	0.307	32.578
 location_reconstructed	Ntoroko	1.05	30.53
@@ -1319,8 +1317,6 @@ location_epicenter	Nyankunde	1.476095	29.944402
 location_epicenter	Nyarambe	2.153119	31.154728
 location_epicenter	Rimba	2.219520	30.755949
 location_epicenter	Rwampara	1.571948	30.110212
-# NOTE: I couldn't find Sota - this is the Bunia lat/long - but found a WHO report saying "Sota health area (about 50 km from Bunia in Ituri Province)"
-location_epicenter	Sota	1.595513	30.223442
 location_epicenter	Tchomia	1.436	30.484
 # Democratic Republic of the Congo / Kasaï
 location_epicenter	Banga Lubaka	-5.621778	20.528918
@@ -1740,6 +1736,7 @@ location_epicenter	Yalifafo	-1.359883	22.433076
 # Uganda (any division)
 location_epicenter	Arua	3.019	30.912
 location_epicenter	Bundibugyo	0.705	30.06
+location_epicenter	Gulu	2.770239	32.304427
 location_epicenter	Hoima	1.433	31.345
 location_epicenter	Kampala	0.307	32.578
 location_epicenter	Ntoroko	1.05	30.53
