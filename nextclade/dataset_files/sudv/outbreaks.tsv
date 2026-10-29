@@ -1,36 +1,36 @@
 clade	gene	site	alt
-Sudv-2025	nuc	337	G
-Sudv-2025	nuc	9734	C
-Sudv-2025	nuc	18299	C
-
-Sudv-2022	nuc	496	G
-Sudv-2022	nuc	10044	C
-Sudv-2022	nuc	18371	C
-
-Sudv-2012b	nuc	250	G
-Sudv-2012b	nuc	6816	G
-Sudv-2012b	nuc	18071	C
-
-Sudv-2012a	nuc	202	T
-Sudv-2012a	nuc	9464	G
-Sudv-2012a	nuc	17747	C
-
-Sudv-2011	nuc	1588	A
-Sudv-2011	nuc	9414	A
-Sudv-2011	nuc	18193	G
-
-Sudv-2004	nuc	366	G
-Sudv-2004	nuc	7200	A
-Sudv-2004	nuc	18230	T
-
-Sudv-2000	nuc	1646	C
-Sudv-2000	nuc	11003	A
-Sudv-2000	nuc	18390	T
+Sudv-1976	nuc	1648	A
+Sudv-1976	nuc	9238	G
+Sudv-1976	nuc	16389	G
 
 Sudv-1979	nuc	1630	C
 Sudv-1979	nuc	8561	G
 Sudv-1979	nuc	18631	A
 
-Sudv-1976	nuc	1648	A
-Sudv-1976	nuc	9238	G
-Sudv-1976	nuc	16389	G
+Sudv-2000	nuc	1646	C
+Sudv-2000	nuc	11003	A
+Sudv-2000	nuc	18390	T
+
+Sudv-2004	nuc	366	G
+Sudv-2004	nuc	7200	A
+Sudv-2004	nuc	18230	T
+
+Sudv-2011	nuc	1588	A
+Sudv-2011	nuc	9414	A
+Sudv-2011	nuc	18193	G
+
+Sudv-2012a	nuc	202	T
+Sudv-2012a	nuc	9464	G
+Sudv-2012a	nuc	17747	C
+
+Sudv-2012b	nuc	250	G
+Sudv-2012b	nuc	6816	G
+Sudv-2012b	nuc	18071	C
+
+Sudv-2022	nuc	496	G
+Sudv-2022	nuc	10044	C
+Sudv-2022	nuc	18371	C
+
+Sudv-2025	nuc	337	G
+Sudv-2025	nuc	9734	C
+Sudv-2025	nuc	18299	C
