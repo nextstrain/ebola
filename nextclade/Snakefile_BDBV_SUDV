@@ -12,11 +12,12 @@ workdir: workflow.current_basedir
 configfile: "defaults/config.yaml"
 
 
-default_update_message = (
-    "Include 2026 Outbreak sequences; add outbreak annotation; data source is now pathoplexus"
-)
+default_update_message = {
+    "bdbv": "Include 2026 Outbreak sequences; add outbreak annotation; data source is now pathoplexus",
+    "sudv": "Add reference tree with outbreak annotation; private mutation QC relative to tree; enable SNP cluster QC and ADAR pattern",
+}
 
-species = ["bdbv"]
+species = ["bdbv", "sudv"]
 
 
 wildcard_constraints:
@@ -48,24 +49,48 @@ rule merge_data:
         awk 'NR == 1 || FNR > 1' {input.metadata} > {output.merged_metadata}
         """
 
+exclude_files = {
+    "bdbv": [
+        "defaults/exclude_bdbv.txt",
+        "../phylogenetic/defaults/exclude_patents.txt",
+    ],
+    "sudv": [
+        "../phylogenetic/defaults/exclude_sudv.txt",
+        "../phylogenetic/defaults/exclude_patents.txt",
+    ],
+}
+
+include_files = {
+    "bdbv": [],
+    "sudv": ["../phylogenetic/defaults/include_sudv_all-outbreaks.txt"],
+}
+
+subsample_args = {
+    "bdbv": "--subsample-max-sequences 500 --subsample-seed 0 --group-by year month",
+    "sudv": "--subsample-seed 0",
+}
+
+
 rule filter:
     input:
         data="results/{species}/sequences_merged.fasta",
         metadata="results/{species}/metadata_merged.tsv",
-        exclude="defaults/exclude_{species}.txt",
+        exclude=lambda w: exclude_files[w.species],
+        include=lambda w: include_files[w.species],
     output:
         filtered_data="results/{species}/sequences.fasta",
         filtered_metadata="results/{species}/metadata_raw.tsv",
     params:
         min_length=18000,
+        include=lambda w, input: f"--include {' '.join(input.include)}" if input.include else "",
+        subsample=lambda w: subsample_args[w.species],
     shell:
         """
         augur filter --metadata-id-columns accession --sequences {input.data} --metadata {input.metadata} \
                      --min-length {params.min_length} \
-                     --subsample-max-sequences 500 \
-                     --subsample-seed 0 \
-                     --group-by year month \
+                     {params.subsample} \
                      --exclude {input.exclude} \
+                     {params.include} \
                      --output-sequences {output.filtered_data} \
                      --output-metadata {output.filtered_metadata}
         """
@@ -81,7 +106,7 @@ rule add_strain_name:
 
         metadata = pd.read_csv(input.metadata, sep="\t")
         def get_country_code(country):
-            return {"Uganda": "UGA", "Democratic Republic of the Congo": "COD", "Congo": "COG"}.get(country, country)
+            return {"Uganda": "UGA", "Democratic Republic of the Congo": "COD", "Congo": "COG", "South Sudan": "SSD", "Sudan": "SDN"}.get(country, country)
         def get_admindiv(row):
             return row["location"] if not pd.isna(row["location"]) else row["division"]
         metadata["strain"] = metadata.apply(
@@ -158,7 +183,7 @@ rule refine:
         """
 
 
-cds = {"bdbv": ["NP", "VP35", "VP40", "GP", "GP_003", "VP30", "VP24", "L"], "l": ["RdRp"], "s": ["N", "NSs"]}
+cds = {"bdbv": ["NP", "VP35", "VP40", "GP", "GP_003", "VP30", "VP24", "L"], "sudv": ["NP", "VP35", "VP40", "GP", "sGP", "ssGP", "VP30", "VP24", "L"]}
 
 
 rule ancestral:
@@ -221,6 +246,8 @@ rule augment_auspice_config:
         with open(input.pathogen_json) as f:
             name = json.load(f)["attributes"]["name"]
         config["title"] = f"Nextclade dataset for analysis of {name} ({wildcards.species.upper()}) genomes"
+        config["colorings"].append({"key": "outbreak", "title": "Outbreak", "type": "categorical"})
+        config["display_defaults"]["branch_label"] = "outbreak"
 
         with open(output.config, "w") as f:
             json.dump(config, f, indent=2)
@@ -232,9 +259,10 @@ rule generate_changelog:
         changelog="results/{species}/CHANGELOG.md",
     params:
         changelog_url=lambda w: config["changelog_url"].format(species=w.species),
+        update_message=lambda w: default_update_message[w.species],
     shell:
         """
-        curl -s {params.changelog_url} | cat <(printf "## Unreleased\n\n{default_update_message}\n\n") - > {output.changelog}
+        curl -s {params.changelog_url} | cat <(printf "## Unreleased\n\n{params.update_message}\n\n") - > {output.changelog}
         """
 
 
@@ -245,16 +273,20 @@ rule export:
         ancestral_seqs="results/{species}/muts.json",
         auspice_config="results/{species}/auspice_config.json",
         outbreaks="results/{species}/outbreaks.json",
-        description="dataset_files/{species}/description.md",
+        colors="dataset_files/{species}/outbreak_colors.tsv",
+        description=lambda w: [f for f in [f"dataset_files/{w.species}/description.md"] if os.path.exists(f)],
     output:
         auspice_tree="results/{species}/tree.json",
+    params:
+        description=lambda w, input: f"--description {input.description}" if input.description else "",
     shell:
         """
         augur export v2 --tree {input.tree} \
                     --metadata {input.metadata} \
                     --metadata-id-columns accession \
-                    --description {input.description} \
+                    {params.description} \
                     --auspice-config {input.auspice_config}  \
+                    --colors {input.colors} \
                     --node-data {input.ancestral_seqs} {input.outbreaks}\
                     --include-root-sequence-inline \
                     --output {output.auspice_tree} \
