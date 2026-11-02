@@ -102,14 +102,22 @@ mask:
   sudv/all-outbreaks: &generic-masking
     beginning: 50
     end: 50
-  bdbv/all-outbreaks: &bdbv-masking
-     beginning: 65
-     end: 472
-     sites: [7461, 3287, 2923, 2874, 5246]
+  bdbv/all-outbreaks:
+     # see <https://github.com/nextstrain/ebola/pull/123> for figures of terminus ATGC percentages
+     # which influence our masking ranges
+     beginning: &bdbv-mask-beginning 65
+     end: &bdbv-mask-end 472
+     sites:
+      - 2874 # heavily reverted site
+      - 2923 # heavily reverted site
+      - 3287 # heavily reverted site
+      - 5246 # very homoplasic, and 1/4 sites are Ns
+      - 7461 # a polymorphic site in a variable region in GP that conflicts with outgroup rooting.
   bdbv/drc-uganda-2026:
-     beginning: 65
-     end: 472
-     sites: [5246]
+     beginning: *bdbv-mask-beginning
+     end: *bdbv-mask-end
+     sites: 
+       - 5246 # very homoplasic, and 1/4 sites are Ns
 
 tree:
   bdbv/all-outbreaks: >-
