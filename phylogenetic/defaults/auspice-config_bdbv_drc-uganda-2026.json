@@ -73,6 +73,11 @@
       "type": "categorical"
     },
     {
+      "key": "sequencing_center",
+      "title": "Sequencing Center (putative)",
+      "type": "categorical"
+    },
+    {
       "key": "dataUseTerms",
       "title": "Data use terms",
       "type": "categorical",

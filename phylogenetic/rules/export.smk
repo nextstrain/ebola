@@ -23,6 +23,8 @@ def node_data_files(wildcards):
         files.append(f"results/{wildcards.species}/{wildcards.build}/muts-counts.json")
     if config['label_outbreaks'].get(build_pair, False):
         files.append(f"results/{wildcards.species}/{wildcards.build}/outbreaks.json")
+    if config['sequencing_center'].get(build_pair, False):
+        files.append(f"results/{wildcards.species}/{wildcards.build}/sequencing-centers.json")
     if config.get('translate', {}).get(build_pair, False):
         files.append(f"results/{wildcards.species}/{wildcards.build}/aa_muts.json")
 

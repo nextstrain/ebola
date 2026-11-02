@@ -224,6 +224,11 @@ count_mutations:
     counts: 0,1,2,3,4,5,6,7+
     cds: [GP]
 
+# Parse the sequencing center out of each strain name and expose it as node data.
+# Leave out (or falsify) a build to skip this annotation.
+sequencing_center:
+  bdbv/drc-uganda-2026: true
+
 
 label_outbreaks:
   ebov/all-outbreaks: true
