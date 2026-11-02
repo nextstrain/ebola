@@ -148,6 +148,26 @@ rule sampling_year:
         """
 
 
+rule sequencing_center:
+    """Parse the sequencing center out of each strain name as node data"""
+    input:
+        metadata = "results/{species}/{build}/metadata.tsv",
+    output:
+        node_data = "results/{species}/{build}/sequencing-centers.json",
+    params:
+        script = os.path.join(workflow.basedir, "scripts", "parse-strain.py"),
+    log:
+        "logs/{species}/{build}/sequencing_center.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        python {params.script} \
+            --metadata {input.metadata:q} \
+            --output {output.node_data:q}
+        """
+
+
 rule label_outbreaks:
     input:
         metadata = "results/{species}/{build}/metadata.tsv",
