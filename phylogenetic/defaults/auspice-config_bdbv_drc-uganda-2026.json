@@ -108,8 +108,35 @@
     },
     {
       "key": "genome_coverage",
-      "title": "Genome coverage",
+      "title": "Genome coverage percentage",
       "type": "continuous"
+    },
+    {
+      "key": "depthOfCoverage",
+      "title": "Genome coverage depth",
+      "type": "continuous",
+      "scale": [
+        [10, "#4580CA"],
+        [35, "#6BB28D"],
+        [75, "#AABD52"],
+        [200, "#DFA43B"]
+      ],
+      "legend": [
+        {"value": 10, "display": "<20x", "bounds": [0,20]},
+        {"value": 35, "display": "20-50x", "bounds": [20,50]},
+        {"value": 75, "display": "50-100x", "bounds": [50, 100]},
+        {"value": 200, "display": ">100x", "bounds": [100, 1000000]}
+      ]
+    },
+    {
+      "key": "sequencingProtocol",
+      "title": "Sequencing protocol",
+      "type": "categorical"
+    },
+    {
+      "key": "sequencingInstrument",
+      "title": "Sequencing Instrument",
+      "type": "categorical"
     },
     {
       "key": "nuc_mut_count",
