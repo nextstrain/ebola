@@ -40,6 +40,9 @@ include: "rules/export.smk"
 rule all:
     input:
         expand("auspice/ebola_{build_pair}.json", build_pair=[b.replace('/', '_') for b in config['builds']]),
+        # tip-frequencies sidecar JSONs, only for builds with a 'tip_frequencies' config block
+        [f"auspice/ebola_{b.replace('/', '_')}_tip-frequencies.json"
+         for b in config['builds'] if config.get('tip_frequencies', {}).get(b)],
 
 # Allow users to import custom rules provided via the config.
 # This allows users to run custom rules that can extend or override the workflow.

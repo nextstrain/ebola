@@ -11,6 +11,7 @@ rule process_bdbv_locations:
         import csv
         inferred_key = 'location_reconstructed'
         augmented_key = 'location_epicenter'
+        epicenter_bool_key = 'location_epicenter_bool'
 
         epicenter_zones = ["Bunia", "Mongbwalu", "Rwampara"]
         epicenter_joint_name = "Bunia|Mongbwalu|Rwampara"
@@ -22,7 +23,7 @@ rule process_bdbv_locations:
             with open(input.metadata,'r') as metadata:
 
                 metadata_reader = csv.DictReader(metadata,delimiter="\t")
-                header = metadata_reader.fieldnames + [inferred_key,augmented_key]
+                header = metadata_reader.fieldnames + [inferred_key,augmented_key,epicenter_bool_key]
 
                 writer = csv.DictWriter(output, fieldnames=header,delimiter="\t")
                 writer.writeheader()
@@ -30,15 +31,18 @@ rule process_bdbv_locations:
                 for row in metadata_reader:
                     location = row.get('location')
                     if not location: # some samples do not have locations in the metadata
+                        row[epicenter_bool_key] = "no"
                         writer.writerow(row)
                         continue
                     else:
                         row[inferred_key] = row['location']
                         if row[inferred_key] in epicenter_zones:
                             row[augmented_key] = epicenter_joint_name
+                            row[epicenter_bool_key] = "yes"
                             epicenter_count+=1
                         else:
                             row[augmented_key] = row[inferred_key]
+                            row[epicenter_bool_key] = "no"
                     writer.writerow(row)
 
         with open(log.log_file,'w') as l:
