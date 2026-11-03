@@ -192,6 +192,7 @@
     "division",
     "PPX_accession",
     "INSDC_accession",
-    "restrictedUntil"
+    "restrictedUntil",
+    "location_epicenter_bool"
   ]
 }
