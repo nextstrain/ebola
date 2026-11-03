@@ -148,6 +148,52 @@ rule sampling_year:
         """
 
 
+rule tip_frequencies:
+    """
+    Estimating KDE frequencies for tips. Only run for builds which define a
+    'tip_frequencies' config block (see `rule all` for how this is wired up).
+    """
+    input:
+        # Use the same tree that `rule export` uses so frequencies match the displayed tree
+        tree = lambda wildcards: \
+            f"results/{wildcards.species}/{wildcards.build}/tree-adar-stripped.nwk" \
+            if adar_enabled(wildcards) \
+            else f"results/{wildcards.species}/{wildcards.build}/tree.nwk",
+        metadata = "results/{species}/{build}/metadata.tsv",
+    output:
+        tip_freq = "auspice/ebola_{species}_{build}_tip-frequencies.json"
+    params:
+        min_date = lambda w: config['tip_frequencies'][f"{w.species}/{w.build}"]['min_date'],
+        max_date = lambda w: config['tip_frequencies'][f"{w.species}/{w.build}"]['max_date'],
+        proportion_wide = lambda w: config['tip_frequencies'][f"{w.species}/{w.build}"]['proportion_wide'],
+        narrow_bandwidth = lambda w: config['tip_frequencies'][f"{w.species}/{w.build}"]['narrow_bandwidth'],
+        wide_bandwidth = lambda w: config['tip_frequencies'][f"{w.species}/{w.build}"]['wide_bandwidth'],
+        pivot_interval = lambda w: config['tip_frequencies'][f"{w.species}/{w.build}"]['pivot_interval'],
+        pivot_interval_units = lambda w: config['tip_frequencies'][f"{w.species}/{w.build}"]['pivot_interval_units'],
+    benchmark:
+        "benchmarks/{species}/{build}/tip_frequencies.txt"
+    log:
+        "logs/{species}/{build}/tip_frequencies.txt"
+    shell:
+        r"""
+        exec &> >(tee {log:q})
+
+        augur frequencies \
+            --method kde \
+            --tree {input.tree:q} \
+            --metadata {input.metadata:q} \
+            --metadata-id-columns id \
+            --min-date {params.min_date} \
+            --max-date {params.max_date} \
+            --proportion-wide {params.proportion_wide} \
+            --narrow-bandwidth {params.narrow_bandwidth} \
+            --wide-bandwidth {params.wide_bandwidth} \
+            --pivot-interval {params.pivot_interval} \
+            --pivot-interval-units {params.pivot_interval_units} \
+            --output {output.tip_freq:q}
+        """
+
+
 rule label_outbreaks:
     input:
         metadata = "results/{species}/{build}/metadata.tsv",

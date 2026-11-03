@@ -224,6 +224,20 @@ count_mutations:
     counts: 0,1,2,3,4,5,6,7+
     cds: [GP]
 
+# Leave out (or falsify) a build to skip tip-frequency estimation
+tip_frequencies:
+  bdbv/drc-uganda-2026:
+    min_date: "2026-05-10" # only 9 samples before this date (true as of Nov 2026)
+    max_date: 1M # ignore most recent month due to sequence availability
+    # Each tip is a combination of two gaussians weighted by proportion_wide
+    # bandwidth values are the standard deviations, measured in years
+    proportion_wide: 0.2 # `augur frequencies` default
+    narrow_bandwidth: 0.019 # 1 week
+    wide_bandwidth: 0.038 # 2 weeks
+    # How frequently is the grid evaluated?
+    pivot_interval: 1
+    pivot_interval_units: weeks
+
 
 label_outbreaks:
   ebov/all-outbreaks: true

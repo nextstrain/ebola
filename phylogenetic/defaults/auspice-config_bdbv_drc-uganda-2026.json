@@ -194,5 +194,11 @@
     "INSDC_accession",
     "restrictedUntil",
     "location_epicenter_bool"
+  ],
+  "panels": [
+    "tree",
+    "map",
+    "entropy",
+    "frequencies"
   ]
 }
