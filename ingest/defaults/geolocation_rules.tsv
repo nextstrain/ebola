@@ -88,17 +88,17 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 */Democratic Republic of the Congo/Ituri/Sota	Africa/Democratic Republic of the Congo/Ituri/Bunia
 */Democratic Republic of the Congo/Ituri/Sukisa	Africa/Democratic Republic of the Congo/Ituri/Bunia
 
-# Province-name normalisation to the spellings used in
-# phylogenetic/defaults/lat_longs.tsv.
+# Province spellings as in phylogenetic/defaults/lat_longs.tsv. The Kivu identity
+# rules are needed because augur's default rules otherwise respell them `Nord Kivu`/`Sud Kivu`.
 */Democratic Republic of the Congo/Haut-Uélé/*	Africa/Democratic Republic of the Congo/Haut-Uele/*
-*/Democratic Republic of the Congo/Nord Kivu/*	Africa/Democratic Republic of the Congo/Nord-Kivu/*
-*/Democratic Republic of the Congo/Sud Kivu/*	Africa/Democratic Republic of the Congo/Sud-Kivu/*
+*/Democratic Republic of the Congo/Nord-Kivu/*	Africa/Democratic Republic of the Congo/Nord-Kivu/*
+*/Democratic Republic of the Congo/Sud-Kivu/*	Africa/Democratic Republic of the Congo/Sud-Kivu/*
+# The Nord-Kivu identity rule takes precedence over `*/Manguripa`, so repeat it here.
+*/Democratic Republic of the Congo/Nord-Kivu/Manguripa	Africa/Democratic Republic of the Congo/Nord-Kivu/Manguredjipa
 
 # Haut-Uele health zones recorded under Ituri.
 # Boma-Mangbetu is also the pre-2026-07 spelling of `Boma Mangbetu`.
-*/Democratic Republic of the Congo/Ituri/Boma-Mangbetu	Africa/Democratic Republic of the Congo/Haut-Uele/Boma Mangbetu
-*/Democratic Republic of the Congo/Haut-Uele/Boma-Mangbetu	Africa/Democratic Republic of the Congo/Haut-Uele/Boma Mangbetu
-*/Democratic Republic of the Congo/Haut-Uélé/Boma-Mangbetu	Africa/Democratic Republic of the Congo/Haut-Uele/Boma Mangbetu
+*/Democratic Republic of the Congo/*/Boma-Mangbetu	Africa/Democratic Republic of the Congo/Haut-Uele/Boma Mangbetu
 */Democratic Republic of the Congo/Ituri/Isiro	Africa/Democratic Republic of the Congo/Haut-Uele/Isiro
 */Democratic Republic of the Congo/Ituri/Pawa	Africa/Democratic Republic of the Congo/Haut-Uele/Pawa
 */Democratic Republic of the Congo/Ituri/Wamba	Africa/Democratic Republic of the Congo/Haut-Uele/Wamba
