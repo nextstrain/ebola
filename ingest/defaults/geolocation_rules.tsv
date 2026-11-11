@@ -74,6 +74,7 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 */Democratic Republic of the Congo/*/Nyakunde	Africa/Democratic Republic of the Congo/*/Nyankunde
 */Democratic Republic of the Congo/Ituri/Mungwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbwalu
 */Democratic Republic of the Congo/Ituri/Mongwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbwalu
+*/Democratic Republic of the Congo/Ituri/Mungbwalu	Africa/Democratic Republic of the Congo/Ituri/Mongbwalu
 */Democratic Republic of the Congo/*/Rwmapara	Africa/Democratic Republic of the Congo/*/Rwampara
 */Democratic Republic of the Congo/Tshopo/Lubunga	Africa/Democratic Republic of the Congo/Tshopo/Lubunga (Tshopo)
 */Democratic Republic of the Congo/Tshopo/Makiso-Kisangani	Africa/Democratic Republic of the Congo/Tshopo/Makiso Kisangani
@@ -86,6 +87,24 @@ Africa/Zaire/*/*	Africa/Democratic Republic of the Congo//
 */Democratic Republic of the Congo/Ituri/Mandje	Africa/Democratic Republic of the Congo/Ituri/Mangala
 */Democratic Republic of the Congo/Ituri/Sota	Africa/Democratic Republic of the Congo/Ituri/Bunia
 */Democratic Republic of the Congo/Ituri/Sukisa	Africa/Democratic Republic of the Congo/Ituri/Bunia
+
+# Province-name normalisation to the spellings used in
+# phylogenetic/defaults/lat_longs.tsv.
+*/Democratic Republic of the Congo/Haut-Uélé/*	Africa/Democratic Republic of the Congo/Haut-Uele/*
+*/Democratic Republic of the Congo/Nord Kivu/*	Africa/Democratic Republic of the Congo/Nord-Kivu/*
+*/Democratic Republic of the Congo/Sud Kivu/*	Africa/Democratic Republic of the Congo/Sud-Kivu/*
+
+# Haut-Uele health zones recorded under Ituri.
+# Boma-Mangbetu is also the pre-2026-07 spelling of `Boma Mangbetu`.
+*/Democratic Republic of the Congo/Ituri/Boma-Mangbetu	Africa/Democratic Republic of the Congo/Haut-Uele/Boma Mangbetu
+*/Democratic Republic of the Congo/Haut-Uele/Boma-Mangbetu	Africa/Democratic Republic of the Congo/Haut-Uele/Boma Mangbetu
+*/Democratic Republic of the Congo/Haut-Uélé/Boma-Mangbetu	Africa/Democratic Republic of the Congo/Haut-Uele/Boma Mangbetu
+*/Democratic Republic of the Congo/Ituri/Isiro	Africa/Democratic Republic of the Congo/Haut-Uele/Isiro
+*/Democratic Republic of the Congo/Ituri/Pawa	Africa/Democratic Republic of the Congo/Haut-Uele/Pawa
+*/Democratic Republic of the Congo/Ituri/Wamba	Africa/Democratic Republic of the Congo/Haut-Uele/Wamba
+
+# A compound of two health zones, so keep the province only.
+*/Democratic Republic of the Congo/Ituri/Bunia-Mandima	Africa/Democratic Republic of the Congo/Ituri/
 
 # Uganda
 # Use <https://en.wikipedia.org/wiki/Districts_of_Uganda> to categorise Uganda into
