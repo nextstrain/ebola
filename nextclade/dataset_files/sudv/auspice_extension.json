@@ -1,0 +1,13 @@
+{
+    "clade_node_attrs": [
+    {
+        "name": "outbreak",
+        "displayName": "Outbreak",
+        "description": "Annotation of recent outbreaks",
+        "skipAsReference": false
+    }
+    ],
+    "ref_nodes": {
+        "default": "__parent__"
+    }
+}
