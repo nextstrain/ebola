@@ -3,7 +3,7 @@
 | Key                    | Value                                                                           |
 | ---------------------- | ------------------------------------------------------------------------------- |
 | authors                | [Cornelius Roemer](https://neherlab.org), [Richard Neher](https://neherlab.org) |
-| data source            | Genbank                                                                         |
+| data source            | GenBank                                                                         |
 | nextclade dataset path | nextstrain/orthoebolavirus/sudv                                                          |
 | annotation             | [NC_006432.1](https://www.ncbi.nlm.nih.gov/nuccore/NC_006432)                   |
 
